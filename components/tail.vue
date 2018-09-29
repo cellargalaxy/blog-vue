@@ -1,6 +1,7 @@
 <template>
   <b-card class="text-center translucent">
     <p v-text="'Copyright © 2017-'+year+' cellargalaxy. All rights reserved.'"/>
+    <p>Powered by Spring Boot & Nuxt.js</p>
   </b-card>
 </template>
 
