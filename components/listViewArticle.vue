@@ -1,6 +1,6 @@
 <template>
   <div>
-    <view-article v-for="(articleVo,articleVoIndex) in articleVos" :articleVo="articleVo" style="padding-bottom: 1em;"/>
+    <view-article v-for="(articleVo,articleVoIndex) in articleVos" :articleVo="articleVo" :readmore="true" style="padding-bottom: 1em;"/>
   </div>
 </template>
 

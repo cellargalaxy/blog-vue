@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import com from '../components/commentForm.vue'
+  import com from '../components/tail.vue'
 
   export default {
     name: "test",

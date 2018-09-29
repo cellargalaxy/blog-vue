@@ -1,31 +1,37 @@
 <template>
   <b-list-group>
     <b-list-group-item class="translucent">
-      <h2>
-        <b-link :href="articleVo.article.url" v-text="articleVo.article.title"/>
-      </h2>
+      <b-row>
+        <h2>
+          <b-link :href="articleVo.article.url" v-text="articleVo.article.title"/>
+        </h2>
+      </b-row>
 
-      发布
-      <b-badge v-text="articleVo.article.createTime"/>
-      更新
-      <b-badge v-text="articleVo.article.updateTime"/>
-      作者
-      <b-badge v-text="articleVo.article.username"/>
-      浏览
-      <b-badge v-text="articleVo.article.view"/>
-      评论
-      <b-badge v-text="articleVo.comments.length"/>
+      <b-row>
+        <b-col cols="auto" class="mr-auto">
+          发布
+          <b-badge v-text="articleVo.article.createTime"/>
+          更新
+          <b-badge v-text="articleVo.article.updateTime"/>
+          作者
+          <b-badge v-text="articleVo.article.username"/>
+          浏览
+          <b-badge v-text="articleVo.article.view"/>
+          评论
+          <b-badge v-text="articleVo.comments.length"/>
+        </b-col>
+
+        <b-col v-if="readmore" cols="auto">
+          <b-link :href="articleVo.article.url">阅读更多</b-link>
+        </b-col>
+      </b-row>
     </b-list-group-item>
 
-    <b-list-group-item class="translucent" v-html="articleVo.article.html"/>
-
-    <b-list-group-item class="translucent" v-if="readmore">
-      <b-link :href="articleVo.article.url">阅读更多</b-link>
-    </b-list-group-item>
+    <b-list-group-item class="translucent" v-html="readmore?articleVo.article.summary:articleVo.article.html"/>
   </b-list-group>
 </template>
 
-<!--<view-article :articleVo="articleVo"/>-->
+<!--<view-article :articleVo="articleVo" :readmore="readmore"/>-->
 
 <script>
   import common from '../commonApi/common'
@@ -44,7 +50,7 @@
               "userId": 2,
               "sortId": 1,
               "title": "测试",
-              "markdown": "## 文章markdown",
+              "markdown": "# 文章markdown",
               "view": 50,
               "createTime": 1538124214583,
               "updateTime": 1538124214583,
@@ -66,7 +72,7 @@
                 "commentId": 1,
                 "userId": 2,
                 "articleId": 1,
-                "markdown": "# 文章markdown",
+                "markdown": "## 评论markdown",
                 "createTime": 1538124214584,
                 "updateTime": 1538124214584,
                 "username": "游客"
@@ -77,7 +83,7 @@
       },
       readmore: {
         default: function () {
-          return false
+          return true
         }
       },
     },

@@ -1,30 +1,48 @@
 <template>
-  <b-form @submit="postComment" class="translucent">
+  <b-form class="translucent">
     <b-form-group>
       <b-form-textarea v-model="commentForm.markdown" placeholder="支持markdown" :rows="5" class="translucent"/>
     </b-form-group>
 
     <b-form-group>
-      <b-button variant="success" style="width: 100%;">发表评论</b-button>
+      <b-button @click="postComment" variant="success" style="width: 100%;">发表评论</b-button>
     </b-form-group>
   </b-form>
 </template>
 
+<!--<comment-form :userId="userId" :articleId="articleId"/>-->
+
 <script>
+  import util from '../utils/util'
+  import guestComment from '../guestApi/guestComment'
+
   export default {
     name: "commentForm",
     data() {
       return {
-        commentForm: {
-          userId: 2,
-          articleId: 1,
-          markdown: null,
-        }
+        commentForm: {userId: this.userId, articleId: this.articleId, markdown: null,}
       }
+    },
+    props: {
+      userId: {
+        default: function () {
+          return 0
+        }
+      },
+      articleId: {
+        default: function () {
+          return 0
+        }
+      },
     },
     methods: {
       postComment: function () {
-        console.log('postComment')
+        guestComment.addComment(this.commentForm)
+          .then(res => {
+            util.successInfo('添加成功')
+            this.commentForm = {userId: this.userId, articleId: this.articleId, markdown: null,}
+            location.reload();
+          })
       },
     },
   }

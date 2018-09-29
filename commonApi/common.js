@@ -11,6 +11,7 @@ function initArticle(article) {
   if (isNumber(article.updateTime)) {
     article.updateTime = util.formatTimestamp(article.updateTime, 'yyyy-MM-dd')
   }
+  article.summary=util.markdown2html(article.markdown)
   article.html=util.markdown2html(article.markdown)
   article.url='/article/'+article.articleId
   return article

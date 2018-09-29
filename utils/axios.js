@@ -2,7 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 import util from './util'
 
-const baseURL = 'http://api.mycloud.cellargalaxy.top'
+const baseURL = 'http://127.0.0.1:8080/test'
 
 const baseAxios = axios.create({
   baseURL: baseURL,
