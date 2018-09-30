@@ -8,7 +8,7 @@
       </b-row>
 
       <b-row>
-        <b-col cols="auto" class="mr-auto">
+        <b-col align-self="start">
           发布
           <b-badge v-text="articleVo.article.createTime"/>
           更新
@@ -31,13 +31,13 @@
   </b-list-group>
 </template>
 
-<!--<view-article :articleVo="articleVo" :readmore="readmore"/>-->
+<!--<view-article-vo :articleVo="articleVo" :readmore="readmore"/>-->
 
 <script>
   import common from '../commonApi/common'
 
   export default {
-    name: "viewArticle",
+    name: "viewArticleVo",
     data() {
       return {}
     },

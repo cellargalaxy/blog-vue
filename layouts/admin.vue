@@ -4,7 +4,7 @@
 
     <br/>
 
-    <b-container>
+    <b-container fluid>
       <nuxt/>
     </b-container>
 
@@ -21,7 +21,7 @@
     props: {
       sort: {
         default: function () {
-          return '学习'
+          return ''
         }
       },
     },

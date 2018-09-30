@@ -12,6 +12,9 @@ marked.setOptions({
 });
 
 function markdown2html(markdown) {
+  if (markdown == null) {
+    return null
+  }
   return marked(markdown, {sanitize: true})
 }
 
@@ -52,6 +55,9 @@ function formatFileSize(bytes) {
 
 //读cookie
 function getCookie(name) {
+  if (typeof window === 'undefined') {
+    return null
+  }
   var nameEQ = name + '='
   var ca = document.cookie.split(';')
   for (var i = 0; i < ca.length; i++) {
@@ -64,23 +70,42 @@ function getCookie(name) {
 
 //写cookie
 function setCookie(key, value) {
-  var date = new Date()
-  date.setTime(date.getTime() + (1000 * 60 * 60 * 6))
-  document.cookie = key + '=' + value + '; expires=' + date.toGMTString()
+  if (typeof window !== 'undefined') {
+    var date = new Date()
+    date.setTime(date.getTime() + (1000 * 60 * 60 * 6))
+    document.cookie = key + '=' + value + '; expires=' + date.toGMTString()
+  }
+
 }
 
 //成功信息弹框
 function successInfo(info) {
-  alert(info)
+  if (typeof window !== 'undefined') {
+    alert(info)
+  }
 }
 
 //失败信息弹框
 function errorInfo(info) {
-  alert(info)
+  if (typeof window !== 'undefined') {
+    alert(info)
+  }
 }
 
 function confirmBox(message) {
-  return confirm(message)
+  if (typeof window !== 'undefined') {
+    return confirm(message)
+  }
+  return true
+}
+
+function exitWarm(message) {
+  if (typeof window !== 'undefined') {
+    window.onbeforeunload = function () {
+      return message;
+    }
+  }
+  return true
 }
 
 //检查参数并通过询问框询问
@@ -169,6 +194,7 @@ export default {
   successInfo: successInfo,
   errorInfo: errorInfo,
   confirmBox: confirmBox,
+  exitWarm: exitWarm,
   checkParameterAnd: checkParameterAnd,
   checkParameterOr: checkParameterOr,
   checkQueryParameter: checkQueryParameter,

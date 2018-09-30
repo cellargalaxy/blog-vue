@@ -1,7 +1,7 @@
 <template>
   <b-form class="translucent">
     <b-form-group>
-      <b-form-textarea v-model="commentForm.markdown" placeholder="支持markdown" :rows="5" class="translucent"/>
+      <b-form-textarea v-model="commentForm.markdown" placeholder='支持markdown。由于本站做了缓存，成功评论后至少要过一分钟再刷新页面才能显示' :rows="5" class="translucent"/>
     </b-form-group>
 
     <b-form-group>

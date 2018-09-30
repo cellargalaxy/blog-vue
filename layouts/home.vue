@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-head :sort="sort"/>
+    <page-head :sort="''"/>
 
     <br/>
 
@@ -8,7 +8,7 @@
       <nuxt/>
     </b-container>
 
-    <page-foot/>
+    <page-foot class="footer"/>
   </div>
 </template>
 
@@ -17,7 +17,7 @@
   import pageFoot from '../components/pageFoot'
 
   export default {
-    name: "default",
+    name: "home",
     props: {
       sort: {
         default: function () {
@@ -32,7 +32,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   body {
     /*background-color: yellow;*/
     /*background-image: url(http://119.23.235.95:83/image/background.jpg);*/
@@ -40,5 +40,10 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
   }
 </style>

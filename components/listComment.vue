@@ -1,6 +1,6 @@
 <template>
   <div>
-    <comment v-for="(comment,commentIndex) in comments" :comment="comment" :floor="comments.length-commentIndex"
+    <comment v-for="(comment,commentIndex) in comments" :key="commentIndex" :comment="comment" :floor="comments.length-commentIndex"
              style="padding-bottom: 0.5em;"/>
   </div>
 </template>

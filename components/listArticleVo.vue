@@ -1,16 +1,16 @@
 <template>
   <div>
-    <view-article v-for="(articleVo,articleVoIndex) in articleVos" :articleVo="articleVo" :readmore="true" style="padding-bottom: 1em;"/>
+    <view-article-vo v-for="(articleVo,articleVoIndex) in articleVos" :key="articleVoIndex" :articleVo="articleVo" :readmore="true" style="padding-bottom: 1em;"/>
   </div>
 </template>
 
-<!--<list-view-article :articleVos="articleVos"/>-->
+<!--<list-article-vo :articleVos="articleVos"/>-->
 
 <script>
-  import viewArticle from './viewArticle'
+  import viewArticleVo from './viewArticleVo'
 
   export default {
-    name: "listViewArticle",
+    name: "listArticleVo",
     data() {
       return {}
     },
@@ -124,7 +124,7 @@
       },
     },
     components: {
-      viewArticle,
+      viewArticleVo,
     },
   }
 </script>

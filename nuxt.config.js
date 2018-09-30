@@ -3,11 +3,11 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'blog-vue',
+    title: 'cellargalaxyの博客',
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: 'Nuxt.js project'}
+      {hid: 'description', name: 'description', content: 'cellargalaxyの博客'}
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
@@ -30,7 +30,7 @@ module.exports = {
   */
   build: {
     //任何页面里面引入 axios 而不用担心它会被重复打包
-    vendor: ['axios','marked'],
+    vendor: ['axios', 'marked', 'js-base64'],
     /*
     ** Run ESLint on save
     */
@@ -44,6 +44,6 @@ module.exports = {
         })
       }
     }
-  }
+  },
 }
 

@@ -1,65 +1,70 @@
 <template>
-  <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        blog-vue
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
-  </section>
+  <b-card class="text-center translucent">
+    <b-nav>
+      <b-nav-item v-for="(sort,sortIndex) in sorts" :key="sortIndex" :href="'/'+sort.path+'/1'"
+                  @mouseenter="mouseenter(sortIndex)" @mouseleave="mouseleave(sortIndex)">
+        <b>{{sort.name}}</b>
+      </b-nav-item>
+    </b-nav>
+  </b-card>
 </template>
 
 <script>
-  import AppLogo from '../components/AppLogo.vue'
+  import {Base64} from 'js-base64'
+  import guestSort from '../guestApi/guestSort'
 
   export default {
-    components: {
-      AppLogo
-    }
+    asyncData({params}) {
+      return guestSort.listAllSort()
+        .then(res => {
+          return {sorts: res.data.data}
+        })
+    },
+    data() {
+      return {
+        timeout: null,
+      }
+    },
+    created: function () {
+      for (let i = 0; i < this.sorts.length; i++) {
+        this.sorts[i].base64 = Base64.encode(this.sorts[i].sort)
+        this.sorts[i].path = this.sorts[i].sort
+        this.sorts[i].name = this.sorts[i].base64
+      }
+    },
+    methods: {
+      mouseenter: function (sortIndex) {
+        this.sorts[sortIndex].path = this.sorts[sortIndex].base64
+        var self = this
+        this.timeout = setTimeout(function () {
+          self.sorts[sortIndex].name = self.sorts[sortIndex].sort
+          self.sorts[sortIndex].path = self.sorts[sortIndex].sort
+        }, 3000);
+      },
+      mouseleave: function (sortIndex) {
+        if (this.timeout != null) {
+          clearTimeout(this.timeout);
+        }
+        this.sorts[sortIndex].name = this.sorts[sortIndex].base64
+        this.sorts[sortIndex].path = this.sorts[sortIndex].base64
+      },
+    },
+    components: {},
+    layout: 'home',
   }
 </script>
 
 <style>
   .container {
-    min-height: 100vh;
+    /*min-height: 10em;*/
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
   }
 
-  .title {
-    font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-    display: block;
-    font-weight: 300;
-    font-size: 100px;
-    color: #35495e;
-    letter-spacing: 1px;
-  }
-
-  .subtitle {
-    font-weight: 300;
-    font-size: 42px;
-    color: #526488;
-    word-spacing: 5px;
-    padding-bottom: 15px;
-  }
-
-  .links {
-    padding-top: 15px;
+  .translucent {
+    background-color: rgba(255, 255, 255, 0.7);
   }
 </style>
 

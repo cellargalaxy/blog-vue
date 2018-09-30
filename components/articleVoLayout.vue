@@ -1,19 +1,21 @@
 <template>
   <div>
-    <view-article :articleVo="articleVo" :readmore="false"/>
+    <view-article-vo :articleVo="articleVo" :readmore="false"/>
     <br/>
     <comment-form :userId="userId" :articleId="articleVo.article.articleId"/>
     <list-comment :comments="articleVo.comments"/>
   </div>
 </template>
 
+<!--<article-vo-layout :articleVo="articleVo" :userId="userId"/>-->
+
 <script>
-  import viewArticle from './viewArticle'
+  import viewArticleVo from './viewArticleVo'
   import commentForm from './commentForm'
   import listComment from './listComment'
 
   export default {
-    name: "articleVo",
+    name: "articleVoLayout",
     props: {
       articleVo: {
         default: function () {
@@ -61,7 +63,7 @@
       },
     },
     components: {
-      viewArticle,
+      viewArticleVo,
       commentForm,
       listComment,
     },
