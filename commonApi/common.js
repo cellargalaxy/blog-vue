@@ -11,9 +11,18 @@ function initArticle(article) {
   if (isNumber(article.updateTime)) {
     article.updateTime = util.formatTimestamp(article.updateTime, 'yyyy-MM-dd')
   }
-  article.summary=util.markdown2html(article.markdown)
-  article.html=util.markdown2html(article.markdown)
-  article.url='/article/'+article.articleId
+  article.url = '/article/' + article.articleId
+  article.html = util.markdown2htmlWithHtml(article.markdown)
+  let summaryMarkdown = ''
+  let strings = article.markdown.split(/[\n]/);
+  let hangCount = 0
+  for (let i = 0; i < strings.length && hangCount < 5; i++) {
+    summaryMarkdown = summaryMarkdown + strings[i] + '\n'
+    if (strings[i].trim() == '') {
+      hangCount = hangCount + 1
+    }
+  }
+  article.summary = util.markdown2htmlWithHtml(summaryMarkdown)
   return article
 }
 
@@ -29,12 +38,12 @@ function initTag(tag) {
 
 function initComment(comment) {
   if (isNumber(comment.createTime)) {
-    comment.createTime = util.formatTimestamp(comment.createTime, 'yyyy-MM-dd')
+    comment.createTime = util.formatTimestamp(comment.createTime, 'yyyy-MM-dd hh:mm:ss')
   }
   if (isNumber(comment.updateTime)) {
-    comment.updateTime = util.formatTimestamp(comment.updateTime, 'yyyy-MM-dd')
+    comment.updateTime = util.formatTimestamp(comment.updateTime, 'yyyy-MM-dd hh:mm:ss')
   }
-  comment.html=util.markdown2html(comment.markdown)
+  comment.html = util.markdown2htmlWithoutHtml(comment.markdown)
   return comment
 }
 

@@ -1,11 +1,12 @@
 <template>
   <b-list-group>
     <b-list-group-item class="translucent">
-      <b-row>
+      <b-card no-body class="transparent">
+        <!--This is some text without the default card body section. Notice the lack of padding.-->
         <h2>
           <b-link :href="articleVo.article.url" v-text="articleVo.article.title"/>
         </h2>
-      </b-row>
+      </b-card>
 
       <b-row>
         <b-col align-self="start">
@@ -37,6 +38,11 @@
   import common from '../commonApi/common'
 
   export default {
+    head: {
+      link: [
+        {rel: 'stylesheet', href: '/markdown.css'},
+      ],
+    },
     name: "viewArticleVo",
     data() {
       return {}
@@ -93,9 +99,6 @@
         for (let i = 0; i < val.tags.length; i++) {
           common.initTag(val.tags[i])
         }
-        for (let i = 0; i < val.comments.length; i++) {
-          common.initTag(val.comments[i])
-        }
       },
     },
     created: function () {
@@ -103,15 +106,18 @@
       for (let i = 0; i < this.articleVo.tags.length; i++) {
         common.initTag(this.articleVo.tags[i])
       }
-      for (let i = 0; i < this.articleVo.comments.length; i++) {
-        common.initTag(this.articleVo.comments[i])
-      }
     },
   }
 </script>
 
 <style scoped>
+  .transparent {
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
+  }
+
   .translucent {
     background-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 0.7);
   }
 </style>

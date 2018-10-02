@@ -1,11 +1,12 @@
 <template>
   <b-form class="translucent">
     <b-form-group>
-      <b-form-textarea v-model="commentForm.markdown" placeholder='支持markdown。由于本站做了缓存，成功评论后至少要过一分钟再刷新页面才能显示' :rows="5" class="translucent"/>
+      <b-form-textarea v-model="commentForm.markdown" placeholder='支持markdown。由于本站做了缓存，成功评论后可能需要等过一分钟，刷新页面才能显示'
+                       :rows="5" class="translucent"/>
     </b-form-group>
 
     <b-form-group>
-      <b-button @click="postComment" variant="success" style="width: 100%;">发表评论</b-button>
+      <b-button @click="postComment" variant="outline-success" style="width: 100%;">发表评论</b-button>
     </b-form-group>
   </b-form>
 </template>
@@ -39,7 +40,7 @@
       postComment: function () {
         guestComment.addComment(this.commentForm)
           .then(res => {
-            util.successInfo('添加成功')
+            util.successInfo('成功评论')
             this.commentForm = {userId: this.userId, articleId: this.articleId, markdown: null,}
             location.reload();
           })
@@ -49,7 +50,13 @@
 </script>
 
 <style scoped>
+  .transparent {
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
+  }
+
   .translucent {
     background-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 0.7);
   }
 </style>

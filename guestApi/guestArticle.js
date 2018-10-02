@@ -14,14 +14,14 @@ function listArticleVo(articleQuery) {
   if (util.checkQueryParameter(articleQuery)) {
     return guestArticleApi.listArticleVo(articleQuery.pageSize, articleQuery.page, articleQuery.articleId, articleQuery.userId, articleQuery.sortId, articleQuery.sort, articleQuery.title)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 function getArticleCount(articleQuery) {
   if (util.checkQueryParameter(articleQuery)) {
     return guestArticleApi.getArticleCount(articleQuery.pageSize, articleQuery.page, articleQuery.articleId, articleQuery.userId, articleQuery.sortId, articleQuery.title)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 export default {

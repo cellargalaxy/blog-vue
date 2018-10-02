@@ -17,9 +17,6 @@
 
   export default {
     name: "comment",
-    data() {
-      return {}
-    },
     props: {
       comment: {
         default: function () {
@@ -41,7 +38,7 @@
       },
     },
     watch: {
-      articleVo(val) {
+      comment(val) {
         common.initComment(val)
       },
     },
@@ -54,8 +51,11 @@
 <style scoped>
   .transparent {
     background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
   }
+
   .translucent {
     background-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 0.7);
   }
 </style>

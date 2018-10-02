@@ -2,18 +2,14 @@ import axios from 'axios'
 import qs from 'qs'
 import util from './util'
 
-const baseURL = 'http://127.0.0.1:8080'
+const baseURL = 'http://api.www.cellargalaxt.top'
+const timeout = 1000 * 5
 
-const baseAxios = axios.create({
+const tokenAxios = axios.create({
   baseURL: baseURL,
-  timeout: 1000 * 60 * 60
+  timeout: timeout
 })
-
-const simpleAxios = axios.create({
-  baseURL: baseURL,
-  timeout: 5000
-})
-simpleAxios.interceptors.request.use(
+tokenAxios.interceptors.request.use(
   config => {
     config.data = qs.stringify(config.data)
     config.headers = {
@@ -24,11 +20,108 @@ simpleAxios.interceptors.request.use(
   }
 )
 
-const instance = axios.create({
+const tokenAxiosMethod = createMethod(tokenAxios)
+
+function createMethod(axios) {
+  return {
+    async get(url, data) {
+      try {
+        let res = await axios.get(url, {params: data})
+        if (res.data.status != 1) {
+          util.errorInfo(res.data.massage)
+        }
+        return inspect(res.data)
+      } catch (e) {
+        console.log(e)
+        util.errorInfo('网络异常:' + e)
+        return createEmptyResponse()
+      }
+    },
+    async post(url, data) {
+      try {
+        let res = await axios.post(url, data)
+        if (res.data.status != 1) {
+          util.errorInfo(res.data.massage)
+        }
+        return inspect(res.data)
+      } catch (e) {
+        console.log(e)
+        util.errorInfo('网络异常:' + e)
+        return createEmptyResponse()
+      }
+    },
+  }
+}
+
+function inspect(data) {
+  return new Promise((resolve, reject) => {
+    if (data.status === 1) {
+      resolve(data.data)
+    } else {
+      reject(data.massage)
+    }
+  })
+}
+
+var token = null
+const tokenKey = 'Authorization'
+
+function setTokenFromCookieString(cookieString) {
+  token = getTokenFromCookieString(cookieString)
+  util.setCookie(tokenKey, token)
+}
+
+function setToken(t) {
+  token = t
+  util.setCookie(tokenKey, token)
+}
+
+function getTokenFromCookieString(cookieString) {
+  if (token == null) {
+    token = util.getCookieFromString(cookieString, tokenKey)
+  }
+  return token
+}
+
+function getToken() {
+  if (token == null) {
+    token = util.getCookie(tokenKey)
+  }
+  return token
+}
+
+function logined() {
+  return getToken() != null && getToken() != '' && getToken() != 'null'
+}
+
+function createEmptyResponse() {
+  return inspect({status: 0, massage: '请登录', data: null})
+}
+
+export default {
+  tokenAxiosMethod: tokenAxiosMethod,
+  setTokenFromCookieString: setTokenFromCookieString,
+  setToken: setToken,
+  getTokenFromCookieString: getTokenFromCookieString,
+  getToken: getToken,
+  createEmptyResponse: createEmptyResponse,
+  logined: logined,
+}
+
+//////////////////////
+
+const baseAxios = axios.create({
+  baseURL: baseURL,
+  timeout: timeout
+})
+
+////////////////
+
+const inspectAxios = axios.create({
   baseURL: baseURL,
   timeout: 5000
 })
-instance.interceptors.request.use(
+inspectAxios.interceptors.request.use(
   config => {
     config.data = qs.stringify(config.data)
     config.headers = {
@@ -43,7 +136,7 @@ instance.interceptors.request.use(
     return Promise.reject(error)
   }
 )
-instance.interceptors.response.use(
+inspectAxios.interceptors.response.use(
   response => {
     if (response.data.status != 1) {
       util.errorInfo(response.data.massage)
@@ -57,40 +150,3 @@ instance.interceptors.response.use(
     return Promise.reject(error)
   }
 )
-
-var token = null
-
-function setToken(t) {
-  token = t
-  util.setCookie('Authorization', t)
-}
-
-function getToken() {
-  if (token == null) {
-    token = util.getCookie('Authorization')
-  }
-  return token
-}
-
-function logined() {
-  return getToken() != null && getToken() != 'null'
-}
-
-function createEmtryAxios() {
-  return {
-    then: function () {
-    }, catch: function () {
-    }
-  }
-}
-
-export default {
-  baseAxios: baseAxios,
-  simpleAxios: simpleAxios,
-  instance: instance,
-  baseURL: baseURL,
-  setToken: setToken,
-  getToken: getToken,
-  createEmtryAxios: createEmtryAxios,
-  logined: logined,
-}

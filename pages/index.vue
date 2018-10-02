@@ -14,11 +14,14 @@
   import guestSort from '../guestApi/guestSort'
 
   export default {
-    asyncData({params}) {
-      return guestSort.listAllSort()
-        .then(res => {
-          return {sorts: res.data.data}
-        })
+    async asyncData({params}) {
+      let listAllSort = await guestSort.listAllSort()
+      for (let i = 0; i < listAllSort.length; i++) {
+        listAllSort[i].base64 = Base64.encode(listAllSort[i].sort)
+        listAllSort[i].path = listAllSort[i].sort
+        listAllSort[i].name = listAllSort[i].sort
+      }
+      return {sorts: listAllSort}
     },
     data() {
       return {
@@ -26,15 +29,11 @@
       }
     },
     created: function () {
-      for (let i = 0; i < this.sorts.length; i++) {
-        this.sorts[i].base64 = Base64.encode(this.sorts[i].sort)
-        this.sorts[i].path = this.sorts[i].sort
-        this.sorts[i].name = this.sorts[i].base64
-      }
     },
     methods: {
       mouseenter: function (sortIndex) {
         this.sorts[sortIndex].path = this.sorts[sortIndex].base64
+        this.sorts[sortIndex].name = this.sorts[sortIndex].base64
         var self = this
         this.timeout = setTimeout(function () {
           self.sorts[sortIndex].name = self.sorts[sortIndex].sort
@@ -56,7 +55,6 @@
 
 <style>
   .container {
-    /*min-height: 10em;*/
     display: flex;
     justify-content: center;
     align-items: center;

@@ -4,44 +4,49 @@ import adminArticleApi from './adminArticleApi'
 
 function addArticle(article, tags) {
   if (!axios.logined()) {
-    return axios.createEmtryAxios()
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
   }
-  if (util.checkParameterAnd('确认添加文章？', article, 'userId', 'sortId', 'markdown')) {
+  if (util.checkParameterAnd('确认添加文章？', article, 'sortId', 'markdown')) {
     return adminArticleApi.addArticle(article.userId, article.sortId, article.title, article.markdown, article.view, tags)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 function removeArticle(article) {
   if (!axios.logined()) {
-    return axios.createEmtryAxios()
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
   }
   if (util.checkParameterAnd('确认删除文章？', article, 'articleId')) {
     return adminArticleApi.removeArticle(article.articleId)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 function changeArticle(article) {
   if (!axios.logined()) {
-    return axios.createEmtryAxios()
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
   }
   if (util.checkParameterAnd('确认修改文章？', article, 'articleId')) {
     return adminArticleApi.changeArticle(article.articleId, article.userId, article.sortId, article.title, article.markdown, article.view)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 function getArticle(article) {
   if (!axios.logined()) {
-    return axios.createEmtryAxios()
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
   }
   return adminArticleApi.getArticle(article.articleId)
 }
 
 function getArticleVo(article) {
   if (!axios.logined()) {
-    return axios.createEmtryAxios()
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
   }
   return adminArticleApi.getArticleVo(article.articleId)
 }
@@ -52,32 +57,35 @@ function createArticleQuery() {
 
 function listArticle(articleQuery) {
   if (!axios.logined()) {
-    return axios.createEmtryAxios()
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
   }
   if (util.checkQueryParameter(articleQuery)) {
     return adminArticleApi.listArticle(articleQuery.pageSize, articleQuery.page, articleQuery.articleId, articleQuery.userId, articleQuery.sortId, articleQuery.title)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 function listArticleVo(articleQuery) {
   if (!axios.logined()) {
-    return axios.createEmtryAxios()
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
   }
   if (util.checkQueryParameter(articleQuery)) {
     return adminArticleApi.listArticleVo(articleQuery.pageSize, articleQuery.page, articleQuery.articleId, articleQuery.userId, articleQuery.sortId, articleQuery.title)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 function getArticleCount(articleQuery) {
   if (!axios.logined()) {
-    return axios.createEmtryAxios()
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
   }
   if (util.checkQueryParameter(articleQuery)) {
     return adminArticleApi.getArticleCount(articleQuery.pageSize, articleQuery.page, articleQuery.articleId, articleQuery.userId, articleQuery.sortId, articleQuery.title)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 export default {

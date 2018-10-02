@@ -3,20 +3,20 @@ import axios from '../utils/axios'
 const url = '/admin/user'
 
 function addUser(username, password) {
-  return axios.instance.post(url + '/addUser', {
+  return axios.tokenAxiosMethod.post(url + '/addUser', {
     username: username,
     password: password,
   })
 }
 
 function removeUser(userId) {
-  return axios.instance.post(url + '/removeUser', {
+  return axios.tokenAxiosMethod.post(url + '/removeUser', {
     userId: userId,
   })
 }
 
 function changeUser(userId, username, password) {
-  return axios.instance.post(url + '/changeUser', {
+  return axios.tokenAxiosMethod.post(url + '/changeUser', {
     userId: userId,
     username: username,
     password: password,
@@ -24,22 +24,18 @@ function changeUser(userId, username, password) {
 }
 
 function getUserVo(userId) {
-  return axios.instance.get(url + '/getUserVo', {
-    params: {
+  return axios.tokenAxiosMethod.get(url + '/getUserVo', {
       userId: userId,
-    }
   })
 }
 
 function listAllUserVo() {
-  return axios.instance.get(url + '/listAllUserVo', {
-    params: {}
+  return axios.tokenAxiosMethod.get(url + '/listAllUserVo', {
   })
 }
 
 function listAllPermission() {
-  return axios.instance.get(url + '/listAllPermission', {
-    params: {}
+  return axios.tokenAxiosMethod.get(url + '/listAllPermission', {
   })
 }
 

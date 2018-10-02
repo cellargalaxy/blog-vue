@@ -12,18 +12,20 @@
     validate({params}) {
       return /^\d+$/.test(params.articleId)
     },
-    asyncData({params}) {
-      return guestArticle.viewArticle(params)
-        .then(res => {
-          return {articleVo: res.data.data}
-        })
+    async asyncData({params, error}) {
+      let viewArticle = await guestArticle.viewArticle(params)
+      if (viewArticle != null) {
+        return {articleVo: viewArticle}
+      } else {
+        error({statusCode: 404, message: '你找的文章不翼而飞了！'})
+      }
     },
     data() {
       return {
         userId: 0
       }
     },
-    create: function () {
+    created: function () {
       let userVo = publicApi.getCurrentUserVo()
       if (userVo != null) {
         this.userId = userVo.user.userId

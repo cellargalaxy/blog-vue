@@ -9,12 +9,14 @@
     </b-container>
 
     <page-foot/>
+    <goto-top/>
   </div>
 </template>
 
 <script>
   import pageHead from '../components/pageHead'
   import pageFoot from '../components/pageFoot'
+  import gotoTop from '../components/gotoTop'
 
   export default {
     name: "default",
@@ -28,6 +30,7 @@
     components: {
       pageHead,
       pageFoot,
+      gotoTop,
     },
   }
 </script>

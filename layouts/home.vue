@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-head :sort="''"/>
+    <page-head :sort="sort"/>
 
     <br/>
 
@@ -21,7 +21,7 @@
     props: {
       sort: {
         default: function () {
-          return '学习'
+          return ''
         }
       },
     },

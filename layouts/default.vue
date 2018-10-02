@@ -9,25 +9,28 @@
     </b-container>
 
     <page-foot/>
+    <goto-top/>
   </div>
 </template>
 
 <script>
   import pageHead from '../components/pageHead'
   import pageFoot from '../components/pageFoot'
+  import gotoTop from '../components/gotoTop'
 
   export default {
     name: "default",
     props: {
       sort: {
         default: function () {
-          return '学习'
+          return this.$route.params.sort
         }
       },
     },
     components: {
       pageHead,
       pageFoot,
+      gotoTop,
     },
   }
 </script>
@@ -41,4 +44,8 @@
     background-attachment: fixed;
     background-size: cover;
   }
+  /*pre {*/
+    /*background-color: rgba(255, 255, 255, 0.7);*/
+    /*border-color: rgba(255, 255, 255, 0.7);*/
+  /*}*/
 </style>

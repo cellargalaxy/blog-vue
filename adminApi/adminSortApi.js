@@ -3,27 +3,26 @@ import axios from '../utils/axios'
 const url = '/admin/sort'
 
 function addSort(sort) {
-  return axios.instance.post(url + '/addSort', {
+  return axios.tokenAxiosMethod.post(url + '/addSort', {
     sort: sort,
   })
 }
 
 function removeSort(sortId) {
-  return axios.instance.post(url + '/removeSort', {
+  return axios.tokenAxiosMethod.post(url + '/removeSort', {
     sortId: sortId,
   })
 }
 
 function changeSort(sortId, sort) {
-  return axios.instance.post(url + '/changeSort', {
+  return axios.tokenAxiosMethod.post(url + '/changeSort', {
     sortId: sortId,
     sort: sort,
   })
 }
 
 function listAllSort() {
-  return axios.instance.get(url + '/listAllSort', {
-    params: {}
+  return axios.tokenAxiosMethod.get(url + '/listAllSort', {
   })
 }
 

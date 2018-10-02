@@ -1,21 +1,86 @@
-import marked from 'marked'
+//import marked from 'marked'
+import 'highlight.js/styles/idea.css';
 
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  gfm: true,
-  tables: true,
-  breaks: false,
-  pedantic: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false
+const hljs = require('highlight.js');
+const markdownItWithHtml = require('markdown-it')({
+  html: true,        // Enable HTML tags in source
+  xhtmlOut: false,        // Use '/' to close single tags (<br/>).
+                          // This is only for full CommonMark compatibility.
+  breaks: false,        // Convert '\n' in paragraphs into <br>
+  langPrefix: 'language-',  // CSS language prefix for fenced blocks. Can be
+                            // useful for external highlighters.
+  linkify: false,        // Autoconvert URL-like text to links
+
+  // Enable some language-neutral replacement + quotes beautification
+  typographer: false,
+
+  // Double + single quotes replacement pairs, when typographer enabled,
+  // and smartquotes on. Could be either a String or an Array.
+  //
+  // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
+  // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
+  quotes: '“”‘’',
+
+  // Highlighter function. Should return escaped HTML,
+  // or '' if the source string is not changed and should be escaped externally.
+  // If result starts with <pre... internal wrapper is skipped.
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {
+      }
+    }
+    return ''; // use external default escaping
+  }
+});
+const markdownItWithoutHtml = require('markdown-it')({
+  html: false,        // Enable HTML tags in source
+  xhtmlOut: false,        // Use '/' to close single tags (<br/>).
+                          // This is only for full CommonMark compatibility.
+  breaks: false,        // Convert '\n' in paragraphs into <br>
+  langPrefix: 'language-',  // CSS language prefix for fenced blocks. Can be
+                            // useful for external highlighters.
+  linkify: false,        // Autoconvert URL-like text to links
+
+  // Enable some language-neutral replacement + quotes beautification
+  typographer: false,
+
+  // Double + single quotes replacement pairs, when typographer enabled,
+  // and smartquotes on. Could be either a String or an Array.
+  //
+  // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
+  // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
+  quotes: '“”‘’',
+
+  // Highlighter function. Should return escaped HTML,
+  // or '' if the source string is not changed and should be escaped externally.
+  // If result starts with <pre... internal wrapper is skipped.
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {
+      }
+    }
+    return ''; // use external default escaping
+  }
 });
 
-function markdown2html(markdown) {
+function markdown2htmlWithHtml(markdown) {
   if (markdown == null) {
     return null
   }
-  return marked(markdown, {sanitize: true})
+  return markdownItWithHtml.render(markdown);
+  // return marked(markdown, {sanitize: true})
+}
+
+function markdown2htmlWithoutHtml(markdown) {
+  if (markdown == null) {
+    return null
+  }
+  return markdownItWithoutHtml.render(markdown);
+  // return marked(markdown, {sanitize: true})
 }
 
 //格式化时间戳
@@ -54,12 +119,12 @@ function formatFileSize(bytes) {
 }
 
 //读cookie
-function getCookie(name) {
-  if (typeof window === 'undefined') {
+function getCookieFromString(cookieString, name) {
+  if (cookieString == null) {
     return null
   }
   var nameEQ = name + '='
-  var ca = document.cookie.split(';')
+  var ca = cookieString.split(';')
   for (var i = 0; i < ca.length; i++) {
     var c = ca[i]
     while (c.charAt(0) == ' ') c = c.substring(1, c.length)
@@ -68,9 +133,16 @@ function getCookie(name) {
   return null
 }
 
+function getCookie(name) {
+  if (!inBrowser()) {
+    return null
+  }
+  return getCookieFromString(document.cookie, name)
+}
+
 //写cookie
 function setCookie(key, value) {
-  if (typeof window !== 'undefined') {
+  if (inBrowser()) {
     var date = new Date()
     date.setTime(date.getTime() + (1000 * 60 * 60 * 6))
     document.cookie = key + '=' + value + '; expires=' + date.toGMTString()
@@ -80,32 +152,36 @@ function setCookie(key, value) {
 
 //成功信息弹框
 function successInfo(info) {
-  if (typeof window !== 'undefined') {
+  if (inBrowser()) {
     alert(info)
   }
 }
 
 //失败信息弹框
 function errorInfo(info) {
-  if (typeof window !== 'undefined') {
+  if (inBrowser()) {
     alert(info)
   }
 }
 
 function confirmBox(message) {
-  if (typeof window !== 'undefined') {
+  if (inBrowser()) {
     return confirm(message)
   }
   return true
 }
 
 function exitWarm(message) {
-  if (typeof window !== 'undefined') {
+  if (inBrowser()) {
     window.onbeforeunload = function () {
       return message;
     }
   }
-  return true
+}
+
+function inBrowser() {
+  // return true
+  return typeof window !== 'undefined'
 }
 
 //检查参数并通过询问框询问
@@ -185,10 +261,12 @@ function checkQueryParameter(data, ...parameters) {
 }
 
 export default {
-  markdown2html: markdown2html,
+  markdown2htmlWithHtml: markdown2htmlWithHtml,
+  markdown2htmlWithoutHtml: markdown2htmlWithoutHtml,
   formatTimestamp: formatTimestamp,
   formatDate: formatDate,
   formatFileSize: formatFileSize,
+  getCookieFromString: getCookieFromString,
   getCookie: getCookie,
   setCookie: setCookie,
   successInfo: successInfo,

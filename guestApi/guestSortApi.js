@@ -3,8 +3,7 @@ import axios from '../utils/axios'
 const url = '/guest/sort'
 
 function listAllSort() {
-  return axios.instance.get(url + '/listAllSort', {
-    params: {}
+  return axios.tokenAxiosMethod.get(url + '/listAllSort', {
   })
 }
 

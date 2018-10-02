@@ -6,7 +6,7 @@ function addComment(comment) {
   if (util.checkParameterAnd('确认添加评论？', comment, 'articleId', 'markdown')) {
     return guestCommentApi.addComment(comment.userId, comment.articleId, comment.markdown)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 export default {

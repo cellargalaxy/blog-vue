@@ -1,7 +1,7 @@
 <template>
   <b-card class="text-center translucent white">
-    <p v-if="error.statusCode===404" v-text="'你找的页面不翼而飞了呀'"/>
-    <p v-else v-text="error.statusCode+'？什么鬼异常'"/>
+    <h2 v-text="error.statusCode"/>
+    <p v-text="error.message"/>
     <nuxt-link to="/">回去首页溜达</nuxt-link>
   </b-card>
 </template>

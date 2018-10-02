@@ -10,8 +10,8 @@ module.exports = {
       {hid: 'description', name: 'description', content: 'cellargalaxyの博客'}
     ],
     link: [
-      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
-    ]
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+    ],
   },
   /*
   ** Customize the progress bar color
@@ -21,8 +21,11 @@ module.exports = {
   modules: [
     'bootstrap-vue/nuxt',
 
-    // Or if you have custom bootstrap CSS...
     ['bootstrap-vue/nuxt', {css: false}],
+  ],
+
+  plugins: [
+    {src: '~plugins/mavon-editor', ssr: false},
   ],
 
   /*

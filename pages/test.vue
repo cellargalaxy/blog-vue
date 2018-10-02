@@ -3,14 +3,14 @@
 </template>
 
 <script>
-  import com from '../components/pageHead.vue'
+  import com from '../components/gotoTop.vue'
 
   export default {
     name: "test",
     components: {
       com
     },
-    layout: 'admin',
+    // layout: 'admin',
   }
 </script>
 

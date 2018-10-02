@@ -3,7 +3,7 @@ import util from '../utils/util'
 
 function login(username, password) {
   util.checkParameterAnd(null, {username: username, password: password}, 'username', 'password')
-  return axios.instance.post('/login', {username: username, password: password})
+  return axios.tokenAxiosMethod.post('/login', {username: username, password: password})
 }
 
 function setLogin(userVo) {
@@ -17,7 +17,7 @@ function setLogout() {
 
 function getUseVo(token, username) {
   axios.setToken(token)
-  return axios.simpleAxios.get('/admin/user/getUserVo', {params: {username: username}})
+  return axios.tokenAxiosMethod.get('/admin/user/getUserVo', {params: {username: username}})
 }
 
 function setCurrentUserVo(userVo) {
@@ -25,7 +25,7 @@ function setCurrentUserVo(userVo) {
 }
 
 function getCurrentUserVo() {
-  var userVoString = util.getCookie('userVo')
+  let userVoString = util.getCookie('userVo')
   if (userVoString != undefined && userVoString != null && userVoString.length > 0) {
     return JSON.parse(userVoString)
   }

@@ -4,22 +4,24 @@ import adminCommentApi from './adminCommentApi'
 
 function removeComment(comment) {
   if (!axios.logined()) {
-    return axios.createEmtryAxios()
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
   }
   if (util.checkParameterAnd('确认删除评论？', comment, 'commentId')) {
     return adminCommentApi.removeComment(comment.commentId)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 function changeComment(comment) {
   if (!axios.logined()) {
-    return axios.createEmtryAxios()
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
   }
   if (util.checkParameterAnd('确认修改评论？', comment, 'commentId')) {
     return adminCommentApi.changeComment(comment.commentId, comment.userId, comment.articleId, comment.markdown)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 export default {

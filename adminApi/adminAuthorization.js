@@ -4,22 +4,24 @@ import adminAuthorizationApi from './adminAuthorizationApi'
 
 function addAuthorization(authorization) {
   if (!axios.logined()) {
-    return axios.createEmtryAxios()
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
   }
   if (util.checkParameterAnd('确认添加授权？', authorization, 'userId', 'permission')) {
     return adminAuthorizationApi.addAuthorization(authorization.userId, authorization.permission)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 function removeAuthorization(authorization) {
   if (!axios.logined()) {
-    return axios.createEmtryAxios()
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
   }
   if (util.checkParameterAnd('确认删除授权？', authorization, 'authorizationId')) {
     return adminAuthorizationApi.removeAuthorization(authorization.authorizationId)
   }
-  return axios.createEmtryAxios()
+  return axios.createEmptyResponse()
 }
 
 export default {
