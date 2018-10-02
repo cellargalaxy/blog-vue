@@ -2,7 +2,8 @@ import axios from 'axios'
 import qs from 'qs'
 import util from './util'
 
-const baseURL = 'http://api.www.cellargalaxt.top'
+// const baseURL = 'http://api.www.cellargalaxt.top'
+const baseURL = 'http://127.0.0.1:8080'
 const timeout = 1000 * 5
 
 const tokenAxios = axios.create({

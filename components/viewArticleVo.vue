@@ -38,11 +38,6 @@
   import common from '../commonApi/common'
 
   export default {
-    head: {
-      link: [
-        {rel: 'stylesheet', href: '/markdown.css'},
-      ],
-    },
     name: "viewArticleVo",
     data() {
       return {}
