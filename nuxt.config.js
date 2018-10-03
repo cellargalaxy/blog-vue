@@ -7,7 +7,7 @@ module.exports = {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: 'cellargalaxyの博客'}
+      {hid: 'default_description', name: 'description', content: 'cellargalaxyの博客'}
     ],
     script: [
       {src: '/jquery/3.3.1/jquery.min.js'},

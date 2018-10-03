@@ -39,8 +39,17 @@
 
   export default {
     name: "viewArticleVo",
-    data() {
-      return {}
+    head() {
+      if (!this.readmore) {
+        return {
+          title: this.articleVo.article.title + ' | cellargalaxyの博客',
+          meta: [
+            {hid: 'article_description', name: 'description', content: this.articleVo.article.title}
+          ]
+        }
+      } else {
+        return {}
+      }
     },
     props: {
       articleVo: {
