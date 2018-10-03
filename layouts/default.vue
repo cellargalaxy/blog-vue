@@ -23,7 +23,7 @@
     props: {
       sort: {
         default: function () {
-          return this.$route.params.sort
+          return this.$route.params.sort != undefined ? this.$route.params.sort : ''
         }
       },
     },
