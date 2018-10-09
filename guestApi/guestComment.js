@@ -9,6 +9,20 @@ function addComment(comment) {
   return axios.createEmptyResponse()
 }
 
+
+function listCommentByArticleId(pageSize, page, articleId, userId, sortId, sort, title) {
+  return axios.tokenAxiosMethod.get(url + '/listCommentByArticleId', {
+    pageSize: pageSize,
+    page: page,
+    articleId: articleId,
+    userId: userId,
+    sortId: sortId,
+    sort: sort,
+    title: title,
+  })
+}
+
 export default {
   addComment: addComment,
+  listCommentByArticleId: listCommentByArticleId,
 }

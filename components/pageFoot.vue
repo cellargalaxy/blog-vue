@@ -6,7 +6,7 @@
   </b-card>
 </template>
 
-<!--<page-foot/>-->
+<page-foot/>
 
 <script>
   import util from '../utils/util'

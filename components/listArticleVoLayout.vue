@@ -8,7 +8,7 @@
 <!--<list-article-vo-layout :articleVos="articleVos" :total="total" :pageSize="pageSize" :currentPage="currentPage"/>-->
 
 <script>
-  import listArticleVo from './listArticleVo'
+  import listArticleVo from './listArticle'
   import pagination from './pagination'
 
   export default {

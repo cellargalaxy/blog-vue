@@ -5,7 +5,7 @@
 <script>
   import publicApi from '../../commonApi/publicApi'
   import guestArticle from '../../guestApi/guestArticle'
-  import articleVoLayout from '../../components/articleVoLayout.vue'
+  import articleVoLayout from '../../components/viewArticleLayout.vue'
 
   export default {
     name: "article_articleId.vue",

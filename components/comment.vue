@@ -10,7 +10,7 @@
   </b-list-group>
 </template>
 
-<!--<comment :comment="comment" :floor="floor"/>-->
+<comment :comment="comment" :floor="floor"/>
 
 <script>
   import common from '../commonApi/common'

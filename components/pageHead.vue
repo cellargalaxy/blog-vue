@@ -14,7 +14,7 @@
   </b-card>
 </template>
 
-<!--<page-head :sort="sort"/>-->
+<page-head :sort="sort"/>
 
 <script>
   export default {
@@ -22,11 +22,10 @@
     props: {
       sort: {
         default: function () {
-          return "学习"
+          return "分类"
         }
       },
     },
-    methods: {},
   }
 </script>
 

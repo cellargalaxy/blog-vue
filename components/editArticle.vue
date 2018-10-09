@@ -11,7 +11,7 @@
   </b-form>
 </template>
 
-<!--<edit-article :userId="userId" :sorts="sorts" :articleForm="articleForm"/>-->
+<edit-article :sorts="sorts" :articleForm="articleForm"/>
 
 <script>
   import util from '../utils/util'
@@ -56,19 +56,14 @@
       }
     },
     props: {
-      userId: {
-        default: function () {
-          return 0
-        }
-      },
       sorts: {
         default: function () {
-          return [{"sortId": 1, "sort": "学习",},]
+          return [{"sortId": 1, "sort": "分类",},]
         }
       },
       articleForm: {
         default: function () {
-          return {articleId: 0, userId: this.userId, sortId: 0, title: null, markdown: '', view: 0, tags: ''}
+          return {articleId: 0, userId: 0, sortId: 0, title: null, markdown: '', view: 0, tags: ''}
         }
       },
     },
@@ -93,13 +88,7 @@
           adminArticle.addArticle(this.articleForm, this.articleForm.tags)
             .then(res => {
               util.successInfo('保存成功')
-              this.articleForm.articleId = 0
-              this.articleForm.userId = this.userId
-              this.articleForm.sortId = 0
-              this.articleForm.title = null
-              this.articleForm.markdown = ''
-              this.articleForm.view = 0
-              this.articleForm.tags = ''
+              this.articleForm = {articleId: 0, userId: 0, sortId: 0, title: null, markdown: '', view: 0, tags: ''}
             })
         } else {
           adminArticle.changeArticle(this.articleForm)

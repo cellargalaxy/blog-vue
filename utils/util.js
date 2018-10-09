@@ -1,88 +1,3 @@
-//import marked from 'marked'
-import 'highlight.js/styles/idea.css';
-
-const hljs = require('highlight.js');
-const markdownItWithHtml = require('markdown-it')({
-  html: true,        // Enable HTML tags in source
-  xhtmlOut: false,        // Use '/' to close single tags (<br/>).
-                          // This is only for full CommonMark compatibility.
-  breaks: false,        // Convert '\n' in paragraphs into <br>
-  langPrefix: 'language-',  // CSS language prefix for fenced blocks. Can be
-                            // useful for external highlighters.
-  linkify: false,        // Autoconvert URL-like text to links
-
-  // Enable some language-neutral replacement + quotes beautification
-  typographer: false,
-
-  // Double + single quotes replacement pairs, when typographer enabled,
-  // and smartquotes on. Could be either a String or an Array.
-  //
-  // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
-  // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
-  quotes: '“”‘’',
-
-  // Highlighter function. Should return escaped HTML,
-  // or '' if the source string is not changed and should be escaped externally.
-  // If result starts with <pre... internal wrapper is skipped.
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(lang, str).value;
-      } catch (__) {
-      }
-    }
-    return ''; // use external default escaping
-  }
-});
-const markdownItWithoutHtml = require('markdown-it')({
-  html: false,        // Enable HTML tags in source
-  xhtmlOut: false,        // Use '/' to close single tags (<br/>).
-                          // This is only for full CommonMark compatibility.
-  breaks: false,        // Convert '\n' in paragraphs into <br>
-  langPrefix: 'language-',  // CSS language prefix for fenced blocks. Can be
-                            // useful for external highlighters.
-  linkify: false,        // Autoconvert URL-like text to links
-
-  // Enable some language-neutral replacement + quotes beautification
-  typographer: false,
-
-  // Double + single quotes replacement pairs, when typographer enabled,
-  // and smartquotes on. Could be either a String or an Array.
-  //
-  // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
-  // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
-  quotes: '“”‘’',
-
-  // Highlighter function. Should return escaped HTML,
-  // or '' if the source string is not changed and should be escaped externally.
-  // If result starts with <pre... internal wrapper is skipped.
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(lang, str).value;
-      } catch (__) {
-      }
-    }
-    return ''; // use external default escaping
-  }
-});
-
-function markdown2htmlWithHtml(markdown) {
-  if (markdown == null) {
-    return null
-  }
-  return markdownItWithHtml.render(markdown);
-  // return marked(markdown, {sanitize: true})
-}
-
-function markdown2htmlWithoutHtml(markdown) {
-  if (markdown == null) {
-    return null
-  }
-  return markdownItWithoutHtml.render(markdown);
-  // return marked(markdown, {sanitize: true})
-}
-
 //格式化时间戳
 function formatTimestamp(timestamp, fmt) {
   return formatDate(new Date(timestamp), fmt)
@@ -144,10 +59,9 @@ function getCookie(name) {
 function setCookie(key, value) {
   if (inBrowser()) {
     var date = new Date()
-    date.setTime(date.getTime() + (1000 * 60 * 60 * 6))
+    date.setTime(date.getTime() + (1000 * 60 * 60 * 24 * 365 * 10))
     document.cookie = key + '=' + value + '; expires=' + date.toGMTString()
   }
-
 }
 
 //成功信息弹框
@@ -180,8 +94,7 @@ function exitWarm(message) {
 }
 
 function inBrowser() {
-  // return true
-  return typeof window !== 'undefined'
+  return typeof(window) !== 'undefined'
 }
 
 //检查参数并通过询问框询问
@@ -261,8 +174,6 @@ function checkQueryParameter(data, ...parameters) {
 }
 
 export default {
-  markdown2htmlWithHtml: markdown2htmlWithHtml,
-  markdown2htmlWithoutHtml: markdown2htmlWithoutHtml,
   formatTimestamp: formatTimestamp,
   formatDate: formatDate,
   formatFileSize: formatFileSize,

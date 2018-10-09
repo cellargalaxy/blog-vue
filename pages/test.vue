@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import com from '../components/gotoTop.vue'
+  import com from '../components/listComment.vue'
 
   export default {
     name: "test",

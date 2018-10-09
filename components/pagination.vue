@@ -1,9 +1,9 @@
 <template>
   <b-pagination :total-rows="total" :per-page="pageSize" v-model="currentPage" @change="change"
-                align="center"></b-pagination>
+                align="center" class="translucent"/>
 </template>
 
-<!--<pagination :total="total" :pageSize="pageSize" :currentPage="currentPage"/>-->
+<pagination :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
 
 <script>
   export default {

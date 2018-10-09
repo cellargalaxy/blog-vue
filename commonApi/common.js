@@ -1,18 +1,20 @@
 import util from '../utils/util'
+import markdown from '../utils/markdown'
 
 function isNumber(val) {
   return val != null && !isNaN(val)
 }
 
 function initArticle(article) {
-  if (isNumber(article.createTime)) {
-    article.createTime = util.formatTimestamp(article.createTime, 'yyyy-MM-dd')
+  if (isNumber(article.createDate)) {
+    article.createDate = util.formatTimestamp(article.createDate, 'yyyy-MM-dd')
   }
-  if (isNumber(article.updateTime)) {
-    article.updateTime = util.formatTimestamp(article.updateTime, 'yyyy-MM-dd')
+  if (isNumber(article.updateDate)) {
+    article.updateDate = util.formatTimestamp(article.updateDate, 'yyyy-MM-dd')
   }
+
   article.url = '/article/' + article.articleId
-  article.html = util.markdown2htmlWithHtml(article.markdown)
+  article.html = markdown.markdown2htmlWithHtml(article.markdown)
   let summaryMarkdown = ''
   let strings = article.markdown.split(/[\n]/);
   let hangCount = 0
@@ -22,7 +24,7 @@ function initArticle(article) {
       hangCount = hangCount + 1
     }
   }
-  article.summary = util.markdown2htmlWithHtml(summaryMarkdown)
+  article.summary = markdown.markdown2htmlWithHtml(summaryMarkdown)
   return article
 }
 
@@ -43,12 +45,12 @@ function initComment(comment) {
   if (isNumber(comment.updateTime)) {
     comment.updateTime = util.formatTimestamp(comment.updateTime, 'yyyy-MM-dd hh:mm:ss')
   }
-  comment.html = util.markdown2htmlWithoutHtml(comment.markdown)
+  comment.html = markdown.markdown2htmlWithoutHtml(comment.markdown)
   return comment
 }
 
 export default {
-  initArticle:initArticle,
-  initTag:initTag,
-  initComment:initComment,
+  initArticle: initArticle,
+  initTag: initTag,
+  initComment: initComment,
 }

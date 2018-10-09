@@ -1,9 +1,10 @@
 import axios from 'axios'
 import qs from 'qs'
 import util from './util'
+import account from './account'
 
-const baseURL = 'http://api.www.cellargalaxy.top'
-// const baseURL = 'http://127.0.0.1:8080'
+// const baseURL = 'http://api.www.cellargalaxy.top'
+const baseURL = 'http://127.0.0.1:8080'
 const timeout = 1000 * 10
 
 const tokenAxios = axios.create({
@@ -15,7 +16,7 @@ tokenAxios.interceptors.request.use(
     config.data = qs.stringify(config.data)
     config.headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': getToken()
+      'Authorization': account.getToken()
     }
     return config
   }
@@ -29,6 +30,7 @@ function createMethod(axios) {
       try {
         let res = await axios.get(url, {params: data})
         if (res.data.status != 1) {
+          console.log(res.data.massage)
           util.errorInfo(res.data.massage)
         }
         return inspect(res.data)
@@ -42,6 +44,7 @@ function createMethod(axios) {
       try {
         let res = await axios.post(url, data)
         if (res.data.status != 1) {
+          console.log(res.data.massage)
           util.errorInfo(res.data.massage)
         }
         return inspect(res.data)
@@ -64,49 +67,13 @@ function inspect(data) {
   })
 }
 
-var token = null
-const tokenKey = 'Authorization'
-
-function setTokenFromCookieString(cookieString) {
-  token = getTokenFromCookieString(cookieString)
-  util.setCookie(tokenKey, token)
-}
-
-function setToken(t) {
-  token = t
-  util.setCookie(tokenKey, token)
-}
-
-function getTokenFromCookieString(cookieString) {
-  if (token == null) {
-    token = util.getCookieFromString(cookieString, tokenKey)
-  }
-  return token
-}
-
-function getToken() {
-  if (token == null) {
-    token = util.getCookie(tokenKey)
-  }
-  return token
-}
-
-function logined() {
-  return getToken() != null && getToken() != '' && getToken() != 'null'
-}
-
 function createEmptyResponse() {
   return inspect({status: 0, massage: '请登录', data: null})
 }
 
 export default {
   tokenAxiosMethod: tokenAxiosMethod,
-  setTokenFromCookieString: setTokenFromCookieString,
-  setToken: setToken,
-  getTokenFromCookieString: getTokenFromCookieString,
-  getToken: getToken,
   createEmptyResponse: createEmptyResponse,
-  logined: logined,
 }
 
 //////////////////////

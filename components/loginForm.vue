@@ -11,12 +11,12 @@
   </b-form>
 </template>
 
-<!--<login-form/>-->
+<login-form/>
 
 <script>
   import util from '../utils/util'
-  import axios from '../utils/axios'
   import publicApi from '../commonApi/publicApi'
+  import account from '../utils/account'
 
   export default {
     name: "loginForm",
@@ -29,10 +29,10 @@
       login: function () {
         publicApi.login(this.userForm.username, this.userForm.password)
           .then(res => {
-            axios.setToken(res)
+            account.setToken(res)
             this.userForm = {username: null, password: null,}
             util.successInfo('登录成功')
-            window.location.href='/admin/editArticle';
+            window.location.href = '/admin/editArticle';
           })
       },
     },

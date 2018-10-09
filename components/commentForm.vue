@@ -1,7 +1,7 @@
 <template>
   <b-form class="translucent">
     <b-form-group>
-      <b-form-textarea v-model="commentForm.markdown" placeholder='支持markdown。由于本站做了缓存，成功评论后可能需要等过一分钟，刷新页面才能显示'
+      <b-form-textarea v-model="commentForm.markdown" placeholder='支持markdown。由于缓存，新评论需要过几分钟，刷新页面才能显示。'
                        :rows="5" class="translucent"/>
     </b-form-group>
 
@@ -11,7 +11,7 @@
   </b-form>
 </template>
 
-<!--<comment-form :userId="userId" :articleId="articleId"/>-->
+<comment-form :articleId="articleId"/>
 
 <script>
   import util from '../utils/util'
@@ -21,15 +21,10 @@
     name: "commentForm",
     data() {
       return {
-        commentForm: {userId: this.userId, articleId: this.articleId, markdown: null,}
+        commentForm: {userId: 0, articleId: this.articleId, markdown: null,}
       }
     },
     props: {
-      userId: {
-        default: function () {
-          return 0
-        }
-      },
       articleId: {
         default: function () {
           return 0
@@ -41,7 +36,7 @@
         guestComment.addComment(this.commentForm)
           .then(res => {
             util.successInfo('成功评论')
-            this.commentForm = {userId: this.userId, articleId: this.articleId, markdown: null,}
+            this.commentForm = {userId: 0, articleId: this.articleId, markdown: null,}
             location.reload();
           })
       },

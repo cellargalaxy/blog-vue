@@ -10,6 +10,7 @@ function addComment(userId, articleId, markdown) {
   })
 }
 
+
 export default {
   addComment: addComment,
 }
