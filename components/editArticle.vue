@@ -3,6 +3,7 @@
     <b-input-group>
       <b-form-input v-model="articleForm.title" type="text" placeholder="title"/>
       <b-form-select v-model="articleForm.sortId" :options="sortOptions"/>
+      <b-button variant="primary" @click="flushArticle">刷新</b-button>
     </b-input-group>
 
     <b-form-group>
@@ -11,10 +12,11 @@
   </b-form>
 </template>
 
-<edit-article :sorts="sorts" :articleForm="articleForm"/>
+<edit-article :sorts="sorts" :articleForm="articleForm" @flushArticle="flushArticle"/>
 
 <script>
   import util from '../utils/util'
+  import common from '../commonApi/common'
   import adminArticle from '../adminApi/adminArticle'
 
   export default {
@@ -58,12 +60,12 @@
     props: {
       sorts: {
         default: function () {
-          return [{"sortId": 1, "sort": "分类",},]
+          return [{"sortId": 1, "sort": "一个分类",},]
         }
       },
       articleForm: {
         default: function () {
-          return {articleId: 0, userId: 0, sortId: 0, title: null, markdown: '', view: 0, tags: ''}
+          return {articleId: 0, sortId: 0, title: null, markdown: '', view: 0, tags: ''}
         }
       },
     },
@@ -83,12 +85,15 @@
       util.exitWarm('文章可能还没保存，确认离开？')
     },
     methods: {
-      postArticle(value, render) {
+      flushArticle: function () {
+        this.$emit('flushArticle', this.articleForm.createDate, this.articleForm.title)
+      },
+      postArticle: function (value, render) {
         if (this.articleForm.articleId == 0) {
           adminArticle.addArticle(this.articleForm, this.articleForm.tags)
             .then(res => {
               util.successInfo('保存成功')
-              this.articleForm = {articleId: 0, userId: 0, sortId: 0, title: null, markdown: '', view: 0, tags: ''}
+              this.articleForm = {articleId: 0, sortId: 0, title: null, markdown: '', view: 0, tags: ''}
             })
         } else {
           adminArticle.changeArticle(this.articleForm)

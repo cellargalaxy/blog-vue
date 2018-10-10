@@ -1,9 +1,10 @@
 import util from '../utils/util'
+import account from '../utils/account'
 import axios from '../utils/axios'
 import adminSortApi from './adminSortApi'
 
 function addSort(sort) {
-  if (!axios.logined()) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
@@ -14,7 +15,7 @@ function addSort(sort) {
 }
 
 function removeSort(sort) {
-  if (!axios.logined()) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
@@ -25,7 +26,7 @@ function removeSort(sort) {
 }
 
 function changeSort(sort) {
-  if (!axios.logined()) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
@@ -35,17 +36,8 @@ function changeSort(sort) {
   return axios.createEmptyResponse()
 }
 
-function listAllSort() {
-  if (!axios.logined()) {
-    util.errorInfo('请登录')
-    return axios.createEmptyResponse()
-  }
-  return adminSortApi.listAllSort()
-}
-
 export default {
   addSort: addSort,
   removeSort: removeSort,
   changeSort: changeSort,
-  listAllSort: listAllSort,
 }

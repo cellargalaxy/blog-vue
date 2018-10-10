@@ -1,9 +1,10 @@
 import util from '../utils/util'
+import account from '../utils/account'
 import axios from '../utils/axios'
 import adminCommentApi from './adminCommentApi'
 
 function removeComment(comment) {
-  if (!axios.logined()) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
@@ -14,7 +15,7 @@ function removeComment(comment) {
 }
 
 function changeComment(comment) {
-  if (!axios.logined()) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }

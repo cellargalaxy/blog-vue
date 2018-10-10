@@ -1,7 +1,5 @@
-//import marked from 'marked'
-// import 'highlight.js/styles/idea.css';
-
-// const hljs = require('highlight.js');
+import 'highlight.js/styles/darcula.css';
+const hljs = require('highlight.js');
 
 const markdownItWithHtml = require('markdown-it')({
   html: true,
@@ -11,15 +9,16 @@ const markdownItWithHtml = require('markdown-it')({
   linkify: false,
   typographer: false,
   quotes: '“”‘’',
-  // highlight: function (str, lang) {
-  //   if (lang && hljs.getLanguage(lang)) {
-  //     try {
-  //       return hljs.highlight(lang, str).value;
-  //     } catch (__) {
-  //     }
-  //   }
-  //   return '';
-  // }
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return '<pre class="hljs"><code>' +
+          hljs.highlight(lang, str, true).value +
+          '</code></pre>';
+      } catch (__) {}
+    }
+    return '<pre class="hljs"><code>' + markdownItWithHtml.utils.escapeHtml(str) + '</code></pre>';
+  }
 });
 
 const markdownItWithoutHtml = require('markdown-it')({
@@ -30,15 +29,16 @@ const markdownItWithoutHtml = require('markdown-it')({
   linkify: false,
   typographer: false,
   quotes: '“”‘’',
-  // highlight: function (str, lang) {
-  //   if (lang && hljs.getLanguage(lang)) {
-  //     try {
-  //       return hljs.highlight(lang, str).value;
-  //     } catch (__) {
-  //     }
-  //   }
-  //   return ''; // use external default escaping
-  // }
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return '<pre class="hljs"><code>' +
+          hljs.highlight(lang, str, true).value +
+          '</code></pre>';
+      } catch (__) {}
+    }
+    return '<pre class="hljs"><code>' + markdownItWithoutHtml.utils.escapeHtml(str) + '</code></pre>';
+  }
 });
 
 function markdown2htmlWithHtml(markdown) {

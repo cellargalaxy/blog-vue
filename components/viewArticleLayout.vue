@@ -1,6 +1,6 @@
 <template>
   <div>
-    <view-article :article="article" :commentCount="article.commentCount" :isSummary="false"/>
+    <view-article :article="article" :commentCount="comments.length" :isSummary="false"/>
     <br/>
     <comment-form :articleId="article.articleId"/>
     <list-comment :comments="comments"/>
@@ -10,7 +10,8 @@
 <view-article-layout :article="article"/>
 
 <script>
-  import viewArticleVo from './viewArticle'
+  import guestComment from '../guestApi/guestComment'
+  import viewArticle from './viewArticle'
   import commentForm from './commentForm'
   import listComment from './listComment'
 
@@ -43,10 +44,13 @@
       }
     },
     created: function () {
-
+      guestComment.listCommentByArticleId(this.article)
+        .then(res => {
+          this.comments = res
+        })
     },
     components: {
-      viewArticleVo,
+      viewArticle,
       commentForm,
       listComment,
     },

@@ -21,7 +21,7 @@
     name: "commentForm",
     data() {
       return {
-        commentForm: {userId: 0, articleId: this.articleId, markdown: null,}
+        commentForm: {articleId: this.articleId, markdown: null}
       }
     },
     props: {
@@ -36,7 +36,7 @@
         guestComment.addComment(this.commentForm)
           .then(res => {
             util.successInfo('成功评论')
-            this.commentForm = {userId: 0, articleId: this.articleId, markdown: null,}
+            this.commentForm = {articleId: this.articleId, markdown: null}
             location.reload();
           })
       },

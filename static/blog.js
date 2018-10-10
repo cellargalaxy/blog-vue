@@ -35,16 +35,24 @@ const images = [
 
 
 $(function () {
-  $("body").css('background-image', 'url(' + images[Math.floor(Math.random() * images.length)] + ')');
+  flushBackgroundImage()
 })
 
-// changeImage(0)
+function flushBackgroundImage() {
+  setflushBackgroundImage(Math.floor(Math.random() * images.length))
+}
 
-function changeImage(i) {
+function setflushBackgroundImage(index) {
+  $("body").css('background-image', 'url(' + images[index] + ')')
+}
+
+// changeBackgroundImage(0)
+
+function changeBackgroundImage(i) {
   $(function () {
-    $("body").css('background-image', 'url(' + images[i % images.length] + ')');
+    setflushBackgroundImage(i % images.length)
   })
   setTimeout(function () {
-    changeImage(i + 1)
+    setflushBackgroundImage(i + 1)
   }, 1000 * 60);
 }

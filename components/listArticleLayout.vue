@@ -1,17 +1,18 @@
 <template>
   <div>
-    <view-article v-for="(article,articleIndex) in articles" :key="articleIndex" :article="article"
-                  :commentCount="article.commentCount" :isSummary="true" style="padding-bottom: 1em;"/>
+    <list-article :articles="articles"/>
+    <pagination :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
   </div>
 </template>
 
-<list-article :articles="articles"/>
+<list-article-layout :articles="articles" :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
 
 <script>
-  import viewArticle from './viewArticle'
+  import listArticle from './listArticle'
+  import pagination from './pagination'
 
   export default {
-    name: "listArticle",
+    name: "listArticleLayout",
     data() {
       return {}
     },
@@ -67,9 +68,25 @@
           ]
         }
       },
+      total: {
+        default: function () {
+          return 25
+        }
+      },
+      pageSize: {
+        default: function () {
+          return 10
+        }
+      },
+      currentPage: {
+        default: function () {
+          return 1
+        }
+      },
     },
     components: {
-      viewArticle,
+      listArticle,
+      pagination,
     },
   }
 </script>

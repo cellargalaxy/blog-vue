@@ -1,13 +1,6 @@
 <template>
   <div>
-    <page-head :sort="sort"/>
-
-    <br/>
-
-    <b-container>
-      <nuxt/>
-    </b-container>
-
+    <nuxt/>
     <page-foot/>
     <goto-top/>
   </div>

@@ -2,37 +2,51 @@ import axios from '../utils/axios'
 
 const url = '/guest/article'
 
-function viewArticle(articleId) {
+function viewArticle(createDate, title) {
   return axios.tokenAxiosMethod.get(url + '/viewArticle', {
-      articleId: articleId,
+    createDate: createDate,
+    title: title
   })
 }
 
-function listArticleVo(pageSize, page, articleId, userId, sortId, sort, title) {
-  return axios.tokenAxiosMethod.get(url + '/listArticleVo', {
-      pageSize: pageSize,
-      page: page,
-      articleId: articleId,
-      userId: userId,
-      sortId: sortId,
-      sort: sort,
-      title: title,
+function viewArticleVo(createDate, title) {
+  return axios.tokenAxiosMethod.get(url + '/viewArticleVo', {
+    articleId: createDate,
+    title: title
   })
 }
 
-function getArticleCount(pageSize, page, articleId, userId, sortId, title) {
-  return axios.tokenAxiosMethod.get(url + '/getArticleCount', {
-      pageSize: pageSize,
-      page: page,
-      articleId: articleId,
-      userId: userId,
-      sortId: sortId,
-      title: title,
+function listArticleBySort(pageSize, page, sort) {
+  return axios.tokenAxiosMethod.get(url + '/listArticleBySort', {
+    pageSize: pageSize,
+    page: page,
+    sort: sort,
   })
+}
+
+function listArticleVoBySort(pageSize, page, sort) {
+  return axios.tokenAxiosMethod.get(url + '/listArticleVoBySort', {
+    pageSize: pageSize,
+    page: page,
+    sort: sort,
+  })
+}
+
+function getArticleCountBySort(sort) {
+  return axios.tokenAxiosMethod.get(url + '/getArticleCountBySort', {
+    sort: sort,
+  })
+}
+
+function listAllSitemap() {
+  return axios.tokenAxiosMethod.get(url + '/listAllSitemap', {})
 }
 
 export default {
   viewArticle: viewArticle,
-  listArticleVo: listArticleVo,
-  getArticleCount: getArticleCount,
+  viewArticleVo: viewArticleVo,
+  listArticleBySort: listArticleBySort,
+  listArticleVoBySort: listArticleVoBySort,
+  getArticleCountBySort: getArticleCountBySort,
+  listAllSitemap: listAllSitemap,
 }

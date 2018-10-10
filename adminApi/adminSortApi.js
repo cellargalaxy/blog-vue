@@ -21,14 +21,8 @@ function changeSort(sortId, sort) {
   })
 }
 
-function listAllSort() {
-  return axios.tokenAxiosMethod.get(url + '/listAllSort', {
-  })
-}
-
 export default {
   addSort: addSort,
   removeSort: removeSort,
   changeSort: changeSort,
-  listAllSort: listAllSort,
 }

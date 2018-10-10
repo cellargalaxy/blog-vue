@@ -3,8 +3,8 @@ import qs from 'qs'
 import util from './util'
 import account from './account'
 
-// const baseURL = 'http://api.www.cellargalaxy.top'
-const baseURL = 'http://127.0.0.1:8080'
+const baseURL = 'http://api.www.cellargalaxy.top'
+// const baseURL = 'http://127.0.0.1:8080'
 const timeout = 1000 * 10
 
 const tokenAxios = axios.create({
@@ -37,7 +37,7 @@ function createMethod(axios) {
       } catch (e) {
         console.log(e)
         util.errorInfo('网络异常:' + e)
-        return createEmptyResponse()
+        return createEmptyResponseWithMassage('网络异常:' + e)
       }
     },
     async post(url, data) {
@@ -51,7 +51,7 @@ function createMethod(axios) {
       } catch (e) {
         console.log(e)
         util.errorInfo('网络异常:' + e)
-        return createEmptyResponse()
+        return createEmptyResponseWithMassage('网络异常:' + e)
       }
     },
   }
@@ -67,12 +67,17 @@ function inspect(data) {
   })
 }
 
+function createEmptyResponseWithMassage(massage) {
+  return inspect({status: 0, massage: massage, data: null})
+}
+
 function createEmptyResponse() {
-  return inspect({status: 0, massage: '请登录', data: null})
+  return createEmptyResponseWithMassage('请登录')
 }
 
 export default {
   tokenAxiosMethod: tokenAxiosMethod,
+  createEmptyResponseWithMassage: createEmptyResponseWithMassage,
   createEmptyResponse: createEmptyResponse,
 }
 

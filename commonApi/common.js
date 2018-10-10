@@ -13,7 +13,7 @@ function initArticle(article) {
     article.updateDate = util.formatTimestamp(article.updateDate, 'yyyy-MM-dd')
   }
 
-  article.url = '/article/' + article.articleId
+  article.url = '/article/' + article.createDate + '/' + article.title
   article.html = markdown.markdown2htmlWithHtml(article.markdown)
   let summaryMarkdown = ''
   let strings = article.markdown.split(/[\n]/);

@@ -1,14 +1,22 @@
 <template>
-  <login-form/>
+  <div>
+    <page-head :sort="''"/>
+
+    <b-container>
+      <login-form/>
+    </b-container>
+  </div>
 </template>
 
 <script>
+  import pageHead from '../components/pageHead'
   import loginForm from '../components/loginForm.vue'
 
   export default {
     name: "login",
     components: {
-      loginForm
+      pageHead,
+      loginForm,
     },
   }
 </script>

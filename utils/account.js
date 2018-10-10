@@ -20,13 +20,40 @@ function getTokenFromCookieString(cookieString) {
 }
 
 function logined() {
-  return getToken() != null && getToken() != '' && getToken() != 'null'
+  return getToken() != null && getToken() != '' && getToken() != 'null' && getAccount() != null && getAccount() != '' && getAccount() != 'null'
+}
+
+const accountKey = 'account'
+
+function login(t, account) {
+  setToken(t)
+  setAccount(account)
+}
+
+function logout() {
+  setToken(null)
+  setAccount(null)
+}
+
+function getAccount() {
+  let accountString = util.getCookie(accountKey)
+  if (accountString != undefined && accountString != null && accountString.length > 0) {
+    return JSON.parse(accountString)
+  }
+  return null
+}
+
+function setAccount(userVo) {
+  util.setCookie(accountKey, JSON.stringify(userVo))
 }
 
 export default {
-  tokenKey: tokenKey,
   setToken: setToken,
   getTokenFromCookieString: getTokenFromCookieString,
   getToken: getToken,
   logined: logined,
+  login: login,
+  logout: logout,
+  getAccount: getAccount,
+  setAccount: setAccount,
 }

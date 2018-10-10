@@ -1,3 +1,6 @@
+import util from './utils/util'
+import guestArticle from './guestApi/guestArticle'
+
 module.exports = {
   /*
   ** Headers of the page
@@ -27,11 +30,36 @@ module.exports = {
     'bootstrap-vue/nuxt',
 
     ['bootstrap-vue/nuxt', {css: false}],
+
+    '@nuxtjs/sitemap',
   ],
 
   plugins: [
     {src: '~plugins/mavon-editor', ssr: false},
   ],
+
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: 'http://www.cellargalaxy.top',
+    cacheTime: 1000 * 60 * 15,
+    gzip: true,
+    generate: false, // Enable me when using nuxt generate
+    exclude: [
+      '/secret',
+      '/admin/**'
+    ],
+    routes(callback) {
+      guestArticle.listAllSitemap()
+        .then(articles => {
+          let routes = articles.map(article => {
+            article.createDate = util.formatTimestamp(article.createDate, 'yyyy-MM-dd')
+            return '/article/' + article.createDate + '/' + article.title
+          })
+          callback(null, routes)
+        })
+        .catch(callback)
+    }
+  },
 
   /*
   ** Build configuration

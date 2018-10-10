@@ -1,9 +1,11 @@
 import util from '../utils/util'
+import account from '../utils/account'
 import axios from '../utils/axios'
 import adminUserApi from './adminUserApi'
+import adminArticleApi from "./adminArticleApi";
 
 function addUser(user) {
-  if (!axios.logined()) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
@@ -14,7 +16,7 @@ function addUser(user) {
 }
 
 function removeUser(user) {
-  if (!axios.logined()) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
@@ -25,7 +27,7 @@ function removeUser(user) {
 }
 
 function changeUser(user) {
-  if (!axios.logined()) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
@@ -35,29 +37,41 @@ function changeUser(user) {
   return axios.createEmptyResponse()
 }
 
-function getUserVo(user) {
-  if (!axios.logined()) {
+function getUser(user) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
-  return adminUserApi.getUserVo(user.userId)
+  if (util.checkParameterAnd(null, user, 'userId')) {
+    return adminArticleApi.getUser(user.userId)
+  }
+  return axios.createEmptyResponse()
+}
+
+function listAllUser() {
+  if (!account.logined()) {
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
+  }
+  return adminArticleApi.listAllUser()
 }
 
 function listAllUserVo() {
-  if (!axios.logined()) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
-  return adminUserApi.listAllUserVo()
+  return adminArticleApi.listAllUserVo()
 }
 
 function listAllPermission() {
-  if (!axios.logined()) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
-  return adminUserApi.listAllPermission()
+  return adminArticleApi.listAllPermission()
 }
+
 
 export default {
   addUser: addUser,

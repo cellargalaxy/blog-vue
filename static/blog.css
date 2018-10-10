@@ -7,20 +7,20 @@ body {
   background-size: cover;
 }
 
-pre code {
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 0.5em solid rgba(255, 255, 255, 1);
-  border-radius: 0.5em;
-  display: block !important;
-  padding: 0.5em;
-}
+/*pre code {*/
+  /*background-color: rgba(255, 255, 255, 0.7);*/
+  /*border: 0.5em solid rgba(255, 255, 255, 1);*/
+  /*border-radius: 0.5em;*/
+  /*display: block !important;*/
+  /*padding: 0.5em;*/
+/*}*/
 
-code {
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 3px;
+/*code {*/
+  /*background-color: rgba(255, 255, 255, 0.7);*/
+  /*border: 1px solid rgba(255, 255, 255, 0.7);*/
+  /*border-radius: 3px;*/
 
-}
+/*}*/
 
 img {
   max-width: 100%;

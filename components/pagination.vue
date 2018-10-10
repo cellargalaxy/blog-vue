@@ -1,6 +1,6 @@
 <template>
   <b-pagination :total-rows="total" :per-page="pageSize" v-model="currentPage" @change="change"
-                align="center" class="translucent"/>
+                align="center"/>
 </template>
 
 <pagination :total="total" :pageSize="pageSize" :currentPage="currentPage"/>

@@ -17,6 +17,7 @@
   import util from '../utils/util'
   import publicApi from '../commonApi/publicApi'
   import account from '../utils/account'
+  import guestUser from '../guestApi/guestUser'
 
   export default {
     name: "loginForm",
@@ -28,8 +29,13 @@
     methods: {
       login: function () {
         publicApi.login(this.userForm.username, this.userForm.password)
-          .then(res => {
-            account.setToken(res)
+          .then(res1 => {
+            account.setToken(res1)
+            guestUser.getUserVo()
+              .then(res2 => {
+                account.setAccount(res2)
+              })
+
             this.userForm = {username: null, password: null,}
             util.successInfo('登录成功')
             window.location.href = '/admin/editArticle';

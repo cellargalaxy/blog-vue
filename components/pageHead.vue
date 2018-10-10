@@ -2,7 +2,7 @@
   <b-card class="text-center transparent">
     <h2>
       <b class="white">
-        cellargalaxyの博客
+        <b-link :href="'/'" v-text="'cellargalaxyの博客'" class="white"/>
       </b>
     </h2>
 

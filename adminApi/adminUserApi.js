@@ -23,27 +23,30 @@ function changeUser(userId, username, password) {
   })
 }
 
-function getUserVo(userId) {
-  return axios.tokenAxiosMethod.get(url + '/getUserVo', {
-      userId: userId,
+function getUser(userId) {
+  return axios.tokenAxiosMethod.get(url + '/getUser', {
+    userId: userId,
   })
+}
+
+function listAllUser() {
+  return axios.tokenAxiosMethod.get(url + '/listAllUser', {})
 }
 
 function listAllUserVo() {
-  return axios.tokenAxiosMethod.get(url + '/listAllUserVo', {
-  })
+  return axios.tokenAxiosMethod.get(url + '/listAllUserVo', {})
 }
 
 function listAllPermission() {
-  return axios.tokenAxiosMethod.get(url + '/listAllPermission', {
-  })
+  return axios.tokenAxiosMethod.get(url + '/listAllPermission', {})
 }
 
 export default {
   addUser: addUser,
   removeUser: removeUser,
   changeUser: changeUser,
-  getUserVo: getUserVo,
+  getUser: getUser,
+  listAllUser: listAllUser,
   listAllUserVo: listAllUserVo,
   listAllPermission: listAllPermission,
 }

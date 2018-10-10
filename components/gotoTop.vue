@@ -8,6 +8,8 @@
   </b-button-group>
 </template>
 
+<goto-top/>
+
 <script>
   export default {
     name: "gotoTop",

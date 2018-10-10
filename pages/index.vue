@@ -1,17 +1,33 @@
 <template>
-  <b-card class="text-center translucent">
-    <b-nav>
-      <b-nav-item v-for="(sort,sortIndex) in sorts" :key="sortIndex" :href="'/'+sort.path+'/1'"
-                  @mouseenter="mouseenter(sortIndex)" @mouseleave="mouseleave(sortIndex)">
-        <b>{{sort.name}}</b>
-      </b-nav-item>
-    </b-nav>
-  </b-card>
+  <div>
+    <page-head :sort="''"/>
+
+    <b-container>
+      <b-card class="text-center translucent">
+        <b-nav>
+          <b-nav-item @click="flushBackgroundImage">
+            <b>&lt;</b>
+          </b-nav-item>
+
+          <b-nav-item v-for="(sort,sortIndex) in sorts" :key="sortIndex" :href="'/'+sort.path+'/1'"
+                      @mouseenter="mouseenter(sortIndex)" @mouseleave="mouseleave(sortIndex)">
+            <b>{{sort.name}}</b>
+          </b-nav-item>
+
+
+          <b-nav-item @click="flushBackgroundImage">
+            <b>&gt;</b>
+          </b-nav-item>
+        </b-nav>
+      </b-card>
+    </b-container>
+  </div>
 </template>
 
 <script>
   import {Base64} from 'js-base64'
   import guestSort from '../guestApi/guestSort'
+  import pageHead from '../components/pageHead'
 
   export default {
     async asyncData({params}) {
@@ -44,11 +60,16 @@
         if (this.timeout != null) {
           clearTimeout(this.timeout);
         }
-        this.sorts[sortIndex].name = this.sorts[sortIndex].base64
-        this.sorts[sortIndex].path = this.sorts[sortIndex].base64
+        this.sorts[sortIndex].name = this.sorts[sortIndex].sort
+        this.sorts[sortIndex].path = this.sorts[sortIndex].sort
+      },
+      flushBackgroundImage: function () {
+        flushBackgroundImage()
       },
     },
-    components: {},
+    components: {
+      pageHead,
+    },
     layout: 'home',
   }
 </script>

@@ -1,12 +1,16 @@
 <template>
-  <edit-article :userId="userId" :sorts="sorts"/>
+  <div>
+    <page-head :sort="''"/>
+
+    <b-container>
+      <edit-article :sorts="sorts"/>
+    </b-container>
+  </div>
 </template>
 
 <script>
-  import util from '../../../utils/util'
-  import axios from '../../../utils/axios'
   import guestSort from '../../../guestApi/guestSort'
-  import publicApi from '../../../commonApi/publicApi'
+  import pageHead from '../../../components/pageHead'
   import editArticle from '../../../components/editArticle'
 
   export default {
@@ -14,26 +18,21 @@
     validate({params}) {
       return true
     },
-    async asyncData({params, req, error}) {
-      axios.setToken(util.getCookieFromString(req.headers.cookie, 'Authorization'))
-      let listAllSort = await guestSort.listAllSort()
-      return {sorts: listAllSort}
-    },
     data() {
       return {
-        userId: 0
+        sorts: []
       }
     },
     created: function () {
-      let userVo = publicApi.getCurrentUserVo()
-      if (userVo != null) {
-        this.userId = userVo.user.userId
-      }
+      guestSort.listAllSort()
+        .then(res => {
+          this.sorts = res
+        })
     },
     components: {
+      pageHead,
       editArticle
     },
-    layout: 'admin',
   }
 </script>
 

@@ -1,11 +1,18 @@
 <template>
-  <list-article-vo-layout :articleVos="articleVos" :total="total" :pageSize="articleQuery.pageSize"
-                          :currentPage="articleQuery.page"/>
+  <div>
+    <page-head :sort="articleQuery.sort"/>
+
+    <b-container>
+      <list-article-layout :articles="articles" :total="total"
+                           :pageSize="articleQuery.pageSize" :currentPage="articleQuery.page"/>
+    </b-container>
+  </div>
 </template>
 
 <script>
   import guestArticle from '../../guestApi/guestArticle'
-  import listArticleVoLayout from '../../components/listArticleVoLayout'
+  import pageHead from '../../components/pageHead'
+  import listArticleLayout from '../../components/listArticleLayout'
 
   export default {
     name: "_sort_page",
@@ -13,16 +20,32 @@
       return /^\d+$/.test(params.page)
     },
     async asyncData({params}) {
-      let articleQuery = guestArticle.createArticleQuery()
-      articleQuery.sort = params.sort
-      articleQuery.page = parseInt(params.page)
+      return {params:params}
+    },
+    data() {
+      return {
+        articleQuery: guestArticle.createArticleQuery(),
+        articles: [],
+        total: 0
+      }
+    },
+    created: function () {
+      this.articleQuery.sort = this.params.sort
+      this.articleQuery.page = parseInt(this.params.page)
 
-      let listArticleVo = await guestArticle.listArticleVo(articleQuery)
-      let getArticleCount = await guestArticle.getArticleCount(articleQuery)
-      return {articleVos: listArticleVo, articleQuery: articleQuery, total: getArticleCount}
+      guestArticle.listArticleBySort(this.articleQuery)
+        .then(res => {
+          this.articles = res
+        })
+
+      guestArticle.getArticleCountBySort(this.articleQuery)
+        .then(res => {
+          this.total = res
+        })
     },
     components: {
-      listArticleVoLayout,
+      pageHead,
+      listArticleLayout,
     },
   }
 </script>

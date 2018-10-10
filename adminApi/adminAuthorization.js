@@ -1,9 +1,10 @@
 import util from '../utils/util'
+import account from '../utils/account'
 import axios from '../utils/axios'
 import adminAuthorizationApi from './adminAuthorizationApi'
 
 function addAuthorization(authorization) {
-  if (!axios.logined()) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
@@ -14,7 +15,7 @@ function addAuthorization(authorization) {
 }
 
 function removeAuthorization(authorization) {
-  if (!axios.logined()) {
+  if (!account.logined()) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
