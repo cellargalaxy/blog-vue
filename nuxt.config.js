@@ -52,7 +52,7 @@ module.exports = {
       guestArticle.listAllSitemap()
         .then(articles => {
           let routes = articles.map(article => {
-            // article.createDate = util.formatTimestamp(article.createDate, 'yyyy-MM-dd')
+            article.createDate = util.formatTimestamp(article.createDate, 'yyyy-MM-dd')
             return '/article/' + article.createDate + '/' + article.title
           })
           callback(null, routes)
