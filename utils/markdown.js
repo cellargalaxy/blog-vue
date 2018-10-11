@@ -45,14 +45,18 @@ function markdown2htmlWithHtml(markdown) {
   if (markdown == null) {
     return ''
   }
-  return markdownItWithHtml.render(markdown);
+  return markdownItWithHtml.render(markdown)
+    .replace(/<\s*table[^>]*>/,'<div class="table-area"><table>')
+    .replace(/<\s*\/\s*table[^>]*>/,'</table></div>')
 }
 
 function markdown2htmlWithoutHtml(markdown) {
   if (markdown == null) {
     return ''
   }
-  return markdownItWithoutHtml.render(markdown);
+  return markdownItWithoutHtml.render(markdown)
+    .replace(/<\s*table[^>]*>/,'<div class="table-area"><table>')
+    .replace(/<\s*\/\s*table[^>]*>/,'</table></div>')
 }
 
 export default {

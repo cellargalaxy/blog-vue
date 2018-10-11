@@ -7,21 +7,6 @@ body {
   background-size: cover;
 }
 
-/*pre code {*/
-  /*background-color: rgba(255, 255, 255, 0.7);*/
-  /*border: 0.5em solid rgba(255, 255, 255, 1);*/
-  /*border-radius: 0.5em;*/
-  /*display: block !important;*/
-  /*padding: 0.5em;*/
-/*}*/
-
-/*code {*/
-  /*background-color: rgba(255, 255, 255, 0.7);*/
-  /*border: 1px solid rgba(255, 255, 255, 0.7);*/
-  /*border-radius: 3px;*/
-
-/*}*/
-
 img {
   max-width: 100%;
   -webkit-border-radius: 0.3em;
@@ -43,40 +28,44 @@ blockquote {
   padding-left: 0.5em;
 }
 
-/*头颜色*/
-table tr th {
-  background-color: rgba(255, 255, 255, 0.7);
-}
+/*表格样式来源*/
+/*https://blog.xiaomo.info/2016/MarkdownTableStyle/*/
+/*http://moxfive.xyz/2016/03/04/markdown-table-style/*/
 
-/*空格*/
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  margin-top: 0.8rem;
-  margin-bottom: 1.4rem;
-  *border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
+  width: 100%; /*表格宽度*/
+  max-width: 65em; /*表格最大宽度，避免表格过宽*/
+  border: 1px solid #dedede; /*表格外边框设置*/
+  margin: 15px auto; /*外边距*/
+  border-collapse: collapse; /*使用单一线条的边框*/
+  empty-cells: show; /*单元格无内容依旧绘制边框*/
 }
 
-/*各自颜色*/
-tr {
-  background-color: rgba(255, 255, 255, 0.6);
+table th,
+table td {
+  height: 35px; /*统一每一行的默认高度*/
+  border: 1px solid #dedede; /*内部边框样式*/
+  padding: 0 10px; /*内边距*/
 }
 
-/*布局与列条*/
-th, td {
-  padding: 0.5em 1em;
-  border: 0.1em solid #ddd;
+table th {
+  font-weight: bold; /*加粗*/
+  text-align: center !important; /*内容居中，加上 !important 避免被 Markdown 样式覆盖*/
+  background: rgba(158,188,226,0.2); /*背景色*/
 }
 
-/*行亮*/
 table tr:hover {
-  background: #fbf8e9;
-  -o-transition: all 0.1s ease-in-out;
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
+  background: #efefef;
 }
 
+table th {
+  white-space: nowrap; /*表头内容强制在一行显示*/
+}
+
+table td:nth-child(1) {
+  white-space: nowrap;
+}
+
+.table-area {
+  overflow: auto;
+}
