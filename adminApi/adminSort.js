@@ -31,7 +31,7 @@ function changeSort(sort) {
     return axios.createEmptyResponse()
   }
   if (util.checkParameterAnd('确认修改分类？', sort, 'sortId')) {
-    return adminSortApi.changeSort(sort.sortId, sort.sort)
+    return adminSortApi.changeSort(sort.sortId, sort.sort, sort.status)
   }
   return axios.createEmptyResponse()
 }

@@ -15,10 +15,11 @@ function removeSort(sortId) {
   })
 }
 
-function changeSort(sortId, sort) {
+function changeSort(sortId, sort, status) {
   return axios.tokenAxiosMethod.post(url + '/changeSort', {
     sortId: sortId,
     sort: sort,
+    status: status,
   })
 }
 

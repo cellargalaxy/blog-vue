@@ -22,6 +22,7 @@ function initArticle(article) {
     article.updateTime = util.formatTimestamp(article.updateTime, 'hh:mm:ss')
   }
 
+  article.statusName = getArticleStatusName(article.status)
   article.url = '/article/' + article.createDate + '/' + article.title
   article.html = markdown.markdown2htmlWithHtml(article.markdown)
   let summaryMarkdown = ''
@@ -35,6 +36,19 @@ function initArticle(article) {
   }
   article.summary = markdown.markdown2htmlWithHtml(summaryMarkdown)
   return article
+}
+
+function getArticleStatusName(status) {
+  if (status == 1) {
+    return '编辑'
+  }
+  if (status == 2) {
+    return '发表'
+  }
+  if (status == 3) {
+    return '禁用'
+  }
+  return status
 }
 
 function initTag(tag) {

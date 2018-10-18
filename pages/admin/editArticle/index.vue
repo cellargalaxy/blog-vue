@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import guestSort from '../../../guestApi/guestSort'
+  import adminSort from '../../../adminApi/adminSort'
   import pageHead from '../../../components/pageHead'
   import editArticle from '../../../components/editArticle'
 
@@ -24,7 +24,7 @@
       }
     },
     created: function () {
-      guestSort.listAbleSort()
+      adminSort.listAllSort()
         .then(res => {
           this.sorts = res
         })
