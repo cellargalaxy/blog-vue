@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-head :sort="''"/>
+    <page-head :name="'后台管理'" :path="'/admin'"/>
 
     <b-container>
       <edit-article :sorts="sorts" :articleForm="article" @flushArticle="flushArticle"/>
@@ -29,7 +29,7 @@
       }
     },
     created: function () {
-      guestSort.listAllSort()
+      guestSort.listAbleSort()
         .then(res => {
           this.sorts = res
         })

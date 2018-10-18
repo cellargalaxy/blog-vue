@@ -16,23 +16,23 @@ function viewArticleVo(article) {
   return axios.createEmptyResponse()
 }
 
-function listArticleBySort(articleQuery) {
+function listAbleArticleBySort(articleQuery) {
   if (util.checkQueryParameter(articleQuery, 'sort')) {
-    return guestArticleApi.listArticleBySort(articleQuery.pageSize, articleQuery.page, articleQuery.sort)
+    return guestArticleApi.listAbleArticleBySort(articleQuery.pageSize, articleQuery.page, articleQuery.sort)
   }
   return axios.createEmptyResponse()
 }
 
-function listArticleVoBySort(articleQuery) {
+function listAbleArticleVoBySort(articleQuery) {
   if (util.checkQueryParameter(articleQuery, 'sort')) {
-    return guestArticleApi.listArticleVoBySort(articleQuery.pageSize, articleQuery.page, articleQuery.sort)
+    return guestArticleApi.listAbleArticleVoBySort(articleQuery.pageSize, articleQuery.page, articleQuery.sort)
   }
   return axios.createEmptyResponse()
 }
 
-function getArticleCountBySort(articleQuery) {
-  if (util.checkQueryParameter(articleQuery, 'sort')) {
-    return guestArticleApi.getArticleCountBySort(articleQuery.sort)
+function getArticleCountBySortAndStatus(articleQuery) {
+  if (util.checkQueryParameter(articleQuery)) {
+    return guestArticleApi.getArticleCountBySortAndStatus(articleQuery.sort, articleQuery.status)
   }
   return axios.createEmptyResponse()
 }
@@ -42,15 +42,15 @@ function listAllSitemap() {
 }
 
 function createArticleQuery() {
-  return {pageSize: 10, page: 1, sort: null}
+  return {pageSize: 10, page: 1, sort: null, status: 0}
 }
 
 export default {
   viewArticle: viewArticle,
   viewArticleVo: viewArticleVo,
-  listArticleBySort: listArticleBySort,
-  listArticleVoBySort: listArticleVoBySort,
-  getArticleCountBySort: getArticleCountBySort,
-  createArticleQuery: createArticleQuery,
+  listAbleArticleBySort: listAbleArticleBySort,
+  listAbleArticleVoBySort: listAbleArticleVoBySort,
+  getArticleCountBySortAndStatus: getArticleCountBySortAndStatus,
   listAllSitemap: listAllSitemap,
+  createArticleQuery: createArticleQuery,
 }

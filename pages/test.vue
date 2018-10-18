@@ -1,15 +1,15 @@
 <template>
   <div>
-    <page-head :sort="'测试分类'"/>
+    <page-head :name="'测试分类'" :path="'#'"/>
     <b-container>
-      <!--<com/>-->
+      <com/>
     </b-container>
   </div>
 </template>
 
 <script>
   import pageHead from '../components/pageHead'
-  import com from '../components/viewArticleLayout.vue'
+  import com from '../components/articleTable.vue'
 
   export default {
     name: "test",
@@ -20,6 +20,6 @@
   }
 </script>
 
-<style >
+<style>
 
 </style>

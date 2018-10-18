@@ -1,18 +1,25 @@
 <template>
-  <div>
-    <list-article :articles="articles"/>
-    <pagination :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
-  </div>
+  <b-table :items="articles" :fields="fields" class="translucent">
+    <template slot="markdown" slot-scope="row">
+      <b-button size="sm" @click.stop="row.toggleDetails">markdown</b-button>
+    </template>
+    <template slot="editArticle" slot-scope="row">
+      <b-link :href="'/admin/editArticle/'+ row.item.createDate + '/' + row.item.title">编辑</b-link>
+    </template>
+
+    <template slot="row-details" slot-scope="row">
+      <b-form-textarea :value="row.item.markdown" :max-rows="10" plaintext class="translucent"/>
+    </template>
+  </b-table>
 </template>
 
-<list-article-layout :articles="articles" :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
+<article-table :articles="articles"/>
 
 <script>
-  import listArticle from './listArticle'
-  import pagination from './pagination'
+  import common from '../commonApi/common'
 
   export default {
-    name: "listArticleLayout",
+    name: "articleTable",
     props: {
       articles: {
         default: function () {
@@ -65,25 +72,24 @@
           ]
         }
       },
-      total: {
-        default: function () {
-          return 25
-        }
-      },
-      pageSize: {
-        default: function () {
-          return 10
-        }
-      },
-      currentPage: {
-        default: function () {
-          return 1
+    },
+    data() {
+      return {
+        fields: [{key: 'createDate', label: '日期'}, {key: 'title', label: '标题'}, {key: 'sort', label: '分类'},
+          {key: 'markdown', label: 'markdown'}, {key: 'editArticle', label: '编辑'}],
+      }
+    },
+    watch: {
+      articles(val) {
+        for (let i = 0; i < val.length; i++) {
+          common.initArticle(val[i])
         }
       },
     },
-    components: {
-      listArticle,
-      pagination,
+    created: function () {
+      for (let i = 0; i < this.articles.length; i++) {
+        common.initArticle(this.articles[i])
+      }
     },
   }
 </script>

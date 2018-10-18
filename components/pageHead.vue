@@ -8,21 +8,26 @@
 
     <p>
       <b>
-        <b-link :href="'/'+sort+'/1'" v-text="sort" class="white"/>
+        <b-link :href="path" v-text="name" class="white"/>
       </b>
     </p>
   </b-card>
 </template>
 
-<page-head :sort="sort"/>
+<page-head :name="name" :path="path"/>
 
 <script>
   export default {
     name: "pageHead",
     props: {
-      sort: {
+      name: {
         default: function () {
-          return "分类"
+          return "一个分类"
+        }
+      },
+      path: {
+        default: function () {
+          return "/一个分类"
         }
       },
     },

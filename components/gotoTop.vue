@@ -1,10 +1,10 @@
 <template>
   <b-button-group vertical class="gotoTop" size="sm">
+    <b-button @click="gotoTop" variant="outline-success">回到顶部</b-button>
+
     <b-button variant="outline-success">
       <b-link target="_blank" href="https://github.com/cellargalaxy">github</b-link>
     </b-button>
-
-    <b-button @click="gotoTop" variant="outline-success">回到顶部</b-button>
   </b-button-group>
 </template>
 

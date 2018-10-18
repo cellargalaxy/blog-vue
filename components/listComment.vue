@@ -1,7 +1,7 @@
 <template>
   <div>
     <comment v-for="(comment,commentIndex) in comments" :key="commentIndex" :comment="comment"
-             :floor="comments.length-commentIndex"
+             :floor="commentIndex+1"
              style="padding-bottom: 0.5em;"/>
   </div>
 </template>

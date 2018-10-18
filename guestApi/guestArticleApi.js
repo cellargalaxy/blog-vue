@@ -16,25 +16,26 @@ function viewArticleVo(createDate, title) {
   })
 }
 
-function listArticleBySort(pageSize, page, sort) {
-  return axios.tokenAxiosMethod.get(url + '/listArticleBySort', {
+function listAbleArticleBySort(pageSize, page, sort) {
+  return axios.tokenAxiosMethod.get(url + '/listAbleArticleBySort', {
     pageSize: pageSize,
     page: page,
     sort: sort,
   })
 }
 
-function listArticleVoBySort(pageSize, page, sort) {
-  return axios.tokenAxiosMethod.get(url + '/listArticleVoBySort', {
+function listAbleArticleVoBySort(pageSize, page, sort) {
+  return axios.tokenAxiosMethod.get(url + '/listAbleArticleVoBySort', {
     pageSize: pageSize,
     page: page,
     sort: sort,
   })
 }
 
-function getArticleCountBySort(sort) {
-  return axios.tokenAxiosMethod.get(url + '/getArticleCountBySort', {
+function getArticleCountBySortAndStatus(sort, status) {
+  return axios.tokenAxiosMethod.get(url + '/getArticleCountBySortAndStatus', {
     sort: sort,
+    status: status,
   })
 }
 
@@ -45,8 +46,8 @@ function listAllSitemap() {
 export default {
   viewArticle: viewArticle,
   viewArticleVo: viewArticleVo,
-  listArticleBySort: listArticleBySort,
-  listArticleVoBySort: listArticleVoBySort,
-  getArticleCountBySort: getArticleCountBySort,
+  listAbleArticleBySort: listAbleArticleBySort,
+  listAbleArticleVoBySort: listAbleArticleVoBySort,
+  getArticleCountBySortAndStatus: getArticleCountBySortAndStatus,
   listAllSitemap: listAllSitemap,
 }

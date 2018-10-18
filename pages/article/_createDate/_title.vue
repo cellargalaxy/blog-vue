@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-head :sort="article.sort"/>
+    <page-head :name="article.sort" :path="'/'+article.sort+'/1'"/>
 
     <b-container>
       <view-article-layout :article="article"/>
@@ -21,7 +21,7 @@
     async asyncData({params, error}) {
       let viewArticle = await guestArticle.viewArticle(params)
       if (viewArticle != null) {
-        return {article: viewArticle,params:params}
+        return {article: viewArticle, params: params}
       } else {
         error({statusCode: 404, message: '你找的文章不翼而飞了！'})
       }

@@ -1,18 +1,18 @@
 <template>
   <div>
-    <list-article :articles="articles"/>
+    <article-table :articles="articles"/>
     <pagination :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
   </div>
 </template>
 
-<list-article-layout :articles="articles" :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
+<article-table-layout :articles="articles" :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
 
 <script>
-  import listArticle from './listArticle'
+  import articleTable from './articleTable'
   import pagination from './pagination'
 
   export default {
-    name: "listArticleLayout",
+    name: "articleTableLayout",
     props: {
       articles: {
         default: function () {
@@ -82,20 +82,12 @@
       },
     },
     components: {
-      listArticle,
+      articleTable,
       pagination,
     },
   }
 </script>
 
 <style scoped>
-  .transparent {
-    background-color: rgba(255, 255, 255, 0);
-    border-color: rgba(255, 255, 255, 0);
-  }
 
-  .translucent {
-    background-color: rgba(255, 255, 255, 0.7);
-    border-color: rgba(255, 255, 255, 0.7);
-  }
 </style>

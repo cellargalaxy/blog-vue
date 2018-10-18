@@ -3,35 +3,33 @@
     <page-head :name="'后台管理'" :path="'/admin'"/>
 
     <b-container>
-      <edit-article :sorts="sorts"/>
+      <sort-layout :sorts="sorts"/>
+      <br/>
     </b-container>
   </div>
 </template>
 
 <script>
-  import guestSort from '../../../guestApi/guestSort'
-  import pageHead from '../../../components/pageHead'
-  import editArticle from '../../../components/editArticle'
+  import adminSort from '../../adminApi/adminSort'
+  import pageHead from '../../components/pageHead'
+  import sortLayout from '../../components/sortLayout.vue'
 
   export default {
-    name: "adminEditArticleIndex.vue",
-    validate({params}) {
-      return true
-    },
+    name: "adminSort",
     data() {
       return {
-        sorts: []
+        sorts: [],
       }
     },
     created: function () {
-      guestSort.listAbleSort()
+      adminSort.listAllSort()
         .then(res => {
           this.sorts = res
         })
     },
     components: {
       pageHead,
-      editArticle
+      sortLayout,
     },
   }
 </script>

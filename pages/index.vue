@@ -1,89 +1,36 @@
 <template>
   <div>
-    <page-head :sort="''"/>
+    <page-head :name="''" :path="''"/>
 
     <b-container>
-      <b-card class="text-center translucent">
-        <b-nav>
-          <b-nav-item @click="flushBackgroundImage">
-            <b>&lt;</b>
-          </b-nav-item>
-
-          <b-nav-item v-for="(sort,sortIndex) in sorts" :key="sortIndex" :href="'/'+sort.path+'/1'"
-                      @mouseenter="mouseenter(sortIndex)" @mouseleave="mouseleave(sortIndex)">
-            <b>{{sort.name}}</b>
-          </b-nav-item>
-
-
-          <b-nav-item @click="flushBackgroundImage">
-            <b>&gt;</b>
-          </b-nav-item>
-        </b-nav>
-      </b-card>
+      <fool-nav :navs="sorts" :isFool="false"/>
     </b-container>
   </div>
 </template>
 
 <script>
-  import {Base64} from 'js-base64'
   import guestSort from '../guestApi/guestSort'
   import pageHead from '../components/pageHead'
+  import foolNav from '../components/foolNav'
 
   export default {
+    name: "index",
     async asyncData({params}) {
-      let listAllSort = await guestSort.listAllSort()
-      for (let i = 0; i < listAllSort.length; i++) {
-        listAllSort[i].base64 = Base64.encode(listAllSort[i].sort)
-        listAllSort[i].path = listAllSort[i].sort
-        listAllSort[i].name = listAllSort[i].sort
+      let listAbleSort = await guestSort.listAbleSort()
+      for (let i = 0; i < listAbleSort.length; i++) {
+        listAbleSort[i].path = '/' + listAbleSort[i].sort + '/1'
+        listAbleSort[i].name = listAbleSort[i].sort
       }
-      return {sorts: listAllSort}
-    },
-    data() {
-      return {
-        timeout: null,
-      }
-    },
-    created: function () {
-    },
-    methods: {
-      mouseenter: function (sortIndex) {
-        this.sorts[sortIndex].path = this.sorts[sortIndex].base64
-        this.sorts[sortIndex].name = this.sorts[sortIndex].base64
-        var self = this
-        this.timeout = setTimeout(function () {
-          self.sorts[sortIndex].name = self.sorts[sortIndex].sort
-          self.sorts[sortIndex].path = self.sorts[sortIndex].sort
-        }, 3000);
-      },
-      mouseleave: function (sortIndex) {
-        if (this.timeout != null) {
-          clearTimeout(this.timeout);
-        }
-        this.sorts[sortIndex].name = this.sorts[sortIndex].sort
-        this.sorts[sortIndex].path = this.sorts[sortIndex].sort
-      },
-      flushBackgroundImage: function () {
-        flushBackgroundImage()
-      },
+      return {sorts: listAbleSort}
     },
     components: {
       pageHead,
+      foolNav,
     },
     layout: 'home',
   }
 </script>
 
-<style>
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
-  .translucent {
-    background-color: rgba(255, 255, 255, 0.7);
-  }
+<style scoped>
 </style>
 

@@ -3,6 +3,7 @@
     <b-input-group>
       <b-form-input v-model="articleForm.title" type="text" placeholder="title"/>
       <b-form-select v-model="articleForm.sortId" :options="sortOptions"/>
+      <b-form-select v-model="articleForm.status" :options="statusOptions"/>
       <b-button variant="primary" @click="flushArticle">刷新</b-button>
     </b-input-group>
 
@@ -16,7 +17,6 @@
 
 <script>
   import util from '../utils/util'
-  import common from '../commonApi/common'
   import adminArticle from '../adminApi/adminArticle'
 
   export default {
@@ -24,6 +24,7 @@
     data() {
       return {
         sortOptions: [],
+        statusOptions: [{value: 1, text: '编辑'}, {value: 2, text: '发布'}, {value: 3, text: '禁用'}],
         toolbars: {
           bold: true, // 粗体
           italic: true, // 斜体
@@ -65,7 +66,7 @@
       },
       articleForm: {
         default: function () {
-          return {articleId: 0, sortId: 0, title: null, markdown: '', view: 0, tags: ''}
+          return {articleId: 0, sortId: 0, title: null, markdown: '', view: 0, status: 1}
         }
       },
     },
@@ -90,10 +91,10 @@
       },
       postArticle: function (value, render) {
         if (this.articleForm.articleId == 0) {
-          adminArticle.addArticle(this.articleForm, this.articleForm.tags)
+          adminArticle.addArticle(this.articleForm)
             .then(res => {
               util.successInfo('保存成功')
-              this.articleForm = {articleId: 0, sortId: 0, title: null, markdown: '', view: 0, tags: ''}
+              this.articleForm = {articleId: 0, sortId: 0, title: null, markdown: '', view: 0, status: 1}
             })
         } else {
           adminArticle.changeArticle(this.articleForm)

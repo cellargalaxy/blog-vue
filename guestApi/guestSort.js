@@ -1,9 +1,9 @@
 import guestSortApi from './guestSortApi'
 
-function listAllSort() {
-  return guestSortApi.listAllSort()
+function listAbleSort() {
+  return guestSortApi.listAbleSort()
 }
 
 export default {
-  listAllSort: listAllSort,
+  listAbleSort: listAbleSort,
 }

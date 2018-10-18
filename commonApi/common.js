@@ -6,11 +6,20 @@ function isNumber(val) {
 }
 
 function initArticle(article) {
+  if (article == null) {
+    return
+  }
   if (isNumber(article.createDate)) {
     article.createDate = util.formatTimestamp(article.createDate, 'yyyy-MM-dd')
   }
+  if (isNumber(article.createTime)) {
+    article.createTime = util.formatTimestamp(article.createTime, 'hh:mm:ss')
+  }
   if (isNumber(article.updateDate)) {
     article.updateDate = util.formatTimestamp(article.updateDate, 'yyyy-MM-dd')
+  }
+  if (isNumber(article.updateTime)) {
+    article.updateTime = util.formatTimestamp(article.updateTime, 'hh:mm:ss')
   }
 
   article.url = '/article/' + article.createDate + '/' + article.title
@@ -29,6 +38,9 @@ function initArticle(article) {
 }
 
 function initTag(tag) {
+  if (tag == null) {
+    return
+  }
   if (isNumber(tag.createTime)) {
     tag.createTime = util.formatTimestamp(tag.createTime, 'yyyy-MM-dd')
   }
@@ -39,6 +51,9 @@ function initTag(tag) {
 }
 
 function initComment(comment) {
+  if (comment == null) {
+    return
+  }
   if (isNumber(comment.createTime)) {
     comment.createTime = util.formatTimestamp(comment.createTime, 'yyyy-MM-dd hh:mm:ss')
   }

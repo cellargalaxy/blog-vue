@@ -1,21 +1,22 @@
 <template>
   <div>
-    <page-head :name="articleQuery.sort" :path="'/'+articleQuery.sort+'/1'"/>
+    <page-head :name="'后台管理'" :path="'/admin'"/>
 
     <b-container>
-      <list-article-layout :articles="articles" :total="total"
-                           :pageSize="articleQuery.pageSize" :currentPage="articleQuery.page"/>
+      <article-table-layout :articles="articles" :total="total" :pageSize="articleQuery.pageSize"
+                            :currentPage="articleQuery.page"/>
     </b-container>
   </div>
 </template>
 
 <script>
-  import guestArticle from '../../guestApi/guestArticle'
-  import pageHead from '../../components/pageHead'
-  import listArticleLayout from '../../components/listArticleLayout'
+  import adminArticle from '../../../adminApi/adminArticle'
+  import guestArticle from '../../../guestApi/guestArticle'
+  import pageHead from '../../../components/pageHead'
+  import articleTableLayout from '../../../components/articleTableLayout'
 
   export default {
-    name: "_sort_page",
+    name: "adminListArticle_page",
     validate({params}) {
       return /^\d+$/.test(params.page)
     },
@@ -30,11 +31,9 @@
       }
     },
     created: function () {
-      this.articleQuery.status = 2
-      this.articleQuery.sort = this.params.sort
       this.articleQuery.page = parseInt(this.params.page)
 
-      guestArticle.listAbleArticleBySort(this.articleQuery)
+      adminArticle.listArticle(this.articleQuery)
         .then(res => {
           this.articles = res
         })
@@ -46,7 +45,7 @@
     },
     components: {
       pageHead,
-      listArticleLayout,
+      articleTableLayout,
     },
   }
 </script>

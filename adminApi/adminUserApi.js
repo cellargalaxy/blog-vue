@@ -29,6 +29,12 @@ function getUser(userId) {
   })
 }
 
+function getUserVo(userId) {
+  return axios.tokenAxiosMethod.get(url + '/getUserVo', {
+    userId: userId,
+  })
+}
+
 function listAllUser() {
   return axios.tokenAxiosMethod.get(url + '/listAllUser', {})
 }
@@ -46,6 +52,7 @@ export default {
   removeUser: removeUser,
   changeUser: changeUser,
   getUser: getUser,
+  getUserVo: getUserVo,
   listAllUser: listAllUser,
   listAllUserVo: listAllUserVo,
   listAllPermission: listAllPermission,

@@ -35,11 +35,10 @@
               .then(res2 => {
                 account.setAccount(res2)
 
-                this.userForm = {username: null, password: null,}
+                this.userForm = {username: null, password: null}
                 util.successInfo('登录成功')
-                window.location.href = '/admin/editArticle';
+                window.location.href = '/admin';
               })
-
           })
       },
     },

@@ -8,8 +8,8 @@ function addSort(sort) {
     util.errorInfo('请登录')
     return axios.createEmptyResponse()
   }
-  if (util.checkParameterAnd('确认添加分类？', sort, 'sort')) {
-    return adminSortApi.addSort(sort.sort)
+  if (util.checkParameterAnd('确认添加分类？', sort, 'sort', 'status')) {
+    return adminSortApi.addSort(sort.sort, sort.status)
   }
   return axios.createEmptyResponse()
 }
@@ -36,8 +36,17 @@ function changeSort(sort) {
   return axios.createEmptyResponse()
 }
 
+function listAllSort() {
+  if (!account.logined()) {
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
+  }
+  return adminSortApi.listAllSort()
+}
+
 export default {
   addSort: addSort,
   removeSort: removeSort,
   changeSort: changeSort,
+  listAllSort: listAllSort,
 }

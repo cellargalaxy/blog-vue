@@ -1,7 +1,7 @@
 <template>
   <b-form class="translucent">
     <b-form-group>
-      <b-form-textarea v-model="commentForm.markdown" placeholder='支持markdown。由于缓存，新评论需要过几分钟，刷新页面才能显示。'
+      <b-form-textarea v-model="commentForm.markdown" placeholder='评论暂时不开放。支持markdown。由于缓存，新评论需要过几分钟，刷新页面才能显示。'
                        :rows="5" class="translucent"/>
     </b-form-group>
 
@@ -27,12 +27,14 @@
     props: {
       articleId: {
         default: function () {
-          return 0
+          return 1
         }
       },
     },
     methods: {
       postComment: function () {
+        util.successInfo('评论暂时不开放')
+        return
         guestComment.addComment(this.commentForm)
           .then(res => {
             util.successInfo('成功评论')

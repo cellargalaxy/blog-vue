@@ -2,9 +2,10 @@ import axios from '../utils/axios'
 
 const url = '/admin/sort'
 
-function addSort(sort) {
+function addSort(sort, status) {
   return axios.tokenAxiosMethod.post(url + '/addSort', {
     sort: sort,
+    status: status,
   })
 }
 
@@ -21,8 +22,13 @@ function changeSort(sortId, sort) {
   })
 }
 
+function listAllSort() {
+  return axios.tokenAxiosMethod.get(url + '/listAllSort', {})
+}
+
 export default {
   addSort: addSort,
   removeSort: removeSort,
   changeSort: changeSort,
+  listAllSort: listAllSort,
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-head :sort="''"/>
+    <page-head :name="''" :path="''"/>
 
     <b-container>
       <login-form/>

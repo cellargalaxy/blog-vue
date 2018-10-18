@@ -48,6 +48,17 @@ function getUser(user) {
   return axios.createEmptyResponse()
 }
 
+function getUserVo(user) {
+  if (!account.logined()) {
+    util.errorInfo('请登录')
+    return axios.createEmptyResponse()
+  }
+  if (util.checkParameterAnd(null, user, 'userId')) {
+    return adminArticleApi.getUserVo(user.userId)
+  }
+  return axios.createEmptyResponse()
+}
+
 function listAllUser() {
   if (!account.logined()) {
     util.errorInfo('请登录')
@@ -72,12 +83,13 @@ function listAllPermission() {
   return adminArticleApi.listAllPermission()
 }
 
-
 export default {
   addUser: addUser,
   removeUser: removeUser,
   changeUser: changeUser,
+  getUser: getUser,
   getUserVo: getUserVo,
+  listAllUser:listAllUser,
   listAllUserVo: listAllUserVo,
   listAllPermission: listAllPermission,
 }
