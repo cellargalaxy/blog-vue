@@ -1,24 +1,27 @@
 <template>
   <div>
+    <page-head :name="''" :path="''"/>
+
     <b-container>
       <b-card class="text-center translucent white">
         <h2 v-text="error.statusCode"/>
         <p v-text="error.message"/>
         <nuxt-link to="/">回去首页溜达</nuxt-link>
       </b-card>
+      <br/>
     </b-container>
 
-    <page-foot class="footer"/>
   </div>
 </template>
 
 <script>
-  import pageFoot from '../components/pageFoot'
+  import pageHead from '../components/pageHead'
+
   export default {
     name: "error",
     props: ['error'],
     components: {
-      pageFoot,
+      pageHead,
     },
   }
 </script>
