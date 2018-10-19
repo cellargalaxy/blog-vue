@@ -7,7 +7,6 @@
 </template>
 
 <script>
-  import pageHead from '../components/pageHead'
   import pageFoot from '../components/pageFoot'
   import gotoTop from '../components/gotoTop'
 
@@ -21,7 +20,6 @@
       },
     },
     components: {
-      pageHead,
       pageFoot,
       gotoTop,
     },

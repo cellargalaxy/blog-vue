@@ -9,7 +9,6 @@
 </template>
 
 <script>
-  import pageHead from '../components/pageHead'
   import pageFoot from '../components/pageFoot'
 
   export default {
@@ -22,7 +21,6 @@
       },
     },
     components: {
-      pageHead,
       pageFoot,
     },
   }
