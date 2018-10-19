@@ -9,6 +9,8 @@
 </template>
 
 <script>
+  import util from '../../../../utils/util'
+  import account from '../../../../utils/account'
   import adminSort from '../../../../adminApi/adminSort'
   import adminArticle from '../../../../adminApi/adminArticle'
   import pageHead from '../../../../components/pageHead'
@@ -16,8 +18,9 @@
 
   export default {
     name: "adminEditArticle_createDate_title.vue",
-    validate({params}) {
-      return /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(params.createDate)
+    validate({params, req}) {
+      var token = util.getCookieFromString(req.headers.cookie, account.tokenKey)
+      return /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(params.createDate) && token != null && token != ''
     },
     async asyncData({params}) {
       return {params: params}

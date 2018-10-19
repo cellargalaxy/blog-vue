@@ -10,6 +10,8 @@
 </template>
 
 <script>
+  import util from '../../../utils/util'
+  import account from '../../../utils/account'
   import adminArticle from '../../../adminApi/adminArticle'
   import guestArticle from '../../../guestApi/guestArticle'
   import pageHead from '../../../components/pageHead'
@@ -17,8 +19,9 @@
 
   export default {
     name: "adminListArticle_page",
-    validate({params}) {
-      return /^\d+$/.test(params.page)
+    validate({params, req}) {
+      var token = util.getCookieFromString(req.headers.cookie, account.tokenKey)
+      return /^\d+$/.test(params.page) && token != null && token != ''
     },
     async asyncData({params}) {
       return {params: params}

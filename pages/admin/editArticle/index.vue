@@ -9,14 +9,17 @@
 </template>
 
 <script>
+  import util from '../../../utils/util'
+  import account from '../../../utils/account'
   import adminSort from '../../../adminApi/adminSort'
   import pageHead from '../../../components/pageHead'
   import editArticle from '../../../components/editArticle'
 
   export default {
     name: "adminEditArticleIndex.vue",
-    validate({params}) {
-      return true
+    validate({params, req}) {
+      var token = util.getCookieFromString(req.headers.cookie, account.tokenKey)
+      return token != null && token != ''
     },
     data() {
       return {

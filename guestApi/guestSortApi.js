@@ -2,11 +2,11 @@ import axios from '../utils/axios'
 
 const url = '/guest/sort'
 
-function listAbleSort() {
-  return axios.tokenAxiosMethod.get(url + '/listAbleSort', {
+function listShowSort() {
+  return axios.tokenAxiosMethod.get(url + '/listShowSort', {
   })
 }
 
 export default {
-  listAbleSort: listAbleSort,
+  listShowSort: listShowSort,
 }

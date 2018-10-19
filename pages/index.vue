@@ -16,7 +16,7 @@
   export default {
     name: "index",
     async asyncData({params}) {
-      let listAbleSort = await guestSort.listAbleSort()
+      let listAbleSort = await guestSort.listShowSort()
       for (let i = 0; i < listAbleSort.length; i++) {
         listAbleSort[i].path = '/' + listAbleSort[i].sort + '/1'
         listAbleSort[i].name = listAbleSort[i].sort

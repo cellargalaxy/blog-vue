@@ -48,6 +48,7 @@ function setAccount(userVo) {
 }
 
 export default {
+  tokenKey: tokenKey,
   setToken: setToken,
   getTokenFromCookieString: getTokenFromCookieString,
   getToken: getToken,

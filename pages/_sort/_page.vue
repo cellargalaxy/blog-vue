@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-head :name="articleQuery.sort" :path="'/'+articleQuery.sort+'/1'"/>
+    <page-head :name="articleQuery.sort+'('+total+')'" :path="'/'+articleQuery.sort+'/1'"/>
 
     <b-container>
       <list-article-layout :articles="articles" :total="total"

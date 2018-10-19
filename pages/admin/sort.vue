@@ -10,12 +10,18 @@
 </template>
 
 <script>
+  import util from '../../utils/util'
+  import account from '../../utils/account'
   import adminSort from '../../adminApi/adminSort'
   import pageHead from '../../components/pageHead'
   import sortLayout from '../../components/sortLayout.vue'
 
   export default {
     name: "adminSort",
+    validate({params, req}) {
+      var token = util.getCookieFromString(req.headers.cookie, account.tokenKey)
+      return token != null && token != ''
+    },
     data() {
       return {
         sorts: [],
