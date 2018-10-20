@@ -3,7 +3,7 @@ import qs from 'qs'
 import util from './util'
 import account from './account'
 
-const baseURL = 'http://api.www.cellargalaxy.top'
+const baseURL = 'http://api.blog.cellargalaxy.top'
 // const baseURL = 'http://127.0.0.1:8080'
 const timeout = 1000 * 10
 
