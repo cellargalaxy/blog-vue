@@ -34,6 +34,7 @@
       }
     },
     created: function () {
+      this.articleQuery.pageSize = 20
       this.articleQuery.page = parseInt(this.params.page)
 
       adminArticle.listArticle(this.articleQuery)
