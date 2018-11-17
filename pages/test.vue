@@ -9,7 +9,7 @@
 
 <script>
   import pageHead from '../components/pageHead'
-  import com from '../components/articleTable.vue'
+  import com from '../components/editArticle.vue'
 
   export default {
     name: "test",

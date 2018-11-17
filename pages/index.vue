@@ -3,7 +3,11 @@
     <page-head :name="''" :path="''"/>
 
     <b-container>
-      <fool-nav :navs="sorts" :isFool="false"/>
+      <b-row>
+        <b-col>
+          <fool-nav :navs="sorts" :isFool="false"/>
+        </b-col>
+      </b-row>
     </b-container>
   </div>
 </template>
@@ -18,7 +22,7 @@
     async asyncData({params}) {
       let listAbleSort = await guestSort.listShowSort()
       for (let i = 0; i < listAbleSort.length; i++) {
-        listAbleSort[i].path = '/' + listAbleSort[i].sort + '/1'
+        listAbleSort[i].path = 'http://blog.cellargalaxy.top/' + listAbleSort[i].sort + '/1'
         listAbleSort[i].name = listAbleSort[i].sort
       }
       return {sorts: listAbleSort}

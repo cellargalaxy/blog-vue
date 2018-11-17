@@ -4,7 +4,10 @@
       <b-form-input v-model="articleForm.title" type="text" placeholder="title"/>
       <b-form-select v-model="articleForm.sortId" :options="sortOptions"/>
       <b-form-select v-model="articleForm.status" :options="statusOptions"/>
-      <b-button variant="primary" @click="flushArticle">刷新</b-button>
+      <b-button v-if="articleForm.articleId > 0" @click="flushArticle" variant="warning">刷新</b-button>
+      <b-button v-if="articleForm.articleId > 0" variant="outline-link">
+        <b-link :href="'/article/'+ articleForm.createDate + '/' + articleForm.title" target="_blank">查看</b-link>
+      </b-button>
     </b-input-group>
 
     <b-form-group>
@@ -87,7 +90,9 @@
     },
     methods: {
       flushArticle: function () {
-        this.$emit('flushArticle', this.articleForm.createDate, this.articleForm.title)
+        if (util.confirmBox('确定刷新文章？')) {
+          this.$emit('flushArticle', this.articleForm.createDate, this.articleForm.title)
+        }
       },
       postArticle: function (value, render) {
         if (this.articleForm.articleId == 0) {
