@@ -3,7 +3,7 @@
     <b-list-group-item class="translucent">
       <b-card no-body class="transparent">
         <h2>
-          <b-link :href="article.url" v-text="article.title"/>
+          <b-link :href="article.url" v-text="article.title" target="_blank"/>
         </h2>
       </b-card>
 

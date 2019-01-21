@@ -21,6 +21,7 @@
 <script>
   import util from '../utils/util'
   import adminArticle from '../adminApi/adminArticle'
+  import common from '../commonApi/common'
 
   export default {
     name: "editArticle",
@@ -80,12 +81,16 @@
           this.sortOptions.push({value: val[i].sortId, text: val[i].sort})
         }
       },
+      articleForm(val) {
+        common.initArticle(val)
+      },
     },
     created: function () {
       this.sortOptions = []
       for (let i = 0; i < this.sorts.length; i++) {
         this.sortOptions.push({value: this.sorts[i].sortId, text: this.sorts[i].sort})
       }
+      common.initArticle(this.articleForm)
       util.exitWarm('文章可能还没保存，确认离开？')
     },
     methods: {
