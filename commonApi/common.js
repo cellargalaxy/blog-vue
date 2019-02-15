@@ -26,12 +26,14 @@ function initArticle(article) {
   article.url = '/article/' + article.createDate + '/' + article.title
   article.html = markdown.markdown2htmlWithHtml(article.markdown)
   let summaryMarkdown = ''
-  let strings = article.markdown.split(/[\n]/);
-  let hangCount = 0
-  for (let i = 0; i < strings.length && hangCount < 5; i++) {
-    summaryMarkdown = summaryMarkdown + strings[i] + '\n'
-    if (strings[i].trim() == '') {
-      hangCount = hangCount + 1
+  if (article.markdown != null) {
+    let strings = article.markdown.split(/[\n]/);
+    let hangCount = 0
+    for (let i = 0; i < strings.length && hangCount < 5; i++) {
+      summaryMarkdown = summaryMarkdown + strings[i] + '\n'
+      if (strings[i].trim() == '') {
+        hangCount = hangCount + 1
+      }
     }
   }
   article.summary = markdown.markdown2htmlWithHtml(summaryMarkdown)
