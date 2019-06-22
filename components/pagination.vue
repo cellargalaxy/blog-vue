@@ -1,6 +1,6 @@
 <template>
   <b-pagination :total-rows="total" :per-page="pageSize" v-model="currentPage" @change="change"
-                align="center"/>
+                align="center" class="translucent"/>
 </template>
 
 <pagination :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
@@ -34,11 +34,6 @@
 </script>
 
 <style scoped>
-  .transparent {
-    background-color: rgba(255, 255, 255, 0);
-    border-color: rgba(255, 255, 255, 0);
-  }
-
   .translucent {
     background-color: rgba(255, 255, 255, 0.7);
     border-color: rgba(255, 255, 255, 0.7);

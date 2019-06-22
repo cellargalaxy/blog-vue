@@ -1,25 +1,27 @@
 <template>
-  <div>
-    <page-head :name="'测试分类'" :path="'#'"/>
-    <b-container>
-      <com/>
-    </b-container>
-  </div>
+  <com></com>
 </template>
 
 <script>
-  import pageHead from '../components/pageHead'
-  import com from '../components/editArticle.vue'
+  import com from '../components/timeLine'
 
   export default {
     name: "test",
+    data() {
+      return {
+        article:  {
+          "title": "测试",
+          "url": "#",
+          "attributes": [{"name": "时间", "value": "2019-01-01"}],
+          "summaryHtml": "summaryHtml",
+          "html": "html",
+        },
+      }
+    },
     components: {
       com,
-      pageHead,
     },
+    layout: 'test',
   }
 </script>
 
-<style>
-
-</style>

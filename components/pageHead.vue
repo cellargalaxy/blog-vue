@@ -1,35 +1,27 @@
 <template>
   <b-card class="text-center transparent">
-    <h2>
+    <b-img v-if="config.avatarUrl" :src="config.avatarUrl" thumbnail fluid class="translucent"/>
+    <br v-if="config.siteName"/>
+    <br v-if="config.siteName"/>
+    <h2 v-if="config.siteName">
       <b class="white">
-        <b-link :href="'/'" v-text="'cellargalaxyの博客'" class="white"/>
+        <b-link v-text="config.siteName" :href="config.siteUrl" class="white"/>
       </b>
     </h2>
-
-    <p>
-      <b>
-        <b-link :href="path" v-text="name" class="white"/>
-      </b>
-    </p>
   </b-card>
 </template>
 
-<page-head :name="name" :path="path"/>
+<page-head/>
 
 <script>
+  import config from '../assets/config'
+
   export default {
     name: "pageHead",
-    props: {
-      name: {
-        default: function () {
-          return "一个分类"
-        }
-      },
-      path: {
-        default: function () {
-          return "/一个分类"
-        }
-      },
+    computed: {
+      config: function () {
+        return config.getPageHeadConfig()
+      }
     },
   }
 </script>

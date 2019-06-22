@@ -1,46 +1,32 @@
 <template>
   <div>
+    <navbar/>
+
     <b-container>
-      <nuxt/>
+      <b-row align-v="center" class="text-center" style="height: 100vh">
+        <b-col>
+          <nuxt/>
+        </b-col>
+      </b-row>
     </b-container>
 
-    <page-foot class="footer"/>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129312781-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-129312781-1');
-    </script>
-
+    <goto/>
   </div>
 </template>
 
 <script>
-  import pageFoot from '../components/pageFoot'
+  import navbar from '../components/navbar'
+  import goto from '../components/goto'
 
   export default {
     name: "home",
-    props: {
-      sort: {
-        default: function () {
-          return ''
-        }
-      },
-    },
     components: {
-      pageFoot,
+      navbar,
+      goto,
     },
   }
 </script>
 
 <style scoped>
-  .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
+
 </style>

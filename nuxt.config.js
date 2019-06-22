@@ -1,85 +1,66 @@
-import util from './utils/util'
-import guestArticle from './guestApi/guestArticle'
+import config from './assets/config'
+import articleClone from './assets/dao/articleClone'
+import articleService from './assets/service/articleService'
 
-module.exports = {
+export default {
+  mode: 'universal',
+
   /*
   ** Headers of the page
   */
   head: {
-    title: 'cellargalaxyの博客',
+    title: config.getSiteConfig().siteName,
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'default_description', name: 'description', content: 'cellargalaxyの博客'}
+      {hid: 'description', name: 'description', content: config.getSiteConfig().description}
     ],
     script: [
-      {src: '/jquery/3.3.1/jquery.min.js'},
-      {src: '/blog.js'},
+      {src: config.getSiteConfig().globalJsUrl},
     ],
     link: [
-      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
-      {rel: 'stylesheet', href: '/blog.css'},
-    ],
+      {rel: 'icon', type: 'image/x-icon', href: config.getSiteConfig().faviconUrl},
+      {rel: 'stylesheet', href: config.getSiteConfig().globalCssUrl},
+    ]
   },
+
   /*
-  ** Customize the progress bar color
+  ** Customize the progress-bar color
   */
-  loading: {color: '#3B8070'},
+  loading: {color: '#fff'},
 
+  /*
+  ** Global CSS
+  */
+  css: [],
+
+  /*
+  ** Plugins to load before mounting the App
+  */
+  plugins: [],
+
+  /*
+  ** Nuxt.js modules
+  */
   modules: [
+    // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
-
-    ['bootstrap-vue/nuxt', {css: false}],
-
-    '@nuxtjs/sitemap',
   ],
-
-  plugins: [
-    {src: '~plugins/mavon-editor', ssr: false},
-  ],
-
-  sitemap: {
-    path: '/sitemap.xml',
-    hostname: 'http://blog.cellargalaxy.top',
-    cacheTime: 1000 * 60 * 15,
-    gzip: true,
-    generate: false, // Enable me when using nuxt generate
-    exclude: [
-      '/secret',
-      '/admin/**'
-    ],
-    routes(callback) {
-      guestArticle.listAllSitemap()
-        .then(articles => {
-          let routes = articles.map(article => {
-            article.createDate = util.formatTimestamp(article.createDate, 'yyyy-MM-dd')
-            return '/article/' + article.createDate + '/' + article.title
-          })
-          callback(null, routes)
-        })
-        .catch(callback)
-    }
-  },
 
   /*
   ** Build configuration
   */
   build: {
-    //任何页面里面引入 axios 而不用担心它会被重复打包
-    vendor: ['axios', 'marked', 'js-base64'],
     /*
-    ** Run ESLint on save
+    ** You can extend webpack config here
     */
-    extend(config, {isDev}) {
-      if (isDev && process.client) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
+    extend(config, ctx) {
+      config.node = {
+        'cluster': 'empty',
+        'fs': 'empty',
       }
+      // articleClone.autoCloneRepository()
+      // articleService.autoFlushArticle()
     }
   },
 }
-

@@ -1,15 +1,5 @@
 <template>
-  <div>
-    <navbar/>
-    <page-head/>
-
-    <b-container>
-      <nuxt/>
-    </b-container>
-
-    <page-foot/>
-    <goto/>
-  </div>
+  <nuxt/>
 </template>
 
 <script>
@@ -19,7 +9,7 @@
   import goto from '../components/goto'
 
   export default {
-    name: "default",
+    name: "test",
     components: {
       navbar,
       pageHead,
