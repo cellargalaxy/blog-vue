@@ -149,7 +149,8 @@ function listArticlePage(pageSize, currentPage) {
 }
 
 function getArticle(articlePath) {
-  const article = articleDao.getArticle(path.join(repositoryPath, articlePath + extension))
+  articlePath = path.join(repositoryPath, articlePath + extension)
+  const article = articleDao.getArticle(articlePath)
   if (article) {
     return article
   }

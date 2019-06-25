@@ -43,15 +43,12 @@
     },
     methods: {
       click: function () {
-        console.log('click')
         this.clickShow = !this.clickShow
       },
       mouseenter: function () {
-        console.log('mouseenter')
         this.show = true
       },
       mouseleave: function () {
-        console.log('mouseleave')
         this.show = false
       },
     },

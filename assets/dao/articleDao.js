@@ -56,7 +56,7 @@ function getFileMarkdownFromFolder(articlePath, fileMarkdown, extensionRegularOb
   if (stats.isFile() && extensionRegularObject.test(articlePath)) {
     const data = fs.readFileSync(articlePath)
     const markdown = data.toString()
-    fileMarkdown[articlePath] = markdown
+    fileMarkdown[articlePath.replace(/\\/g, '/')] = markdown
     return
   }
   if (stats.isDirectory()) {
@@ -73,8 +73,7 @@ function fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegular
   const article = {}
   article.path = articlePath
   article.markdown = markdown
-  let strings = articlePath.split('/')
-  let title = strings[strings.length - 1]
+  const title = path.basename(articlePath)
   article.title = title.replace(extension, '')
   article.url = articlePath.replace(repositoryPath, '').replace(extension, '')
 

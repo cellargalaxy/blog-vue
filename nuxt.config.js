@@ -1,6 +1,5 @@
 import config from './assets/config'
 import articleClone from './assets/dao/articleClone'
-import articleService from './assets/service/articleService'
 
 export default {
   mode: 'universal',
@@ -59,8 +58,7 @@ export default {
         'cluster': 'empty',
         'fs': 'empty',
       }
-      // articleClone.autoCloneRepository()
-      // articleService.autoFlushArticle()
+      articleClone.autoCloneRepository()
     }
   },
 }

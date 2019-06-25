@@ -6,7 +6,7 @@ function getPageFootConfig() {
       {text: 'Powered by Nuxt.js & Github', url: 'https://github.com/cellargalaxy'},
     ],
     [
-      {text: '友链：'},
+      {text: '孤独的友链：'},
       {text: 'Powered by Nuxt.js & Github', url: 'https://github.com/cellargalaxy'},
       {text: 'Powered by Nuxt.js & Github', url: 'https://github.com/cellargalaxy'},
       {text: 'Powered by Nuxt.js & Github', url: 'https://github.com/cellargalaxy'},
@@ -16,7 +16,7 @@ function getPageFootConfig() {
       {text: 'Powered by Nuxt.js & Github', url: 'https://github.com/cellargalaxy'},
     ],
     [
-      {text: '赞助：'},
+      {text: '贫穷的赞助：'},
       {text: 'Powered by Nuxt.js & Github', url: 'https://github.com/cellargalaxy'},
       {text: 'Powered by Nuxt.js & Github', url: 'https://github.com/cellargalaxy'},
       {text: 'Powered by Nuxt.js & Github', url: 'https://github.com/cellargalaxy'},
@@ -82,7 +82,7 @@ function getNavbarConfig() {
     brandUrl: '/',
     navs: [
       {text: '文章', url: '/a'},
-      {text: '时间轴', url: '/t'},
+      {text: '时间轴', url: '/timeLine'},
       {text: '关于我', url: '/ab'},
       {text: '开源', url: '/g'},
     ],
@@ -92,7 +92,10 @@ function getNavbarConfig() {
 function getHomeConfig() {
   return {
     brandHello: 'HI,MOSHIRO!',
-    brandTexts: ['我在这里的时候经常想，以前的人为什么总是留下记录呢？', '因为他们不想让有些事情发生改变。——苍之萤'],
+    brandTexts: [
+      '我在这里的时候经常想，以前的人为什么总是留下记录呢？',
+      '因为他们不想让有些事情发生改变。——苍之萤',
+    ],
     navs: [
       {text: '微信', url: '/a'},
       {text: 'QQ', url: '/t'},
