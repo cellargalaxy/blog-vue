@@ -14,13 +14,13 @@
 <page-foot/>
 
 <script>
-    import config from '../assets/config'
+    import configService from '../assets/service/configService'
 
     export default {
         name: "pageFoot",
         computed: {
             config: function () {
-                return config.getPageFootConfig()
+                return configService.getPageFootConfig()
             }
         },
     }

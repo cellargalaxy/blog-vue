@@ -4,7 +4,7 @@
 
 <script>
   import articleListAndPage from '../../components/articleListAndPage'
-  import config from '../../assets/config'
+  import configService from '../../assets/service/configService'
   import articleService from '../../assets/service/articleService'
 
   export default {
@@ -13,7 +13,7 @@
       return /^\d+$/.test(params.page)
     },
     async asyncData({params, error}) {
-      const pageSize = config.getArticleConfig().pageSize
+      const pageSize = configService.getArticleConfig().pageSize
       const currentPage = params.page
       const total = articleService.listArticle().length
       const articles = articleService.listArticlePage(pageSize, currentPage)

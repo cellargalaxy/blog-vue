@@ -3,21 +3,21 @@ const fs = require('fs-extra')
 const path = require('path')
 
 import log from '../utils/log'
-import config from '../config'
+import configService from '../service/configService'
 
-const gitUrl = config.getGitConfig().gitUrl
+const gitUrl = configService.getGitConfig().gitUrl
 log.info('git仓库地址: {}', gitUrl)
 
-const ref = config.getGitConfig().ref
+const ref = configService.getGitConfig().ref
 log.info('git仓库分支: {}', ref)
 
-const repositoryMainPath = config.getGitConfig().repositoryMainPath
+const repositoryMainPath = configService.getGitConfig().repositoryMainPath
 log.info('主仓库路径: {}, 即: {}', repositoryMainPath, path.join(path.resolve(), repositoryMainPath))
 
-const repositoryTmpPath = config.getGitConfig().repositoryTmpPath
+const repositoryTmpPath = configService.getGitConfig().repositoryTmpPath
 log.info('临时仓库路径: {}, 即: {}', repositoryTmpPath, path.join(path.resolve(), repositoryTmpPath))
 
-const pullTime = config.getGitConfig().pullTime
+const pullTime = configService.getGitConfig().pullTime
 log.info('文章缓存时间: {}', pullTime)
 
 function cloneRepository() {

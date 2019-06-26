@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import config from '../assets/config'
+  import configService from '../assets/service/configService'
 
   export default {
     name: "index",
@@ -33,7 +33,7 @@
     },
     computed: {
       config: function () {
-        return config.getHomeConfig()
+        return configService.getHomeConfig()
       },
       fontSize: function () {
         return (100 / this.config.brandHello.length) + 'vw'

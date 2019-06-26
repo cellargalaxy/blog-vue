@@ -13,13 +13,13 @@
 <goto/>
 
 <script>
-  import config from '../assets/config'
+  import configService from '../assets/service/configService'
 
   export default {
     name: "goto",
     computed: {
       config: function () {
-        return config.getGotoConfig()
+        return configService.getGotoConfig()
       }
     },
     methods: {

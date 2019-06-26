@@ -1,8 +1,8 @@
-import config from '../config'
+import configService from '../service/configService'
 
 const log4js = require('log4js')
-const logger = log4js.getLogger(config.getLogConfig().name)
-logger.level = config.getLogConfig().level
+const logger = log4js.getLogger(configService.getLogConfig().name)
+logger.level = configService.getLogConfig().level
 
 function formatString(string, ...infos) {
   for (let i = 0; i < infos.length; i++) {

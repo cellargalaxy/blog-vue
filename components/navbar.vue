@@ -1,9 +1,9 @@
 <template>
   <b-navbar toggleable="sm" fixed="top" :class="{low_translucent:show,transparent:!show}"
             @mouseenter="mouseenter" @mouseleave="mouseleave" style="height: 5em;">
-    <b-navbar-brand :href="navbarConfig.brandUrl" :class="{translucent:!show,transparent:show}"
+    <b-navbar-brand :class="{translucent:!show,transparent:show}" :href="config.brandUrl"
                     style="border-radius: 0.5em;padding: 0.2em;">
-      <b class="gray">{{navbarConfig.brandText}}</b>
+      <b class="gray">{{config.brandText}}</b>
     </b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse" :class="{translucent:!show,transparent:show}" @click="click"/>
@@ -12,7 +12,7 @@
       <b-container>
         <b-row align-h="center">
           <b-navbar-nav align="center">
-            <b-nav-item v-for="(nav,navIndex) in navbarConfig.navs?navbarConfig.navs:[]" :key="navIndex"
+            <b-nav-item :key="navIndex" v-for="(nav,navIndex) in config.navs?config.navs:[]"
                         :href="nav.url" style="margin-left: 0.5em;margin-right: 0.5em;">
               <b :class="{gray:show,translucent_word:!show}">{{nav.text}}</b>
             </b-nav-item>
@@ -26,7 +26,7 @@
 <navbar/>
 
 <script>
-  import config from '../assets/config'
+  import configService from '../assets/service/configService'
 
   export default {
     name: "navbar",
@@ -37,8 +37,8 @@
       }
     },
     computed: {
-      navbarConfig: function () {
-        return config.getNavbarConfig()
+      config: function () {
+        return configService.getNavbarConfig()
       },
     },
     methods: {

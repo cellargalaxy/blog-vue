@@ -14,13 +14,13 @@
 <page-head/>
 
 <script>
-  import config from '../assets/config'
+  import configService from '../assets/service/configService'
 
   export default {
     name: "pageHead",
     computed: {
       config: function () {
-        return config.getPageHeadConfig()
+        return configService.getPageHeadConfig()
       }
     },
   }

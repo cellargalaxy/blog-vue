@@ -1,4 +1,4 @@
-import config from './assets/config'
+import configService from './assets/service/configService'
 import articleClone from './assets/dao/articleClone'
 
 export default {
@@ -8,18 +8,18 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: config.getSiteConfig().siteName,
+    title: configService.getSiteConfig().siteName,
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: config.getSiteConfig().description}
+      {hid: 'description', name: 'description', content: configService.getSiteConfig().description}
     ],
     script: [
-      {src: config.getSiteConfig().globalJsUrl},
+      {src: configService.getSiteConfig().globalJsUrl},
     ],
     link: [
-      {rel: 'icon', type: 'image/x-icon', href: config.getSiteConfig().faviconUrl},
-      {rel: 'stylesheet', href: config.getSiteConfig().globalCssUrl},
+      {rel: 'icon', type: 'image/x-icon', href: configService.getSiteConfig().faviconUrl},
+      {rel: 'stylesheet', href: configService.getSiteConfig().globalCssUrl},
     ]
   },
 
@@ -51,7 +51,7 @@ export default {
   */
   build: {
     /*
-    ** You can extend webpack config here
+    ** You can extend webpack configService here
     */
     extend(config, ctx) {
       config.node = {

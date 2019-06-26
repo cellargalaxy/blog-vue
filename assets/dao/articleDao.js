@@ -3,20 +3,20 @@ const fs = require('fs-extra')
 
 import utils from "../utils/utils";
 import log from '../utils/log'
-import config from '../config'
+import configService from '../service/configService'
 
-const repositoryMainPath = config.getGitConfig().repositoryMainPath
-const basePath = config.getGitConfig().basePath
+const repositoryMainPath = configService.getGitConfig().repositoryMainPath
+const basePath = configService.getGitConfig().basePath
 const repositoryPath = path.join(repositoryMainPath, basePath)
 log.info('主仓库路径: {}', repositoryMainPath)
 log.info('仓库基础路径: {}', basePath)
 log.info('主仓库基础路径: {}, 即: {}', repositoryPath, path.join(path.resolve(), repositoryPath))
 
-const extension = config.getGitConfig().extension
+const extension = configService.getGitConfig().extension
 const extensionRegularObject = new RegExp(extension)
 log.info('文件扩展名正则: {}', extensionRegularObject)
 
-const dateRegular = config.getGitConfig().dateRegular
+const dateRegular = configService.getGitConfig().dateRegular
 const dateRegularObject = new RegExp(dateRegular)
 log.info('文件日期正则: {}', dateRegularObject)
 
@@ -86,7 +86,7 @@ function fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegular
   if (dateString) {
     dateString = dateString.toString()
     const date = new Date(dateString)
-    dateString = utils.formatDate(date, config.getArticleConfig().dateFormat)
+    dateString = utils.formatDate(date, configService.getArticleConfig().dateFormat)
     article.date = date
     article.dateString = dateString
     attributes.push({"name": "时间", "value": dateString})

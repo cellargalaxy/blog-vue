@@ -1,21 +1,21 @@
 const path = require('path')
 
-import config from "../config"
+import configService from "./configService"
 import utils from "../utils/utils"
 import log from "../utils/log"
 import articleDao from '../dao/articleDao'
 
-const pullTime = config.getGitConfig().pullTime
+const pullTime = configService.getGitConfig().pullTime
 log.info('文章缓存时间: {}', pullTime)
 
-const repositoryMainPath = config.getGitConfig().repositoryMainPath
-const basePath = config.getGitConfig().basePath
+const repositoryMainPath = configService.getGitConfig().repositoryMainPath
+const basePath = configService.getGitConfig().basePath
 const repositoryPath = path.join(repositoryMainPath, basePath)
 log.info('主仓库路径: {}', repositoryMainPath)
 log.info('仓库基础路径: {}', basePath)
 log.info('主仓库完整路径: {}, 即: {}', repositoryMainPath, path.join(path.resolve(), repositoryPath))
 
-const extension = config.getGitConfig().extension
+const extension = configService.getGitConfig().extension
 const extensionRegularObject = new RegExp(extension)
 log.info('文件扩展名正则: {}', extensionRegularObject)
 
