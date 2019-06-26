@@ -15,7 +15,7 @@
       </b-row>
     </b-list-group-item>
 
-    <b-list-group-item class="translucent" v-html="isSummary?article.summaryHtml:article.html"/>
+    <b-list-group-item class="translucent" v-html="$md.render(isSummary?article.summary:article.markdown)"/>
   </b-list-group>
 </template>
 

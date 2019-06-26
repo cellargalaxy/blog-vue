@@ -1,3 +1,4 @@
+@charset "utf-8";
 body {
     background-image: url("/images/wave1.png"), url("/images/wave2.png"), url("/images/dot.gif"), url("https://cdn.jsdelivr.net/gh/moezx/cdn@3.6.8/cover/webp/AK-02.jpg.webp");
     background-repeat: no-repeat, no-repeat, repeat, no-repeat;
@@ -12,4 +13,67 @@ body {
 
 a {
     cursor: url("http://hebin.me/wp-content/uploads/2017/10/2017100712571858.png"), auto;
+}
+
+img {
+    max-width: 100%;
+    -webkit-border-radius: 0.3em;
+    -moz-border-radius: 0.3em;
+    -ms-border-radius: 0.3em;
+    -o-border-radius: 0.3em;
+    border-radius: 0.3em;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 1px 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: #fff 0.5em solid;
+}
+
+blockquote {
+    border-left: 0.3em solid rgba(255, 255, 255, 1);
+    padding-left: 0.5em;
+}
+
+/*表格样式来源*/
+/*https://blog.xiaomo.info/2016/MarkdownTableStyle/*/
+/*http://moxfive.xyz/2016/03/04/markdown-table-style/*/
+
+table {
+    width: 100%; /*表格宽度*/
+    max-width: 65em; /*表格最大宽度，避免表格过宽*/
+    border: 1px solid #dedede; /*表格外边框设置*/
+    margin: 15px auto; /*外边距*/
+    border-collapse: collapse; /*使用单一线条的边框*/
+    empty-cells: show; /*单元格无内容依旧绘制边框*/
+}
+
+table th,
+table td {
+    height: 35px; /*统一每一行的默认高度*/
+    border: 1px solid #dedede; /*内部边框样式*/
+    padding: 0 10px; /*内边距*/
+}
+
+table th {
+    font-weight: bold; /*加粗*/
+    text-align: center !important; /*内容居中，加上 !important 避免被 Markdown 样式覆盖*/
+    background: rgba(158, 188, 226, 0.2); /*背景色*/
+}
+
+table tr:hover {
+    background: #efefef;
+}
+
+table th {
+    white-space: nowrap; /*表头内容强制在一行显示*/
+}
+
+table td:nth-child(1) {
+    white-space: nowrap;
+}
+
+.table-area {
+    overflow: auto;
 }

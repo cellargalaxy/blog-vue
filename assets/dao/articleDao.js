@@ -20,6 +20,9 @@ const dateRegular = configService.getGitConfig().dateRegular
 const dateRegularObject = new RegExp(dateRegular)
 log.info('文件日期正则: {}', dateRegularObject)
 
+const summaryLength = configService.getArticleConfig().summaryLength
+log.info('摘要长度: {}', summaryLength)
+
 function getArticle(articlePath) {
   if (!articlePath || !fs.existsSync(articlePath)) {
     return null
@@ -28,7 +31,7 @@ function getArticle(articlePath) {
   if (stats.isFile() && extensionRegularObject.test(articlePath)) {
     const data = fs.readFileSync(articlePath)
     const markdown = data.toString()
-    return fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegularObject, extension)
+    return fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegularObject, extension, summaryLength)
   }
   return null
 }
@@ -40,7 +43,7 @@ function listArticle() {
 
   const articles = []
   for (let articlePath in fileMarkdown) {
-    const article = fileMarkdown2Article(articlePath, fileMarkdown[articlePath], repositoryPath, dateRegularObject, extension)
+    const article = fileMarkdown2Article(articlePath, fileMarkdown[articlePath], repositoryPath, dateRegularObject, extension, summaryLength)
     articles.push(article)
   }
 
@@ -69,16 +72,23 @@ function getFileMarkdownFromFolder(articlePath, fileMarkdown, extensionRegularOb
   }
 }
 
-function fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegularObject, extension) {
+function fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegularObject, extension, summaryLength) {
   const article = {}
   article.path = articlePath
   article.markdown = markdown
+  let summary = ''
+  const markdowns = markdown.split('\n')
+  let count = 0
+  for (let i = 0; i < markdowns.length && count < summaryLength; i++) {
+    if (markdowns[i] && (markdowns[i] = markdowns[i].trim()).length > 0) {
+      count = count + 1
+    }
+    summary = summary + markdowns[i] + '\n'
+  }
+  article.summary = summary
   const title = path.basename(articlePath)
   article.title = title.replace(extension, '')
   article.url = articlePath.replace(repositoryPath, '').replace(extension, '')
-
-  article.html = markdown
-  article.summaryHtml = markdown
 
   const attributes = []
 
