@@ -150,17 +150,6 @@ function getHomeConfig() {
   }
 }
 
-function getLogConfig() {
-  const config = configDao.getConfig()
-  if (config && config.logConfig) {
-    return config.logConfig
-  }
-  return {
-    "name": "default",
-    "level": "debug"
-  }
-}
-
 function getGitConfig() {
   const config = configDao.getConfig()
   if (config && config.gitConfig) {
@@ -185,6 +174,5 @@ export default {
   getArticleConfig: getArticleConfig,
   getNavbarConfig: getNavbarConfig,
   getHomeConfig: getHomeConfig,
-  getLogConfig: getLogConfig,
   getGitConfig: getGitConfig,
 }

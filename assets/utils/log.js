@@ -1,8 +1,29 @@
-import configService from '../service/configService'
+import utils from '../utils/utils'
 
-const log4js = require('log4js')
-const logger = log4js.getLogger(configService.getLogConfig().name)
-logger.level = configService.getLogConfig().level
+function log(level, massage) {
+  console.log(utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' ' + level + ' ' + massage)
+}
+
+const logger = {}
+
+logger.trace = function (massage) {
+  log('trace', massage)
+}
+logger.debug = function (massage) {
+  log('debug', massage)
+}
+logger.info = function (massage) {
+  log('info', massage)
+}
+logger.warn = function (massage) {
+  log('warn', massage)
+}
+logger.error = function (massage) {
+  log('error', massage)
+}
+logger.fatal = function (massage) {
+  log('fatal', massage)
+}
 
 function formatString(string, ...infos) {
   for (let i = 0; i < infos.length; i++) {
