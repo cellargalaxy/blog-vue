@@ -11,17 +11,18 @@
   </b-card>
 </template>
 
-<page-head/>
+<page-head :config="config"/>
 
 <script>
-  import configService from '../assets/service/configService'
 
   export default {
     name: "pageHead",
-    computed: {
-      config: function () {
-        return configService.getPageHeadConfig()
-      }
+    props: {
+      config: {
+        default: function () {
+          return null
+        }
+      },
     },
   }
 </script>

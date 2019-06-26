@@ -2,7 +2,8 @@
   <b-button-group vertical class="goto" size="sm">
     <b-button @click="gotoTop" class="translucent gray"><b>{{config.gotoTopText}}</b></b-button>
 
-    <b-button v-for="(content,contentIndex) in config.contents?config.contents:[]" :key="contentIndex" class="translucent">
+    <b-button :key="contentIndex" class="translucent"
+              v-for="(content,contentIndex) in config.contents?config.contents:[]">
       <b-link target="_blank" :href="content.url" class="gray"><b>{{content.text}}</b></b-link>
     </b-button>
 
@@ -10,17 +11,18 @@
   </b-button-group>
 </template>
 
-<goto/>
+<goto :config="config"/>
 
 <script>
-  import configService from '../assets/service/configService'
 
   export default {
     name: "goto",
-    computed: {
-      config: function () {
-        return configService.getGotoConfig()
-      }
+    props: {
+      config: {
+        default: function () {
+          return null
+        }
+      },
     },
     methods: {
       gotoTop: function () {

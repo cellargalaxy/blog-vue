@@ -169,7 +169,7 @@ function getTimeLineArticles() {
 
 export default {
   autoFlushArticle: autoFlushArticle,
-  listArticle: listArticlePage,
+  listArticle: listArticle,
   listArticlePage: listArticlePage,
   getArticle: getArticle,
   getTimeLineArticles: getTimeLineArticles,

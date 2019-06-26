@@ -1,5 +1,5 @@
 const path = require('path')
-const fs = require('fs-extra')
+const fs = require('fs')
 
 import utils from "../utils/utils";
 import log from '../utils/log'
@@ -21,7 +21,7 @@ const dateRegularObject = new RegExp(dateRegular)
 log.info('文件日期正则: {}', dateRegularObject)
 
 function getArticle(articlePath) {
-  if (!articlePath || !fs.pathExistsSync(articlePath)) {
+  if (!articlePath || !fs.existsSync(articlePath)) {
     return null
   }
   const stats = fs.statSync(articlePath)
@@ -48,7 +48,7 @@ function listArticle() {
 }
 
 function getFileMarkdownFromFolder(articlePath, fileMarkdown, extensionRegularObject) {
-  if (!articlePath || !fs.pathExistsSync(articlePath)) {
+  if (!articlePath || !fs.existsSync(articlePath)) {
     log.debug('路径不存在: {}', articlePath)
     return
   }
@@ -97,7 +97,11 @@ function fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegular
   attributes.push({"name": "字数", "value": wordSum})
 
   //https://www.wukong.com/question/6434284981916270849/
-  const readTime = Math.round(wordSum / 300) + '分钟'
+  let readTime = Math.round(wordSum / 300)
+  if (readTime == 0) {
+    readTime = 1
+  }
+  readTime = readTime + '分钟'
   article.readTime = readTime
   attributes.push({"name": "阅读时间", "value": readTime})
 

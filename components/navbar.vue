@@ -23,23 +23,24 @@
   </b-navbar>
 </template>
 
-<navbar/>
+<navbar :config="config"/>
 
 <script>
-  import configService from '../assets/service/configService'
 
   export default {
     name: "navbar",
+    props: {
+      config: {
+        default: function () {
+          return null
+        }
+      },
+    },
     data() {
       return {
         show: false,
         clickShow: false,
       }
-    },
-    computed: {
-      config: function () {
-        return configService.getNavbarConfig()
-      },
     },
     methods: {
       click: function () {

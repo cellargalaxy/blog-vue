@@ -1,11 +1,25 @@
 <template>
-  <article-list-and-page :articles="articles" :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
+  <div>
+    <navbar :config="navbarConfig"/>
+    <page-head :config="pageHeadConfig"/>
+
+    <b-container>
+      <article-list-and-page :articles="articles" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
+    </b-container>
+
+    <page-foot :config="pageFootConfig"/>
+    <goto :config="gotoConfig"/>
+  </div>
 </template>
 
 <script>
+  import navbar from '../../components/navbar'
+  import pageHead from '../../components/pageHead'
+  import pageFoot from '../../components/pageFoot'
+  import goto from '../../components/goto'
   import articleListAndPage from '../../components/articleListAndPage'
-  import configService from '../../assets/service/configService'
   import articleService from '../../assets/service/articleService'
+  import configService from '../../assets/service/configService'
 
   export default {
     name: "page",
@@ -26,10 +40,18 @@
         currentPage: currentPage,
         total: total,
         articles: articles,
+        navbarConfig: configService.getNavbarConfig(),
+        pageHeadConfig: configService.getPageHeadConfig(),
+        pageFootConfig: configService.getPageFootConfig(),
+        gotoConfig: configService.getGotoConfig(),
       }
     },
     components: {
       articleListAndPage,
+      navbar,
+      pageHead,
+      pageFoot,
+      goto,
     },
     layout: 'default',
   }

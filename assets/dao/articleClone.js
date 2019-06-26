@@ -1,8 +1,9 @@
 const git = require("isomorphic-git")
-const fs = require('fs-extra')
+const fs = require('fs')
 const path = require('path')
 
 import log from '../utils/log'
+import fileIo from '../utils/fileIo'
 import configService from '../service/configService'
 
 const gitUrl = configService.getGitConfig().gitUrl
@@ -23,8 +24,8 @@ log.info('文章缓存时间: {}', pullTime)
 function cloneRepository() {
   log.info('开始克隆仓库')
 
-  log.info('清空临时仓库目录: {}', repositoryTmpPath)
-  fs.emptydirSync(repositoryTmpPath)
+  log.info('删除临时仓库目录: {}', repositoryTmpPath)
+  fileIo.deleteFileOrFolder(repositoryTmpPath)
 
   git.clone({
     'fs': fs,
@@ -38,10 +39,10 @@ function cloneRepository() {
       log.info('成功克隆仓库')
 
       log.info('删除主仓库目录')
-      fs.removeSync(repositoryMainPath)
+      fileIo.deleteFileOrFolder(repositoryMainPath)
 
       log.info('重命名临时仓库目录为主仓库目录')
-      fs.copySync(repositoryTmpPath, repositoryMainPath)
+      fs.renameSync(repositoryTmpPath, repositoryMainPath)
     } catch (e) {
       log.error('仓库迁移发生异常: {}', e)
     } finally {

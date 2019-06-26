@@ -1,31 +1,10 @@
 <template>
-  <div>
-    <navbar/>
-    <page-head/>
-
-    <b-container>
-      <nuxt/>
-    </b-container>
-
-    <page-foot/>
-    <goto/>
-  </div>
+  <nuxt/>
 </template>
 
 <script>
-  import navbar from '../components/navbar'
-  import pageHead from '../components/pageHead'
-  import pageFoot from '../components/pageFoot'
-  import goto from '../components/goto'
-
   export default {
     name: "default",
-    components: {
-      navbar,
-      pageHead,
-      pageFoot,
-      goto,
-    },
   }
 </script>
 

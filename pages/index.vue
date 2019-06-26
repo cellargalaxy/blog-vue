@@ -1,42 +1,62 @@
 <template>
-  <div>
-    <h2 :style="{'font-size': fontSize,'font-style':fontStyle,'text-shadow':textShadow}" @mouseenter="mouseenter"
-        @mouseleave="mouseleave" class="white"
-        v-if="config.brandHello">
-      <b>{{config.brandHello}}</b>
-    </h2>
-    <b-card class="translucent-black"
-            v-if="(config.brandTexts&&config.brandTexts.length>0)||(config.navs&&config.navs.length>0)">
-      <p :key="brandTextsIndex"
-         class="white" v-for="(brandText,brandTextsIndex) in config.brandTexts"
-         v-if="config.brandTexts&&config.brandTexts.length>0">
-        {{brandText}}</p>
 
-      <b-nav align="center" class="transparent" v-if="config.navs&&config.navs.length>0">
-        <b-nav-item :href="nav.url" :key="navIndex" target="_blank" v-for="(nav,navIndex) in config.navs">
-          {{nav.text}}
-        </b-nav-item>
-      </b-nav>
-    </b-card>
+  <div>
+    <navbar :config="navbarConfig"/>
+
+    <b-container>
+      <b-row align-v="center" class="text-center" style="height: 100vh">
+        <b-col>
+
+          <h2 :style="{'font-size': fontSize,'font-style':fontStyle,'text-shadow':textShadow}" @mouseenter="mouseenter"
+              @mouseleave="mouseleave" class="white"
+              v-if="homeConfig.brandHello">
+            <b>{{homeConfig.brandHello}}</b>
+          </h2>
+          <b-card class="translucent-black"
+                  v-if="(homeConfig.brandTexts&&homeConfig.brandTexts.length>0)||(homeConfig.navs&&homeConfig.navs.length>0)">
+            <p :key="brandTextsIndex"
+               class="white" v-for="(brandText,brandTextsIndex) in homeConfig.brandTexts"
+               v-if="homeConfig.brandTexts&&homeConfig.brandTexts.length>0">
+              {{brandText}}</p>
+
+            <b-nav align="center" class="transparent" v-if="homeConfig.navs&&homeConfig.navs.length>0">
+              <b-nav-item :href="nav.url" :key="navIndex" target="_blank" v-for="(nav,navIndex) in homeConfig.navs">
+                {{nav.text}}
+              </b-nav-item>
+            </b-nav>
+          </b-card>
+
+        </b-col>
+      </b-row>
+    </b-container>
+
+    <goto :config="gotoConfig"/>
   </div>
+
 </template>
 
 <script>
+  import navbar from '../components/navbar'
+  import goto from '../components/goto'
   import configService from '../assets/service/configService'
 
   export default {
     name: "index",
+    async asyncData({params, error}) {
+      return {
+        homeConfig: configService.getHomeConfig(),
+        navbarConfig: configService.getNavbarConfig(),
+        gotoConfig: configService.getGotoConfig()
+      }
+    },
     data() {
       return {
         isItalic: false,
       }
     },
     computed: {
-      config: function () {
-        return configService.getHomeConfig()
-      },
       fontSize: function () {
-        return (100 / this.config.brandHello.length) + 'vw'
+        return (100 / this.homeConfig.brandHello.length) + 'vw'
       },
       fontStyle: function () {
         return this.isItalic ? 'italic' : 'normal'
@@ -53,7 +73,10 @@
         this.isItalic = false
       },
     },
-    layout: 'home',
+    components: {
+      navbar,
+      goto,
+    },
   }
 </script>
 
