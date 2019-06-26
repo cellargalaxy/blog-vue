@@ -56,7 +56,7 @@
     },
     computed: {
       fontSize: function () {
-        return (100 / this.homeConfig.brandHello.length) + 'vw'
+        return (60 / this.homeConfig.brandHello.length) + 'vw'
       },
       fontStyle: function () {
         return this.isItalic ? 'italic' : 'normal'
