@@ -58,7 +58,7 @@ export default {
         'cluster': 'empty',
         'fs': 'empty',
       }
-      articleClone.autoCloneRepository()
+      articleClone.autoPullRepository()
     }
   },
 }
