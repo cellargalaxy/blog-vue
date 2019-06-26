@@ -160,7 +160,7 @@ function getGitConfig() {
     "ref": "master",
     "basePath": "",
     "repositoryMainPath": "repository",
-    "pullTime": 60000,
+    "pullTime": 1000 * 60 * 10,
     "extension": ".md",
     "dateRegular": "/\\d{4}-\\d{2}\\/\\d{2}/"
   }
