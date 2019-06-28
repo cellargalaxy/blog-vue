@@ -18,31 +18,7 @@ log.info('主仓库路径: {}, 即: {}', repositoryMainPath, path.join(path.reso
 const pullTime = configService.getGitConfig().pullTime
 log.info('文章缓存时间: {}', pullTime)
 
-function pullRepository() {
-  try {
-    log.info('开始更新仓库')
-    git.pull({
-      'fs': fs,
-      'dir': repositoryMainPath,
-      'ref': ref,
-      'singleBranch': true,
-    }).then(function () {
-      log.info('成功更新仓库')
-      log.info('setTimeout调用pullRepository')
-      setTimeout(pullRepository, pullTime)
-    }).catch(function (e) {
-      log.error('调用仓库更新发生异常: {}', e)
-      log.info('setTimeout调用autoPullRepository')
-      setTimeout(autoPullRepository, pullTime)
-    })
-  } catch (e) {
-    log.error('仓库更新发生异常: {}', e)
-    log.info('setTimeout调用autoPullRepository')
-    setTimeout(autoPullRepository, pullTime)
-  }
-}
-
-function autoPullRepository() {
+function cloneRepository() {
   try {
     log.info('删除仓库目录')
     fileIo.deleteFileOrFolder(repositoryMainPath)
@@ -61,13 +37,51 @@ function autoPullRepository() {
       setTimeout(pullRepository, pullTime)
     }).catch(function (e) {
       log.error('调用克隆仓库发生异常: {}', e)
-      log.info('setTimeout调用autoPullRepository')
-      setTimeout(autoPullRepository, pullTime)
+      log.info('setTimeout调用cloneRepository')
+      setTimeout(cloneRepository, pullTime)
     })
   } catch (e) {
     log.error('克隆仓库发生异常: {}', e)
-    log.info('setTimeout调用autoPullRepository')
-    setTimeout(autoPullRepository, pullTime)
+    log.info('setTimeout调用cloneRepository')
+    setTimeout(cloneRepository, pullTime)
+  }
+}
+
+function pullRepository() {
+  try {
+    log.info('开始更新仓库')
+    git.pull({
+      'fs': fs,
+      'dir': repositoryMainPath,
+      'ref': ref,
+      'singleBranch': true,
+    }).then(function () {
+      log.info('成功更新仓库')
+      log.info('setTimeout调用pullRepository')
+      setTimeout(pullRepository, pullTime)
+    }).catch(function (e) {
+      log.error('调用仓库更新发生异常: {}', e)
+      log.info('setTimeout调用cloneRepository')
+      setTimeout(cloneRepository, pullTime)
+    })
+  } catch (e) {
+    log.error('仓库更新发生异常: {}', e)
+    log.info('setTimeout调用cloneRepository')
+    setTimeout(cloneRepository, pullTime)
+  }
+}
+
+function autoPullRepository() {
+  try {
+    if (fs.existsSync(repositoryMainPath)) {
+      pullRepository()
+    } else {
+      cloneRepository()
+    }
+  } catch (e) {
+    log.error('检查仓库发生异常: {}', e)
+    log.info('setTimeout调用cloneRepository')
+    setTimeout(cloneRepository, pullTime)
   }
 }
 

@@ -56,7 +56,7 @@
     },
     computed: {
       fontSize: function () {
-        return (60 / this.homeConfig.brandHello.length) + 'vw'
+        return (100 / this.countStringLength(this.homeConfig.brandHello)) + 'vw'
       },
       fontStyle: function () {
         return this.isItalic ? 'italic' : 'normal'
@@ -71,6 +71,21 @@
       },
       mouseleave: function () {
         this.isItalic = false
+      },
+      countStringLength: function (string) {
+        const regExp = new RegExp("[^\x00-\xff]")
+        let length = 0
+        for (let i = 0; i < string.length; i++) {
+          if (regExp.test(string.charAt(i))) {
+            length = length + 2
+          } else {
+            length = length + 1
+          }
+        }
+        if (length == 0) {
+          length = 1
+        }
+        return length
       },
     },
     components: {

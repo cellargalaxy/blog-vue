@@ -86,7 +86,7 @@ export default {
     quotes: '“”‘’',
 
     use: [
-      'markdown-it-highlightjs'
+      'markdown-it-highlightjs',
     ]
   }
 }

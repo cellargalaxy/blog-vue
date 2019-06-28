@@ -2,9 +2,9 @@
 body {
     background-image: url("/images/wave1.png"), url("/images/wave2.png"), url("/images/dot.gif"), url("https://cdn.jsdelivr.net/gh/moezx/cdn@3.6.8/cover/webp/AK-02.jpg.webp");
     background-repeat: no-repeat, no-repeat, repeat, no-repeat;
-    background-position: 0vw 90vh, -27vw 90vh, 0% 0%, center;
+    background-position: 0vw 92vh, -27vw 91vh, 0% 0%, center;
     background-attachment: fixed, fixed, fixed, fixed;
-    background-size: 104vw 10vh, 127vw 10vh, auto, cover;
+    background-size: 104vw 8vh, 127vw 9vh, auto, cover;
 }
 
 body {
