@@ -69,6 +69,7 @@ function getSiteConfig() {
     return config.siteConfig
   }
   return {
+    "siteUrl": "https://github.com",
     "siteName": "cellargalaxyの博客",
     "faviconUrl": "https://2heng.xin/favicon-32x32.png",
     "description": "cellargalaxyの博客",

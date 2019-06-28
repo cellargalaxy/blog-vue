@@ -1,4 +1,5 @@
 import configService from './assets/service/configService'
+import articleService from './assets/service/articleService'
 import articleClone from './assets/dao/articleClone'
 
 export default {
@@ -47,6 +48,7 @@ export default {
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
     '@nuxtjs/markdownit',
+    '@nuxtjs/sitemap',
   ],
 
   /*
@@ -88,5 +90,19 @@ export default {
     use: [
       'markdown-it-highlightjs',
     ]
-  }
+  },
+
+  sitemap: {
+    hostname: configService.getSiteConfig().siteUrl,
+    path: '/sitemap.xml',
+    gzip: true,
+    cacheTime: configService.getGitConfig().pullTime,
+    generate: false, // Enable me when using nuxt generate
+    exclude: [],
+    routes(callback) {
+      const articles = articleService.listArticle()
+      let routes = articles.map(article => article.url)
+      callback(null, routes)
+    }
+  },
 }
