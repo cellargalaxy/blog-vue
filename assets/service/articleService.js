@@ -8,12 +8,12 @@ import articleDao from '../dao/articleDao'
 const pullTime = configService.getGitConfig().pullTime
 log.info('文章缓存时间: {}', pullTime)
 
-const repositoryMainPath = configService.getGitConfig().repositoryMainPath
+const repositoryPath = configService.getGitConfig().repositoryPath
 const basePath = configService.getGitConfig().basePath
-const repositoryPath = path.join(repositoryMainPath, basePath)
-log.info('主仓库路径: {}', repositoryMainPath)
+const repositoryBasePath = path.join(repositoryPath, basePath)
+log.info('仓库路径: {}', repositoryPath)
 log.info('仓库基础路径: {}', basePath)
-log.info('主仓库完整路径: {}, 即: {}', repositoryMainPath, path.join(path.resolve(), repositoryPath))
+log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, path.join(path.resolve(), repositoryBasePath))
 
 const extension = configService.getGitConfig().extension
 const extensionRegularObject = new RegExp(extension)
@@ -115,9 +115,6 @@ function flushArticle() {
   articles = ass
   pathArticleMap = pam
   timeLineArticles = tlas
-  // console.log('timeLineArticles')
-  // console.log(timeLineArticles)
-  // console.log('timeLineArticles')
 }
 
 function autoFlushArticle() {

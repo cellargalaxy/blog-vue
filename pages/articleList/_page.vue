@@ -32,7 +32,12 @@
       const total = articleService.listArticle().length
       const articles = articleService.listArticlePage(pageSize, currentPage)
       if (articles && articles.length == 0) {
-        error({statusCode: 404, message: '翻页翻过头了'})
+        let errorConfig = configService.getErrorPageConfig()['404']
+        if (errorConfig) {
+          error({statusCode: 404, message: errorConfig.message})
+        } else {
+          error({statusCode: 404, message: '翻页翻过头了'})
+        }
         return
       }
       return {

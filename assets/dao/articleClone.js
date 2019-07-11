@@ -12,8 +12,8 @@ log.info('git仓库地址: {}', gitUrl)
 const ref = configService.getGitConfig().ref
 log.info('git仓库分支: {}', ref)
 
-const repositoryMainPath = configService.getGitConfig().repositoryMainPath
-log.info('主仓库路径: {}, 即: {}', repositoryMainPath, path.join(path.resolve(), repositoryMainPath))
+const repositoryPath = configService.getGitConfig().repositoryPath
+log.info('仓库路径: {}, 即: {}', repositoryPath, path.join(path.resolve(), repositoryPath))
 
 const pullTime = configService.getGitConfig().pullTime
 log.info('文章缓存时间: {}', pullTime)
@@ -21,12 +21,12 @@ log.info('文章缓存时间: {}', pullTime)
 function cloneRepository() {
   try {
     log.info('删除仓库目录')
-    fileIo.deleteFileOrFolder(repositoryMainPath)
+    fileIo.deleteFileOrFolder(repositoryPath)
 
     log.info('开始克隆仓库')
     git.clone({
       'fs': fs,
-      'dir': repositoryMainPath,
+      'dir': repositoryPath,
       'url': gitUrl,
       'ref': ref,
       'singleBranch': true,
@@ -52,7 +52,7 @@ function pullRepository() {
     log.info('开始更新仓库')
     git.pull({
       'fs': fs,
-      'dir': repositoryMainPath,
+      'dir': repositoryPath,
       'ref': ref,
       'singleBranch': true,
     }).then(function () {
@@ -73,7 +73,7 @@ function pullRepository() {
 
 function autoPullRepository() {
   try {
-    if (fs.existsSync(repositoryMainPath)) {
+    if (fs.existsSync(repositoryPath)) {
       pullRepository()
     } else {
       cloneRepository()

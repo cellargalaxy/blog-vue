@@ -5,12 +5,12 @@ import utils from "../utils/utils";
 import log from '../utils/log'
 import configService from '../service/configService'
 
-const repositoryMainPath = configService.getGitConfig().repositoryMainPath
+const repositoryPath = configService.getGitConfig().repositoryPath
 const basePath = configService.getGitConfig().basePath
-const repositoryPath = path.join(repositoryMainPath, basePath)
-log.info('主仓库路径: {}', repositoryMainPath)
+const repositoryBasePath = path.join(repositoryPath, basePath)
+log.info('仓库路径: {}', repositoryPath)
 log.info('仓库基础路径: {}', basePath)
-log.info('主仓库基础路径: {}, 即: {}', repositoryPath, path.join(path.resolve(), repositoryPath))
+log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, path.join(path.resolve(), repositoryBasePath))
 
 const extension = configService.getGitConfig().extension
 const extensionRegularObject = new RegExp(extension)
@@ -31,7 +31,7 @@ function getArticle(articlePath) {
   if (stats.isFile() && extensionRegularObject.test(articlePath)) {
     const data = fs.readFileSync(articlePath)
     const markdown = data.toString()
-    return fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegularObject, extension, summaryLength)
+    return fileMarkdown2Article(articlePath, markdown, repositoryBasePath, dateRegularObject, extension, summaryLength)
   }
   return null
 }
@@ -39,14 +39,13 @@ function getArticle(articlePath) {
 function listArticle() {
   //{'articlePath': 'markdown'}
   let fileMarkdown = {}
-  getFileMarkdownFromFolder(repositoryPath, fileMarkdown, extensionRegularObject)
+  getFileMarkdownFromFolder(repositoryBasePath, fileMarkdown, extensionRegularObject)
 
   const articles = []
   for (let articlePath in fileMarkdown) {
-    const article = fileMarkdown2Article(articlePath, fileMarkdown[articlePath], repositoryPath, dateRegularObject, extension, summaryLength)
+    const article = fileMarkdown2Article(articlePath, fileMarkdown[articlePath], repositoryBasePath, dateRegularObject, extension, summaryLength)
     articles.push(article)
   }
-
   return articles
 }
 
@@ -100,6 +99,11 @@ function fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegular
     article.date = date
     article.dateString = dateString
     attributes.push({"name": "时间", "value": dateString})
+  }
+
+  const sort = articlePath.split(dateString)[0].replace(repositoryPath, '').replace('/', '')
+  if (sort && sort != '') {
+    article.sort = sort
   }
 
   const wordSum = article.markdown.length

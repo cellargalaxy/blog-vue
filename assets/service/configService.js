@@ -8,7 +8,7 @@ function getPageFootConfig() {
   return [
     [
       {
-        "text": "Copyright © 2017-? cellargalaxy."
+        "text": "Copyright © 2017-? ."
       },
       {
         "text": "备案？不存在的"
@@ -23,8 +23,8 @@ function getPageFootConfig() {
         "text": "孤独的友链："
       },
       {
-        "text": "さくら荘の白猫",
-        "url": "https://2heng.xin"
+        "text": "Github",
+        "url": "https://github.com/"
       },
       {
         "text": "nuxtjs",
@@ -45,7 +45,7 @@ function getGotoConfig() {
     "contents": [
       {
         "text": "电报",
-        "url": "https://t.me/"
+        "url": "https://telegram.org/"
       }
     ]
   }
@@ -57,8 +57,8 @@ function getPageHeadConfig() {
     return config.pageHeadConfig
   }
   return {
-    "avatarUrl": "https://avatars2.githubusercontent.com/u/26119390?s=60&v=4",
-    "siteName": "cellargalaxyの博客",
+    "avatarUrl": "https://i.loli.net/2019/07/09/5d2483a93eb0e97951.jpg",
+    "siteName": "名无の窝",
     "siteUrl": "/"
   }
 }
@@ -69,10 +69,10 @@ function getSiteConfig() {
     return config.siteConfig
   }
   return {
-    "siteUrl": "https://github.com",
-    "siteName": "cellargalaxyの博客",
-    "faviconUrl": "https://2heng.xin/favicon-32x32.png",
-    "description": "cellargalaxyの博客",
+    "siteUrl": "http://localhost",
+    "siteName": "名无の窝",
+    "faviconUrl": "https://i.loli.net/2019/07/09/5d2484e68fddd81209.jpg",
+    "description": "名无の窝",
     "globalCssUrl": "/css/global.css",
     "globalJsUrl": "/js/global.js"
   }
@@ -96,7 +96,7 @@ function getNavbarConfig() {
     return config.navbarConfig
   }
   return {
-    "brandText": "cellargalaxyの博客",
+    "brandText": "名无の窝",
     "brandUrl": "/",
     "navs": [
       {
@@ -125,7 +125,7 @@ function getHomeConfig() {
     return config.homeConfig
   }
   return {
-    "brandHello": "HI,MOSHIRO!",
+    "brandHello": "HI,MUMEI!",
     "brandTexts": [
       "我在这里的时候经常想，以前的人为什么总是留下记录呢？",
       "因为他们不想让有些事情发生改变。——苍之萤"
@@ -136,12 +136,12 @@ function getHomeConfig() {
         "url": "https://twitter.com/"
       },
       {
-        "text": "电报",
-        "url": "https://t.me/"
+        "text": "facebook",
+        "url": "https://facebook.com/"
       },
       {
-        "text": "github",
-        "url": "https://github.com/"
+        "text": "微博",
+        "url": "https://weibo.com/"
       },
       {
         "text": "纸糊",
@@ -160,10 +160,24 @@ function getGitConfig() {
     "gitUrl": "https://github.com/cellargalaxy/blog.git",
     "ref": "master",
     "basePath": "",
-    "repositoryMainPath": "repository",
+    "repositoryPath": "repository",
     "pullTime": 1000 * 60 * 10,
     "extension": ".md",
     "dateRegular": "/\\d{4}-\\d{2}\\/\\d{2}/"
+  }
+}
+
+function getErrorPageConfig() {
+  const config = configDao.getConfig()
+  if (config && config.errorPageConfig) {
+    return config.errorPageConfig
+  }
+  return {
+    "404": {
+      "message": "页面的搜索要靠自我奋斗，但也要考虑历史的进程",
+      "returnText": "回去首页溜达",
+      "returnUrl": "/"
+    }
   }
 }
 
@@ -176,4 +190,5 @@ export default {
   getNavbarConfig: getNavbarConfig,
   getHomeConfig: getHomeConfig,
   getGitConfig: getGitConfig,
+  getErrorPageConfig: getErrorPageConfig,
 }

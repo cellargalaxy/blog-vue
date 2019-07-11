@@ -3,17 +3,26 @@
     <b-card class="text-center translucent white">
       <h2 v-text="error.statusCode"/>
       <p v-text="error.message"/>
-      <nuxt-link to="/">回去首页溜达</nuxt-link>
+      <nuxt-link :to="errorPageReturnLink">{{errorPageReturnText}}</nuxt-link>
     </b-card>
     <br/>
   </div>
 </template>
 
 <script>
+  import configService from '../assets/service/configService'
 
   export default {
     name: "error",
     props: ['error'],
+    computed: {
+      errorPageReturnText: function () {
+        return configService.getSiteConfig().errorPageReturnText
+      },
+      errorPageReturnLink: function () {
+        return configService.getSiteConfig().errorPageReturnLink
+      },
+    },
   }
 </script>
 

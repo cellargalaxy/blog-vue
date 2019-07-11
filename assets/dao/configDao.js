@@ -1,9 +1,14 @@
+import log from "../utils/log";
+
 const path = require('path')
 const fs = require('fs')
 
-const repositoryMainPath = 'repository'
+const repositoryPath = 'repository'
 const basePath = ''
-const repositoryPath = path.join(repositoryMainPath, basePath)
+const repositoryBasePath = path.join(repositoryPath, basePath)
+log.info('仓库路径: {}', repositoryPath)
+log.info('仓库基础路径: {}', basePath)
+log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, path.join(path.resolve(), repositoryBasePath))
 
 function getConfig() {
   try {
