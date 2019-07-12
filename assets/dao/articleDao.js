@@ -6,10 +6,10 @@ import log from '../utils/log'
 import configService from '../service/configService'
 
 const repositoryPath = configService.getGitConfig().repositoryPath
-const basePath = configService.getGitConfig().basePath
-const repositoryBasePath = path.join(repositoryPath, basePath)
 log.info('仓库路径: {}', repositoryPath)
+const basePath = configService.getGitConfig().basePath
 log.info('仓库基础路径: {}', basePath)
+const repositoryBasePath = path.join(repositoryPath, basePath)
 log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, path.join(path.resolve(), repositoryBasePath))
 
 const extension = configService.getGitConfig().extension
@@ -58,7 +58,7 @@ function getFileMarkdownFromFolder(articlePath, fileMarkdown, extensionRegularOb
   if (stats.isFile() && extensionRegularObject.test(articlePath)) {
     const data = fs.readFileSync(articlePath)
     const markdown = data.toString()
-    fileMarkdown[articlePath.replace(/\\/g, '/')] = markdown
+    fileMarkdown[articlePath] = markdown
     return
   }
   if (stats.isDirectory()) {
@@ -72,6 +72,7 @@ function getFileMarkdownFromFolder(articlePath, fileMarkdown, extensionRegularOb
 }
 
 function fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegularObject, extension, summaryLength) {
+  articlePath = articlePath.replace(/\\/g, '/')
   const article = {}
   article.path = articlePath
   article.markdown = markdown
@@ -101,9 +102,11 @@ function fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegular
     attributes.push({"name": "时间", "value": dateString})
   }
 
+  dateString = dateRegularObject.exec(articlePath)
   const sort = articlePath.split(dateString)[0].replace(repositoryPath, '').replace('/', '')
   if (sort && sort != '') {
     article.sort = sort
+    attributes.push({"name": "分类", "value": sort})
   }
 
   const wordSum = article.markdown.length

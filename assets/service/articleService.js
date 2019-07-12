@@ -9,10 +9,10 @@ const pullTime = configService.getGitConfig().pullTime
 log.info('文章缓存时间: {}', pullTime)
 
 const repositoryPath = configService.getGitConfig().repositoryPath
-const basePath = configService.getGitConfig().basePath
-const repositoryBasePath = path.join(repositoryPath, basePath)
 log.info('仓库路径: {}', repositoryPath)
+const basePath = configService.getGitConfig().basePath
 log.info('仓库基础路径: {}', basePath)
+const repositoryBasePath = path.join(repositoryPath, basePath)
 log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, path.join(path.resolve(), repositoryBasePath))
 
 const extension = configService.getGitConfig().extension

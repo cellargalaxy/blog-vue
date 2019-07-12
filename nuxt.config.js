@@ -1,6 +1,6 @@
 import configService from './assets/service/configService'
 import articleService from './assets/service/articleService'
-// import articleClone from './assets/dao/articleClone'
+import articleClone from './assets/dao/articleClone'
 
 export default {
   mode: 'universal',
@@ -63,7 +63,7 @@ export default {
         'cluster': 'empty',
         'fs': 'empty',
       }
-      // articleClone.autoPullRepository()
+      articleClone.autoPullRepository()
     }
   },
 

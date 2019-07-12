@@ -167,17 +167,16 @@ function getGitConfig() {
   }
 }
 
-function getErrorPageConfig() {
-  const config = configDao.getConfig()
-  if (config && config.errorPageConfig) {
-    return config.errorPageConfig
+function getErrorPageConfig(statusCode) {
+  let config = configDao.getConfig()
+  if (config && config.errorPageConfig && config.errorPageConfig[statusCode]) {
+    return config.errorPageConfig[statusCode]
   }
   return {
-    "404": {
-      "message": "页面的搜索要靠自我奋斗，但也要考虑历史的进程",
-      "returnText": "回去首页溜达",
-      "returnUrl": "/"
-    }
+    "statusCode": statusCode,
+    "message": "未知错误",
+    "returnText": "回去首页溜达",
+    "returnUrl": "/"
   }
 }
 

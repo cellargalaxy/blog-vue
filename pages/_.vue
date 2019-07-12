@@ -27,7 +27,8 @@
       const articlePath = '/' + params.pathMatch
       const article = articleService.getArticle(articlePath)
       if (!article) {
-        error({statusCode: 404, message: '你找的文章不翼而飞了'})
+        const errorConfig = configService.getErrorPageConfig("404")
+        error(errorConfig)
         return
       }
       return {

@@ -42,7 +42,7 @@
 
   export default {
     name: "index",
-    async asyncData({params, error}) {
+    async asyncData({}) {
       return {
         homeConfig: configService.getHomeConfig(),
         navbarConfig: configService.getNavbarConfig(),
@@ -52,6 +52,7 @@
     data() {
       return {
         isItalic: false,
+        shadowColor: true,
       }
     },
     computed: {
@@ -62,12 +63,13 @@
         return this.isItalic ? 'italic' : 'normal'
       },
       textShadow: function () {
-        return this.isItalic ? (Math.random() > 0.5 ? '0.08em 0em 0.05em orangered' : '0.08em 0em 0.05em dodgerblue') : ''
+        return this.isItalic ? (this.shadowColor ? '0.08em 0em 0.05em orangered' : '0.08em 0em 0.05em dodgerblue') : ''
       },
     },
     methods: {
       mouseenter: function () {
         this.isItalic = true
+        this.shadowColor = !this.shadowColor
       },
       mouseleave: function () {
         this.isItalic = false
