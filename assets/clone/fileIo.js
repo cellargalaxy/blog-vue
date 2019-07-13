@@ -17,9 +17,9 @@ function deleteFileOrFolder(fileOrFolderPath) {
   fs.rmdirSync(fileOrFolderPath)
 }
 
-export default {
-  deleteFileOrFolder: deleteFileOrFolder,
-}
-// module.exports = {
+// export default {
 //   deleteFileOrFolder: deleteFileOrFolder,
 // }
+module.exports = {
+  deleteFileOrFolder: deleteFileOrFolder,
+}

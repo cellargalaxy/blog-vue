@@ -1,6 +1,6 @@
-// const configDao = require('../dao/configDao')
+const configDao = require('./configDao')
 
-import configDao from '../dao/configDao'
+// import configDao from './configDao'
 
 function getPageFootConfig() {
   const config = configDao.getConfig()
@@ -182,18 +182,7 @@ function getErrorPageConfig(statusCode) {
   }
 }
 
-export default {
-  getPageFootConfig: getPageFootConfig,
-  getGotoConfig: getGotoConfig,
-  getPageHeadConfig: getPageHeadConfig,
-  getSiteConfig: getSiteConfig,
-  getArticleConfig: getArticleConfig,
-  getNavbarConfig: getNavbarConfig,
-  getHomeConfig: getHomeConfig,
-  getGitConfig: getGitConfig,
-  getErrorPageConfig: getErrorPageConfig,
-}
-// module.exports = {
+// export default {
 //   getPageFootConfig: getPageFootConfig,
 //   getGotoConfig: getGotoConfig,
 //   getPageHeadConfig: getPageHeadConfig,
@@ -204,3 +193,14 @@ export default {
 //   getGitConfig: getGitConfig,
 //   getErrorPageConfig: getErrorPageConfig,
 // }
+module.exports = {
+  getPageFootConfig: getPageFootConfig,
+  getGotoConfig: getGotoConfig,
+  getPageHeadConfig: getPageHeadConfig,
+  getSiteConfig: getSiteConfig,
+  getArticleConfig: getArticleConfig,
+  getNavbarConfig: getNavbarConfig,
+  getHomeConfig: getHomeConfig,
+  getGitConfig: getGitConfig,
+  getErrorPageConfig: getErrorPageConfig,
+}

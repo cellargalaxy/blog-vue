@@ -2,9 +2,13 @@ const git = require("isomorphic-git")
 const fs = require('fs')
 const path = require('path')
 
-import log from '../utils/log'
-import fileIo from '../utils/fileIo'
-import configService from '../service/configService'
+const log = require('./log')
+const fileIo = require('./fileIo')
+const configService = require('./configService')
+
+// import log from './log'
+// import fileIo from './fileIo'
+// import configService from './configService'
 
 const gitUrl = configService.getGitConfig().gitUrl
 log.info('git仓库地址: {}', gitUrl)
@@ -85,6 +89,11 @@ function autoPullRepository() {
   }
 }
 
-export default {
-  autoPullRepository: autoPullRepository,
-}
+// export default {
+//   autoPullRepository: autoPullRepository,
+// }
+// module.exports = {
+//   autoPullRepository: autoPullRepository,
+// }
+
+autoPullRepository()

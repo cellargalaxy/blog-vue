@@ -1,8 +1,12 @@
 const path = require('path')
 const fs = require('fs')
 
-import utils from "../utils/utils";
+// const log = require('../utils/log')
+// const utils = require('../utils/utils')
+// const configService = require('../service/configService')
+
 import log from '../utils/log'
+import utils from '../utils/utils'
 import configService from '../service/configService'
 
 const repositoryPath = configService.getGitConfig().repositoryPath
@@ -130,3 +134,7 @@ export default {
   getArticle: getArticle,
   listArticle: listArticle,
 }
+// module.exports = {
+//   getArticle: getArticle,
+//   listArticle: listArticle,
+// }

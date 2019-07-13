@@ -1,6 +1,9 @@
 @charset "utf-8";
 body {
-    background-image: url("/images/wave1.png"), url("/images/wave2.png"), url("/images/dot.gif"), url("https://cdn.jsdelivr.net/gh/moezx/cdn@3.6.8/cover/webp/AK-02.jpg.webp");
+    background-image: url("https://i.loli.net/2019/07/12/5d2883198e29846770.png"),
+    url("https://i.loli.net/2019/07/12/5d288319798d150333.png"),
+    url("https://i.loli.net/2019/07/12/5d28861cb660b13384.png"),
+    url("https://i.loli.net/2018/10/02/5bb391d063618.jpg");
     background-repeat: no-repeat, no-repeat, repeat, no-repeat;
     background-position: 0vw 92vh, -27vw 91vh, 0% 0%, center;
     background-attachment: fixed, fixed, fixed, fixed;

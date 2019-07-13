@@ -1,9 +1,9 @@
 const path = require('path')
 const fs = require('fs')
 
-// const log = require('../utils/log')
+const log = require('./log')
 
-import log from '../utils/log'
+// import log from './log'
 
 const repositoryPath = 'repository'
 log.info('仓库路径: {}', repositoryPath)
@@ -29,9 +29,9 @@ function getConfig() {
   return null
 }
 
-export default {
-  getConfig: getConfig,
-}
-// module.exports = {
+// export default {
 //   getConfig: getConfig,
 // }
+module.exports = {
+  getConfig: getConfig,
+}

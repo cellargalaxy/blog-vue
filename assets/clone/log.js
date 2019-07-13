@@ -1,6 +1,6 @@
-// const utils = require('../utils/utils')
+const utils = require('./utils')
 
-import utils from '../utils/utils'
+// import utils from './utils'
 
 function log(level, massage) {
   console.log(utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' ' + level + ' ' + massage)
@@ -58,15 +58,7 @@ function fatal(string, ...infos) {
   logger.fatal(formatString(string, ...infos))
 }
 
-export default {
-  trace: trace,
-  debug: debug,
-  info: info,
-  warn: warn,
-  error: error,
-  fatal: fatal,
-}
-// module.exports = {
+// export default {
 //   trace: trace,
 //   debug: debug,
 //   info: info,
@@ -74,3 +66,11 @@ export default {
 //   error: error,
 //   fatal: fatal,
 // }
+module.exports = {
+  trace: trace,
+  debug: debug,
+  info: info,
+  warn: warn,
+  error: error,
+  fatal: fatal,
+}
