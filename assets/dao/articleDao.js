@@ -1,10 +1,6 @@
 const path = require('path')
 const fs = require('fs')
 
-// const log = require('../utils/log')
-// const utils = require('../utils/utils')
-// const configService = require('../service/configService')
-
 import log from '../utils/log'
 import utils from '../utils/utils'
 import configService from '../service/configService'
@@ -134,7 +130,3 @@ export default {
   getArticle: getArticle,
   listArticle: listArticle,
 }
-// module.exports = {
-//   getArticle: getArticle,
-//   listArticle: listArticle,
-// }

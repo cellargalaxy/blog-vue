@@ -1,5 +1,3 @@
-// const configDao = require('../dao/configDao')
-
 import configDao from '../dao/configDao'
 
 function getPageFootConfig() {
@@ -193,14 +191,3 @@ export default {
   getGitConfig: getGitConfig,
   getErrorPageConfig: getErrorPageConfig,
 }
-// module.exports = {
-//   getPageFootConfig: getPageFootConfig,
-//   getGotoConfig: getGotoConfig,
-//   getPageHeadConfig: getPageHeadConfig,
-//   getSiteConfig: getSiteConfig,
-//   getArticleConfig: getArticleConfig,
-//   getNavbarConfig: getNavbarConfig,
-//   getHomeConfig: getHomeConfig,
-//   getGitConfig: getGitConfig,
-//   getErrorPageConfig: getErrorPageConfig,
-// }

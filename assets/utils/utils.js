@@ -189,19 +189,3 @@ export default {
   checkParameterOr: checkParameterOr,
   checkQueryParameter: checkQueryParameter,
 }
-// module.exports = {
-//   formatTimestamp: formatTimestamp,
-//   formatDate: formatDate,
-//   formatFileSize: formatFileSize,
-//   getCookieFromString: getCookieFromString,
-//   getCookie: getCookie,
-//   setCookie: setCookie,
-//   successInfo: successInfo,
-//   errorInfo: errorInfo,
-//   confirmBox: confirmBox,
-//   exitWarm: exitWarm,
-//   inBrowser: inBrowser,
-//   checkParameterAnd: checkParameterAnd,
-//   checkParameterOr: checkParameterOr,
-//   checkQueryParameter: checkQueryParameter,
-// }

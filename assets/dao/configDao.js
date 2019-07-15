@@ -1,8 +1,6 @@
 const path = require('path')
 const fs = require('fs')
 
-// const log = require('../utils/log')
-
 import log from '../utils/log'
 
 const repositoryPath = 'repository'
@@ -32,6 +30,3 @@ function getConfig() {
 export default {
   getConfig: getConfig,
 }
-// module.exports = {
-//   getConfig: getConfig,
-// }

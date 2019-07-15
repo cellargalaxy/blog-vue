@@ -1,5 +1,3 @@
-// const utils = require('../utils/utils')
-
 import utils from '../utils/utils'
 
 function log(level, massage) {
@@ -66,11 +64,3 @@ export default {
   error: error,
   fatal: fatal,
 }
-// module.exports = {
-//   trace: trace,
-//   debug: debug,
-//   info: info,
-//   warn: warn,
-//   error: error,
-//   fatal: fatal,
-// }

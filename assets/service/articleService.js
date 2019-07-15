@@ -1,10 +1,5 @@
 const path = require('path')
 
-// const log = require('../utils/log')
-// const configService = require('./configService')
-// const utils = require('../utils/utils')
-// const articleDao = require('../dao/articleDao')
-
 import log from '../utils/log'
 import configService from './configService'
 import utils from '../utils/utils'
@@ -176,10 +171,3 @@ export default {
   getArticle: getArticle,
   getTimeLineArticles: getTimeLineArticles,
 }
-// module.exports = {
-//   autoFlushArticle: autoFlushArticle,
-//   listArticle: listArticle,
-//   listArticlePage: listArticlePage,
-//   getArticle: getArticle,
-//   getTimeLineArticles: getTimeLineArticles,
-// }
