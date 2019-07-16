@@ -10,7 +10,9 @@
       <b-row>
         <b-col align-self="start">
           <b-badge v-for="(attribute,attributeIndex) in article.attributes" :key="attributeIndex"
-                   v-text="attribute.name+': '+attribute.value" style="margin-left: 0.1em;margin-right: 0.1em;"/>
+                   style="margin-left: 0.1em;margin-right: 0.1em;">
+            {{attribute.name+': '}}<a :href="attribute.url" class="white" target="_blank" v-text="attribute.value"/>
+          </b-badge>
         </b-col>
       </b-row>
     </b-list-group-item>

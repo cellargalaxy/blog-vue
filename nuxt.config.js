@@ -48,6 +48,10 @@ export default {
     'bootstrap-vue/nuxt',
     '@nuxtjs/markdownit',
     '@nuxtjs/sitemap',
+    ['@nuxtjs/component-cache', {
+      max: 10000,
+      maxAge: configService.getGitConfig().pullTime
+    }],
   ],
 
   /*

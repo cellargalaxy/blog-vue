@@ -21,8 +21,6 @@
 
   import articleService from '../assets/service/articleService'
   import configService from '../assets/service/configService'
-  // const articleService = require('../assets/service/articleService')
-  // const configService = require('../assets/service/configService')
 
   export default {
     name: "timeLine",
