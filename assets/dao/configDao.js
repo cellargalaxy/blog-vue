@@ -1,18 +1,19 @@
-const path = require('path')
-const fs = require('fs')
+import path from 'path'
+import fs from 'fs'
 
+import fileIO from '../utils/fileIO'
 import log from '../utils/log'
 
 const repositoryPath = 'repository'
 log.info('仓库路径: {}', repositoryPath)
 const basePath = ''
 log.info('仓库基础路径: {}', basePath)
-const repositoryBasePath = path.join(repositoryPath, basePath)
-log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, path.join(path.resolve(), repositoryBasePath))
+const repositoryBasePath = fileIO.join(repositoryPath, basePath)
+log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, fileIO.join(path.resolve(), repositoryBasePath))
 
 function getConfig() {
   try {
-    const configPath = path.join(repositoryPath, '.config', 'config.json')
+    const configPath = fileIO.join(repositoryBasePath, '.config', 'config.json')
     if (!fs.existsSync(configPath)) {
       return null
     }
@@ -22,7 +23,7 @@ function getConfig() {
       return JSON.parse(data)
     }
   } catch (e) {
-    console.log('读取配置文件发生异常: ', e)
+    log.error('读取配置文件发生异常: {}', e)
   }
   return null
 }

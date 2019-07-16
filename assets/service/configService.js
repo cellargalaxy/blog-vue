@@ -1,7 +1,25 @@
+import LRU from 'lru-cache'
+
 import configDao from '../dao/configDao'
 
-function getPageFootConfig() {
+const configKey = 'config'
+const lru = new LRU({
+  max: 1000,
+  maxAge: configDao.getConfig() && configDao.getConfig().pullTime ? configDao.getConfig().pullTime : 1000 * 60
+})
+
+
+function getConfig() {
+  if (lru.has(configKey)) {
+    return lru.get(configKey)
+  }
   const config = configDao.getConfig()
+  lru.set(configKey, config)
+  return config
+}
+
+function getPageFootConfig() {
+  const config = getConfig()
   if (config && config.pageFootConfig) {
     return config.pageFootConfig
   }
@@ -35,7 +53,7 @@ function getPageFootConfig() {
 }
 
 function getGotoConfig() {
-  const config = configDao.getConfig()
+  const config = getConfig()
   if (config && config.gotoConfig) {
     return config.gotoConfig
   }
@@ -52,7 +70,7 @@ function getGotoConfig() {
 }
 
 function getPageHeadConfig() {
-  const config = configDao.getConfig()
+  const config = getConfig()
   if (config && config.pageHeadConfig) {
     return config.pageHeadConfig
   }
@@ -64,7 +82,7 @@ function getPageHeadConfig() {
 }
 
 function getSiteConfig() {
-  const config = configDao.getConfig()
+  const config = getConfig()
   if (config && config.siteConfig) {
     return config.siteConfig
   }
@@ -79,7 +97,7 @@ function getSiteConfig() {
 }
 
 function getArticleConfig() {
-  const config = configDao.getConfig()
+  const config = getConfig()
   if (config && config.articleConfig) {
     return config.articleConfig
   }
@@ -91,7 +109,7 @@ function getArticleConfig() {
 }
 
 function getNavbarConfig() {
-  const config = configDao.getConfig()
+  const config = getConfig()
   if (config && config.navbarConfig) {
     return config.navbarConfig
   }
@@ -100,16 +118,12 @@ function getNavbarConfig() {
     "brandUrl": "/",
     "navs": [
       {
-        "text": "文章",
-        "url": "/articleList/1"
-      },
-      {
         "text": "时间轴",
         "url": "/timeLine"
       },
       {
         "text": "关于我",
-        "url": "/关于我"
+        "url": "/README"
       },
       {
         "text": "开源",
@@ -120,7 +134,7 @@ function getNavbarConfig() {
 }
 
 function getHomeConfig() {
-  const config = configDao.getConfig()
+  const config = getConfig()
   if (config && config.homeConfig) {
     return config.homeConfig
   }
@@ -152,7 +166,7 @@ function getHomeConfig() {
 }
 
 function getGitConfig() {
-  const config = configDao.getConfig()
+  const config = getConfig()
   if (config && config.gitConfig) {
     return config.gitConfig
   }
@@ -168,7 +182,7 @@ function getGitConfig() {
 }
 
 function getErrorPageConfig(statusCode) {
-  let config = configDao.getConfig()
+  let config = getConfig()
   if (config && config.errorPageConfig && config.errorPageConfig[statusCode]) {
     return config.errorPageConfig[statusCode]
   }

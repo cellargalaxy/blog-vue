@@ -11,6 +11,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/component-cache": "^1.1.5",
     "@nuxtjs/markdownit": "^1.2.5",
     "@nuxtjs/sitemap": "^1.2.0",
     "bootstrap": "^4.1.3",

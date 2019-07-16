@@ -1,89 +1,70 @@
-const path = require('path')
+import path from 'path'
+import LRU from 'lru-cache'
 
+import fileIO from '../utils/fileIO'
 import log from '../utils/log'
-import configService from './configService'
 import utils from '../utils/utils'
 import articleDao from '../dao/articleDao'
+import configService from './configService'
 
-const pullTime = configService.getGitConfig().pullTime
-log.info('文章缓存时间: {}', pullTime)
+const articleKey = 'article-'
+const articlesKey = 'articles'
+const pathArticlesKey = 'pathArticles-'
+const timeLineArticlesKey = 'timeLineArticles'
+const lru = new LRU({
+  max: 10000,
+  maxAge: configService.getGitConfig().pullTime ? configService.getGitConfig().pullTime : 1000 * 60
+})
+
 
 const repositoryPath = configService.getGitConfig().repositoryPath
 log.info('仓库路径: {}', repositoryPath)
 const basePath = configService.getGitConfig().basePath
 log.info('仓库基础路径: {}', basePath)
-const repositoryBasePath = path.join(repositoryPath, basePath)
-log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, path.join(path.resolve(), repositoryBasePath))
+const repositoryBasePath = fileIO.join(repositoryPath, basePath)
+log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, fileIO.join(path.resolve(), repositoryBasePath))
+
+const pullTime = configService.getGitConfig().pullTime
+log.info('文章缓存时间: {}', pullTime)
 
 const extension = configService.getGitConfig().extension
 const extensionRegularObject = new RegExp(extension)
 log.info('文件扩展名正则: {}', extensionRegularObject)
 
-//[{'article key': 'article value'}]
-//需要按时间排序
-let articles = []
 
-//{'articlePath': {'article key': 'article value'}}
-let pathArticleMap = {}
-
-//[{'date': 'date', 'dateString': 'dateString', 'articles': [{'article key': 'article value'}]}]
-//需要按时间排序
-let timeLineArticles = []
-
-function flushArticle() {
-  log.info('开始刷新文章')
-  const ass = articleDao.listArticle()
-
+function articles2timeLineArticles(articles) {
   //用于保存数据的临时对象
-  const pam = {}
   //{'dateString': [{'article key': 'article value'}]}
-  let tlas = {}
+  let timeLineArticles = {}
   //{'articlePath': [{'article key': 'article value'}]}
-  let otherTlas = {}
-  for (let i in ass) {
-    const article = ass[i]
-
-    pam[article.path.replace(repositoryPath, '').replace(extension, '')] = article
+  let otherTimeLineArticles = {}
+  for (let i in articles) {
+    const article = articles[i]
 
     if (article.date) {
       //有时间的文章
       const dateString = utils.formatDate(article.date, 'yyyy-MM')
-      let timeArticles = tlas[dateString]
+      let timeArticles = timeLineArticles[dateString]
       if (!timeArticles) {
         timeArticles = []
       }
       timeArticles.push(article)
-      tlas[dateString] = timeArticles
+      timeLineArticles[dateString] = timeArticles
     } else {
       //没时间的文章用路径代替
-      let articlePath = path.dirname(article.path.replace(repositoryPath, ''))
-      let timeArticles = otherTlas[articlePath]
+      let articlePath = path.dirname(article.path.replace(repositoryBasePath, ''))
+      let timeArticles = otherTimeLineArticles[articlePath]
       if (!timeArticles) {
         timeArticles = []
       }
       timeArticles.push(article)
-      otherTlas[articlePath] = timeArticles
+      otherTimeLineArticles[articlePath] = timeArticles
     }
   }
 
-  //对文章按时间排序
-  ass.sort((article1, article2) => {
-    if (!article1.date && !article2.date) {
-      return 0
-    }
-    //没有时间的排在最后
-    if (!article1.date) {
-      return 1
-    }
-    if (!article2.date) {
-      return -1
-    }
-    return article2.date.getTime() - article1.date.getTime()
-  })
-
-  //上面为了方便，tlam的数据结构并没有按照timeLineArticleMap，所以这里进行转换
-  const tmp = tlas
-  tlas = []
+  //上面为了方便，timeLineArticles的数据结构并没有按照timeLineArticleMap，所以这里进行转换
+  const tmp = timeLineArticles
+  timeLineArticles = []
   for (let dateString in tmp) {
     //某个月的文章
     const articles = tmp[dateString]
@@ -101,41 +82,89 @@ function flushArticle() {
       }
       return article2.date.getTime() - article1.date.getTime()
     })
-    tlas.push({date: new Date(dateString), dateString: dateString, articles: articles})
+    timeLineArticles.push({date: new Date(dateString), dateString: dateString, articles: articles})
   }
   //对时间线的全部月份进行排序
-  tlas.sort((timeline1, timeline2) => {
+  timeLineArticles.sort((timeline1, timeline2) => {
     return timeline2.date.getTime() - timeline1.date.getTime()
   })
-  for (let articlePath in otherTlas) {
-    const articles = otherTlas[articlePath]
-    tlas.push({dateString: articlePath, articles: articles})
+  //如果可以，对otherTimeLineArticles也进行一下排序
+  for (let articlePath in otherTimeLineArticles) {
+    const articles = otherTimeLineArticles[articlePath]
+    timeLineArticles.push({dateString: articlePath, articles: articles})
   }
 
-  articles = ass
-  pathArticleMap = pam
-  timeLineArticles = tlas
+  return timeLineArticles
 }
 
-function autoFlushArticle() {
-  try {
-    flushArticle()
-  } catch (e) {
-    log.error('自动刷新文章发生异常: {}', e)
-  } finally {
-    log.info('setTimeout调用autoFlushArticle')
-    setTimeout(autoFlushArticle, pullTime)
+function getArticle(articlePath) {
+  if (lru.has(articleKey + articlePath)) {
+    return lru.get(articleKey + articlePath)
   }
+  const article = articleDao.getArticle(articlePath)
+  if (article) {
+    lru.set(articleKey + articlePath, article)
+    return article
+  }
+  return null
+}
+
+function listArticleByPath(folderPath) {
+  if (lru.has(pathArticlesKey + folderPath)) {
+    return lru.get(pathArticlesKey + folderPath)
+  }
+  const articles = articleDao.listArticleByPath(folderPath)
+  if (articles) {
+    articles.sort((article1, article2) => {
+      if (!article1.date && !article2.date) {
+        return 0
+      }
+      //没有时间的排在最后
+      if (!article1.date) {
+        return 1
+      }
+      if (!article2.date) {
+        return -1
+      }
+      return article2.date.getTime() - article1.date.getTime()
+    })
+    lru.set(pathArticlesKey + folderPath, articles)
+    return articles
+  }
+  return []
+}
+
+function listArticlePageByPath(folderPath, pageSize, currentPage) {
+  const articles = listArticleByPath(folderPath)
+  const skipNum = (currentPage - 1) * pageSize;
+  const articlePage = (skipNum + pageSize >= articles.length) ? articles.slice(skipNum, articles.length) : articles.slice(skipNum, skipNum + pageSize);
+  return articlePage;
 }
 
 function listArticle() {
-  if (articles.length == 0) {
-    flushArticle()
+  if (lru.has(articlesKey)) {
+    return lru.get(articlesKey)
   }
-  if (!articles) {
-    return []
+  const articles = articleDao.listArticle()
+  if (articles) {
+    //对文章按时间排序
+    articles.sort((article1, article2) => {
+      if (!article1.date && !article2.date) {
+        return 0
+      }
+      //没有时间的排在最后
+      if (!article1.date) {
+        return 1
+      }
+      if (!article2.date) {
+        return -1
+      }
+      return article2.date.getTime() - article1.date.getTime()
+    })
+    lru.set(articlesKey, articles)
+    return articles
   }
-  return articles
+  return []
 }
 
 function listArticlePage(pageSize, currentPage) {
@@ -145,29 +174,22 @@ function listArticlePage(pageSize, currentPage) {
   return articlePage;
 }
 
-function getArticle(articlePath) {
-  articlePath = path.join(repositoryPath, articlePath + extension)
-  const article = articleDao.getArticle(articlePath)
-  if (article) {
-    return article
-  }
-  return null
-}
-
 function getTimeLineArticles() {
-  if (articles.length == 0) {
-    flushArticle()
+  //[{'date': 'date', 'dateString': 'dateString', 'articles': [{'article key': 'article value'}]}]
+  //需要按时间排序
+  if (lru.has(timeLineArticlesKey)) {
+    return lru.get(timeLineArticlesKey)
   }
-  if (!timeLineArticles) {
-    return []
-  }
+  const timeLineArticles = articles2timeLineArticles(listArticle())
+  lru.set(timeLineArticlesKey, timeLineArticles)
   return timeLineArticles
 }
 
 export default {
-  autoFlushArticle: autoFlushArticle,
   listArticle: listArticle,
   listArticlePage: listArticlePage,
   getArticle: getArticle,
   getTimeLineArticles: getTimeLineArticles,
+  listArticleByPath: listArticleByPath,
+  listArticlePageByPath: listArticlePageByPath,
 }

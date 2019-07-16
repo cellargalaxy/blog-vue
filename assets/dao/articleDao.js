@@ -1,6 +1,7 @@
-const path = require('path')
-const fs = require('fs')
+import path from 'path'
+import fs from 'fs'
 
+import fileIO from '../utils/fileIO'
 import log from '../utils/log'
 import utils from '../utils/utils'
 import configService from '../service/configService'
@@ -9,8 +10,8 @@ const repositoryPath = configService.getGitConfig().repositoryPath
 log.info('仓库路径: {}', repositoryPath)
 const basePath = configService.getGitConfig().basePath
 log.info('仓库基础路径: {}', basePath)
-const repositoryBasePath = path.join(repositoryPath, basePath)
-log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, path.join(path.resolve(), repositoryBasePath))
+const repositoryBasePath = fileIO.join(repositoryPath, basePath)
+log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, fileIO.join(path.resolve(), repositoryBasePath))
 
 const extension = configService.getGitConfig().extension
 const extensionRegularObject = new RegExp(extension)
@@ -24,32 +25,43 @@ const summaryLength = configService.getArticleConfig().summaryLength
 log.info('摘要长度: {}', summaryLength)
 
 function getArticle(articlePath) {
-  if (!articlePath || !fs.existsSync(articlePath)) {
+  if (!articlePath) {
+    return null
+  }
+  //避免被人拼凑其他的路径
+  articlePath = fileIO.join(repositoryBasePath, articlePath + extension)
+  if (!fs.existsSync(articlePath)) {
     return null
   }
   const stats = fs.statSync(articlePath)
   if (stats.isFile() && extensionRegularObject.test(articlePath)) {
     const data = fs.readFileSync(articlePath)
     const markdown = data.toString()
-    return fileMarkdown2Article(articlePath, markdown, repositoryBasePath, dateRegularObject, extension, summaryLength)
+    return fileMarkdown2Article(articlePath, markdown)
   }
   return null
 }
 
 function listArticle() {
+  return listArticleByPath('')
+}
+
+function listArticleByPath(folderPath) {
+  //避免被人拼凑其他的路径
+  folderPath = fileIO.join(repositoryBasePath, folderPath)
   //{'articlePath': 'markdown'}
   let fileMarkdown = {}
-  getFileMarkdownFromFolder(repositoryBasePath, fileMarkdown, extensionRegularObject)
+  getFileMarkdownFromFolder(folderPath, fileMarkdown)
 
   const articles = []
   for (let articlePath in fileMarkdown) {
-    const article = fileMarkdown2Article(articlePath, fileMarkdown[articlePath], repositoryBasePath, dateRegularObject, extension, summaryLength)
+    const article = fileMarkdown2Article(articlePath, fileMarkdown[articlePath])
     articles.push(article)
   }
   return articles
 }
 
-function getFileMarkdownFromFolder(articlePath, fileMarkdown, extensionRegularObject) {
+function getFileMarkdownFromFolder(articlePath, fileMarkdown) {
   if (!articlePath || !fs.existsSync(articlePath)) {
     log.debug('路径不存在: {}', articlePath)
     return
@@ -65,14 +77,13 @@ function getFileMarkdownFromFolder(articlePath, fileMarkdown, extensionRegularOb
     const files = fs.readdirSync(articlePath)
     for (let i = 0; i < files.length; i++) {
       if (!files[i].startsWith('.')) {
-        getFileMarkdownFromFolder(path.join(articlePath, files[i]), fileMarkdown, extensionRegularObject)
+        getFileMarkdownFromFolder(fileIO.join(articlePath, files[i]), fileMarkdown)
       }
     }
   }
 }
 
-function fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegularObject, extension, summaryLength) {
-  articlePath = articlePath.replace(/\\/g, '/')
+function fileMarkdown2Article(articlePath, markdown) {
   const article = {}
   article.path = articlePath
   article.markdown = markdown
@@ -88,7 +99,7 @@ function fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegular
   article.summary = summary
   const title = path.basename(articlePath)
   article.title = title.replace(extension, '')
-  article.url = articlePath.replace(repositoryPath, '').replace(extension, '')
+  article.url = articlePath.replace(repositoryBasePath, '').replace(extension, '')
 
   const attributes = []
 
@@ -102,11 +113,16 @@ function fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegular
     attributes.push({"name": "时间", "value": dateString})
   }
 
+  let sort = articlePath.replace(repositoryBasePath, '')
   dateString = dateRegularObject.exec(articlePath)
-  const sort = articlePath.split(dateString)[0].replace(repositoryPath, '').replace('/', '')
+  if (dateString) {
+    dateString = dateString.toString()
+    sort = sort.split(dateString)[0]
+  }
+  sort = sort.replace(path.basename(articlePath), '')
   if (sort && sort != '') {
     article.sort = sort
-    attributes.push({"name": "分类", "value": sort})
+    attributes.push({"name": "分类", "value": sort, "url": sort})
   }
 
   const wordSum = article.markdown.length
@@ -129,4 +145,5 @@ function fileMarkdown2Article(articlePath, markdown, repositoryPath, dateRegular
 export default {
   getArticle: getArticle,
   listArticle: listArticle,
+  listArticleByPath: listArticleByPath,
 }
