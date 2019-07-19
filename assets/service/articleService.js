@@ -7,6 +7,8 @@ import utils from '../utils/utils'
 import articleDao from '../dao/articleDao'
 import configService from './configService'
 
+const logger = log('articleService')
+
 const articleKey = 'article-'
 const articlesKey = 'articles'
 const pathArticlesKey = 'pathArticles-'
@@ -18,18 +20,18 @@ const lru = new LRU({
 
 
 const repositoryPath = configService.getGitConfig().repositoryPath
-log.info('仓库路径: {}', repositoryPath)
+logger.info('仓库路径: {}', repositoryPath)
 const basePath = configService.getGitConfig().basePath
-log.info('仓库基础路径: {}', basePath)
+logger.info('仓库基础路径: {}', basePath)
 const repositoryBasePath = fileIO.join(repositoryPath, basePath)
-log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, fileIO.join(path.resolve(), repositoryBasePath))
+logger.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, fileIO.join(path.resolve(), repositoryBasePath))
 
 const pullTime = configService.getGitConfig().pullTime
-log.info('文章缓存时间: {}', pullTime)
+logger.info('文章缓存时间: {}', pullTime)
 
 const extension = configService.getGitConfig().extension
 const extensionRegularObject = new RegExp(extension)
-log.info('文件扩展名正则: {}', extensionRegularObject)
+logger.info('文件扩展名正则: {}', extensionRegularObject)
 
 
 function articles2timeLineArticles(articles) {

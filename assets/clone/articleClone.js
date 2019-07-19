@@ -4,7 +4,7 @@ const path = require('path')
 
 let gitUrl = 'https://github.com/cellargalaxy/blog.git'
 let ref = 'master'
-let repositoryPath = 'repository'
+let repositoryPath = 'static/repository'
 let basePath = ''
 let repositoryBasePath = path.join(repositoryPath, basePath)
 let pullTime = 1000 * 60 * 10
@@ -182,9 +182,9 @@ function formatString(string, ...infos) {
 }
 
 function info(string, ...infos) {
-  console.log(formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' info ' + formatString(string, ...infos))
+  console.log(formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' info articleClone ' + formatString(string, ...infos))
 }
 
 function error(string, ...infos) {
-  console.log(formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' error ' + formatString(string, ...infos))
+  console.log(formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' error articleClone ' + formatString(string, ...infos))
 }

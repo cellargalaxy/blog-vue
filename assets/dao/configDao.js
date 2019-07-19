@@ -4,12 +4,14 @@ import fs from 'fs'
 import fileIO from '../utils/fileIO'
 import log from '../utils/log'
 
-const repositoryPath = 'repository'
-log.info('仓库路径: {}', repositoryPath)
+const logger = log('configDao')
+
+const repositoryPath = 'static/repository'
+logger.info('仓库路径: {}', repositoryPath)
 const basePath = ''
-log.info('仓库基础路径: {}', basePath)
+logger.info('仓库基础路径: {}', basePath)
 const repositoryBasePath = fileIO.join(repositoryPath, basePath)
-log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, fileIO.join(path.resolve(), repositoryBasePath))
+logger.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, fileIO.join(path.resolve(), repositoryBasePath))
 
 function getConfig() {
   try {
@@ -23,7 +25,7 @@ function getConfig() {
       return JSON.parse(data)
     }
   } catch (e) {
-    log.error('读取配置文件发生异常: {}', e)
+    logger.error('读取配置文件发生异常: {}', e)
   }
   return null
 }

@@ -59,7 +59,7 @@
   .goto {
     position: fixed;
     bottom: 3em;
-    right: 1em;
+    right: 2em;
     z-index: 9999;
   }
 

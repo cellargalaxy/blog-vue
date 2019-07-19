@@ -1,28 +1,7 @@
 import utils from '../utils/utils'
 
-function log(level, massage) {
-  console.log(utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' ' + level + ' ' + massage)
-}
-
-const logger = {}
-
-logger.trace = function (massage) {
-  log('trace', massage)
-}
-logger.debug = function (massage) {
-  log('debug', massage)
-}
-logger.info = function (massage) {
-  log('info', massage)
-}
-logger.warn = function (massage) {
-  log('warn', massage)
-}
-logger.error = function (massage) {
-  log('error', massage)
-}
-logger.fatal = function (massage) {
-  log('fatal', massage)
+function log(level, name, massage) {
+  console.log(utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' ' + level + ' ' + name + ' ' + massage)
 }
 
 function formatString(string, ...infos) {
@@ -32,35 +11,27 @@ function formatString(string, ...infos) {
   return string
 }
 
-function trace(string, ...infos) {
-  logger.trace(formatString(string, ...infos))
-}
 
-function debug(string, ...infos) {
-  logger.debug(formatString(string, ...infos))
-}
-
-function info(string, ...infos) {
-  logger.info(formatString(string, ...infos))
-}
-
-function warn(string, ...infos) {
-  logger.warn(formatString(string, ...infos))
-}
-
-function error(string, ...infos) {
-  logger.error(formatString(string, ...infos))
-}
-
-function fatal(string, ...infos) {
-  logger.fatal(formatString(string, ...infos))
-}
-
-export default {
-  trace: trace,
-  debug: debug,
-  info: info,
-  warn: warn,
-  error: error,
-  fatal: fatal,
+export default function (name) {
+  return {
+    name: name,
+    trace: function (string, ...infos) {
+      log('trace', name, formatString(string, ...infos))
+    },
+    debug: function debug(string, ...infos) {
+      log('trace', name, formatString(string, ...infos))
+    },
+    info: function (string, ...infos) {
+      log('trace', name, formatString(string, ...infos))
+    },
+    warn: function (string, ...infos) {
+      log('trace', name, formatString(string, ...infos))
+    },
+    error: function (string, ...infos) {
+      log('trace', name, formatString(string, ...infos))
+    },
+    fatal: function (string, ...infos) {
+      log('trace', name, formatString(string, ...infos))
+    }
+  }
 }

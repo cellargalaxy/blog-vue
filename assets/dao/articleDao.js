@@ -6,23 +6,25 @@ import log from '../utils/log'
 import utils from '../utils/utils'
 import configService from '../service/configService'
 
+const logger = log('articleDao')
+
 const repositoryPath = configService.getGitConfig().repositoryPath
-log.info('仓库路径: {}', repositoryPath)
+logger.info('仓库路径: {}', repositoryPath)
 const basePath = configService.getGitConfig().basePath
-log.info('仓库基础路径: {}', basePath)
+logger.info('仓库基础路径: {}', basePath)
 const repositoryBasePath = fileIO.join(repositoryPath, basePath)
-log.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, fileIO.join(path.resolve(), repositoryBasePath))
+logger.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, fileIO.join(path.resolve(), repositoryBasePath))
 
 const extension = configService.getGitConfig().extension
 const extensionRegularObject = new RegExp(extension)
-log.info('文件扩展名正则: {}', extensionRegularObject)
+logger.info('文件扩展名正则: {}', extensionRegularObject)
 
 const dateRegular = configService.getGitConfig().dateRegular
 const dateRegularObject = new RegExp(dateRegular)
-log.info('文件日期正则: {}', dateRegularObject)
+logger.info('文件日期正则: {}', dateRegularObject)
 
 const summaryLength = configService.getArticleConfig().summaryLength
-log.info('摘要长度: {}', summaryLength)
+logger.info('摘要长度: {}', summaryLength)
 
 function getArticle(articlePath) {
   if (!articlePath) {
@@ -63,7 +65,7 @@ function listArticleByPath(folderPath) {
 
 function getFileMarkdownFromFolder(articlePath, fileMarkdown) {
   if (!articlePath || !fs.existsSync(articlePath)) {
-    log.debug('路径不存在: {}', articlePath)
+    logger.debug('路径不存在: {}', articlePath)
     return
   }
   const stats = fs.statSync(articlePath)
