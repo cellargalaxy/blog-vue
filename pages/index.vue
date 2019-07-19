@@ -40,7 +40,6 @@
   import goto from '../components/goto'
 
   import configService from '../assets/service/configService'
-  // const configService = require('../assets/service/configService')
 
   export default {
     name: "index",

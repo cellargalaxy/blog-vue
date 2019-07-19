@@ -99,7 +99,7 @@ function fileMarkdown2Article(articlePath, markdown) {
   article.summary = summary
   const title = path.basename(articlePath)
   article.title = title.replace(extension, '')
-  article.url = articlePath.replace(repositoryBasePath, '').replace(extension, '')
+  article.url = '/article' + articlePath.replace(repositoryBasePath, '').replace(extension, '')
 
   const attributes = []
 
@@ -122,7 +122,7 @@ function fileMarkdown2Article(articlePath, markdown) {
   sort = sort.replace(path.basename(articlePath), '')
   if (sort && sort != '') {
     article.sort = sort
-    attributes.push({"name": "分类", "value": sort, "url": sort})
+    attributes.push({"name": "分类", "value": sort, "url": '/article' + sort})
   }
 
   const wordSum = article.markdown.length

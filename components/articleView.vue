@@ -11,7 +11,7 @@
         <b-col align-self="start">
           <b-badge v-for="(attribute,attributeIndex) in article.attributes" :key="attributeIndex"
                    style="margin-left: 0.1em;margin-right: 0.1em;">
-            {{attribute.name+': '}}<a :href="attribute.url" class="white" target="_blank" v-text="attribute.value"/>
+            {{attribute.name+': '}}<a :href="attribute.url" class="white" v-text="attribute.value"/>
           </b-badge>
         </b-col>
       </b-row>

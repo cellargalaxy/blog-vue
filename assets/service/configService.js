@@ -123,7 +123,7 @@ function getNavbarConfig() {
       },
       {
         "text": "关于我",
-        "url": "/README"
+        "url": "/article/README"
       },
       {
         "text": "开源",
