@@ -19,19 +19,19 @@ export default function (name) {
       log('trace', name, formatString(string, ...infos))
     },
     debug: function debug(string, ...infos) {
-      log('trace', name, formatString(string, ...infos))
+      log('debug', name, formatString(string, ...infos))
     },
     info: function (string, ...infos) {
-      log('trace', name, formatString(string, ...infos))
+      log('info', name, formatString(string, ...infos))
     },
     warn: function (string, ...infos) {
-      log('trace', name, formatString(string, ...infos))
+      log('warn', name, formatString(string, ...infos))
     },
     error: function (string, ...infos) {
-      log('trace', name, formatString(string, ...infos))
+      log('error', name, formatString(string, ...infos))
     },
     fatal: function (string, ...infos) {
-      log('trace', name, formatString(string, ...infos))
+      log('fatal', name, formatString(string, ...infos))
     }
   }
 }
