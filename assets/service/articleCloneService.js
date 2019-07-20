@@ -19,8 +19,11 @@ logger.info('仓库路径: {}', repositoryPath)
 const gitUrl = process.env.BLOG_VUE_GIT_URL != undefined ? process.env.BLOG_VUE_GIT_URL : bootConfig.gitUrl
 logger.info('gitUrl: {}', '***' + gitUrl.split('/')[gitUrl.split('/').length - 1])
 
-const ref = process.env.BLOG_VUE_REF != undefined ? process.env.BLOG_VUE_REF : bootConfig.ref
+const ref = process.env.BLOG_VUE_GIT_REF != undefined ? process.env.BLOG_VUE_GIT_REF : bootConfig.ref
 logger.info('git分支: {}', ref)
+
+const username = process.env.BLOG_VUE_GIT_USERNAME != undefined ? process.env.BLOG_VUE_GIT_USERNAME : bootConfig.username
+const password = process.env.BLOG_VUE_GIT_PASSWORD != undefined ? process.env.BLOG_VUE_GIT_PASSWORD : bootConfig.password
 
 const flushTime = process.env.BLOG_VUE_FLUSH_TIME != undefined ? process.env.BLOG_VUE_FLUSH_TIME : bootConfig.flushTime
 logger.info('git刷新时间（毫秒）: {}', flushTime)
@@ -50,6 +53,8 @@ function cloneRepository(auto) {
       'dir': repositoryPath,
       'url': gitUrl,
       'ref': ref,
+      'username': username,
+      'password': password,
       'singleBranch': true,
       'depth': 1,
     }).then(function () {
@@ -72,6 +77,8 @@ function pullRepository(auto) {
       'fs': fs,
       'dir': repositoryPath,
       'ref': ref,
+      'username': username,
+      'password': password,
       'singleBranch': true,
     }).then(function () {
       logger.info('成功更新仓库')
