@@ -171,11 +171,6 @@ function getGitConfig() {
     return config.gitConfig
   }
   return {
-    "gitUrl": "https://github.com/cellargalaxy/blog.git",
-    "ref": "master",
-    "basePath": "",
-    "repositoryPath": "static/repository",
-    "pullTime": 1000 * 60 * 10,
     "extension": ".md",
     "dateRegular": "/\\d{4}-\\d{2}\\/\\d{2}/"
   }
