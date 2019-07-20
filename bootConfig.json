@@ -3,6 +3,6 @@
   "ref": "master",
   "username": "",
   "password": "",
-  "flushTime": 6000,
+  "flushTime": 600000,
   "repositoryPath": "static/repository"
 }
