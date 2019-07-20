@@ -5,15 +5,12 @@ import fileIO from '../utils/fileIO'
 import log from '../utils/log'
 import utils from '../utils/utils'
 import configService from '../service/configService'
+import bootConfig from '../../bootConfig'
 
 const logger = log('articleDao')
 
-const repositoryPath = configService.getGitConfig().repositoryPath
+const repositoryPath = bootConfig.repositoryPath
 logger.info('仓库路径: {}', repositoryPath)
-const basePath = configService.getGitConfig().basePath
-logger.info('仓库基础路径: {}', basePath)
-const repositoryBasePath = fileIO.join(repositoryPath, basePath)
-logger.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, fileIO.join(path.resolve(), repositoryBasePath))
 
 const extension = configService.getGitConfig().extension
 const extensionRegularObject = new RegExp(extension)
@@ -31,7 +28,7 @@ function getArticle(articlePath) {
     return null
   }
   //避免被人拼凑其他的路径
-  articlePath = fileIO.join(repositoryBasePath, articlePath + extension)
+  articlePath = fileIO.join(repositoryPath, articlePath + extension)
   if (!fs.existsSync(articlePath)) {
     return null
   }
@@ -50,7 +47,7 @@ function listArticle() {
 
 function listArticleByPath(folderPath) {
   //避免被人拼凑其他的路径
-  folderPath = fileIO.join(repositoryBasePath, folderPath)
+  folderPath = fileIO.join(repositoryPath, folderPath)
   //{'articlePath': 'markdown'}
   let fileMarkdown = {}
   getFileMarkdownFromFolder(folderPath, fileMarkdown)
@@ -101,7 +98,7 @@ function fileMarkdown2Article(articlePath, markdown) {
   article.summary = summary
   const title = path.basename(articlePath)
   article.title = title.replace(extension, '')
-  article.url = '/article' + articlePath.replace(repositoryBasePath, '').replace(extension, '')
+  article.url = '/article' + articlePath.replace(repositoryPath, '').replace(extension, '')
 
   const attributes = []
 
@@ -115,7 +112,7 @@ function fileMarkdown2Article(articlePath, markdown) {
     attributes.push({"name": "时间", "value": dateString})
   }
 
-  let sort = articlePath.replace(repositoryBasePath, '')
+  let sort = articlePath.replace(repositoryPath, '')
   dateString = dateRegularObject.exec(articlePath)
   if (dateString) {
     dateString = dateString.toString()

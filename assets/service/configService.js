@@ -1,11 +1,18 @@
 import LRU from 'lru-cache'
 
 import configDao from '../dao/configDao'
+import bootConfig from '../../bootConfig'
+import log from "../utils/log";
+
+const logger = log('configService')
+
+const flushTime = bootConfig.flushTime
+logger.info('文章缓存时间: {}', flushTime)
 
 const configKey = 'config'
 const lru = new LRU({
   max: 1000,
-  maxAge: configDao.getConfig() && configDao.getConfig().pullTime ? configDao.getConfig().pullTime : 1000 * 60
+  maxAge: flushTime
 })
 
 
@@ -87,12 +94,12 @@ function getSiteConfig() {
     return config.siteConfig
   }
   return {
-    "siteUrl": "http://localhost",
+    "siteUrl": "http://127.0.0.1:3000",
     "siteName": "名无の窝",
     "faviconUrl": "https://i.loli.net/2019/07/09/5d2484e68fddd81209.jpg",
     "description": "名无の窝",
-    "globalCssUrl": "/css/global.css",
-    "globalJsUrl": "/js/global.js"
+    "globalCssUrl": "/repository/.config/css/global.css",
+    "globalJsUrl": "/repository/.config/js/global.js"
   }
 }
 
@@ -117,6 +124,10 @@ function getNavbarConfig() {
     "brandText": "名无の窝",
     "brandUrl": "/",
     "navs": [
+      {
+        "text": "文章",
+        "url": "/article"
+      },
       {
         "text": "时间轴",
         "url": "/timeLine"

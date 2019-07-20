@@ -2,5 +2,5 @@
 rm -rf node_modules
 rm -rf .nuxt
 npm i
-node articleClone.js false
+node cloneArticle.js false
 npm run build

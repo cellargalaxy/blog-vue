@@ -1,13 +1,18 @@
 import path from 'path'
 import LRU from 'lru-cache'
-
-import fileIO from '../utils/fileIO'
 import log from '../utils/log'
 import utils from '../utils/utils'
 import articleDao from '../dao/articleDao'
 import configService from './configService'
+import bootConfig from '../../bootConfig'
 
 const logger = log('articleService')
+
+const repositoryPath = bootConfig.repositoryPath
+logger.info('仓库路径: {}', repositoryPath)
+
+const flushTime = bootConfig.flushTime
+logger.info('文章缓存时间: {}', flushTime)
 
 const articleKey = 'article-'
 const articlesKey = 'articles'
@@ -15,19 +20,8 @@ const pathArticlesKey = 'pathArticles-'
 const timeLineArticlesKey = 'timeLineArticles'
 const lru = new LRU({
   max: 10000,
-  maxAge: configService.getGitConfig().pullTime ? configService.getGitConfig().pullTime : 1000 * 60
+  maxAge: flushTime
 })
-
-
-const repositoryPath = configService.getGitConfig().repositoryPath
-logger.info('仓库路径: {}', repositoryPath)
-const basePath = configService.getGitConfig().basePath
-logger.info('仓库基础路径: {}', basePath)
-const repositoryBasePath = fileIO.join(repositoryPath, basePath)
-logger.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, fileIO.join(path.resolve(), repositoryBasePath))
-
-const pullTime = configService.getGitConfig().pullTime
-logger.info('文章缓存时间: {}', pullTime)
 
 const extension = configService.getGitConfig().extension
 const extensionRegularObject = new RegExp(extension)
@@ -54,7 +48,7 @@ function articles2timeLineArticles(articles) {
       timeLineArticles[dateString] = timeArticles
     } else {
       //没时间的文章用路径代替
-      let articlePath = path.dirname(article.path.replace(repositoryBasePath, ''))
+      let articlePath = path.dirname(article.path.replace(repositoryPath, ''))
       let timeArticles = otherTimeLineArticles[articlePath]
       if (!timeArticles) {
         timeArticles = []

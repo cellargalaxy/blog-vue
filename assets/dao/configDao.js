@@ -1,21 +1,17 @@
-import path from 'path'
 import fs from 'fs'
 
 import fileIO from '../utils/fileIO'
 import log from '../utils/log'
+import bootConfig from '../../bootConfig'
 
 const logger = log('configDao')
 
-const repositoryPath = 'static/repository'
+const repositoryPath = bootConfig.repositoryPath
 logger.info('仓库路径: {}', repositoryPath)
-const basePath = ''
-logger.info('仓库基础路径: {}', basePath)
-const repositoryBasePath = fileIO.join(repositoryPath, basePath)
-logger.info('仓库完整基础路径: {}, 即: {}', repositoryBasePath, fileIO.join(path.resolve(), repositoryBasePath))
 
 function getConfig() {
   try {
-    const configPath = fileIO.join(repositoryBasePath, '.config', 'config.json')
+    const configPath = fileIO.join(repositoryPath, '.config', 'config.json')
     if (!fs.existsSync(configPath)) {
       return null
     }

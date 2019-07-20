@@ -5,13 +5,14 @@
 
     <b-container>
       <b-row align-v="center" class="text-center" style="height: 100vh">
-        <b-col>
+        <b-col lg="2" md="1" sm="0" xl="2"/>
+        <b-col lg="8" md="10" sm="12" xl="8">
 
-          <h2 :style="{'font-size': fontSize,'font-style':fontStyle,'text-shadow':textShadow}" @mouseenter="mouseenter"
+          <h1 :style="{'font-size': fontSize,'font-style':fontStyle,'text-shadow':textShadow}" @mouseenter="mouseenter"
               @mouseleave="mouseleave" class="white"
               v-if="homeConfig.brandHello">
             <b>{{homeConfig.brandHello}}</b>
-          </h2>
+          </h1>
           <b-card class="translucent-black"
                   v-if="(homeConfig.brandTexts&&homeConfig.brandTexts.length>0)||(homeConfig.navs&&homeConfig.navs.length>0)">
             <p :key="brandTextsIndex"
@@ -27,6 +28,7 @@
           </b-card>
 
         </b-col>
+        <b-col lg="2" md="1" sm="0" xl="2"/>
       </b-row>
     </b-container>
 
@@ -58,7 +60,7 @@
     },
     computed: {
       fontSize: function () {
-        return (100 / this.countStringLength(this.homeConfig.brandHello)) + 'vw'
+        return ''//(100 / this.countStringLength(this.homeConfig.brandHello)) + 'vw'
       },
       fontStyle: function () {
         return this.isItalic ? 'italic' : 'normal'

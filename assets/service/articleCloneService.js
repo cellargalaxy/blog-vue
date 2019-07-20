@@ -2,7 +2,7 @@ const git = require("isomorphic-git")
 const fs = require('fs')
 const path = require('path')
 
-const bootConfig = require('./bootConfig')
+const bootConfig = require('../../bootConfig')
 
 const logger = {
   info: function (string, ...infos) {
@@ -13,19 +13,17 @@ const logger = {
   },
 }
 
-const repositoryPath = 'static/repository'
+const repositoryPath = bootConfig.repositoryPath
 logger.info('仓库路径: {}', repositoryPath)
 
 const gitUrl = process.env.BLOG_VUE_GIT_URL != undefined ? process.env.BLOG_VUE_GIT_URL : bootConfig.gitUrl
-logger.info('gitUrl: {}', gitUrl)
+logger.info('gitUrl: {}', '***' + gitUrl.split('/')[gitUrl.split('/').length - 1])
 
 const ref = process.env.BLOG_VUE_REF != undefined ? process.env.BLOG_VUE_REF : bootConfig.ref
 logger.info('git分支: {}', ref)
 
 const flushTime = process.env.BLOG_VUE_FLUSH_TIME != undefined ? process.env.BLOG_VUE_FLUSH_TIME : bootConfig.flushTime
 logger.info('git刷新时间（毫秒）: {}', flushTime)
-
-autoPullRepository(process.argv[2] != undefined && process.argv[2] != null ? JSON.parse(process.argv[2]) : false)
 
 function autoPullRepository(auto) {
   try {
@@ -155,3 +153,5 @@ function formatString(string, ...infos) {
 function log(level, name, massage) {
   console.log(formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' ' + level + ' ' + name + ' ' + massage)
 }
+
+exports.autoPullRepository = autoPullRepository

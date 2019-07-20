@@ -1,0 +1,6 @@
+{
+  "gitUrl": "https://github.com/cellargalaxy/blog.git",
+  "ref": "master",
+  "flushTime": 6000,
+  "repositoryPath": "static/repository"
+}
