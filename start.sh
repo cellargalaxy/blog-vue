@@ -1,3 +1,7 @@
 #!/bin/bash
-ps -ef | grep blog-vue | grep -v grep  | cut -c 9-15 | xargs kill -s 9
+pids=`ps -ef | grep blog-vue | grep -v grep  | cut -c 9-15`
+for pid in $pids
+do
+    kill -s 9 $pid
+done
 nohup npm start >start.log 2>&1 &
