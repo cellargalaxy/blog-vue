@@ -16,6 +16,7 @@ export default {
       {hid: 'description', name: 'description', content: configService.getSiteConfig().description}
     ],
     script: [
+      {src: 'https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js'},
       {src: configService.getSiteConfig().globalJsUrl},
     ],
     link: [
