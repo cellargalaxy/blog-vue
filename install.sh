@@ -14,7 +14,7 @@ read -p "please enter username(optional):" username
 if [ -z $username ];then
     username=""
 fi
-read -p "please enter password(optional):" password
+read -s -p "please enter password(optional):" password
 if [ -z $password ];then
     password=""
 fi
@@ -23,11 +23,11 @@ if [ -z $flushTime ];then
     flushTime="600000"
 fi
 echo '{
-  "gitUrl": "'+$gitUrl+'",
-  "ref": "'+$ref+'",
-  "username": "'+$username+'",
-  "password": "'+$password+'",
-  "flushTime": '+$flushTime+',
+  "gitUrl": "'$gitUrl'",
+  "ref": "'$ref'",
+  "username": "'$username'",
+  "password": "'$password'",
+  "flushTime": '$flushTime',
   "repositoryPath": "static/repository"
 }' > bootConfig.json
 rm -rf node_modules
