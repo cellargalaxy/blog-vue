@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 if [ "$1"x = "start"x ]; then
     start
+    return
 fi
 if [ "$1"x = "stop"x ]; then
     stop
+    return
 fi
 if [ "status"x = "status"x ]; then
     start
+    return
 fi
+echo 'please input type:start,stop,status'
 
 function start() {
     stop

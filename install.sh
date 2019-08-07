@@ -22,14 +22,17 @@ read -p "please enter flushTime(default:600000:10min):" flushTime
 if [ -z $flushTime ];then
     flushTime="600000"
 fi
-echo '{
+bootConfig='{
   "gitUrl": "'$gitUrl'",
   "ref": "'$ref'",
   "username": "'$username'",
   "password": "'$password'",
   "flushTime": '$flushTime',
   "repositoryPath": "static/repository"
-}' > bootConfig.json
+}'
+echo $bootConfig
+echo 'boot config,input any key go on,or control+c over'
+echo $bootConfig > bootConfig.json
 rm -rf node_modules
 rm -rf .nuxt
 npm i
