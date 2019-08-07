@@ -29,11 +29,10 @@ function status() {
 
 if [ "$1"x = "start"x ]; then
     start
-fi
-if [ "$1"x = "stop"x ]; then
+elif [ "$1"x = "stop"x ]; then
     stop
-fi
-if [ "$1"x = "status"x ]; then
+elif [ "$1"x = "status"x ]; then
     status
+else
+    echo 'please input type:start,stop,status'
 fi
-echo 'please input type:start,stop,status'
