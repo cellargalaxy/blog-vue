@@ -1,15 +1,4 @@
 #!/usr/bin/env bash
-if [ "$1"x = "start"x ]; then
-    start
-fi
-if [ "$1"x = "stop"x ]; then
-    stop
-fi
-if [ "$1"x = "status"x ]; then
-    status
-fi
-echo 'please input type:start,stop,status'
-
 function start() {
     stop
     pwd=`pwd`
@@ -37,3 +26,14 @@ function status() {
     pids=`ps -ef | grep $pwd | grep -v grep  | cut -c 9-15`
     echo $pwd' process: '$pids
 }
+
+if [ "$1"x = "start"x ]; then
+    start
+fi
+if [ "$1"x = "stop"x ]; then
+    stop
+fi
+if [ "$1"x = "status"x ]; then
+    status
+fi
+echo 'please input type:start,stop,status'
