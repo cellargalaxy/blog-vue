@@ -32,6 +32,7 @@ bootConfig='{
 }'
 echo $bootConfig
 echo 'boot config,input any key go on,or control+c over'
+read
 echo $bootConfig > bootConfig.json
 rm -rf node_modules
 rm -rf .nuxt
