@@ -126,7 +126,7 @@ function getNavbarConfig() {
     "navs": [
       {
         "text": "文章",
-        "url": "/article"
+        "url": "/article/"
       },
       {
         "text": "时间轴",
