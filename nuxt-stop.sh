@@ -1,6 +1,7 @@
 #!/bin/bash
 echo 'search blog-vue process'
-pids=`ps -ef | grep blog-vue | grep -v grep  | cut -c 9-15`
+pwd=`pwd`
+pids=`ps -ef | grep $pwd | grep -v grep  | cut -c 9-15`
 echo 'will kill blog-vue process: '$pids
 for pid in $pids
 do
