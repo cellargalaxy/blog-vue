@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 while :
 do
     read -p "please enter git url(required):" gitUrl
