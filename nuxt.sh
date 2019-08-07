@@ -5,8 +5,8 @@ fi
 if [ "$1"x = "stop"x ]; then
     stop
 fi
-if [ "status"x = "status"x ]; then
-    start
+if [ "$1"x = "status"x ]; then
+    status
 fi
 echo 'please input type:start,stop,status'
 
