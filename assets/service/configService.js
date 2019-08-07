@@ -1,12 +1,12 @@
 import LRU from 'lru-cache'
 
 import configDao from '../dao/configDao'
-import bootConfig from '../../bootConfig'
+import config from '../config'
 import log from "../utils/log";
 
 const logger = log('configService')
 
-const flushTime = bootConfig.flushTime
+const flushTime = config.flushTime
 logger.info('文章缓存时间: {}', flushTime)
 
 const configKey = 'config'

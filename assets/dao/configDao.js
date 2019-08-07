@@ -2,11 +2,11 @@ import fs from 'fs'
 
 import fileIO from '../utils/fileIO'
 import log from '../utils/log'
-import bootConfig from '../../bootConfig'
+import config from '../config'
 
 const logger = log('configDao')
 
-const repositoryPath = bootConfig.repositoryPath
+const repositoryPath = config.repositoryPath
 logger.info('仓库路径: {}', repositoryPath)
 
 function getConfig() {

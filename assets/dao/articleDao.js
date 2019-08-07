@@ -5,11 +5,11 @@ import fileIO from '../utils/fileIO'
 import log from '../utils/log'
 import utils from '../utils/utils'
 import configService from '../service/configService'
-import bootConfig from '../../bootConfig'
+import config from '../config'
 
 const logger = log('articleDao')
 
-const repositoryPath = bootConfig.repositoryPath
+const repositoryPath = config.repositoryPath
 logger.info('仓库路径: {}', repositoryPath)
 
 const extension = configService.getGitConfig().extension

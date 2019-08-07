@@ -1,6 +1,6 @@
 import configService from './assets/service/configService'
 import articleService from './assets/service/articleService'
-import bootConfig from './bootConfig'
+import config from './assets/config'
 
 export default {
   mode: 'universal',
@@ -52,7 +52,7 @@ export default {
     '@nuxtjs/sitemap',
     ['@nuxtjs/component-cache', {
       max: 10000,
-      maxAge: bootConfig.flushTime
+      maxAge: config.flushTime
     }],
   ],
 
@@ -100,7 +100,7 @@ export default {
     hostname: configService.getSiteConfig().siteUrl,
     path: '/sitemap.xml',
     gzip: true,
-    cacheTime: bootConfig.flushTime,
+    cacheTime: config.flushTime,
     generate: false, // Enable me when using nuxt generate
     exclude: [],
     routes(callback) {

@@ -2,6 +2,7 @@ const git = require("isomorphic-git")
 const fs = require('fs')
 const path = require('path')
 
+const config = require('../config')
 const bootConfig = require('../../bootConfig')
 
 const logger = {
@@ -13,8 +14,11 @@ const logger = {
   },
 }
 
-const repositoryPath = bootConfig.repositoryPath
+const repositoryPath = config.repositoryPath
 logger.info('仓库路径: {}', repositoryPath)
+
+const flushTime = process.env.BLOG_VUE_FLUSH_TIME != undefined ? process.env.BLOG_VUE_FLUSH_TIME : config.flushTime
+logger.info('git刷新时间（毫秒）: {}', flushTime)
 
 const gitUrl = process.env.BLOG_VUE_GIT_URL != undefined ? process.env.BLOG_VUE_GIT_URL : bootConfig.gitUrl
 logger.info('gitUrl: {}', '***' + gitUrl.split('/')[gitUrl.split('/').length - 1])
@@ -24,9 +28,6 @@ logger.info('git分支: {}', ref)
 
 const username = process.env.BLOG_VUE_GIT_USERNAME != undefined ? process.env.BLOG_VUE_GIT_USERNAME : bootConfig.username
 const password = process.env.BLOG_VUE_GIT_PASSWORD != undefined ? process.env.BLOG_VUE_GIT_PASSWORD : bootConfig.password
-
-const flushTime = process.env.BLOG_VUE_FLUSH_TIME != undefined ? process.env.BLOG_VUE_FLUSH_TIME : bootConfig.flushTime
-logger.info('git刷新时间（毫秒）: {}', flushTime)
 
 function autoPullRepository(auto) {
   try {

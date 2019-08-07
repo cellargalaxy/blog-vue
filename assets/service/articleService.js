@@ -4,14 +4,14 @@ import log from '../utils/log'
 import utils from '../utils/utils'
 import articleDao from '../dao/articleDao'
 import configService from './configService'
-import bootConfig from '../../bootConfig'
+import config from '../config'
 
 const logger = log('articleService')
 
-const repositoryPath = bootConfig.repositoryPath
+const repositoryPath = config.repositoryPath
 logger.info('仓库路径: {}', repositoryPath)
 
-const flushTime = bootConfig.flushTime
+const flushTime = config.flushTime
 logger.info('文章缓存时间: {}', flushTime)
 
 const articleKey = 'article-'
