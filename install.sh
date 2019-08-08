@@ -1,29 +1,38 @@
 #!/usr/bin/env bash
-while :
-do
-    read -p "please enter git url(required):" gitUrl
-    if [ ! -z $gitUrl ];then
-        break
+bootConfigPath="bootConfig.json"
+
+if [ ! -f $bootConfigPath ]; then
+    echo 'bootConfig not exist'
+    while :
+    do
+        read -p "please enter git url(required):" gitUrl
+        if [ ! -z $gitUrl ];then
+            break
+        fi
+    done
+    read -p "please enter git ref(default:master):" ref
+    if [ -z $ref ];then
+        ref="master"
     fi
-done
-read -p "please enter git ref(default:master):" ref
-if [ -z $ref ];then
-    ref="master"
+    read -p "please enter username(optional):" username
+    if [ -z $username ];then
+        username=""
+    fi
+    read -s -p "please enter password(optional):" password
+    if [ -z $password ];then
+        password=""
+    fi
+    bootConfig='{
+      "gitUrl": "'$gitUrl'",
+      "ref": "'$ref'",
+      "username": "'$username'",
+      "password": "'$password'"
+    }'
+else
+    echo 'bootConfig exist'
+    bootConfig=`cat $bootConfigPath`
 fi
-read -p "please enter username(optional):" username
-if [ -z $username ];then
-    username=""
-fi
-read -s -p "please enter password(optional):" password
-if [ -z $password ];then
-    password=""
-fi
-bootConfig='{
-  "gitUrl": "'$gitUrl'",
-  "ref": "'$ref'",
-  "username": "'$username'",
-  "password": "'$password'"
-}'
+
 echo $bootConfig
 echo 'boot config,input any key go on,or control+c over'
 read
