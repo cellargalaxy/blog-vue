@@ -10,7 +10,7 @@ function start() {
 function stop() {
     pwd=`pwd`
     echo 'search clone git process: '$pwd
-    pids=`ps -ef | grep $pwd | grep -v grep  | cut -c 9-15`
+    pids=`ps -ef | grep $pwd | grep cloneArticle.js | grep -v grep  | cut -c 9-15`
     echo 'will kill clone git process: '$pids
     for pid in $pids
     do
@@ -23,7 +23,7 @@ function stop() {
 function status() {
     pwd=`pwd`
     echo 'search clone git process: '$pid
-    pids=`ps -ef | grep $pwd | grep -v grep  | cut -c 9-15`
+    pids=`ps -ef | grep $pwd | grep cloneArticle.js | grep -v grep  | cut -c 9-15`
     echo 'clone git process: '$pids
 }
 

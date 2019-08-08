@@ -10,7 +10,7 @@ function start() {
 function stop() {
     pwd=`pwd`
     echo 'search '$pwd' process'
-    pids=`ps -ef | grep $pwd | grep -v grep  | cut -c 9-15`
+    pids=`ps -ef | grep $pwd | grep node_modules | grep -v grep  | cut -c 9-15`
     echo 'will kill '$pwd' process: '$pids
     for pid in $pids
     do
@@ -23,7 +23,7 @@ function stop() {
 function status() {
     pwd=`pwd`
     echo 'search '$pwd' process'
-    pids=`ps -ef | grep $pwd | grep -v grep  | cut -c 9-15`
+    pids=`ps -ef | grep $pwd | grep node_modules | grep -v grep  | cut -c 9-15`
     echo $pwd' process: '$pids
 }
 
