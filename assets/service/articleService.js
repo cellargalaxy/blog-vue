@@ -150,6 +150,7 @@ function listRoutes() {
   if (!pageSize) {
     pageSize = 10
   }
+  sorts['/'] = articles.length
   for (let sort in sorts) {
     let sum = sorts[sort] / pageSize
     if (sorts[sort] % pageSize > 0) {
