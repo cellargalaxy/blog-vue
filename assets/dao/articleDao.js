@@ -2,38 +2,23 @@ import path from 'path'
 import fs from 'fs'
 
 import fileIO from '../utils/fileIO'
-import log from '../utils/log'
 import utils from '../utils/utils'
 import configService from '../service/configService'
 import config from '../config'
 
-const logger = log('articleDao')
-
 const repositoryPath = config.repositoryPath
-logger.info('仓库路径: {}', repositoryPath)
-
 const extension = configService.getGitConfig().extension
-const extensionRegularObject = new RegExp(extension)
-logger.info('文件扩展名正则: {}', extensionRegularObject)
-
 const dateRegular = configService.getGitConfig().dateRegular
 const dateRegularObject = new RegExp(dateRegular)
-logger.info('文件日期正则: {}', dateRegularObject)
-
 const summaryLength = configService.getArticleConfig().summaryLength
-logger.info('摘要长度: {}', summaryLength)
 
 function getArticle(articlePath) {
-  if (!articlePath) {
-    return null
-  }
   //避免被人拼凑其他的路径
   articlePath = fileIO.join(repositoryPath, articlePath + extension)
-  if (!fs.existsSync(articlePath)) {
+  if (!fileIO.exists(articlePath)) {
     return null
   }
-  const stats = fs.statSync(articlePath)
-  if (stats.isFile() && extensionRegularObject.test(articlePath)) {
+  if (articlePath.endsWith(extension) && fs.statSync(articlePath).isFile()) {
     const data = fs.readFileSync(articlePath)
     const markdown = data.toString()
     return fileMarkdown2Article(articlePath, markdown)
@@ -41,7 +26,7 @@ function getArticle(articlePath) {
   return null
 }
 
-function listArticle() {
+function listAllArticle() {
   return listArticleByPath('')
 }
 
@@ -61,12 +46,11 @@ function listArticleByPath(folderPath) {
 }
 
 function getFileMarkdownFromFolder(articlePath, fileMarkdown) {
-  if (!articlePath || !fs.existsSync(articlePath)) {
-    logger.debug('路径不存在: {}', articlePath)
+  if (!articlePath || !fileIO.exists(articlePath)) {
     return
   }
   const stats = fs.statSync(articlePath)
-  if (stats.isFile() && extensionRegularObject.test(articlePath)) {
+  if (articlePath.endsWith(extension) && stats.isFile()) {
     const data = fs.readFileSync(articlePath)
     const markdown = data.toString()
     fileMarkdown[articlePath] = markdown
@@ -86,6 +70,7 @@ function fileMarkdown2Article(articlePath, markdown) {
   const article = {}
   article.path = articlePath
   article.markdown = markdown
+
   let summary = ''
   const markdowns = markdown.split('\n')
   let count = 0
@@ -96,15 +81,16 @@ function fileMarkdown2Article(articlePath, markdown) {
     summary = summary + markdowns[i] + '\n'
   }
   article.summary = summary
+
   const title = path.basename(articlePath)
   article.title = title.replace(extension, '')
   article.url = '/article' + articlePath.replace(repositoryPath, '').replace(extension, '')
 
   const attributes = []
 
-  let dateString = dateRegularObject.exec(articlePath)
-  if (dateString) {
-    dateString = dateString.toString()
+  let dateExec = dateRegularObject.exec(articlePath)
+  if (dateExec) {
+    let dateString = dateExec.toString()
     const date = new Date(dateString)
     dateString = utils.formatDate(date, configService.getArticleConfig().dateFormat)
     article.date = date
@@ -113,15 +99,15 @@ function fileMarkdown2Article(articlePath, markdown) {
   }
 
   let sort = articlePath.replace(repositoryPath, '')
-  dateString = dateRegularObject.exec(articlePath)
-  if (dateString) {
-    dateString = dateString.toString()
+  if (dateExec) {
+    let dateString = dateExec.toString()
     sort = sort.split(dateString)[0]
   }
   sort = sort.replace(path.basename(articlePath), '')
   if (sort && sort != '') {
     article.sort = sort
-    attributes.push({"name": "分类", "value": sort, "url": '/article' + sort})
+    article.sortUrl = '/' + fileIO.join('page', sort, '1') + '/'
+    attributes.push({"name": "分类", "value": sort, "url": article.sortUrl})
   }
 
   const wordSum = article.markdown.length
@@ -143,6 +129,6 @@ function fileMarkdown2Article(articlePath, markdown) {
 
 export default {
   getArticle: getArticle,
-  listArticle: listArticle,
+  listAllArticle: listAllArticle,
   listArticleByPath: listArticleByPath,
 }

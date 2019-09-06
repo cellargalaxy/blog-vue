@@ -33,10 +33,14 @@ else
     bootConfig=`cat $bootConfigPath`
 fi
 
-echo $bootConfig
+cat<<EOF
+$bootConfig
+EOF
 echo 'boot config,input any key go on,or control+c over'
 read
-echo $bootConfig > bootConfig.json
+cat>bootConfig.json<<EOF
+$bootConfig
+EOF
 rm -rf node_modules
 rm -rf .nuxt
 npm i

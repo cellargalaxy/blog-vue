@@ -1,21 +1,30 @@
 @charset "utf-8";
+
 body {
-    background-image: url("https://i.loli.net/2019/07/12/5d2883198e29846770.png"),
-    url("https://i.loli.net/2019/07/12/5d288319798d150333.png"),
-    url("https://i.loli.net/2019/07/12/5d28861cb660b13384.png"),
-    url("https://i.loli.net/2018/10/02/5bb391d063618.jpg");
+    background-image: url("/images/wave1.png"),
+    url("/images/wave2.png"),
+    url("/images/blurry.png"),
+    url("https://i.loli.net/2019/07/20/5d31ed25dde6a52295.jpg");
     background-repeat: no-repeat, no-repeat, repeat, no-repeat;
     background-position: 0vw 92vh, -27vw 91vh, 0% 0%, center;
     background-attachment: fixed, fixed, fixed, fixed;
     background-size: 104vw 8vh, 127vw 9vh, auto, cover;
 }
 
+/*整个网站黑白灰*/
+/* body {
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='saturate' values='0'/></filter></svg>#grayscale");
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+    filter: gray;
+} */
+
 body {
-    cursor: url("http://hebin.me/wp-content/uploads/2017/10/2017100712571612.png"), auto;
+    cursor: url("/images/huaji-mouse.png"), auto;
 }
 
 a {
-    cursor: url("http://hebin.me/wp-content/uploads/2017/10/2017100712571858.png"), auto;
+    cursor: url("/images/angry-mouse.png"), auto;
 }
 
 img {

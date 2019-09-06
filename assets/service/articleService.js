@@ -1,38 +1,64 @@
-import path from 'path'
-import LRU from 'lru-cache'
-import log from '../utils/log'
 import utils from '../utils/utils'
 import articleDao from '../dao/articleDao'
-import configService from './configService'
-import config from '../config'
+import fileIO from "../utils/fileIO"
+import configService from '../service/configService'
 
-const logger = log('articleService')
+function getArticle(articlePath) {
+  return articleDao.getArticle(articlePath)
+}
 
-const repositoryPath = config.repositoryPath
-logger.info('仓库路径: {}', repositoryPath)
+function listArticleByPath(folderPath) {
+  let articles = articleDao.listArticleByPath(folderPath)
+  if (!articles) {
+    articles = []
+  }
+  articles.sort(sortArticles)
+  return articles
+}
 
-const flushTime = config.flushTime
-logger.info('文章缓存时间: {}', flushTime)
+function listArticlePageByArticles(articles, pageSize, currentPage) {
+  const skipNum = (currentPage - 1) * pageSize;
+  const articlePage = (skipNum + pageSize >= articles.length) ? articles.slice(skipNum, articles.length) : articles.slice(skipNum, skipNum + pageSize);
+  return articlePage
+}
 
-const articleKey = 'article-'
-const articlesKey = 'articles'
-const pathArticlesKey = 'pathArticles-'
-const timeLineArticlesKey = 'timeLineArticles'
-const lru = new LRU({
-  max: 10000,
-  maxAge: flushTime
-})
+function listArticlePageByPath(folderPath, pageSize, currentPage) {
+  const articles = listArticleByPath(folderPath)
+  return listArticlePageByArticles(articles, pageSize, currentPage)
+}
 
-const extension = configService.getGitConfig().extension
-const extensionRegularObject = new RegExp(extension)
-logger.info('文件扩展名正则: {}', extensionRegularObject)
+function listAllArticle() {
+  let articles = articleDao.listAllArticle()
+  if (!articles) {
+    articles = []
+  }
+  //对文章按时间排序
+  articles.sort(sortArticles)
+  return articles
+}
 
+function listAllArticlePageByArticles(articles, pageSize, currentPage) {
+  const skipNum = (currentPage - 1) * pageSize;
+  const articlePage = (skipNum + pageSize >= articles.length) ? articles.slice(skipNum, articles.length) : articles.slice(skipNum, skipNum + pageSize);
+  return articlePage
+}
+
+function listAllArticlePage(pageSize, currentPage) {
+  const articles = listAllArticle()
+  return listAllArticlePageByArticles(articles, pageSize, currentPage)
+}
+
+function getTimeLineArticles() {
+  //[{'date': 'date', 'dateString': 'dateString', 'articles': [{'article key': 'article value'}]}]
+  //需要按时间排序
+  return articles2timeLineArticles(listAllArticle())
+}
 
 function articles2timeLineArticles(articles) {
   //用于保存数据的临时对象
   //{'dateString': [{'article key': 'article value'}]}
   let timeLineArticles = {}
-  //{'articlePath': [{'article key': 'article value'}]}
+  //{'sort': [{'article key': 'article value'}]}
   let otherTimeLineArticles = {}
   for (let i in articles) {
     const article = articles[i]
@@ -48,144 +74,102 @@ function articles2timeLineArticles(articles) {
       timeLineArticles[dateString] = timeArticles
     } else {
       //没时间的文章用路径代替
-      let articlePath = path.dirname(article.path.replace(repositoryPath, ''))
-      let timeArticles = otherTimeLineArticles[articlePath]
+      let sort = article.sort
+      let timeArticles = otherTimeLineArticles[sort]
       if (!timeArticles) {
         timeArticles = []
       }
       timeArticles.push(article)
-      otherTimeLineArticles[articlePath] = timeArticles
+      otherTimeLineArticles[sort] = timeArticles
     }
   }
 
   //上面为了方便，timeLineArticles的数据结构并没有按照timeLineArticleMap，所以这里进行转换
-  const tmp = timeLineArticles
+  let tmp = timeLineArticles
   timeLineArticles = []
   for (let dateString in tmp) {
     //某个月的文章
     const articles = tmp[dateString]
     //对那个月的文章进行排序
-    articles.sort((article1, article2) => {
-      if (!article1.date && !article2.date) {
-        return 0
-      }
-      //没有时间的排在最后
-      if (!article1.date) {
-        return 1
-      }
-      if (!article2.date) {
-        return -1
-      }
-      return article2.date.getTime() - article1.date.getTime()
-    })
+    articles.sort(sortArticles)
     timeLineArticles.push({date: new Date(dateString), dateString: dateString, articles: articles})
   }
   //对时间线的全部月份进行排序
   timeLineArticles.sort((timeline1, timeline2) => {
     return timeline2.date.getTime() - timeline1.date.getTime()
   })
-  //如果可以，对otherTimeLineArticles也进行一下排序
-  for (let articlePath in otherTimeLineArticles) {
-    const articles = otherTimeLineArticles[articlePath]
-    timeLineArticles.push({dateString: articlePath, articles: articles})
+
+  tmp = otherTimeLineArticles
+  otherTimeLineArticles = []
+  for (let sort in tmp) {
+    const articles = tmp[sort]
+    otherTimeLineArticles.push({dateString: sort, articles: articles})
+  }
+  otherTimeLineArticles.sort((timeline1, timeline2) => {
+    return timeline1.dateString.localeCompare(timeline2.dateString)
+  })
+
+  //将没有时间的文章放到timeLineArticles里
+  for (let sort in otherTimeLineArticles) {
+    timeLineArticles.push(otherTimeLineArticles[sort])
   }
 
   return timeLineArticles
 }
 
-function getArticle(articlePath) {
-  if (lru.has(articleKey + articlePath)) {
-    return lru.get(articleKey + articlePath)
+function sortArticles(article1, article2) {
+  if (!article1.date && !article2.date) {
+    return article1.title.localeCompare(article2.title)
   }
-  const article = articleDao.getArticle(articlePath)
-  if (article) {
-    lru.set(articleKey + articlePath, article)
-    return article
+  //没有时间的排在最后
+  if (!article1.date) {
+    return 1
   }
-  return null
+  if (!article2.date) {
+    return -1
+  }
+  return article2.date.getTime() - article1.date.getTime()
 }
 
-function listArticleByPath(folderPath) {
-  if (lru.has(pathArticlesKey + folderPath)) {
-    return lru.get(pathArticlesKey + folderPath)
-  }
-  const articles = articleDao.listArticleByPath(folderPath)
-  if (articles) {
-    articles.sort((article1, article2) => {
-      if (!article1.date && !article2.date) {
-        return 0
-      }
-      //没有时间的排在最后
-      if (!article1.date) {
-        return 1
-      }
-      if (!article2.date) {
-        return -1
-      }
-      return article2.date.getTime() - article1.date.getTime()
-    })
-    lru.set(pathArticlesKey + folderPath, articles)
-    return articles
-  }
-  return []
-}
+function listRoutes() {
+  const articles = listAllArticle()
+  const routes = []
+  const sorts = {}
+  for (let i in articles) {
+    const article = articles[i]
+    routes.push(article.url)
 
-function listArticlePageByPath(folderPath, pageSize, currentPage) {
-  const articles = listArticleByPath(folderPath)
-  const skipNum = (currentPage - 1) * pageSize;
-  const articlePage = (skipNum + pageSize >= articles.length) ? articles.slice(skipNum, articles.length) : articles.slice(skipNum, skipNum + pageSize);
-  return articlePage;
-}
-
-function listArticle() {
-  if (lru.has(articlesKey)) {
-    return lru.get(articlesKey)
+    let sum = sorts[article.sort]
+    if (!sum) {
+      sum = 0
+    }
+    sum++
+    sorts[article.sort] = sum
   }
-  const articles = articleDao.listArticle()
-  if (articles) {
-    //对文章按时间排序
-    articles.sort((article1, article2) => {
-      if (!article1.date && !article2.date) {
-        return 0
-      }
-      //没有时间的排在最后
-      if (!article1.date) {
-        return 1
-      }
-      if (!article2.date) {
-        return -1
-      }
-      return article2.date.getTime() - article1.date.getTime()
-    })
-    lru.set(articlesKey, articles)
-    return articles
+  let pageSize = configService.getArticleConfig().pageSize
+  if (!pageSize) {
+    pageSize = 10
   }
-  return []
-}
-
-function listArticlePage(pageSize, currentPage) {
-  const articles = listArticle()
-  const skipNum = (currentPage - 1) * pageSize;
-  const articlePage = (skipNum + pageSize >= articles.length) ? articles.slice(skipNum, articles.length) : articles.slice(skipNum, skipNum + pageSize);
-  return articlePage;
-}
-
-function getTimeLineArticles() {
-  //[{'date': 'date', 'dateString': 'dateString', 'articles': [{'article key': 'article value'}]}]
-  //需要按时间排序
-  if (lru.has(timeLineArticlesKey)) {
-    return lru.get(timeLineArticlesKey)
+  for (let sort in sorts) {
+    let sum = sorts[sort] / pageSize
+    if (sorts[sort] % pageSize > 0) {
+      sum++
+    }
+    for (let page = 1; page <= sum; page++) {
+      routes.push('/' + fileIO.join('page', sort, page.toString()) + '/')
+    }
   }
-  const timeLineArticles = articles2timeLineArticles(listArticle())
-  lru.set(timeLineArticlesKey, timeLineArticles)
-  return timeLineArticles
+  return routes
 }
 
 export default {
-  listArticle: listArticle,
-  listArticlePage: listArticlePage,
   getArticle: getArticle,
-  getTimeLineArticles: getTimeLineArticles,
   listArticleByPath: listArticleByPath,
+  listArticlePageByArticles: listArticlePageByArticles,
   listArticlePageByPath: listArticlePageByPath,
+  listAllArticle: listAllArticle,
+  listAllArticlePageByArticles: listAllArticlePageByArticles,
+  listAllArticlePage: listAllArticlePage,
+  getTimeLineArticles: getTimeLineArticles,
+  listRoutes: listRoutes,
 }

@@ -2,15 +2,30 @@
 function start() {
     stop
     pwd=`pwd`
-    echo 'starting clone git process: '$pwd
-    nohup node $pwd'/cloneArticle.js' true >clone.log 2>&1 &
-    echo 'success start clone git process: '$pwd
+    cmd=$pwd'/clone.sh'
+    echo 'starting clone git process: '$cmd
+    nohup $cmd run >clone.log 2>&1 &
+    echo 'success start clone git process: '$cmd
+}
+
+function run() {
+    pwd=`pwd`
+    cmd='node '$pwd'/cloneArticle.js'
+    sleepCmd='sleep 7m'
+    while :
+    do
+        echo 'clone git run cmd: '$cmd
+        $cmd
+        echo 'clone git run cmd success, '$sleepCmd
+        $sleepCmd
+    done
 }
 
 function stop() {
     pwd=`pwd`
-    echo 'search clone git process: '$pwd
-    pids=`ps -ef | grep $pwd | grep cloneArticle.js | grep -v grep  | cut -c 9-15`
+    cmd=$pwd'/clone.sh'
+    echo 'search clone git process: '$cmd
+    pids=`ps -ef | grep $cmd | grep run | grep -v grep  | cut -c 9-15`
     echo 'will kill clone git process: '$pids
     for pid in $pids
     do
@@ -22,8 +37,9 @@ function stop() {
 
 function status() {
     pwd=`pwd`
-    echo 'search clone git process: '$pid
-    pids=`ps -ef | grep $pwd | grep cloneArticle.js | grep -v grep  | cut -c 9-15`
+    cmd=$pwd'/clone.sh'
+    echo 'search clone git process: '$cmd
+    pids=`ps -ef | grep $cmd | grep run | grep -v grep  | cut -c 9-15`
     echo 'clone git process: '$pids
 }
 
@@ -33,6 +49,8 @@ elif [ "$1"x = "stop"x ]; then
     stop
 elif [ "$1"x = "status"x ]; then
     status
+elif [ "$1"x = "run"x ]; then
+    run
 else
-    echo 'please input type:start,stop,status'
+    echo 'please input type:start,stop,status,run'
 fi

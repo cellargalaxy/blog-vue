@@ -100,13 +100,16 @@ export default {
     hostname: configService.getSiteConfig().siteUrl,
     path: '/sitemap.xml',
     gzip: true,
-    cacheTime: config.flushTime,
-    generate: false, // Enable me when using nuxt generate
+    generate: true, // Enable me when using nuxt generate
     exclude: [],
     routes(callback) {
-      const articles = articleService.listArticle()
+      const articles = articleService.listAllArticle()
       let routes = articles.map(article => article.url)
       callback(null, routes)
     }
+  },
+
+  generate: {
+    routes: articleService.listRoutes(),
   },
 }

@@ -2,16 +2,23 @@
 function start() {
     stop
     pwd=`pwd`
-    echo 'starting '$pwd' process'
-    nohup npm start >nuxt.log 2>&1 &
-    echo 'success start '$pwd' process'
+    cmd=$pwd'/nuxt.sh'
+    echo 'starting nuxt process: '$cmd
+    nohup $cmd run >nuxt.log 2>&1 &
+    echo 'success start nuxt process: '$cmd
+}
+
+function run() {
+    echo 'nuxt run cmd: npm start'
+    npm start
 }
 
 function stop() {
     pwd=`pwd`
-    echo 'search '$pwd' process'
-    pids=`ps -ef | grep $pwd | grep node_modules | grep -v grep  | cut -c 9-15`
-    echo 'will kill '$pwd' process: '$pids
+    cmd=$pwd'/nuxt.sh'
+    echo 'search nuxt process: '$cmd
+    pids=`ps -ef | grep $cmd | grep run | grep -v grep  | cut -c 9-15`
+    echo 'will kill nuxt process: '$pids
     for pid in $pids
     do
         echo 'killing pid: '$pid
@@ -22,9 +29,10 @@ function stop() {
 
 function status() {
     pwd=`pwd`
-    echo 'search '$pwd' process'
-    pids=`ps -ef | grep $pwd | grep node_modules | grep -v grep  | cut -c 9-15`
-    echo $pwd' process: '$pids
+    cmd=$pwd'/nuxt.sh'
+    echo 'search nuxt process: '$cmd
+    pids=`ps -ef | grep $cmd | grep run | grep -v grep  | cut -c 9-15`
+    echo 'nuxt process: '$pids
 }
 
 if [ "$1"x = "start"x ]; then
@@ -33,6 +41,8 @@ elif [ "$1"x = "stop"x ]; then
     stop
 elif [ "$1"x = "status"x ]; then
     status
+elif [ "$1"x = "run"x ]; then
+    run
 else
-    echo 'please input type:start,stop,status'
+    echo 'please input type:start,stop,status,run'
 fi

@@ -1,29 +1,18 @@
 import fs from 'fs'
 
-import fileIO from '../utils/fileIO'
-import log from '../utils/log'
-import config from '../config'
-
-const logger = log('configDao')
+import fileIO from "../utils/fileIO";
+import config from "../config";
 
 const repositoryPath = config.repositoryPath
-logger.info('仓库路径: {}', repositoryPath)
 
 function getConfig() {
-  try {
-    const configPath = fileIO.join(repositoryPath, '.config', 'config.json')
-    if (!fs.existsSync(configPath)) {
-      return null
-    }
-    const stats = fs.statSync(configPath)
-    if (stats.isFile()) {
-      const data = fs.readFileSync(configPath)
-      return JSON.parse(data)
-    }
-  } catch (e) {
-    logger.error('读取配置文件发生异常: {}', e)
+  const configPath = fileIO.join(repositoryPath, '.config', 'config.json')
+  const stats = fs.statSync(configPath)
+  if (!stats.isFile()) {
+    return null
   }
-  return null
+  const data = fs.readFileSync(configPath)
+  return JSON.parse(data)
 }
 
 export default {

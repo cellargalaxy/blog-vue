@@ -11,7 +11,6 @@ function formatString(string, ...infos) {
   return string
 }
 
-
 export default function (name) {
   return {
     name: name,

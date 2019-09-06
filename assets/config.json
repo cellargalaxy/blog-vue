@@ -1,4 +1,3 @@
 {
-  "repositoryPath": "static/repository",
-  "flushTime": 600000
+  "repositoryPath": "repository"
 }

@@ -1,27 +1,15 @@
-import LRU from 'lru-cache'
-
 import configDao from '../dao/configDao'
-import config from '../config'
 import log from "../utils/log";
 
 const logger = log('configService')
 
-const flushTime = config.flushTime
-logger.info('文章缓存时间: {}', flushTime)
-
-const configKey = 'config'
-const lru = new LRU({
-  max: 1000,
-  maxAge: flushTime
-})
-
-
 function getConfig() {
-  if (lru.has(configKey)) {
-    return lru.get(configKey)
+  let config = null
+  try {
+    config = configDao.getConfig()
+  } catch (e) {
+    logger.error('读取配置文件失败: {}', e)
   }
-  const config = configDao.getConfig()
-  lru.set(configKey, config)
   return config
 }
 
@@ -169,7 +157,7 @@ function getHomeConfig() {
         "url": "https://weibo.com/"
       },
       {
-        "text": "纸糊",
+        "text": "知乎",
         "url": "https://www.zhihu.com/"
       }
     ]
@@ -183,7 +171,7 @@ function getGitConfig() {
   }
   return {
     "extension": ".md",
-    "dateRegular": "/\\d{4}-\\d{2}\\/\\d{2}/"
+    "dateRegular": "/\\d{4}-\\d{2}-\\d{2}/"
   }
 }
 

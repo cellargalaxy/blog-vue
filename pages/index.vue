@@ -9,19 +9,18 @@
         <b-col lg="8" md="10" sm="12" xl="8">
 
           <h1 :style="{'font-size': fontSize,'font-style':fontStyle,'text-shadow':textShadow}" @mouseenter="mouseenter"
-              @mouseleave="mouseleave" class="white"
-              v-if="homeConfig.brandHello">
+              @mouseleave="mouseleave" class="white" v-if="homeConfig.brandHello">
             <b>{{homeConfig.brandHello}}</b>
           </h1>
           <b-card class="translucent-black"
                   v-if="(homeConfig.brandTexts&&homeConfig.brandTexts.length>0)||(homeConfig.navs&&homeConfig.navs.length>0)">
-            <p :key="brandTextsIndex"
-               class="white" v-for="(brandText,brandTextsIndex) in homeConfig.brandTexts"
+            <p class="white" v-for="(brandText,brandTextsIndex) in homeConfig.brandTexts" :key="brandTextsIndex"
                v-if="homeConfig.brandTexts&&homeConfig.brandTexts.length>0">
-              {{brandText}}</p>
+              {{brandText}}
+            </p>
 
             <b-nav align="center" class="transparent" v-if="homeConfig.navs&&homeConfig.navs.length>0">
-              <b-nav-item :href="nav.url" :key="navIndex" target="_blank" v-for="(nav,navIndex) in homeConfig.navs">
+              <b-nav-item :href="nav.url" target="_blank" v-for="(nav,navIndex) in homeConfig.navs" :key="navIndex">
                 {{nav.text}}
               </b-nav-item>
             </b-nav>
@@ -56,11 +55,17 @@
       return {
         isItalic: false,
         shadowColor: true,
+        maxFontSize: 10
       }
     },
     computed: {
       fontSize: function () {
-        return ''//(100 / this.countStringLength(this.homeConfig.brandHello)) + 'vw'
+        let fontSize = (100 / this.countStringLength(this.homeConfig.brandHello))
+        if (fontSize > this.maxFontSize) {
+          fontSize = this.maxFontSize
+        }
+        fontSize = fontSize + 'vw'
+        return fontSize
       },
       fontStyle: function () {
         return this.isItalic ? 'italic' : 'normal'

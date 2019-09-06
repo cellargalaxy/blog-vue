@@ -27,7 +27,7 @@
     },
     methods: {
       change: function (page) {
-        window.location.href = "?page=" + page
+        window.location.href = '../' + page
       },
     },
   }

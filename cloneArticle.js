@@ -1,5 +1,5 @@
 const git = require("isomorphic-git")
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 
 const config = require('./assets/config')
@@ -17,117 +17,76 @@ const logger = {
 const repositoryPath = config.repositoryPath
 logger.info('仓库路径: {}', repositoryPath)
 
-const flushTime = process.env.BLOG_VUE_FLUSH_TIME != undefined ? process.env.BLOG_VUE_FLUSH_TIME : config.flushTime
-logger.info('git刷新时间（毫秒）: {}', flushTime)
-
-const gitUrl = process.env.BLOG_VUE_GIT_URL != undefined ? process.env.BLOG_VUE_GIT_URL : bootConfig.gitUrl
+const gitUrl = process.env.BLOG_VUE_GIT_URL ? process.env.BLOG_VUE_GIT_URL : bootConfig.gitUrl
 logger.info('gitUrl: {}', '***' + gitUrl.split('/')[gitUrl.split('/').length - 1])
 
-const ref = process.env.BLOG_VUE_GIT_REF != undefined ? process.env.BLOG_VUE_GIT_REF : bootConfig.ref
+const ref = process.env.BLOG_VUE_GIT_REF ? process.env.BLOG_VUE_GIT_REF : bootConfig.ref
 logger.info('git分支: {}', ref)
 
-const username = process.env.BLOG_VUE_GIT_USERNAME != undefined ? process.env.BLOG_VUE_GIT_USERNAME : bootConfig.username
-const password = process.env.BLOG_VUE_GIT_PASSWORD != undefined ? process.env.BLOG_VUE_GIT_PASSWORD : bootConfig.password
+const username = process.env.BLOG_VUE_GIT_USERNAME ? process.env.BLOG_VUE_GIT_USERNAME : bootConfig.username
+const password = process.env.BLOG_VUE_GIT_PASSWORD ? process.env.BLOG_VUE_GIT_PASSWORD : bootConfig.password
 
-autoPullRepository(process.argv[2] != undefined && process.argv[2] != null ? JSON.parse(process.argv[2]) : false)
+flushRepository()
 
-function autoPullRepository(auto) {
-  try {
-    logger.info('是否自动更新: {}', auto)
-    if (fs.existsSync(repositoryPath)) {
-      pullRepository(auto)
-    } else {
-      cloneRepository(auto)
-    }
-  } catch (e) {
-    logger.error('检查仓库发生异常: {}', e)
-    setTimeoutCloneRepository(auto)
+function flushRepository() {
+  if (fs.pathExistsSync(repositoryPath)) {
+    pullRepository()
+  } else {
+    cloneRepository()
   }
 }
 
-function cloneRepository(auto) {
-  try {
-    logger.info('删除仓库目录')
-    deleteFileOrFolder(repositoryPath)
+function cloneRepository() {
+  logger.info('删除仓库目录')
+  fs.removeSync(repositoryPath)
 
-    logger.info('开始克隆仓库')
-    git.clone({
-      'fs': fs,
-      'dir': repositoryPath,
-      'url': gitUrl,
-      'ref': ref,
-      'username': username,
-      'password': password,
-      'singleBranch': true,
-      'depth': 1,
-    }).then(function () {
-      logger.info('成功克隆仓库')
-      setTimeoutPullRepository(auto)
-    }).catch(function (e) {
-      logger.error('调用克隆仓库发生异常: {}', e)
-      setTimeoutCloneRepository(auto)
-    })
-  } catch (e) {
-    logger.error('克隆仓库发生异常: {}', e)
-    setTimeoutCloneRepository(auto)
-  }
+  logger.info('开始克隆仓库')
+  git.clone({
+    'fs': fs,
+    'dir': repositoryPath,
+    'url': gitUrl,
+    'ref': ref,
+    'username': username,
+    'password': password,
+    'singleBranch': true,
+    'depth': 1,
+  }).then(() => {
+    logger.info('成功克隆仓库')
+    moveConfigToStatus()
+  }).catch((e) => {
+    logger.error('调用克隆仓库发生异常: {}', e)
+  })
 }
 
-function pullRepository(auto) {
-  try {
-    logger.info('开始更新仓库')
-    git.pull({
-      'fs': fs,
-      'dir': repositoryPath,
-      'ref': ref,
-      'username': username,
-      'password': password,
-      'singleBranch': true,
-    }).then(function () {
-      logger.info('成功更新仓库')
-      setTimeoutPullRepository(auto)
-    }).catch(function (e) {
-      logger.error('调用仓库更新发生异常: {}', e)
-      setTimeoutCloneRepository(auto)
-    })
-  } catch (e) {
-    logger.error('仓库更新发生异常: {}', e)
-    setTimeoutCloneRepository(auto)
-  }
+function pullRepository() {
+  logger.info('开始更新仓库')
+  git.pull({
+    'fs': fs,
+    'dir': repositoryPath,
+    'ref': ref,
+    'username': username,
+    'password': password,
+    'singleBranch': true,
+  }).then(() => {
+    logger.info('成功更新仓库')
+    moveConfigToStatus()
+  }).catch((e) => {
+    logger.error('调用仓库更新发生异常: {}', e)
+    cloneRepository()
+  })
 }
 
-function setTimeoutPullRepository(auto) {
-  if (auto) {
-    logger.info('setTimeout调用pullRepository')
-    setTimeout(function () {
-      pullRepository(auto)
-    }, flushTime)
-  }
-}
-
-function setTimeoutCloneRepository(auto) {
-  if (auto) {
-    logger.info('setTimeout调用cloneRepository')
-    setTimeout(function () {
-      cloneRepository(auto)
-    }, flushTime)
-  }
-}
-
-function deleteFileOrFolder(fileOrFolderPath) {
-  if (!fileOrFolderPath || !fs.existsSync(fileOrFolderPath)) {
+function moveConfigToStatus() {
+  const configPath = join(repositoryPath, '.config')
+  if (!fs.pathExistsSync(configPath)) {
     return
   }
-  const stats = fs.statSync(fileOrFolderPath)
-  if (stats.isFile()) {
-    fs.unlinkSync(fileOrFolderPath)
-    return
-  }
-  const files = fs.readdirSync(fileOrFolderPath)
-  for (let i = 0; i < files.length; i++) {
-    deleteFileOrFolder(path.join(fileOrFolderPath, files[i]))
-  }
-  fs.rmdirSync(fileOrFolderPath)
+  logger.info('复制config文件到static')
+  fs.copySync(configPath, 'static')
+}
+
+function join(...paths) {
+  return path.join(...paths).replace(/\\/g, '/')
 }
 
 //日期对象格式化
