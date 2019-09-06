@@ -2,10 +2,9 @@
 function start() {
     stop
     pwd=`pwd`
-    cmd=$pwd'/nuxt.sh'
-    echo 'starting nuxt process: '$cmd
-    nohup $cmd run >nuxt.log 2>&1 &
-    echo 'success start nuxt process: '$cmd
+    echo 'starting nuxt process: '$pwd
+    nohup npm start >nuxt.log 2>&1 &
+    echo 'success start nuxt process: '$pwd
 }
 
 function run() {
@@ -15,9 +14,8 @@ function run() {
 
 function stop() {
     pwd=`pwd`
-    cmd=$pwd'/nuxt.sh'
-    echo 'search nuxt process: '$cmd
-    pids=`ps -ef | grep $cmd | grep run | grep -v grep  | cut -c 9-15`
+    echo 'search nuxt process: '$pwd
+    pids=`ps -ef | grep $pwd | grep 'node_modules/.bin/nuxt start' | grep -v grep  | cut -c 9-15`
     echo 'will kill nuxt process: '$pids
     for pid in $pids
     do
@@ -29,9 +27,8 @@ function stop() {
 
 function status() {
     pwd=`pwd`
-    cmd=$pwd'/nuxt.sh'
-    echo 'search nuxt process: '$cmd
-    pids=`ps -ef | grep $cmd | grep run | grep -v grep  | cut -c 9-15`
+    echo 'search nuxt process: '$pwd
+    pids=`ps -ef | grep $pwd | grep 'node_modules/.bin/nuxt start' | grep -v grep  | cut -c 9-15`
     echo 'nuxt process: '$pids
 }
 
