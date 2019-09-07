@@ -9,7 +9,7 @@ function start() {
 }
 
 function run() {
-    sleepCmd='sleep 7m'
+    sleepCmd='sleep 27m'
     while :
     do
         echo 'generate run cmd: node cloneArticle.js'
