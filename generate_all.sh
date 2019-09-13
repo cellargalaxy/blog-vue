@@ -13,11 +13,11 @@ function generate_all() {
     do
         if [[ $file_name == blog-* ]];
         then
-            echo 'generate_all run cmd: '$file_name'/generate.sh run'
+            echo 'generate_all run cmd: '$file_name'/generate.sh one'
             echo 'generate_all run cmd: sleep 5'
             sleep 5
             cd $file_name
-            ./generate.sh run
+            ./generate.sh one
             cd ..
             echo 'generate_all run cmd: sleep 5'
             sleep 5

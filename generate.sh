@@ -8,7 +8,7 @@ function start() {
     echo 'success start generate process: '$cmd
 }
 
-function generate() {
+function one() {
     echo 'generate run cmd: ./clone.sh clone'
     ./clone.sh clone
     echo 'generate run cmd: npm run generate'
@@ -23,7 +23,7 @@ function run() {
     sleepCmd='sleep 27m'
     while :
     do
-        generate
+        one
         echo 'generate run cmd sleep, '$sleepCmd
         $sleepCmd
     done
@@ -60,8 +60,8 @@ elif [ "$1"x = "status"x ]; then
     status
 elif [ "$1"x = "run"x ]; then
     run
-elif [ "$1"x = "generate"x ]; then
-    generate
+elif [ "$1"x = "one"x ]; then
+    one
 else
-    echo 'please input type:start,stop,status,run,generate'
+    echo 'please input type:start,stop,status,run,one'
 fi
