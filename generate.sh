@@ -8,19 +8,23 @@ function start() {
     echo 'success start generate process: '$cmd
 }
 
+function generate() {
+    echo 'generate run cmd: ./clone.sh clone'
+    ./clone.sh clone
+    echo 'generate run cmd: npm run generate'
+    npm run generate
+    echo 'generate run cmd: rm -rf out'
+    rm -rf out
+    echo 'generate run cmd: cp -r dist out'
+    cp -r dist out
+}
+
 function run() {
     sleepCmd='sleep 27m'
     while :
     do
-        echo 'generate run cmd: node cloneArticle.js'
-        node cloneArticle.js
-        echo 'generate run cmd: npm run generate'
-        npm run generate
-        echo 'generate run cmd: rm -rf out'
-        rm -rf out
-        echo 'generate run cmd: cp -r dist out'
-        cp -r dist out
-        echo 'generate run cmd success, '$sleepCmd
+        generate
+        echo 'generate run cmd sleep, '$sleepCmd
         $sleepCmd
     done
 }
@@ -56,6 +60,8 @@ elif [ "$1"x = "status"x ]; then
     status
 elif [ "$1"x = "run"x ]; then
     run
+elif [ "$1"x = "generate"x ]; then
+    generate
 else
-    echo 'please input type:start,stop,status,run'
+    echo 'please input type:start,stop,status,run,generate'
 fi

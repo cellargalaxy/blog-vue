@@ -8,15 +8,20 @@ function start() {
     echo 'success start clone git process: '$cmd
 }
 
-function run() {
+function clone() {
     pwd=`pwd`
     cmd='node '$pwd'/cloneArticle.js'
+    echo 'clone git clone cmd: '$cmd
+    $cmd
+    echo 'clone git run cmd success'
+}
+
+function run() {
     sleepCmd='sleep 7m'
     while :
     do
-        echo 'clone git run cmd: '$cmd
-        $cmd
-        echo 'clone git run cmd success, '$sleepCmd
+        clone
+        echo 'clone git run cmd sleep, '$sleepCmd
         $sleepCmd
     done
 }
@@ -51,6 +56,8 @@ elif [ "$1"x = "status"x ]; then
     status
 elif [ "$1"x = "run"x ]; then
     run
+elif [ "$1"x = "clone"x ]; then
+    clone
 else
-    echo 'please input type:start,stop,status,run'
+    echo 'please input type:start,stop,status,run,clone'
 fi
