@@ -17,7 +17,7 @@ function one() {
 }
 
 function run() {
-    sleepCmd='sleep 7m'
+    sleepCmd='sleep 53m'
     while :
     do
         one
