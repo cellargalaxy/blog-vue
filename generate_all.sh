@@ -8,7 +8,7 @@ function start() {
     echo 'success start generate_all process: '$cmd
 }
 
-function generate_all() {
+function one() {
     for file_name in `ls .`
     do
         if [[ $file_name == blog-* ]];
@@ -29,7 +29,7 @@ function run() {
     sleepCmd='sleep 27m'
     while :
     do
-        generate_all
+        one
         echo 'generate run cmd success, '$sleepCmd
         $sleepCmd
     done
@@ -67,8 +67,8 @@ elif [ "$1"x = "status"x ]; then
     status
 elif [ "$1"x = "run"x ]; then
     run
-elif [ "$1"x = "generate_all"x ]; then
-    generate_all
+elif [ "$1"x = "one"x ]; then
+    one
 else
-    echo 'please input type:start,stop,status,run,generate_all'
+    echo 'please input type:start,stop,status,run,one'
 fi
