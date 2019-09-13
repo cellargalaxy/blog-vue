@@ -9,8 +9,8 @@ function start() {
 }
 
 function one() {
-    echo 'generate run cmd: ./clone.sh clone'
-    ./clone.sh clone
+    echo 'generate run cmd: ./clone.sh one'
+    ./clone.sh one
     echo 'generate run cmd: npm run generate'
     npm run generate
     echo 'generate run cmd: rm -rf out'
