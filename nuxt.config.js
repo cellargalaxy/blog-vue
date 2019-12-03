@@ -1,6 +1,5 @@
-import configService from './assets/service/configService'
-import articleService from './assets/service/articleService'
-import config from './assets/config'
+import configService from './middleware/service/configService'
+import articleService from './middleware/service/articleService'
 
 export default {
   mode: 'universal',
@@ -50,10 +49,6 @@ export default {
     'bootstrap-vue/nuxt',
     '@nuxtjs/markdownit',
     '@nuxtjs/sitemap',
-    ['@nuxtjs/component-cache', {
-      max: 10000,
-      maxAge: config.flushTime
-    }],
   ],
 
   /*

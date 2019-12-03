@@ -1,14 +1,28 @@
 import utils from '../utils/utils'
 import articleDao from '../dao/articleDao'
 import fileIO from "../utils/fileIO"
-import configService from '../service/configService'
+import configService from './configService'
+import log from "../utils/log"
+
+const logger = log('articleService')
+
+const pageSize = configService.getArticleConfig().pageSize
 
 function getArticle(articlePath) {
-  return articleDao.getArticle(articlePath)
+  try {
+    return articleDao.getArticle(articlePath)
+  } catch (e) {
+    logger.error('读取文章文件失败: {}', e)
+  }
 }
 
 function listArticleByPath(folderPath) {
-  let articles = articleDao.listArticleByPath(folderPath)
+  let articles = null
+  try {
+    articles = articleDao.listArticleByPath(folderPath)
+  } catch (e) {
+    logger.error('读取文章列表文件失败: {}', e)
+  }
   if (!articles) {
     articles = []
   }
@@ -16,41 +30,36 @@ function listArticleByPath(folderPath) {
   return articles
 }
 
-function listArticlePageByArticles(articles, pageSize, currentPage) {
-  const skipNum = (currentPage - 1) * pageSize;
-  const articlePage = (skipNum + pageSize >= articles.length) ? articles.slice(skipNum, articles.length) : articles.slice(skipNum, skipNum + pageSize);
-  return articlePage
-}
-
-function listArticlePageByPath(folderPath, pageSize, currentPage) {
+function listArticlePageByPath(folderPath, currentPage) {
   const articles = listArticleByPath(folderPath)
-  return listArticlePageByArticles(articles, pageSize, currentPage)
+  const skipNum = (currentPage - 1) * pageSize
+  const articlePage = (skipNum + pageSize >= articles.length) ? articles.slice(skipNum, articles.length) : articles.slice(skipNum, skipNum + pageSize)
+  return {folderPath: folderPath, articles: articles, currentPage: currentPage, articlePage: articlePage}
 }
 
 function listAllArticle() {
-  let articles = articleDao.listAllArticle()
+  let articles = null
+  try {
+    articles = articleDao.listAllArticle()
+  } catch (e) {
+    logger.error('读取全部文章列表文件失败: {}', e)
+  }
   if (!articles) {
     articles = []
   }
-  //对文章按时间排序
   articles.sort(sortArticles)
   return articles
 }
 
-function listAllArticlePageByArticles(articles, pageSize, currentPage) {
-  const skipNum = (currentPage - 1) * pageSize;
-  const articlePage = (skipNum + pageSize >= articles.length) ? articles.slice(skipNum, articles.length) : articles.slice(skipNum, skipNum + pageSize);
-  return articlePage
-}
-
-function listAllArticlePage(pageSize, currentPage) {
+function listAllArticlePage(currentPage) {
   const articles = listAllArticle()
-  return listAllArticlePageByArticles(articles, pageSize, currentPage)
+  const skipNum = (currentPage - 1) * pageSize
+  const articlePage = (skipNum + pageSize >= articles.length) ? articles.slice(skipNum, articles.length) : articles.slice(skipNum, skipNum + pageSize)
+  return {articles: articles, currentPage: currentPage, articlePage: articlePage}
 }
 
 function getTimeLineArticles() {
   //[{'date': 'date', 'dateString': 'dateString', 'articles': [{'article key': 'article value'}]}]
-  //需要按时间排序
   return articles2timeLineArticles(listAllArticle())
 }
 
@@ -73,7 +82,7 @@ function articles2timeLineArticles(articles) {
       timeArticles.push(article)
       timeLineArticles[dateString] = timeArticles
     } else {
-      //没时间的文章用路径代替
+      //没时间的文章用分类代替
       let sort = article.sort
       let timeArticles = otherTimeLineArticles[sort]
       if (!timeArticles) {
@@ -132,7 +141,15 @@ function sortArticles(article1, article2) {
 }
 
 function listRoutes() {
-  const articles = listAllArticle()
+  let articles = null
+  try {
+    articles = articleDao.listAllArticle()
+  } catch (e) {
+    logger.error('读取全部文章列表文件失败: {}', e)
+  }
+  if (!articles) {
+    articles = []
+  }
   const routes = []
   const sorts = {}
   for (let i in articles) {
@@ -166,10 +183,8 @@ function listRoutes() {
 export default {
   getArticle: getArticle,
   listArticleByPath: listArticleByPath,
-  listArticlePageByArticles: listArticlePageByArticles,
   listArticlePageByPath: listArticlePageByPath,
   listAllArticle: listAllArticle,
-  listAllArticlePageByArticles: listAllArticlePageByArticles,
   listAllArticlePage: listAllArticlePage,
   getTimeLineArticles: getTimeLineArticles,
   listRoutes: listRoutes,

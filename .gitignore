@@ -1,11 +1,11 @@
-bootConfig.json
+# build
+out
+repository
+staticFileData.json
+
 # dependencies
 node_modules
 package-lock.json
-
-# logs
-clone.log
-nuxt.log
 
 # Nuxt build
 .nuxt

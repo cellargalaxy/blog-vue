@@ -1,4 +1,4 @@
-import utils from '../utils/utils'
+import utils from './utils'
 
 function log(level, name, massage) {
   console.log(utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' ' + level + ' ' + name + ' ' + massage)

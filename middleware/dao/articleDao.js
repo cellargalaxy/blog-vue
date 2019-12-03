@@ -13,12 +13,8 @@ const dateRegularObject = new RegExp(dateRegular)
 const summaryLength = configService.getArticleConfig().summaryLength
 
 function getArticle(articlePath) {
-  //避免被人拼凑其他的路径
   articlePath = fileIO.join(repositoryPath, articlePath + extension)
-  if (!fileIO.exists(articlePath)) {
-    return null
-  }
-  if (articlePath.endsWith(extension) && fs.statSync(articlePath).isFile()) {
+  if (fileIO.isFile(articlePath)) {
     const data = fs.readFileSync(articlePath)
     const markdown = data.toString()
     return fileMarkdown2Article(articlePath, markdown)
@@ -46,17 +42,13 @@ function listArticleByPath(folderPath) {
 }
 
 function getFileMarkdownFromFolder(articlePath, fileMarkdown) {
-  if (!articlePath || !fileIO.exists(articlePath)) {
-    return
-  }
-  const stats = fs.statSync(articlePath)
-  if (articlePath.endsWith(extension) && stats.isFile()) {
+  if (fileIO.isFile(articlePath) && articlePath.endsWith(extension)) {
     const data = fs.readFileSync(articlePath)
     const markdown = data.toString()
     fileMarkdown[articlePath] = markdown
     return
   }
-  if (stats.isDirectory()) {
+  if (fileIO.isFolder(articlePath)) {
     const files = fs.readdirSync(articlePath)
     for (let i = 0; i < files.length; i++) {
       if (!files[i].startsWith('.')) {

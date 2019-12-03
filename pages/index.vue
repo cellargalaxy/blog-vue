@@ -40,7 +40,7 @@
   import navbar from '../components/navbar'
   import goto from '../components/goto'
 
-  import configService from '../assets/service/configService'
+  import configService from '../middleware/service/configService'
 
   export default {
     name: "index",

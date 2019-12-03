@@ -19,8 +19,8 @@
   import goto from '../../components/goto'
   import articleView from '../../components/articleView'
 
-  import articleService from '../../assets/service/articleService'
-  import configService from '../../assets/service/configService'
+  import articleService from '../../middleware/service/articleService'
+  import configService from '../../middleware/service/configService'
 
   export default {
     name: "articlePath",

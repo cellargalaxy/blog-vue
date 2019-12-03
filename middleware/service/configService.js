@@ -1,5 +1,5 @@
 import configDao from '../dao/configDao'
-import log from "../utils/log";
+import log from "../utils/log"
 
 const logger = log('configService')
 
