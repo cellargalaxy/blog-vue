@@ -6,10 +6,10 @@ const config = require('./middleware/config')
 
 const logger = {
   info: function (string, ...infos) {
-    log('info', 'git_clone', formatString(string, ...infos))
+    log('info', 'git_clone_pull', formatString(string, ...infos))
   },
   error: function (string, ...infos) {
-    log('error', 'git_clone', formatString(string, ...infos))
+    log('error', 'git_clone_pull', formatString(string, ...infos))
   },
 }
 
