@@ -14,7 +14,7 @@ read -p "please enter git username(default:''):" GIT_USERNAME
 if [ -z $GIT_USERNAME ];then
     GIT_USERNAME=""
 fi
-read -s "please enter git password(default:''):" GIT_PASSWORD
+read -p "please enter git password(default:''):" -s GIT_PASSWORD
 if [ -z $GIT_PASSWORD ];then
     GIT_PASSWORD=""
 fi
