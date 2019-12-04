@@ -1,7 +1,8 @@
 # build
-out
+public
 repository
 staticFileData.json
+http.log
 
 # dependencies
 node_modules
