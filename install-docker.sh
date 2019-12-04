@@ -6,7 +6,7 @@ do
         break
     fi
 done
-read -p "please enter git ref(default:master):" GIT_REF
+read -p "please enter git ref(default:'master'):" GIT_REF
 if [ -z $GIT_REF ];then
     GIT_REF="master"
 fi
