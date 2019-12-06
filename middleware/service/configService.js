@@ -13,6 +13,79 @@ function getConfig() {
   return config
 }
 
+function getSiteConfig() {
+  const config = getConfig()
+  if (config && config.siteConfig) {
+    return config.siteConfig
+  }
+  return {
+    "siteUrl": "http://127.0.0.1:3000",
+    "siteName": "名无の窝",
+    "faviconUrl": "https://i.loli.net/2019/07/09/5d2484e68fddd81209.jpg",
+    "description": "名无の窝",
+    "globalCssUrl": "/repository/.config/css/global.css",
+    "globalJsUrl": "/repository/.config/js/global.js"
+  }
+}
+
+function getNavbarConfig() {
+  const config = getConfig()
+  if (config && config.navbarConfig) {
+    return config.navbarConfig
+  }
+  return {
+    "brandText": "名无の窝",
+    "brandUrl": "/",
+    "navs": [
+      {
+        "text": "文章",
+        "url": "/article/"
+      },
+      {
+        "text": "时间轴",
+        "url": "/timeLine"
+      },
+      {
+        "text": "关于我",
+        "url": "/article/README"
+      },
+      {
+        "text": "开源",
+        "url": "https://github.com/cellargalaxy/blog-vue"
+      }
+    ]
+  }
+}
+
+function getPageHeadConfig() {
+  const config = getConfig()
+  if (config && config.pageHeadConfig) {
+    return config.pageHeadConfig
+  }
+  return {
+    "avatarUrl": "https://i.loli.net/2019/07/09/5d2483a93eb0e97951.jpg",
+    "siteName": "名无の窝",
+    "siteUrl": "/"
+  }
+}
+
+function getGotoConfig() {
+  const config = getConfig()
+  if (config && config.gotoConfig) {
+    return config.gotoConfig
+  }
+  return {
+    "gotoTopText": "↑",
+    "gotoBottomText": "↓",
+    "contents": [
+      {
+        "text": "电报",
+        "url": "https://telegram.org/"
+      }
+    ]
+  }
+}
+
 function getPageFootConfig() {
   const config = getConfig()
   if (config && config.pageFootConfig) {
@@ -47,50 +120,6 @@ function getPageFootConfig() {
   ]
 }
 
-function getGotoConfig() {
-  const config = getConfig()
-  if (config && config.gotoConfig) {
-    return config.gotoConfig
-  }
-  return {
-    "gotoTopText": "↑",
-    "gotoBottomText": "↓",
-    "contents": [
-      {
-        "text": "电报",
-        "url": "https://telegram.org/"
-      }
-    ]
-  }
-}
-
-function getPageHeadConfig() {
-  const config = getConfig()
-  if (config && config.pageHeadConfig) {
-    return config.pageHeadConfig
-  }
-  return {
-    "avatarUrl": "https://i.loli.net/2019/07/09/5d2483a93eb0e97951.jpg",
-    "siteName": "名无の窝",
-    "siteUrl": "/"
-  }
-}
-
-function getSiteConfig() {
-  const config = getConfig()
-  if (config && config.siteConfig) {
-    return config.siteConfig
-  }
-  return {
-    "siteUrl": "http://127.0.0.1:3000",
-    "siteName": "名无の窝",
-    "faviconUrl": "https://i.loli.net/2019/07/09/5d2484e68fddd81209.jpg",
-    "description": "名无の窝",
-    "globalCssUrl": "/repository/.config/css/global.css",
-    "globalJsUrl": "/repository/.config/js/global.js"
-  }
-}
-
 function getArticleConfig() {
   const config = getConfig()
   if (config && config.articleConfig) {
@@ -100,35 +129,6 @@ function getArticleConfig() {
     "summaryLength": 5,
     "pageSize": 10,
     "dateFormat": "yyyy-MM-dd"
-  }
-}
-
-function getNavbarConfig() {
-  const config = getConfig()
-  if (config && config.navbarConfig) {
-    return config.navbarConfig
-  }
-  return {
-    "brandText": "名无の窝",
-    "brandUrl": "/",
-    "navs": [
-      {
-        "text": "文章",
-        "url": "/article/"
-      },
-      {
-        "text": "时间轴",
-        "url": "/timeLine"
-      },
-      {
-        "text": "关于我",
-        "url": "/article/README"
-      },
-      {
-        "text": "开源",
-        "url": "https://github.com/cellargalaxy/blog-vue"
-      }
-    ]
   }
 }
 
@@ -189,12 +189,12 @@ function getErrorPageConfig(statusCode) {
 }
 
 export default {
-  getPageFootConfig: getPageFootConfig,
-  getGotoConfig: getGotoConfig,
-  getPageHeadConfig: getPageHeadConfig,
   getSiteConfig: getSiteConfig,
-  getArticleConfig: getArticleConfig,
   getNavbarConfig: getNavbarConfig,
+  getPageHeadConfig: getPageHeadConfig,
+  getGotoConfig: getGotoConfig,
+  getPageFootConfig: getPageFootConfig,
+  getArticleConfig: getArticleConfig,
   getHomeConfig: getHomeConfig,
   getGitConfig: getGitConfig,
   getErrorPageConfig: getErrorPageConfig,

@@ -30,6 +30,13 @@ function listArticleByPath(folderPath) {
   return articles
 }
 
+function listAllArticlePage(currentPage) {
+  const articles = listAllArticle()
+  const skipNum = (currentPage - 1) * pageSize
+  const articlePage = (skipNum + pageSize >= articles.length) ? articles.slice(skipNum, articles.length) : articles.slice(skipNum, skipNum + pageSize)
+  return {articles: articles, currentPage: currentPage, articlePage: articlePage}
+}
+
 function listArticlePageByPath(folderPath, currentPage) {
   const articles = listArticleByPath(folderPath)
   const skipNum = (currentPage - 1) * pageSize
@@ -49,13 +56,6 @@ function listAllArticle() {
   }
   articles.sort(sortArticles)
   return articles
-}
-
-function listAllArticlePage(currentPage) {
-  const articles = listAllArticle()
-  const skipNum = (currentPage - 1) * pageSize
-  const articlePage = (skipNum + pageSize >= articles.length) ? articles.slice(skipNum, articles.length) : articles.slice(skipNum, skipNum + pageSize)
-  return {articles: articles, currentPage: currentPage, articlePage: articlePage}
 }
 
 function getTimeLineArticles() {
@@ -183,9 +183,9 @@ function listRoutes() {
 export default {
   getArticle: getArticle,
   listArticleByPath: listArticleByPath,
+  listAllArticlePage: listAllArticlePage,
   listArticlePageByPath: listArticlePageByPath,
   listAllArticle: listAllArticle,
-  listAllArticlePage: listAllArticlePage,
   getTimeLineArticles: getTimeLineArticles,
   listRoutes: listRoutes,
 }
