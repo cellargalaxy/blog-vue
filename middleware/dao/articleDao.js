@@ -76,7 +76,7 @@ function fileMarkdown2Article(articlePath, markdown) {
 
   const title = path.basename(articlePath)
   article.title = title.replace(extension, '')
-  article.url = '/article' + articlePath.replace(repositoryPath, '').replace(extension, '')
+  article.url = '/' + fileIO.join('article', articlePath.replace(repositoryPath, '').replace(extension, '')) + '/'
 
   const attributes = []
 

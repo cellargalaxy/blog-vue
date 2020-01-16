@@ -25,9 +25,10 @@
   export default {
     name: "articlePath",
     async asyncData({params, error}) {
-      const articlePath = '/' + params.pathMatch
+      let articlePath = params.pathMatch//-> a/b/c/
+      articlePath = articlePath.substring(0, articlePath.length - 1) //-> a/b/c
 
-      const article = articleService.getArticle(articlePath)
+      const article = articleService.getArticle(articlePath)//-> root/a/b/c.md
       if (article) {
         return {
           article: article,
