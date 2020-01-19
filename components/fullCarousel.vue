@@ -1,25 +1,43 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <b-carousel controls indicators fade :interval="config.brandInterval">
+  <b-carousel indicators fade :interval="config.brandInterval">
 
-    <b-carousel-slide background="rgba(255, 255, 255, 0)" v-for="(brand,i) in config.brands" :key="i">
+    <b-carousel-slide background="rgba(255, 255, 255, 1)" v-for="(brand,i) in config.brands" :key="i">
       <template v-slot:img>
-        <full-image :imageUrl="brand.imageUrl"  style="max-height: 50vh;"/>
+        <full-image :imageUrl="brand.imageUrl"/>
       </template>
-      <b-card class="black-background-5" style="border: none" title-tag="h1" :title="brand.title">
-        <b-card-text class="white" v-for="(text,j) in brand.texts" :key="j">{{text}}</b-card-text>
-      </b-card>
+      <b-container fluid>
+        <b-row align-v="center" class="text-center">
+          <b-col xl="2" lg="2" md="1" sm="0"/>
+          <b-col xl="8" lg="8" md="10" sm="12">
+            <b-card class="black-background-5" style="border: none" title-tag="h1" :title="brand.title">
+              <b-card-text class="white" v-for="(text,j) in brand.texts" :key="j">{{text}}</b-card-text>
+            </b-card>
+          </b-col>
+          <b-col xl="2" lg="2" md="1" sm="0"/>
+        </b-row>
+
+        <b-row align-v="center" class="text-center">
+          <b-col xl="2" lg="2" md="1" sm="0"/>
+          <b-col xl="8" lg="8" md="10" sm="12">
+            <b-badge pill class="black-background-5" v-for="(nav,k) in config.navs" :key="k">
+              <a class="white" target="_blank" v-text="nav.text" :href="nav.url"/>
+            </b-badge>
+          </b-col>
+          <b-col xl="2" lg="2" md="1" sm="0"/>
+        </b-row>
+      </b-container>
     </b-carousel-slide>
 
   </b-carousel>
 </template>
 
-<page-head :config="config"/>
+<full-carousel :config="config"/>
 
 <script>
-  import fullImage from './fullImage'
+  import fullImage from './fullScrubImage'
 
   export default {
-    name: "pageHead",
+    name: "fullCarousel",
     props: {
       config: {
         default() {
@@ -61,5 +79,9 @@
 <style scoped>
   .black-background-5 {
     background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .white {
+    color: rgba(255, 255, 255, 1);
   }
 </style>

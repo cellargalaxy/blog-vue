@@ -1,22 +1,17 @@
 <template>
-  <div>
-    <b-card v-for="(timeLineArticle,timeLineArticleIndex) in timeLineArticles" :key="timeLineArticleIndex"
-            :header="timeLineArticle.dateString+'('+timeLineArticle.articles.length+')'" class="translucent"
-            style="border-left-color: gray;border-left-width: 0.3em;border-radius: 0">
-      <b-list-group>
-        <b-list-group-item v-for="(article,articlesIndex) in timeLineArticle.articles" :key="articlesIndex"
-                           :href="article.url" target="_blank" class="transparent">
-          <li>
-            {{article.title}}<sub v-if="article.dateString||article.wordSum">
-            {{(article.dateString?('('+article.dateString+')'):'')+(article.wordSum?('('+article.wordSum+' word)'):'')}}
-          </sub>
-          </li>
-        </b-list-group-item>
-      </b-list-group>
-    </b-card>
-
+  <b-card no-body class="white-background-8" style="border: none">
     <br/>
-  </div>
+    <el-timeline>
+      <el-timeline-item placement="top" v-for="(timeLineArticle,i) in timeLineArticles" :key="i"
+                        :timestamp="timeLineArticle.dateString+' ('+timeLineArticle.articles.length+')'">
+        <b-card no-body class="transparent" style="border:none;"
+                v-for="(article,j) in timeLineArticle.articles" :key="j">
+          <b-link :href="article.url">{{article.title}}</b-link>
+          <p>({{article.dateString}}) ({{article.wordSum}} word)</p>
+        </b-card>
+      </el-timeline-item>
+    </el-timeline>
+  </b-card>
 </template>
 
 <time-line :timeLineArticles="timeLineArticles"/>
@@ -26,63 +21,30 @@
     name: "timeLine",
     props: {
       timeLineArticles: {
-        default: function () {
+        default() {
           return [
             {
-              "dateString": "2019-01",
+              "dateString": "2020-01",
               "articles": [
-                {
-                  "title": "测试11",
-                  "url": "/",
-                  "dateString": "2019-01-01",
-                },
-                {
-                  "title": "测试12",
-                  "url": "#",
-                  "dateString": "2019-01-02",
-                },
-                {
-                  "title": "测试13",
-                  "url": "#",
-                  "dateString": "2019-01-03",
-                },
+                {"title": "测试文章标题-1-1", "url": "#", "dateString": "2020-01-01", "wordSum": 110},
+                {"title": "测试文章标题-1-2", "url": "#", "dateString": "2020-01-02", "wordSum": 120},
+                {"title": "测试文章标题-1-3", "url": "#", "dateString": "2020-01-03", "wordSum": 130},
               ],
             },
             {
-              "dateString": "2019-02",
+              "dateString": "2020-02",
               "articles": [
-                {
-                  "title": "测试24",
-                  "url": "#",
-                  "dateString": "2019-02-04",
-                },
-                {
-                  "title": "测试25",
-                  "url": "#",
-                  "dateString": "2019-02-05",
-                },
-                {
-                  "title": "测试26",
-                  "url": "#",
-                  "dateString": "2019-02-06",
-                },
+                {"title": "测试文章标题-2-1", "url": "#", "dateString": "2020-02-01", "wordSum": 210},
+                {"title": "测试文章标题-2-2", "url": "#", "dateString": "2020-02-02", "wordSum": 220},
+                {"title": "测试文章标题-2-3", "url": "#", "dateString": "2020-02-03", "wordSum": 230},
               ],
             },
             {
-              "dateString": "其他",
+              "dateString": "2020-03",
               "articles": [
-                {
-                  "title": "测试31",
-                  "url": "#",
-                },
-                {
-                  "title": "测试32",
-                  "url": "#",
-                },
-                {
-                  "title": "测试33",
-                  "url": "#",
-                },
+                {"title": "测试文章标题-3-1", "url": "#", "dateString": "2020-03-01", "wordSum": 310},
+                {"title": "测试文章标题-3-2", "url": "#", "dateString": "2020-03-02", "wordSum": 320},
+                {"title": "测试文章标题-3-3", "url": "#", "dateString": "2020-03-03", "wordSum": 330},
               ],
             },
           ]
@@ -95,11 +57,9 @@
 <style scoped>
   .transparent {
     background-color: rgba(255, 255, 255, 0);
-    border-color: rgba(255, 255, 255, 0);
   }
 
-  .translucent {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0);
+  .white-background-8 {
+    background-color: rgba(255, 255, 255, 0.8);
   }
 </style>

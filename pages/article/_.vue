@@ -1,23 +1,23 @@
 <template>
   <div>
     <navbar :config="navbarConfig"/>
-    <page-head :config="pageHeadConfig"/>
-
     <b-container>
+      <br/>
+      <page-head :config="homeConfig"/>
+      <br/>
       <article-view :article="article" :isSummary="false"/>
     </b-container>
-
     <page-foot :config="pageFootConfig"/>
-    <goto :config="gotoConfig"/>
+    <backtop/>
   </div>
 </template>
 
 <script>
   import navbar from '../../components/navbar'
   import pageHead from '../../components/pageHead'
-  import pageFoot from '../../components/pageFoot'
-  import goto from '../../components/goto'
   import articleView from '../../components/articleView'
+  import pageFoot from '../../components/pageFoot'
+  import backtop from '../../components/backtop'
 
   import articleService from '../../middleware/service/articleService'
   import configService from '../../middleware/service/configService'
@@ -26,16 +26,13 @@
     name: "articlePath",
     async asyncData({params, error}) {
       let articlePath = params.pathMatch//-> a/b/c/
-      articlePath = articlePath.substring(0, articlePath.length - 1) //-> a/b/c
-
       const article = articleService.getArticle(articlePath)//-> root/a/b/c.md
       if (article) {
         return {
-          article: article,
           navbarConfig: configService.getNavbarConfig(),
-          pageHeadConfig: configService.getPageHeadConfig(),
+          homeConfig: configService.getHomeConfig(),
+          article: article,
           pageFootConfig: configService.getPageFootConfig(),
-          gotoConfig: configService.getGotoConfig(),
         }
       }
 
@@ -43,11 +40,11 @@
       error(errorConfig)
     },
     components: {
-      articleView,
       navbar,
       pageHead,
+      articleView,
       pageFoot,
-      goto,
+      backtop,
     },
   }
 </script>

@@ -1,83 +1,84 @@
 <template>
-  <b-navbar toggleable="sm" fixed="top" :class="{low_translucent:show,transparent:!show}"
-            @mouseenter="mouseenter" @mouseleave="mouseleave" style="height: 5em;">
-    <b-navbar-brand :class="{translucent:!show,transparent:show}" :href="config.brandUrl"
-                    style="border-radius: 0.5em;padding: 0.2em;">
-      <b class="gray">{{config.brandText}}</b>
+  <b-navbar toggleable="md" fixed="top" style="transition: background-color 500ms"
+            :class="show?'white-background-8':'transparent'" @mouseenter="show=true" @mouseleave="show=false">
+
+    <b-navbar-brand tag="h1" style="border-radius: 0.5em;padding: 0.2em;" :href="config.brandUrl"
+                    :class="show?'transparent':'white-background-6'">
+      <b style="color: rgba(51, 51, 51, 0.7);">{{config.brandText}}</b>
     </b-navbar-brand>
 
-    <b-navbar-toggle target="nav-collapse" :class="{translucent:!show,transparent:show}" @click="click"/>
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-    <b-collapse id="nav-collapse" :class="{low_translucent:clickShow,transparent:!show}" is-nav>
-      <b-container>
-        <b-row align-h="center">
-          <b-navbar-nav align="center">
-            <b-nav-item :key="navIndex" v-for="(nav,navIndex) in config.navs?config.navs:[]"
-                        :href="nav.url" style="margin-left: 0.5em;margin-right: 0.5em;">
-              <b :class="{gray:show,translucent_word:!show}">{{nav.text}}</b>
-            </b-nav-item>
-          </b-navbar-nav>
-        </b-row>
-      </b-container>
+    <!--这里的v-if自然是控制是否显示，但是v-show却有式文本渐变出现的功能-->
+    <b-collapse id="nav-collapse" is-nav v-if="show" v-show="show">
+      <b-navbar-nav align="center">
+        <b-nav-item v-for="(nav,i) in config.navs?config.navs:[]" :key="i" :href="nav.url">
+          <b>{{nav.text}}</b>
+        </b-nav-item>
+      </b-navbar-nav>
     </b-collapse>
+
   </b-navbar>
 </template>
 
 <navbar :config="config"/>
 
 <script>
-
   export default {
     name: "navbar",
     props: {
       config: {
-        default: function () {
-          return null
+        default() {
+          return {
+            "brandText": "主页名",
+            "brandUrl": "#",
+            "navs": [
+              {"text": "导航-1", "url": "#"},
+              {"text": "导航-2", "url": "#"},
+              {"text": "导航-3", "url": "#"},
+              {"text": "导航-4", "url": "#"},
+              {"text": "导航-5", "url": "#"},
+              {"text": "导航-6", "url": "#"},
+              {"text": "导航-7", "url": "#"},
+              {"text": "导航-8", "url": "#"},
+              {"text": "导航-9", "url": "#"},
+              {"text": "导航-0", "url": "#"},
+            ]
+          }
         }
       },
     },
     data() {
       return {
         show: false,
-        clickShow: false,
       }
-    },
-    methods: {
-      click: function () {
-        this.clickShow = !this.clickShow
-      },
-      mouseenter: function () {
-        this.show = true
-      },
-      mouseleave: function () {
-        this.show = false
-      },
     },
   }
 </script>
 
 <style scoped>
+  /*导航栏居中*/
+  .navbar-nav {
+    width: 100%;
+    text-align: center;
+  }
+
+  /*导航栏居中*/
+  .navbar-nav li {
+    float: none;
+    display: inline-block;
+    text-align: center;
+  }
+
   .transparent {
     background-color: rgba(255, 255, 255, 0);
-    border-color: rgba(255, 255, 255, 0);
   }
 
-  .translucent {
-    background-color: rgba(255, 255, 255, 0.7);
-    border-color: rgba(255, 255, 255, 0.7);
+  .white-background-6 {
+    background-color: rgba(255, 255, 255, 0.6);
   }
 
-  .low_translucent {
-    background-color: rgba(255, 255, 255, 0.95);
-    border-color: rgba(255, 255, 255, 0.95);
+  .white-background-8 {
+    background-color: rgba(255, 255, 255, 0.8);
   }
-
-  .gray {
-    color: rgba(51, 51, 51, 0.7);
-  }
-
-  .translucent_word {
-    color: rgba(51, 51, 51, 0);
-  }
-
 </style>

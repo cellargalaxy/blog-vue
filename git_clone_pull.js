@@ -2,22 +2,21 @@ const git = require("isomorphic-git")
 const path = require('path')
 const fs = require('fs-extra')
 
-const config = require('./middleware/config')
+const config = require('./config')
 
-const logger = {
-  info: function (string, ...infos) {
-    log('info', 'git_clone_pull', formatString(string, ...infos))
-  },
-  error: function (string, ...infos) {
-    log('error', 'git_clone_pull', formatString(string, ...infos))
-  },
-}
+const logger = createLogger('git_clone_pull')
+
+const staticFileDataPath = 'staticFileData.json'
+logger.info('静态文件复制列表文件: {}', staticFileDataPath)
+
+const staticFolderName = '.static'
+logger.info('git静态文件路径: {}', staticFolderName)
 
 const repositoryPath = config.repositoryPath
 logger.info('仓库路径: {}', repositoryPath)
 
 const gitUrl = process.env.GIT_URL
-logger.info('gitUrl: {}', '***' + gitUrl.split('/')[gitUrl.split('/').length - 1])
+logger.info('gitUrl: {}', '***' + (gitUrl ? gitUrl.split('/')[gitUrl.split('/').length - 1] : 'null'))
 
 const ref = process.env.GIT_REF ? process.env.GIT_REF : 'master'
 logger.info('git分支: {}', ref)
@@ -25,10 +24,8 @@ logger.info('git分支: {}', ref)
 const username = process.env.GIT_USERNAME ? process.env.GIT_USERNAME : ''
 const password = process.env.GIT_PASSWORD ? process.env.GIT_PASSWORD : ''
 
-const staticFileDataPath = 'staticFileData.json'
-
 if (process.argv.length < 3) {
-  logger.error('未输入命令类型:clone,pull')
+  logger.error('未输入命令类型:clone,pull,copyStatusFile,removeStatusFile')
 } else if (process.argv[2] == 'clone') {
   clone()
 } else if (process.argv[2] == 'pull') {
@@ -78,34 +75,52 @@ async function pull() {
 
 function removeStatusFile() {
   logger.info('开始删除静态文件')
-  const files = fs.readJsonSync(staticFileDataPath)
-  if (!files || files.length == 0) {
+  const filePaths = fs.readJsonSync(staticFileDataPath)
+  if (!filePaths || filePaths.length == 0) {
     logger.info('没有静态文件需要被删除')
     return
   }
-  for (let i = 0; i < files.length; i++) {
-    const fileOrFolderPath = join('static', files[i])
-    logger.info('删除静态文件: {}', fileOrFolderPath)
-    fs.removeSync(fileOrFolderPath)
+  for (let i = 0; i < filePaths.length; i++) {
+    fs.removeSync(filePaths[i])
   }
   logger.info('完成删除静态文件')
 }
 
 function copyStatusFile() {
   logger.info('开始复制静态文件')
-  const staticFolderPath = join(repositoryPath, '.static')
+  const staticFolderPath = join(repositoryPath, staticFolderName)
+  logger.info('创建静态文件夹路径,staticFolderPath: {}', staticFolderPath)
   if (!isFolder(staticFolderPath)) {
-    logger.info('静态文件文件夹不存在')
+    logger.error('静态文件文件夹不存在或者不是文件夹')
     return
   }
-  const files = fs.readdirSync(staticFolderPath)
-  fs.outputJsonSync(staticFileDataPath, files)
-  for (let i = 0; i < files.length; i++) {
-    const fileOrFolderPath = join(staticFolderPath, files[i])
-    logger.info('复制静态文件: {}', fileOrFolderPath)
-    fs.copySync(fileOrFolderPath, join('static', files[i]))
+  const staticFilePaths = []
+  const filePaths = listAllFilePath(staticFolderPath)
+  for (let i = 0; i < filePaths.length; i++) {
+    let targetStaticPath = filePaths[i].split(staticFolderName)
+    targetStaticPath = targetStaticPath[targetStaticPath.length - 1]
+    targetStaticPath = join('static', targetStaticPath)
+    logger.info('创建静态文件目标路径,targetStaticPath: {}', targetStaticPath)
+    staticFilePaths.push(targetStaticPath)
+    fs.copySync(filePaths[i], targetStaticPath)
   }
+  fs.outputJsonSync(staticFileDataPath, staticFilePaths)
   logger.info('完成复制静态文件')
+}
+
+function listAllFilePath(folderPath) {
+  if (isFolder(folderPath)) {
+    const filePaths = []
+    const files = fs.readdirSync(folderPath)
+    for (let i = 0; i < files.length; i++) {
+      const paths = listAllFilePath(join(folderPath, files[i]))
+      for (let i = 0; i < paths.length; i++) {
+        filePaths.push(paths[i])
+      }
+    }
+    return filePaths
+  }
+  return [folderPath]
 }
 
 function copy(sourcePath, targetPath) {
@@ -121,6 +136,10 @@ function remove(targetPath) {
   } else {
     fs.removeSync(targetPath)
   }
+}
+
+function join(...paths) {
+  return path.join(...paths).replace(/\\/g, '/')
 }
 
 function exists(fileOrFolderPath) {
@@ -140,8 +159,32 @@ function isFolder(folderPath) {
   }
 }
 
-function join(...paths) {
-  return path.join(...paths).replace(/\\/g, '/')
+function createLogger(name) {
+  return {
+    name: name,
+    trace: function (string, ...infos) {
+      log('trace', name, formatString(string, ...infos))
+    },
+    debug: function debug(string, ...infos) {
+      log('debug', name, formatString(string, ...infos))
+    },
+    info: function (string, ...infos) {
+      log('info', name, formatString(string, ...infos))
+    },
+    warn: function (string, ...infos) {
+      log('warn', name, formatString(string, ...infos))
+    },
+    error: function (string, ...infos) {
+      log('error', name, formatString(string, ...infos))
+    },
+    fatal: function (string, ...infos) {
+      log('fatal', name, formatString(string, ...infos))
+    }
+  }
+}
+
+function log(level, name, massage) {
+  console.log(formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' ' + level + ' ' + name + ' ' + massage)
 }
 
 function formatString(string, ...infos) {
@@ -149,10 +192,6 @@ function formatString(string, ...infos) {
     string = string.replace('{}', infos[i])
   }
   return string
-}
-
-function log(level, name, massage) {
-  console.log(formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' ' + level + ' ' + name + ' ' + massage)
 }
 
 function formatDate(date, fmt) {

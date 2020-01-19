@@ -1,6 +1,6 @@
 <template>
-  <b-pagination :total-rows="total" :per-page="pageSize" v-model="currentPage" @change="change"
-                align="center" class="translucent"/>
+  <b-pagination class="white-background-8" pills align="center" :hide-ellipsis="true" :limit="12"
+                :value="currentPage" :total-rows="total" :per-page="pageSize" @change="change"></b-pagination>
 </template>
 
 <pagination :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
@@ -10,32 +10,31 @@
     name: "pagination",
     props: {
       total: {
-        default: function () {
-          return 100
+        default() {
+          return 1000
         }
       },
       pageSize: {
-        default: function () {
+        default() {
           return 10
         }
       },
       currentPage: {
-        default: function () {
-          return 1
+        default() {
+          return 15
         }
       },
     },
     methods: {
-      change: function (page) {
-        window.location.href = '../' + page
+      change(page) {
+        window.location.href = '../' + page + '/'
       },
     },
   }
 </script>
 
 <style scoped>
-  .translucent {
-    background-color: rgba(255, 255, 255, 0.7);
-    border-color: rgba(255, 255, 255, 0.7);
+  .white-background-8 {
+    background-color: rgba(255, 255, 255, 0.8);
   }
 </style>

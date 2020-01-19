@@ -1,128 +1,101 @@
+import log from '../utils/log'
 import configDao from '../dao/configDao'
-import log from "../utils/log"
 
 const logger = log('configService')
 
 function getConfig() {
-  let config = null
   try {
-    config = configDao.getConfig()
+    let config = configDao.getConfig()
+    if (config == null) {
+      logger.error('读取配置文件失败')
+      config = {}
+    }
+    return config
   } catch (e) {
     logger.error('读取配置文件失败: {}', e)
+    return {}
   }
-  return config
+}
+
+function getGitConfig() {
+  const config = getConfig()
+  if (config.gitConfig) {
+    return config.gitConfig
+  }
+  return {
+    "extension": ".md",
+    "dateRegular": "/\\d{4}-\\d{2}-\\d{2}/"
+  }
 }
 
 function getSiteConfig() {
   const config = getConfig()
-  if (config && config.siteConfig) {
+  if (config.siteConfig) {
     return config.siteConfig
   }
   return {
     "siteUrl": "http://127.0.0.1:3000",
-    "siteName": "名无の窝",
+    "siteName": "主页の名",
     "faviconUrl": "https://i.loli.net/2019/07/09/5d2484e68fddd81209.jpg",
-    "description": "名无の窝",
-    "globalCssUrl": "/repository/.config/css/global.css",
-    "globalJsUrl": "/repository/.config/js/global.js"
+    "description": "主页の名",
+    "staticCssUrl": "/css/static.css",
+    "staticJsUrl": "/js/static.js"
+  }
+}
+
+function getHomeConfig() {
+  const config = getConfig()
+  if (config.homeConfig) {
+    return config.homeConfig
+  }
+  return {
+    "brandInterval": 5000,
+    "brands": [
+      {
+        "imageUrl": "https://i.loli.net/2018/08/21/5b7bb5dd4f0df.png",
+        "title": "这是大招牌-1",
+        "texts": ["这是一段招牌的演示文字-1-1", "这是一段招牌的演示文字-1-2"]
+      },
+      {
+        "imageUrl": "https://i.loli.net/2018/04/10/5accdcbcb1738.jpg",
+        "title": "这是大招牌-2",
+        "texts": ["这是一段招牌的演示文字-2-1", "这是一段招牌的演示文字-2-2"]
+      },
+      {
+        "imageUrl": "https://i.loli.net/2018/08/21/5b7bbc8ec3633.jpg",
+        "title": "这是大招牌-3",
+        "texts": ["这是一段招牌的演示文字-3-1", "这是一段招牌的演示文字-3-2"]
+      }
+    ],
+    "navs": [
+      {"text": "twitter", "url": "https://twitter.com/"},
+      {"text": "facebook", "url": "https://facebook.com/"},
+      {"text": "微博", "url": "https://weibo.com/"},
+      {"text": "知乎", "url": "https://www.zhihu.com/"}
+    ]
   }
 }
 
 function getNavbarConfig() {
   const config = getConfig()
-  if (config && config.navbarConfig) {
+  if (config.navbarConfig) {
     return config.navbarConfig
   }
   return {
-    "brandText": "名无の窝",
+    "brandText": "主页の名",
     "brandUrl": "/",
     "navs": [
-      {
-        "text": "文章",
-        "url": "/article/"
-      },
-      {
-        "text": "时间轴",
-        "url": "/timeLine"
-      },
-      {
-        "text": "关于我",
-        "url": "/article/README"
-      },
-      {
-        "text": "开源",
-        "url": "https://github.com/cellargalaxy/blog-vue"
-      }
+      {"text": "文章", "url": "/page/1/"},
+      {"text": "时间轴", "url": "/timeLine/"},
+      {"text": "关于我", "url": "/article/README/"},
+      {"text": "开源", "url": "https://github.com/cellargalaxy/blog-vue"}
     ]
   }
-}
-
-function getPageHeadConfig() {
-  const config = getConfig()
-  if (config && config.pageHeadConfig) {
-    return config.pageHeadConfig
-  }
-  return {
-    "avatarUrl": "https://i.loli.net/2019/07/09/5d2483a93eb0e97951.jpg",
-    "siteName": "名无の窝",
-    "siteUrl": "/"
-  }
-}
-
-function getGotoConfig() {
-  const config = getConfig()
-  if (config && config.gotoConfig) {
-    return config.gotoConfig
-  }
-  return {
-    "gotoTopText": "↑",
-    "gotoBottomText": "↓",
-    "contents": [
-      {
-        "text": "电报",
-        "url": "https://telegram.org/"
-      }
-    ]
-  }
-}
-
-function getPageFootConfig() {
-  const config = getConfig()
-  if (config && config.pageFootConfig) {
-    return config.pageFootConfig
-  }
-  return [
-    [
-      {
-        "text": "Copyright © 2017-? ."
-      },
-      {
-        "text": "备案？不存在的"
-      },
-      {
-        "text": "Powered by Nuxt.js & Github",
-        "url": "https://github.com/"
-      }
-    ],
-    [
-      {
-        "text": "孤独的友链："
-      },
-      {
-        "text": "Github",
-        "url": "https://github.com/"
-      },
-      {
-        "text": "nuxtjs",
-        "url": "https://zh.nuxtjs.org"
-      }
-    ]
-  ]
 }
 
 function getArticleConfig() {
   const config = getConfig()
-  if (config && config.articleConfig) {
+  if (config.articleConfig) {
     return config.articleConfig
   }
   return {
@@ -132,52 +105,28 @@ function getArticleConfig() {
   }
 }
 
-function getHomeConfig() {
+function getPageFootConfig() {
   const config = getConfig()
-  if (config && config.homeConfig) {
-    return config.homeConfig
+  if (config.pageFootConfig) {
+    return config.pageFootConfig
   }
-  return {
-    "brandHello": "HI,MUMEI!",
-    "brandTexts": [
-      "我在这里的时候经常想，以前的人为什么总是留下记录呢？",
-      "因为他们不想让有些事情发生改变。——苍之萤"
+  return [
+    [
+      {"text": "Copyright © 2017-? ."},
+      {"text": "备案？不存在的"},
+      {"text": "Powered by Nuxt.js & Github", "url": "https://github.com/"}
     ],
-    "navs": [
-      {
-        "text": "推特",
-        "url": "https://twitter.com/"
-      },
-      {
-        "text": "facebook",
-        "url": "https://facebook.com/"
-      },
-      {
-        "text": "微博",
-        "url": "https://weibo.com/"
-      },
-      {
-        "text": "知乎",
-        "url": "https://www.zhihu.com/"
-      }
+    [
+      {"text": "友链："},
+      {"text": "Github", "url": "https://github.com/"},
+      {"text": "Nuxt.js", "url": "https://zh.nuxtjs.org"}
     ]
-  }
-}
-
-function getGitConfig() {
-  const config = getConfig()
-  if (config && config.gitConfig) {
-    return config.gitConfig
-  }
-  return {
-    "extension": ".md",
-    "dateRegular": "/\\d{4}-\\d{2}-\\d{2}/"
-  }
+  ]
 }
 
 function getErrorPageConfig(statusCode) {
   let config = getConfig()
-  if (config && config.errorPageConfig && config.errorPageConfig[statusCode]) {
+  if (config.errorPageConfig && config.errorPageConfig[statusCode]) {
     return config.errorPageConfig[statusCode]
   }
   return {
@@ -191,8 +140,6 @@ function getErrorPageConfig(statusCode) {
 export default {
   getSiteConfig: getSiteConfig,
   getNavbarConfig: getNavbarConfig,
-  getPageHeadConfig: getPageHeadConfig,
-  getGotoConfig: getGotoConfig,
   getPageFootConfig: getPageFootConfig,
   getArticleConfig: getArticleConfig,
   getHomeConfig: getHomeConfig,

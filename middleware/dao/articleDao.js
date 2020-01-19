@@ -1,126 +1,70 @@
-import path from 'path'
 import fs from 'fs'
 
-import fileIO from '../utils/fileIO'
+import config from '../../config'
+import log from '../utils/log'
 import utils from '../utils/utils'
-import configService from '../service/configService'
-import config from '../config'
+import fileIO from '../utils/fileIO'
 
+const logger = log('articleDao')
 const repositoryPath = config.repositoryPath
-const extension = configService.getGitConfig().extension
-const dateRegular = configService.getGitConfig().dateRegular
-const dateRegularObject = new RegExp(dateRegular)
-const summaryLength = configService.getArticleConfig().summaryLength
 
-function getArticle(articlePath) {
-  articlePath = fileIO.join(repositoryPath, articlePath + extension)
-  if (fileIO.isFile(articlePath)) {
-    const data = fs.readFileSync(articlePath)
-    const markdown = data.toString()
-    return fileMarkdown2Article(articlePath, markdown)
+function getMarkdown(articlePath) {
+  const baseArticlePath = fileIO.join(repositoryPath, articlePath)
+  logger.info('创建baseArticlePath: {}', baseArticlePath)
+  if (!utils.startsWith(baseArticlePath, repositoryPath)) {
+    logger.error('读取文章文件路径不在仓库里')
+    return null
   }
-  return null
+  if (!fileIO.isFile(baseArticlePath)) {
+    logger.error('所读取的文章文件不存在或者不是文件')
+    return null
+  }
+  const data = fs.readFileSync(baseArticlePath)
+  const markdown = data.toString()
+  return markdown
 }
 
-function listAllArticle() {
-  return listArticleByPath('')
-}
-
-function listArticleByPath(folderPath) {
-  //避免被人拼凑其他的路径
-  folderPath = fileIO.join(repositoryPath, folderPath)
-  //{'articlePath': 'markdown'}
+function listFileMarkdown(folderPath, dateRegularObject, extension) {
+  //{'baseArticlePath': 'markdown'}
   let fileMarkdown = {}
-  getFileMarkdownFromFolder(folderPath, fileMarkdown)
 
-  const articles = []
-  for (let articlePath in fileMarkdown) {
-    const article = fileMarkdown2Article(articlePath, fileMarkdown[articlePath])
-    articles.push(article)
+  const baseFolderPath = fileIO.join(repositoryPath, folderPath)
+  logger.info('创建baseFolderPath: {}', baseFolderPath)
+  if (!utils.startsWith(baseFolderPath, repositoryPath)) {
+    logger.error('读取文章文件夹路径不在仓库里')
+    return fileMarkdown
   }
-  return articles
-}
 
-function getFileMarkdownFromFolder(articlePath, fileMarkdown) {
-  if (fileIO.isFile(articlePath) && articlePath.endsWith(extension)) {
-    const data = fs.readFileSync(articlePath)
+  const isfile=fileIO.isFile(baseFolderPath)
+  const isend=utils.endsWith(baseFolderPath, extension)
+  if (isfile && isend) {
+    const data = fs.readFileSync(baseFolderPath)
     const markdown = data.toString()
-    fileMarkdown[articlePath] = markdown
-    return
+    fileMarkdown[folderPath] = markdown
+    return fileMarkdown
   }
-  if (fileIO.isFolder(articlePath)) {
-    const files = fs.readdirSync(articlePath)
+
+  if (fileIO.isFolder(baseFolderPath)) {
+    const files = fs.readdirSync(baseFolderPath)
     for (let i = 0; i < files.length; i++) {
-      if (!files[i].startsWith('.')) {
-        getFileMarkdownFromFolder(fileIO.join(articlePath, files[i]), fileMarkdown)
+      if (utils.startsWith(files[i], '.')) {
+        continue
+      }
+      const childFolderPath = fileIO.join(folderPath, files[i])
+      logger.info('创建childFolderPath: {}', childFolderPath)
+      const childFileMarkdown = listFileMarkdown(childFolderPath, dateRegularObject,extension)
+      for (const childBaseArticlePath in childFileMarkdown) {
+        fileMarkdown[childBaseArticlePath] = childFileMarkdown[childBaseArticlePath]
       }
     }
-  }
-}
-
-function fileMarkdown2Article(articlePath, markdown) {
-  const article = {}
-  article.path = articlePath
-  article.markdown = markdown
-
-  let summary = ''
-  const markdowns = markdown.split('\n')
-  let count = 0
-  for (let i = 0; i < markdowns.length && count < summaryLength; i++) {
-    if (markdowns[i] && (markdowns[i] = markdowns[i].trim()).length > 0) {
-      count = count + 1
-    }
-    summary = summary + markdowns[i] + '\n'
-  }
-  article.summary = summary
-
-  const title = path.basename(articlePath)
-  article.title = title.replace(extension, '')
-  article.url = '/' + fileIO.join('article', articlePath.replace(repositoryPath, '').replace(extension, '')) + '/'
-
-  const attributes = []
-
-  let dateExec = dateRegularObject.exec(articlePath)
-  if (dateExec) {
-    let dateString = dateExec.toString()
-    const date = new Date(dateString)
-    dateString = utils.formatDate(date, configService.getArticleConfig().dateFormat)
-    article.date = date
-    article.dateString = dateString
-    attributes.push({"name": "时间", "value": dateString})
+    return fileMarkdown
   }
 
-  let sort = articlePath.replace(repositoryPath, '')
-  if (dateExec) {
-    let dateString = dateExec.toString()
-    sort = sort.split(dateString)[0]
-  }
-  sort = sort.replace(path.basename(articlePath), '')
-  if (sort && sort != '') {
-    article.sort = sort
-    article.sortUrl = '/' + fileIO.join('page', sort, '1') + '/'
-    attributes.push({"name": "分类", "value": sort, "url": article.sortUrl})
-  }
-
-  const wordSum = article.markdown.length
-  article.wordSum = wordSum
-  attributes.push({"name": "字数", "value": wordSum})
-
-  //https://www.wukong.com/question/6434284981916270849/
-  let readTime = Math.round(wordSum / 300)
-  if (readTime == 0) {
-    readTime = 1
-  }
-  readTime = readTime + '分钟'
-  article.readTime = readTime
-  attributes.push({"name": "阅读时间", "value": readTime})
-
-  article.attributes = attributes
-  return article
+  logger.error('未知类型路径baseFolderPath: {}', baseFolderPath)
+  return fileMarkdown
 }
 
 export default {
-  getArticle: getArticle,
-  listAllArticle: listAllArticle,
-  listArticleByPath: listArticleByPath,
+  getMarkdown: getMarkdown,
+  listFileMarkdown: listFileMarkdown,
 }

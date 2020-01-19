@@ -1,30 +1,22 @@
 <template>
   <b-list-group style="margin-bottom: 1em">
-    <b-list-group-item class="translucent">
-      <b-card v-if="article.title" no-body class="transparent">
-        <h2>
-          <b-link :href="article.url" v-text="article.title" target="_blank"/>
-        </h2>
-      </b-card>
+    <b-list-group-item class="white-background-8">
+      <h1 style="font-size: 2em;">
+        <b-link :href="article.url" v-text="article.title" target="_blank"/>
+      </h1>
 
-      <b-row>
-        <b-col align-self="start">
-          <b-badge v-for="(attribute,attributeIndex) in article.attributes" :key="attributeIndex"
-                   style="margin-left: 0.1em;margin-right: 0.1em;">
-            {{attribute.name+': '}}<a :href="attribute.url" class="white" v-text="attribute.value"/>
-          </b-badge>
-        </b-col>
-      </b-row>
+      <b-badge v-for="(attribute,i) in article.attributes" :key="i" style="margin-left: 0.1em;margin-right: 0.1em;">
+        {{attribute.name+': '}}<a :href="attribute.url" class="white" v-text="attribute.value"/>
+      </b-badge>
     </b-list-group-item>
 
-    <b-list-group-item class="translucent" v-html="$md.render(isSummary?article.summary:article.markdown)"/>
+    <b-list-group-item class="white-background-8" v-html="$md.render(isSummary?article.summary:article.markdown)"/>
   </b-list-group>
 </template>
 
-<article-view :article="article" :isSummary="isSummary"/>
+<article-view :article="article" :isSummary="isSummary" :siteName="siteName"/>
 
 <script>
-
   export default {
     name: "articleView",
     head() {
@@ -33,31 +25,35 @@
       }
       if (this.article.title) {
         return {
-          title: this.article.title + ' | cellargalaxyの博客',
-          meta: [
-            {hid: 'article_description', name: 'description', content: this.article.title}
-          ]
+          title: this.article.title + ' | ' + this.siteName,
+          meta: [{hid: 'article_description', name: 'description', content: this.article.title}]
         }
       }
-      return {
-        title: 'cellargalaxyの博客',
-      }
+      return {title: this.siteName}
     },
     props: {
       article: {
-        default: function () {
+        default() {
           return {
-            "title": "测试",
-            "url": "#",
-            "attributes": [{"name": "时间", "value": "2019-01-01"}],
-            "summaryHtml": "summaryHtml",
-            "html": "html",
+            "title": "测试文章标题-1-1", "url": "#", "markdown": "markdown", "summary": "summary",
+            "attributes": [
+              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+            ],
           }
         }
       },
       isSummary: {
-        default: function () {
+        default() {
           return false
+        }
+      },
+      siteName: {
+        default() {
+          return 'site_name'
         }
       },
     },
@@ -65,13 +61,11 @@
 </script>
 
 <style scoped>
-  .transparent {
-    background-color: rgba(255, 255, 255, 0);
-    border-color: rgba(255, 255, 255, 0);
+  .white-background-8 {
+    background-color: rgba(255, 255, 255, 0.8);
   }
 
-  .translucent {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.9);
+  .white {
+    color: rgba(255, 255, 255, 1);
   }
 </style>

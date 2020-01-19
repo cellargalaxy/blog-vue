@@ -1,23 +1,25 @@
 <template>
   <div>
     <navbar :config="navbarConfig"/>
-    <page-head :config="pageHeadConfig"/>
 
     <b-container>
+      <br/>
+      <page-head :config="homeConfig"/>
+      <br/>
       <time-line-component :timeLineArticles="timeLineArticles"/>
     </b-container>
-
+    <br/>
     <page-foot :config="pageFootConfig"/>
-    <goto :config="gotoConfig"/>
+    <backtop/>
   </div>
 </template>
 
 <script>
   import navbar from '../components/navbar'
   import pageHead from '../components/pageHead'
-  import pageFoot from '../components/pageFoot'
-  import goto from '../components/goto'
   import timeLineComponent from '../components/timeLine'
+  import pageFoot from '../components/pageFoot'
+  import backtop from '../components/backtop'
 
   import articleService from '../middleware/service/articleService'
   import configService from '../middleware/service/configService'
@@ -26,19 +28,18 @@
     name: "timeLine",
     async asyncData({}) {
       return {
-        timeLineArticles: articleService.getTimeLineArticles(),
         navbarConfig: configService.getNavbarConfig(),
-        pageHeadConfig: configService.getPageHeadConfig(),
+        homeConfig: configService.getHomeConfig(),
+        timeLineArticles: articleService.getTimeLineArticles(),
         pageFootConfig: configService.getPageFootConfig(),
-        gotoConfig: configService.getGotoConfig(),
       }
     },
     components: {
-      timeLineComponent,
       navbar,
       pageHead,
+      timeLineComponent,
       pageFoot,
-      goto,
+      backtop,
     },
   }
 </script>

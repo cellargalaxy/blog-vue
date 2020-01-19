@@ -1,16 +1,16 @@
 <template>
-  <div class="scrubImage transparent" :style="{backgroundImage:'url('+scrubUrl+'), url('+imageUrl+')'}"></div>
+  <div class="full-scrub-image" :style="{backgroundImage:'url('+scrubUrl+'), url('+imageUrl+')'}"></div>
 </template>
 
-<scrub-image :scrubUrl="scrubUrl" :imageUrl="imageUrl"/>
+<full-scrub-image :scrubUrl="scrubUrl" :imageUrl="imageUrl"/>
 
 <script>
   export default {
-    name: "scrubImage",
+    name: "fullScrubImage",
     props: {
       scrubUrl: {
         default: function () {
-          return '/images/dot.gif'
+          return '/images/blurry.png'
         }
       },
       imageUrl: {
@@ -23,17 +23,11 @@
 </script>
 
 <style scoped>
-  .scrubImage {
-    /*background-image: url("/images/dot.gif"), url("https://i.loli.net/2018/10/02/5bb391d063618.jpg");*/
+  .full-scrub-image {
     background-repeat: repeat, no-repeat;
     background-position: 0% 0%, center;
     background-attachment: scroll, fixed;
     background-size: auto, cover;
     height: 100vh;
-  }
-
-  .transparent {
-    background-color: rgba(255, 255, 255, 0);
-    border-color: rgba(255, 255, 255, 0);
   }
 </style>

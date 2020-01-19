@@ -16,11 +16,11 @@ export default {
     ],
     script: [
       {src: 'https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js'},
-      {src: configService.getSiteConfig().globalJsUrl},
+      {src: configService.getSiteConfig().staticJsUrl},
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: configService.getSiteConfig().faviconUrl},
-      {rel: 'stylesheet', href: configService.getSiteConfig().globalCssUrl},
+      {rel: 'stylesheet', href: configService.getSiteConfig().staticCssUrl},
     ]
   },
 
@@ -33,13 +33,27 @@ export default {
   ** Global CSS
   */
   css: [
-    {src: '~/node_modules/highlight.js/styles/darcula.css', lang: 'css'}
+    {src: '~/node_modules/highlight.js/styles/darcula.css', lang: 'css'},
+    {src: '~/node_modules/element-ui/lib/theme-chalk/index.css', lang: 'css'},
   ],
 
-  /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [],
+  vender:[
+    'element-ui'
+  ],
+  babel:{
+    "plugins": [["component", [
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-default"
+      },
+      'transform-async-to-generator',
+      'transform-runtime'
+    ]]],
+    comments: true
+  },
+  plugins: [
+    { src: '~plugins/element-ui', ssr: true }
+  ],
 
   /*
   ** Nuxt.js modules
@@ -98,7 +112,7 @@ export default {
     generate: true, // Enable me when using nuxt generate
     exclude: [],
     routes(callback) {
-      const articles = articleService.listAllArticle()
+      const articles = articleService.listArticleByPath('')
       let routes = articles.map(article => article.url)
       callback(null, routes)
     }

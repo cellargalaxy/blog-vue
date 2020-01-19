@@ -1,13 +1,11 @@
 <template>
-  <b-card class="text-center blue-translucent white">
-    <b-container>
-      <p :key="contentsIndex" v-for="(contents,contentsIndex) in config">
-        <b-badge :key="contentIndex" class="transparent" style="margin-left: 1em;margin-right: 1em;"
-                 v-for="(content,contentIndex) in contents">
-          <a :href="content.url" class="white" target="_blank" v-text="content.text"/>
-        </b-badge>
-      </p>
-    </b-container>
+  <b-card class="text-center blue-background-8" style="border:none;">
+    <b-card-text class="white" v-for="(contents,i) in config" :key="i">
+      <b-badge class="transparent" style="margin-left: 0.5em;margin-right: 0.5em;"
+               v-for="(content,j) in contents" :key="j">
+        <a class="white" target="_blank" v-text="content.text" :href="content.url"/>
+      </b-badge>
+    </b-card-text>
   </b-card>
 </template>
 
@@ -19,8 +17,19 @@
     name: "pageFoot",
     props: {
       config: {
-        default: function () {
-          return null
+        default() {
+          return [
+            [
+              {"text": "Copyright © 2017-? ."},
+              {"text": "备案？不存在的"},
+              {"text": "Powered by Nuxt.js & Github", "url": "https://github.com/"},
+            ],
+            [
+              {"text": "友链："},
+              {"text": "Github", "url": "https://github.com/"},
+              {"text": "Nuxt.js", "url": "https://zh.nuxtjs.org"},
+            ]
+          ]
         }
       },
     },
@@ -28,9 +37,9 @@
 </script>
 
 <style scoped>
-  .blue-translucent {
-    background-color: rgba(83, 154, 196, 0.7);
-    border-color: rgba(83, 154, 196, 0.7);
+  .blue-background-8 {
+    background-color: rgba(84, 155, 196, 0.8);
+    border-color: rgba(84, 155, 196, 0.8);
   }
 
   .transparent {

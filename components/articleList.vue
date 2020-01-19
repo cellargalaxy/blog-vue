@@ -1,6 +1,6 @@
 <template>
   <div>
-    <article-view v-for="(article,articleIndex) in articles" :key="articleIndex" :article="article" :isSummary="true"/>
+    <article-view v-for="(article,i) in articles" :key="i" :article="article" :isSummary="true"/>
   </div>
 </template>
 
@@ -13,28 +13,37 @@
     name: "articleList",
     props: {
       articles: {
-        default: function () {
+        default() {
           return [
             {
-              "title": "测试",
-              "url": "#",
-              "attributes": [{"name": "时间", "value": "2019-01-01"}],
-              "summaryHtml": "summaryHtml",
-              "html": "html",
+              "title": "测试文章标题-1-1", "url": "#", "markdown": "markdown", "summary": "summary",
+              "attributes": [
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+              ],
             },
             {
-              "title": "测试",
-              "url": "#",
-              "attributes": [{"name": "时间", "value": "2019-01-01"}],
-              "summaryHtml": "summaryHtml",
-              "html": "html",
+              "title": "测试文章标题-1-2", "url": "#", "markdown": "markdown", "summary": "summary",
+              "attributes": [
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+              ],
             },
             {
-              "title": "测试",
-              "url": "#",
-              "attributes": [{"name": "时间", "value": "2019-01-01"}],
-              "summaryHtml": "summaryHtml",
-              "html": "html",
+              "title": "测试文章标题-1-3", "url": "#", "markdown": "markdown", "summary": "summary",
+              "attributes": [
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+                {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+              ],
             },
           ]
         }

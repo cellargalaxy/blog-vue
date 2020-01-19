@@ -18,28 +18,33 @@ read -p "please enter git password(default:''):" -s GIT_PASSWORD
 if [ -z $GIT_PASSWORD ];then
     GIT_PASSWORD=""
 fi
-read -p "please enter sleepTime(default:3600):" sleepTime
-if [ -z $sleepTime ];then
-    sleepTime="3600"
+read -p "please enter container name(default:'blog_vue'):" CONTAINER_NAME
+if [ -z $CONTAINER_NAME ];then
+    CONTAINER_NAME="blog_vue"
 fi
-read -p "please enter listen port(default:8888):" listenPort
-if [ -z $listenPort ];then
-    listenPort="8888"
+read -p "please enter sleepTime(default:3600):" SLEEP_TIME
+if [ -z $SLEEP_TIME ];then
+    SLEEP_TIME="3600"
+fi
+read -p "please enter listen port(default:8888):" LISTEN_PORT
+if [ -z $LISTEN_PORT ];then
+    LISTEN_PORT="8888"
 fi
 
 echo 'git url: '$GIT_URL
 echo 'git ref: '$GIT_REF
 echo 'git username: '$GIT_USERNAME
-echo 'sleepTime: '$sleepTime
-echo 'listenPort: '$listenPort
+echo 'container name: '$CONTAINER_NAME
+echo 'sleep time: '$SLEEP_TIME
+echo 'listen port: '$LISTEN_PORT
 echo 'input any key go on,or control+c over'
 read
 
 echo 'docker build'
-docker build -t blog_vue .
+docker build -t $CONTAINER_NAME .
 echo 'docker create volume'
-docker volume create blog_vue
+docker volume create $CONTAINER_NAME
 echo 'docker run'
-docker run -d --restart=always --name blog_vue -p $listenPort:8080 -v blog_vue:/src/public -e GIT_URL=$GIT_URL -e GIT_REF=$GIT_REF -e GIT_USERNAME=$GIT_USERNAME -e GIT_PASSWORD=$GIT_PASSWORD -e sleepTime=$sleepTime blog_vue
+docker run -d --restart=always --name $CONTAINER_NAME -p $LISTEN_PORT:8080 -v $CONTAINER_NAME:/src/public -e GIT_URL=$GIT_URL -e GIT_REF=$GIT_REF -e GIT_USERNAME=$GIT_USERNAME -e GIT_PASSWORD=$GIT_PASSWORD -e SLEEP_TIME=$SLEEP_TIME $CONTAINER_NAME
 
 echo 'all finish'

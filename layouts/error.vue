@@ -3,7 +3,7 @@
     <b-row align-v="center" class="text-center" style="height: 100vh">
       <b-col>
 
-        <b-card class="text-center translucent white">
+        <b-card no-body class="text-center translucent white" style="border:none;">
           <h2 v-text="error.statusCode"/>
           <p v-text="error.message"/>
           <nuxt-link :to="error.returnUrl">{{error.returnText}}</nuxt-link>
