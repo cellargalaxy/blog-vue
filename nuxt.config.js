@@ -16,10 +16,12 @@ export default {
     ],
     script: [
       {src: '/base.js'},
+      {src: configService.getSiteConfig().staticJsUrl},
     ],
     link: [
-      {rel: 'icon', type: 'image/x-icon', href: ''},
       {rel: 'stylesheet', href: '/base.css'},
+      {rel: 'icon', type: 'image/x-icon', href: configService.getSiteConfig().faviconUrl},
+      {rel: 'stylesheet', href: configService.getSiteConfig().staticCssUrl},
     ]
   },
 

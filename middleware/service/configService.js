@@ -36,7 +36,10 @@ function getSiteConfig() {
   return {
     "siteUrl": "http://127.0.0.1:3000",
     "siteName": "主页の名",
-    "description": "主页の名"
+    "faviconUrl": "https://i.loli.net/2019/07/09/5d2484e68fddd81209.jpg",
+    "description": "主页の名",
+    "staticCssUrl": "/css/static.css",
+    "staticJsUrl": "/js/static.js"
   }
 }
 
