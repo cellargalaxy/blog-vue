@@ -1,25 +1,60 @@
 # 简介
-一个博客，使用nuxt做服务端渲染，会轮训从指定git仓库里clone/pull作为博文的来源。最终效果达到，在服务器部署好，指定某个git仓库。直接把文章更新到git上，服务端就会更新博文。
+一个博客，每间隔一段时间从指定git仓库里拉取文章，使用nuxt做服务端渲染。最终达到部署服务后，把文章更新到git上，博客就会自动更新博文。
 
-# 使用
-第一次使用需要先执行`install.sh`，在脚本里会要求输入一些参数，并且在根目录生成一个配置文件`bootConfig.json`。其中脚本要求输入的参数参考如下
-```json
-{
-  "gitUrl": "", //所指定的git仓库url，必填
-  "ref": "master", //git的分支，默认master
-  "username": "", //如果是私有仓库，需指定账号，否则为空字符串即可
-  "password": "", //如果是私有仓库，需指定密码，否则为空字符串即可
-  "flushTime": 600000, //每隔多久clone/pull仓库，单位毫秒，默认十分钟
-  "repositoryPath": "static/repository" //仓库所clone到的文件地址，最好别改，脚本里也没这选项
-}
+# 本地使用
+```bash
+cd blog-vue
+npm i
+bash generate.sh
 ```
+然后依照提示填写信息。`generate.sh`执行到最后，会监听`8080`端口，在浏览器打开`127.0.0.1:8080`即可
 
-2. `install.sh` 会依次做无件事，生成`bootConfig.json`配置文件，删除`.nuxt`和`node_modules`两个文件夹，安装node依赖，clone仓库，构建nuxt
-3. `clone-start.sh` 在后台启动一个更新git仓库的进程，会先停止全部已经在运行的更新git仓库的进程
-4. `clone-status.sh` 查看更新git仓库的进程的pid
-5. `clone-stop.sh` 停止全部已经在运行的更新git仓库的进程
-6. `nuxt-start.sh` 在后台启动nuxt，会先停止全部已经在运行的该项目的nuxt
-7. `nuxt-status.sh` 查看该项目的nuxt的进程的pid
-8. `nuxt-stop.sh` 停止全部已经在运行的该项目的nuxt
+# docker安装
+```bash
+cd blog-vue
+npm i
+bash install-docker.sh
+```
+然后依照提示填写信息。`generate.sh`执行到最后，会监听`8080`端口，在浏览器打开`127.0.0.1:8080`即可
 
-所以第一次使用需要先执行`install.sh`，之后执行`clone-start.sh`和`nuxt-start.sh`两个脚本，日志分别会输出到`clone.log`和`nuxt.log`。
+# 参数
+|参数|默认值|含义|
+|-|-|-|
+|git url|没有默认值|git的地址|
+|git ref|master|git的分支|
+|git username|""|git的账号，如果是私有仓库需要填写|
+|git password|""|git的密码，如果是私有仓库需要填写|
+|sleepTime|3600(秒)|每间隔3600秒拉取一次git的文件进行编译，docker中使用|
+|listen port|8888|docker的监听端口|
+|container name|blog_vue|docker的容器的名字|
+
+
+# Summary
+A blog, pull articles from the git repository at interval, use nuxt as server。After deploying the service, push articles to git and blog will auto update.
+
+# local use
+```bash
+cd blog-vue
+npm i
+bash generate.sh
+```
+Fill in the information as prompted. `generate.sh`execution to the end，will listen`8080`port，open`127.0.0.1:8080`in the browser.
+
+# docker install
+```bash
+cd blog-vue
+npm i
+bash install-docker.sh
+```
+Fill in the information as prompted.
+
+# Parameter
+|parameter|defaults|meaning|
+|-|-|-|
+|git url|no default|git address|
+|git ref|master|git branch|
+|git username|""|git username, need to fill in if it is private|
+|git password|""|git password, need to fill in if it is private|
+|sleepTime|3600(second)|pull the git file every 3600 seconds for compilation, use in docker|
+|listen port|8888|docker listen port|
+|container name|blog_vue|docker container name|
