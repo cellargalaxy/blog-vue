@@ -41,10 +41,10 @@ echo 'input any key go on,or control+c over'
 read
 
 echo 'docker build'
-docker build -t $CONTAINER_NAME .
+docker build -t blog_vue .
 echo 'docker create volume'
 docker volume create $CONTAINER_NAME
 echo 'docker run'
-docker run -d --restart=always --name $CONTAINER_NAME -p $LISTEN_PORT:8080 -v $CONTAINER_NAME:/src/public -e GIT_URL=$GIT_URL -e GIT_REF=$GIT_REF -e GIT_USERNAME=$GIT_USERNAME -e GIT_PASSWORD=$GIT_PASSWORD -e SLEEP_TIME=$SLEEP_TIME $CONTAINER_NAME
+docker run -d --restart=always --name $CONTAINER_NAME -p $LISTEN_PORT:8080 -v $CONTAINER_NAME:/src/public -e GIT_URL=$GIT_URL -e GIT_REF=$GIT_REF -e GIT_USERNAME=$GIT_USERNAME -e GIT_PASSWORD=$GIT_PASSWORD -e SLEEP_TIME=$SLEEP_TIME blog_vue
 
 echo 'all finish'
