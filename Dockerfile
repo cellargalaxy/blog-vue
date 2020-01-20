@@ -1,6 +1,5 @@
 FROM node:10
 WORKDIR /src
-COPY package*.json ./
-RUN npm install
 COPY . .
-ENTRYPOINT ["./generate_docker.sh"]
+RUN npm install
+ENTRYPOINT ["/src/generate_docker.sh"]
