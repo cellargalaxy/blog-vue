@@ -81,7 +81,9 @@ function removeStatusFile() {
     return
   }
   for (let i = 0; i < filePaths.length; i++) {
+    logger.info('开始删除静态文件: {}', filePaths[i])
     fs.removeSync(filePaths[i])
+    logger.info('完成删除静态文件: {}', filePaths[i])
   }
   logger.info('完成删除静态文件')
 }
@@ -102,7 +104,9 @@ function copyStatusFile() {
     targetStaticPath = join('static', targetStaticPath)
     logger.info('创建静态文件目标路径,targetStaticPath: {}', targetStaticPath)
     staticFilePaths.push(targetStaticPath)
+    logger.info('开始复制静态文件: {}', targetStaticPath)
     fs.copySync(filePaths[i], targetStaticPath)
+    logger.info('完成复制静态文件: {}', targetStaticPath)
   }
   fs.outputJsonSync(staticFileDataPath, staticFilePaths)
   logger.info('完成复制静态文件')

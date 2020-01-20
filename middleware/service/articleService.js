@@ -25,6 +25,9 @@ function getArticle(articleUrlPath) {
     articlePath = articlePath + EXTENSION //-> a/b/c.md
     logger.info('添加拓展名articlePath: {}', articlePath)
     const markdown = articleDao.getMarkdown(articlePath)
+    if (markdown == null) {
+      return null
+    }
     const article = createArticle(articlePath, markdown)
     return article
   } catch (e) {

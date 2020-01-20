@@ -36,10 +36,7 @@ function getSiteConfig() {
   return {
     "siteUrl": "http://127.0.0.1:3000",
     "siteName": "主页の名",
-    "faviconUrl": "https://i.loli.net/2019/07/09/5d2484e68fddd81209.jpg",
-    "description": "主页の名",
-    "staticCssUrl": "/css/static.css",
-    "staticJsUrl": "/js/static.js"
+    "description": "主页の名"
   }
 }
 
@@ -131,8 +128,8 @@ function getErrorPageConfig(statusCode) {
   }
   return {
     "statusCode": statusCode,
-    "message": "未知错误",
-    "returnText": "回去首页溜达",
+    "message": "unknown error",
+    "returnText": "go back home page",
     "returnUrl": "/"
   }
 }

@@ -15,12 +15,11 @@ export default {
       {hid: 'description', name: 'description', content: configService.getSiteConfig().description}
     ],
     script: [
-      {src: 'https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js'},
-      {src: configService.getSiteConfig().staticJsUrl},
+      {src: '/base.js'},
     ],
     link: [
-      {rel: 'icon', type: 'image/x-icon', href: configService.getSiteConfig().faviconUrl},
-      {rel: 'stylesheet', href: configService.getSiteConfig().staticCssUrl},
+      {rel: 'icon', type: 'image/x-icon', href: ''},
+      {rel: 'stylesheet', href: '/base.css'},
     ]
   },
 
@@ -37,10 +36,10 @@ export default {
     {src: '~/node_modules/element-ui/lib/theme-chalk/index.css', lang: 'css'},
   ],
 
-  vender:[
+  vender: [
     'element-ui'
   ],
-  babel:{
+  babel: {
     "plugins": [["component", [
       {
         "libraryName": "element-ui",
@@ -52,7 +51,7 @@ export default {
     comments: true
   },
   plugins: [
-    { src: '~plugins/element-ui', ssr: true }
+    {src: '~plugins/element-ui', ssr: true}
   ],
 
   /*
@@ -119,6 +118,7 @@ export default {
   },
 
   generate: {
+    fallback: true,
     routes: articleService.listRoutes(),
   },
 }
