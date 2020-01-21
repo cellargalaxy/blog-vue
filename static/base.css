@@ -50,3 +50,7 @@ thead {
     white-space: nowrap;
 }
 
+.hljs ol li {
+    border-left: 0.1em solid #ddd !important;
+    padding-left: 0.2em;
+}
