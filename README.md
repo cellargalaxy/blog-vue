@@ -28,6 +28,8 @@ bash install-docker.sh
 |listen port|8888|docker的监听端口|
 |container name|blog_vue|docker的容器的名字|
 
+# 文章git结构
+参考https://github.com/cellargalaxy/blog-code，约定`.static`存放静态文件，git目录下有`config.json`作为站点的配置
 
 # Summary
 A blog, pull articles from the git repository at interval, use nuxt as server。After deploying the service, push articles to git and blog will auto update.
@@ -58,3 +60,6 @@ Fill in the information as prompted.
 |sleepTime|3600(second)|pull the git file every 3600 seconds for compilation, use in docker|
 |listen port|8888|docker listen port|
 |container name|blog_vue|docker container name|
+
+# Article git structure
+Reference https://github.com/cellargalaxy/blog-code, promise`.static`Store static files, git path has`config.json`configuration as a site
