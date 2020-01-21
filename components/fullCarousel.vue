@@ -6,7 +6,7 @@
         <full-image :imageUrl="brand.imageUrl"/>
       </template>
       <b-container fluid>
-        <b-row align-v="center" class="text-center">
+        <b-row align-v="center" class="text-center" v-if="brand.title">
           <b-col xl="2" lg="2" md="1" sm="0"/>
           <b-col xl="8" lg="8" md="10" sm="12">
             <b-card class="black-background-5" style="border: none" title-tag="h1" :title="brand.title">
