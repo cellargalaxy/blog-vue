@@ -38,8 +38,16 @@ function getSiteConfig() {
     "siteName": "主页の名",
     "faviconUrl": "https://i.loli.net/2019/07/09/5d2484e68fddd81209.jpg",
     "description": "主页の名",
-    "staticCssUrl": "/css/static.css",
-    "staticJsUrl": "/js/static.js"
+    "backgroundImage": {
+      "duration": 6000,
+      "fade": 1000,
+      "images": [
+        "https://i.loli.net/2020/01/20/VXvo2ShyBaPNkdJ.jpg",
+        "https://i.loli.net/2020/01/22/GIZMQjfxEWwgsXt.jpg"
+      ]
+    },
+    "staticCssUrl": "/static.css",
+    "staticJsUrl": "/static.js"
   }
 }
 

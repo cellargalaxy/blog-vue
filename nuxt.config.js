@@ -12,13 +12,24 @@ export default {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: configService.getSiteConfig().description}
+      {hid: 'description', name: 'description', content: configService.getSiteConfig().description},
+      {
+        hid: 'background-image',
+        name: 'background-image',
+        content: JSON.stringify(configService.getSiteConfig().backgroundImage)
+      },
     ],
     script: [
+      {src: 'https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js'},
+      {src: 'https://cdn.bootcss.com/mermaid/8.3.1/mermaid.min.js'},
+      {src: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js'},
+      {src: 'https://cdn.bootcss.com/jquery-backstretch/2.0.4/jquery.backstretch.min.js'},
+      {src: '/js/zoom.js'},
       {src: '/base.js'},
       {src: configService.getSiteConfig().staticJsUrl},
     ],
     link: [
+      {rel: 'stylesheet', href: '/css/zoom.css'},
       {rel: 'stylesheet', href: '/base.css'},
       {rel: 'icon', type: 'image/x-icon', href: configService.getSiteConfig().faviconUrl},
       {rel: 'stylesheet', href: configService.getSiteConfig().staticCssUrl},

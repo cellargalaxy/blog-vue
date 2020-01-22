@@ -19,6 +19,11 @@
     background-size: auto;
 }
 
+/*图片大图的背景蒙版半透明*/
+div.zoom-overlay {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
 /*让链接文字换行*/
 * {
     word-wrap: break-word;
@@ -50,7 +55,11 @@ thead {
     white-space: nowrap;
 }
 
+.hljs ol {
+    margin-bottom: 0em;
+}
+
 .hljs ol li {
     border-left: 0.1em solid #ddd !important;
-    padding-left: 0.2em;
+    padding-left: 0.3em;
 }
