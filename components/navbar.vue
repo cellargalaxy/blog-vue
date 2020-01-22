@@ -1,9 +1,9 @@
 <template>
-  <b-navbar toggleable="md" fixed="top" style="transition: background-color 500ms"
+  <b-navbar fixed="top" style="transition: background-color 1000ms" toggleable="md"
             :class="show?'white-background-8':'transparent'" @mouseenter="show=true" @mouseleave="show=false">
 
-    <b-navbar-brand tag="h1" style="border-radius: 0.5em;padding: 0.2em;" :href="config.brandUrl"
-                    :class="show?'transparent':'white-background-6'">
+    <b-navbar-brand :class="show?'transparent':'white-background-6'" :href="config.brandUrl"
+                    style="border-radius: 0.5em;padding: 0.2em;transition: background-color 1000ms;" tag="h1">
       <b style="color: rgba(51, 51, 51, 0.7);">{{config.brandText}}</b>
     </b-navbar-brand>
 

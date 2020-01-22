@@ -5,7 +5,7 @@
       <template v-slot:img>
         <full-image :imageUrl="brand.imageUrl"  style="max-height: 50vh;"/>
       </template>
-      <b-card class="black-background-5" style="border: none" title-tag="h1" :title="brand.title">
+      <b-card :title="brand.title" class="black-background-5" style="border: none" title-tag="h1" v-if="brand.title">
         <b-card-text class="white" v-for="(text,j) in brand.texts" :key="j">{{text}}</b-card-text>
       </b-card>
     </b-carousel-slide>
