@@ -15,7 +15,7 @@ cd blog-vue
 npm i
 bash install-docker.sh
 ```
-然后依照提示填写信息。`generate.sh`执行到最后，会监听`8080`端口，在浏览器打开`127.0.0.1:8080`即可
+然后依照提示填写信息。`install-docker.sh`执行完成后，还需要一段时间来生成html（大约一分钟到二十分钟）。之后会监听`8080`端口，在浏览器打开`127.0.0.1:8080`即可
 
 # 参数
 |参数|默认值|含义|
@@ -40,7 +40,7 @@ cd blog-vue
 npm i
 bash generate.sh
 ```
-Fill in the information as prompted. `generate.sh`execution to the end，will listen`8080`port，open`127.0.0.1:8080`in the browser.
+Fill in the information as prompted. `generate.sh`execution to the end, will listen`8080`port, open`127.0.0.1:8080`in the browser.
 
 # docker install
 ```bash
@@ -48,7 +48,7 @@ cd blog-vue
 npm i
 bash install-docker.sh
 ```
-Fill in the information as prompted.
+Fill in the information as prompted. After`install-docker.sh`execution, it still takes a while to generate the html(About one minute to twenty minutes). will listen`8080`port, open`127.0.0.1:8080`in the browser.
 
 # Parameter
 |parameter|defaults|meaning|
