@@ -29,7 +29,7 @@ bash install-docker.sh
 |container name|blog_vue|docker的容器的名字|
 
 # 文章git结构
-参考https://github.com/cellargalaxy/blog-code，约定`.static`存放静态文件，git目录下有`config.json`作为站点的配置
+参考https://github.com/cellargalaxy/blog-code ，约定`.static`存放静态文件，git目录下有`config.json`作为站点的配置
 
 # Summary
 A blog, pull articles from the git repository at interval, use nuxt as server。After deploying the service, push articles to git and blog will auto update.
