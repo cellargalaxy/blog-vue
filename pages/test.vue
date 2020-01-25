@@ -1,5 +1,5 @@
 <template>
-  <aomponent/>
+  <!--  <aomponent/>-->
 </template>
 
 <script>
