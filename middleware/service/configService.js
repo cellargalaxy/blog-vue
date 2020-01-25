@@ -133,6 +133,7 @@ function getPageFootConfig() {
 }
 
 function getErrorPageConfig(statusCode) {
+  statusCode = statusCode + ''
   let config = getConfig()
   if (config.errorPageConfig && config.errorPageConfig[statusCode]) {
     return config.errorPageConfig[statusCode]

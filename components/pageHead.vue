@@ -1,9 +1,9 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <b-carousel controls indicators fade :interval="config.brandInterval">
+  <b-carousel :interval="0" controls fade indicators v-model="slide">
 
     <b-carousel-slide background="rgba(255, 255, 255, 0)" v-for="(brand,i) in config.brands" :key="i">
       <template v-slot:img>
-        <full-image :imageUrl="brand.imageUrl"  style="max-height: 50vh;"/>
+        <full-image :imageUrl="brand.imageUrl" style="max-height: 50vh;"/>
       </template>
       <b-card :title="brand.title" class="black-background-5" style="border: none" title-tag="h1" v-if="brand.title">
         <b-card-text class="white" v-for="(text,j) in brand.texts" :key="j">{{text}}</b-card-text>
@@ -49,6 +49,11 @@
               {"text": "知乎", "url": "https://www.zhihu.com/"},
             ]
           }
+        }
+      },
+      slide: {
+        default() {
+          return Math.floor(Math.random() * this.config.brands.length)
         }
       },
     },
