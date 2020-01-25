@@ -20,7 +20,7 @@ function initBackstretch() {
   //https://github.com/jquery-backstretch/jquery-backstretch
   $('[data-hid="background-image"]').each((i, node) => {
     const backgroundImage = JSON.parse($(node).attr('content'))
-    $.backstretch(backgroundImage.images, backgroundImage)
+    $.backstretch(backgroundImage.images.map((image) => image.image), backgroundImage)
   })
 }
 

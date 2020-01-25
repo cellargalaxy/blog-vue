@@ -42,8 +42,14 @@ function getSiteConfig() {
       "duration": 6000,
       "fade": 1000,
       "images": [
-        "https://i.loli.net/2020/01/20/VXvo2ShyBaPNkdJ.jpg",
-        "https://i.loli.net/2020/01/22/GIZMQjfxEWwgsXt.jpg"
+        {
+          "description": "来自深渊-娜娜奇",
+          "image": "https://i.loli.net/2020/01/20/VXvo2ShyBaPNkdJ.jpg"
+        },
+        {
+          "description": "宝石之国-钻石",
+          "image": "https://i.loli.net/2020/01/22/GIZMQjfxEWwgsXt.jpg"
+        }
       ]
     },
     "staticCssUrl": "/static.css",
