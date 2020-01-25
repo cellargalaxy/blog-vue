@@ -17,8 +17,8 @@
     background-position: 0% 0%;
     background-attachment: fixed;
     background-size: auto;
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    min-width: 100vw;
 }
 
 /*图片大图的背景蒙版半透明*/
