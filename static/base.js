@@ -53,6 +53,6 @@ function initTableClass() {
 
 function initCodeRow() {
   $('#__nuxt').find('.hljs').each((i, node) => {
-    $(node).html('<ol><li>' + $(node).html().replace(/\n/g, '\n</li><li>') + '\n</li></ol>');
+    $(node).html('<ol><li>' + $(node).html().replace(/\n/g, '\n</li><li>') + '\n</li></ol>')
   })
 }
