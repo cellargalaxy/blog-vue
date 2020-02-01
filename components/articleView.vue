@@ -14,23 +14,11 @@
   </b-list-group>
 </template>
 
-<article-view :article="article" :isSummary="isSummary" :siteName="siteName"/>
+<article-view :article="article" :isSummary="isSummary"/>
 
 <script>
   export default {
     name: "articleView",
-    head() {
-      if (this.isSummary) {
-        return {}
-      }
-      if (this.article.title) {
-        return {
-          title: this.article.title + ' | ' + this.siteName,
-          meta: [{hid: 'article_description', name: 'description', content: this.article.title}]
-        }
-      }
-      return {title: this.siteName}
-    },
     props: {
       article: {
         default() {
@@ -49,11 +37,6 @@
       isSummary: {
         default() {
           return false
-        }
-      },
-      siteName: {
-        default() {
-          return 'site_name'
         }
       },
     },

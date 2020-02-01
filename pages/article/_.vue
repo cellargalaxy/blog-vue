@@ -29,6 +29,7 @@
       const article = articleService.getArticle(articlePath)//-> root/a/b/c.md
       if (article) {
         return {
+          siteName: configService.getSiteConfig().siteName,
           navbarConfig: configService.getNavbarConfig(),
           homeConfig: configService.getHomeConfig(),
           article: article,
@@ -38,6 +39,15 @@
 
       const errorConfig = configService.getErrorPageConfig("404")
       error(errorConfig)
+    },
+    head() {
+      if (this.article.title) {
+        return {
+          title: this.article.title + ' | ' + this.siteName,
+          meta: [{hid: 'article_description', name: 'description', content: this.article.title}]
+        }
+      }
+      return {title: this.siteName}
     },
     components: {
       navbar,
