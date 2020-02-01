@@ -6,12 +6,16 @@
         <a class="white" target="_blank" v-text="content.text" :href="content.url"/>
       </b-badge>
     </b-card-text>
+    <b-card-text class="white">
+      <b-badge class="transparent">built in {{now}}</b-badge>
+    </b-card-text>
   </b-card>
 </template>
 
 <page-foot :config="config"/>
 
 <script>
+  import utils from '../middleware/utils/utils'
 
   export default {
     name: "pageFoot",
@@ -32,6 +36,11 @@
           ]
         }
       },
+    },
+    computed: {
+      now: () => {
+        return utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm')
+      }
     },
   }
 </script>
