@@ -1,13 +1,21 @@
-window.onload = () => {
+$(() => {
   try {
-    baseWindowOnload()
-    staticWindowOnload()
+    console.log('exec static init start')
+    staticInit()
+    console.log('exec static init over')
   } catch (e) {
-    console.log('exec window onload error:', e)
+    console.log('exec static init error:', e)
   }
-}
+  try {
+    console.log('exec base init start')
+    baseInit()
+    console.log('exec base init over')
+  } catch (e) {
+    console.log('exec base init error:', e)
+  }
+})
 
-function baseWindowOnload() {
+function baseInit() {
   initMermaid()
   initTableClass()
   initCodeRow()
@@ -18,9 +26,30 @@ function baseWindowOnload() {
 
 function initBackstretch() {
   //https://github.com/jquery-backstretch/jquery-backstretch
+  const isPc = window.innerWidth >= window.innerHeight
   $('[data-hid="background-image"]').each((i, node) => {
     const backgroundImage = JSON.parse($(node).attr('content'))
-    $.backstretch(backgroundImage.images.map((image) => image.url), backgroundImage)
+    const urls = []
+    for (let j = 0; j < backgroundImage.images.length; j++) {
+      const image = backgroundImage.images[j]
+      if (image.clientType == undefined || image.clientType == null) {
+        urls.push(image.url)
+        continue
+      }
+      image.clientType = image.clientType.toLowerCase()
+      if (image.clientType == 'pc') {
+        if (isPc) {
+          urls.push(image.url)
+        }
+      } else if (image.clientType == 'phone') {
+        if (!isPc) {
+          urls.push(image.url)
+        }
+      } else {
+        console.log('非法clientType:', image.clientType)
+      }
+    }
+    $.backstretch(urls, backgroundImage)
   })
 }
 

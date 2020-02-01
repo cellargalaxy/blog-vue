@@ -20,10 +20,10 @@ export default {
       },
     ],
     script: [
-      {src: 'https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js'},
-      {src: 'https://cdn.bootcss.com/mermaid/8.3.1/mermaid.min.js'},
+      {src: 'https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js'},
+      {src: 'https://cdn.jsdelivr.net/npm/mermaid@8.4.6/dist/mermaid.min.js'},
       {src: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js'},
-      {src: 'https://cdn.bootcss.com/jquery-backstretch/2.0.4/jquery.backstretch.min.js'},
+      {src: 'https://cdn.jsdelivr.net/npm/jquery.backstretch@2.1.15/jquery.backstretch.min.js'},
       {src: '/js/zoom.js'},
       {src: '/base.js'},
       {src: configService.getSiteConfig().staticJsUrl},

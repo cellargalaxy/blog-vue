@@ -44,10 +44,12 @@ function getSiteConfig() {
       "images": [
         {
           "description": "来自深渊-娜娜奇",
+          "clientType": "pc",
           "url": "https://i.loli.net/2020/01/20/VXvo2ShyBaPNkdJ.jpg"
         },
         {
           "description": "宝石之国-钻石",
+          "clientType": "phone",
           "url": "https://i.loli.net/2020/01/22/GIZMQjfxEWwgsXt.jpg"
         }
       ]
