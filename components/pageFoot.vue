@@ -7,7 +7,7 @@
       </b-badge>
     </b-card-text>
     <b-card-text class="white">
-      <b-badge class="transparent">built in {{now}}</b-badge>
+      <b-badge class="transparent">build in {{now}}</b-badge>
     </b-card-text>
   </b-card>
 </template>
@@ -36,11 +36,11 @@
           ]
         }
       },
-    },
-    computed: {
-      now: () => {
-        return utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm')
-      }
+      now: {
+        default() {
+          return utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm')
+        }
+      },
     },
   }
 </script>
