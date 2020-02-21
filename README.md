@@ -70,3 +70,4 @@ Reference https://github.com/cellargalaxy/blog-code, promise`.static`Store stati
 3. 减少无关字段在文章编译时输出
 4. 修改文章日期结构为20200121形式
 5. 看看叶头的图片需不需要位置的大小更改适配
+6. 博客头像固定url
