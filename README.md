@@ -71,3 +71,5 @@ Reference https://github.com/cellargalaxy/blog-code, promise`.static`Store stati
 4. 修改文章日期结构为20200121形式
 5. 看看叶头的图片需不需要位置的大小更改适配
 6. 博客头像固定url
+7. 支持stackedit
+8. 支持子目录分类型解析，为以后继续挖坑做准备
