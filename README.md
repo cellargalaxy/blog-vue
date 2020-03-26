@@ -73,3 +73,4 @@ Reference https://github.com/cellargalaxy/blog-code, promise`.static`Store stati
 6. 博客头像固定url
 7. 支持stackedit
 8. 支持子目录分类型解析，为以后继续挖坑做准备
+9. 代码行的多出一行bug
