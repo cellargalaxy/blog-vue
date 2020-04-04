@@ -1,0 +1,8 @@
+{
+  "repositoryPath": "repository",
+  "configFileName": "config.json",
+  "staticFolderName": ".static",
+  "staticFileDataPath": "staticFileData.json",
+  "faviconPath": "/images/favicon.ico",
+  "avatarPath": "/images/avatar.jpg"
+}

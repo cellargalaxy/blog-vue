@@ -2,14 +2,14 @@ $(() => {
   try {
     console.log('exec static init start')
     staticInit()
-    console.log('exec static init over')
+    console.log('exec static init finish')
   } catch (e) {
     console.log('exec static init error:', e)
   }
   try {
     console.log('exec base init start')
     baseInit()
-    console.log('exec base init over')
+    console.log('exec base init finish')
   } catch (e) {
     console.log('exec base init error:', e)
   }
@@ -27,26 +27,22 @@ function baseInit() {
 function initBackstretch() {
   //https://github.com/jquery-backstretch/jquery-backstretch
   const isPc = window.innerWidth >= window.innerHeight
+  console.log('is pc windows: ' + isPc)
   $('[data-hid="background-image"]').each((i, node) => {
     const backgroundImage = JSON.parse($(node).attr('content'))
     const urls = []
     for (let j = 0; j < backgroundImage.images.length; j++) {
       const image = backgroundImage.images[j]
-      if (image.clientType == undefined || image.clientType == null) {
+      if (image.isPc == undefined || image.isPc == null || image.isPc == isPc) {
         urls.push(image.url)
-        continue
+        console.log('add background image: ' + image.description)
       }
-      image.clientType = image.clientType.toLowerCase()
-      if (image.clientType == 'pc') {
-        if (isPc) {
-          urls.push(image.url)
-        }
-      } else if (image.clientType == 'phone') {
-        if (!isPc) {
-          urls.push(image.url)
-        }
-      } else {
-        console.log('非法clientType:', image.clientType)
+    }
+    if (urls.length == 0) {
+      for (let j = 0; j < backgroundImage.images.length; j++) {
+        const image = backgroundImage.images[j]
+        urls.push(image.url)
+        console.log('add background image: ' + image.description)
       }
     }
     $.backstretch(urls, backgroundImage)
@@ -71,9 +67,7 @@ function initMermaid() {
 function initMathjax() {
   //https://mathjax.github.io/MathJax-demos-web/tex-chtml.html
   //不知道为什么，经过markdown的反斜杠会被转义，需要在那些用括号或者方括号的，以及换行的地方用\\
-  MathJax = {
-    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
-  }
+  MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}}
 }
 
 function initTableClass() {
@@ -82,6 +76,6 @@ function initTableClass() {
 
 function initCodeRow() {
   $('#__nuxt').find('.hljs').each((i, node) => {
-    $(node).html('<ol><li>' + $(node).html().replace(/\n/g, '\n</li><li>') + '\n</li></ol>')
+    $(node).html('<ol><li>' + $(node).html().trim().replace(/\n/g, '\n</li><li>') + '\n</li></ol>')
   })
 }

@@ -65,12 +65,13 @@ Fill in the information as prompted. After`install-docker.sh`execution, it still
 Reference https://github.com/cellargalaxy/blog-code, promise`.static`Store static files, git path has`config.json`configuration as a site
 
 # 计划
-1. 修改编译时间的bug
-2. 为什么宽会有多
-3. 减少无关字段在文章编译时输出
-4. 修改文章日期结构为20200121形式
-5. 看看叶头的图片需不需要位置的大小更改适配
-6. 博客头像固定url
-7. 支持stackedit
-8. 支持子目录分类型解析，为以后继续挖坑做准备
-9. 代码行的多出一行bug
+1. ~~修改编译时间的bug~~（已修复）
+2. ~~为什么宽会有多~~（已修复）
+3. ~~减少无关字段在文章编译时输出~~（已完成）
+4. ~~修改文章日期结构为20200121形式~~（已完成）
+5. ~~看看叶头的图片需不需要位置的大小更改适配~~（不需要）
+6. ~~博客头像固定url~~（已完成）
+7. ~~支持stackedit~~（已完成）
+8. ~~支持子目录分类型解析，为以后继续挖坑做准备~~（已完成）
+9. ~~代码行的多出一行bug~~（已修复）
+10. ~~增加评论~~（已完成）

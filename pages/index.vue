@@ -14,10 +14,22 @@
 
   export default {
     name: "index",
-    async asyncData({}) {
+    async asyncData({error}) {
+      const navbarConfig = configService.getNavbarConfig()
+      if (!navbarConfig) {
+        const errorConfig = configService.getErrorPageConfig("404")
+        error(errorConfig)
+        return
+      }
+      const homeConfig = configService.getHomeConfig()
+      if (!homeConfig) {
+        const errorConfig = configService.getErrorPageConfig("404")
+        error(errorConfig)
+        return
+      }
       return {
-        navbarConfig: configService.getNavbarConfig(),
-        homeConfig: configService.getHomeConfig(),
+        navbarConfig: navbarConfig,
+        homeConfig: homeConfig,
       }
     },
     components: {

@@ -2,6 +2,8 @@
 public
 staticFileData.json
 http.log
+static/images/avatar.jpg
+static/images/favicon.ico
 
 # dependencies
 node_modules

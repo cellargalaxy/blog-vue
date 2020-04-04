@@ -6,27 +6,41 @@ do
     fi
     read -p "please enter git url(required):" GIT_URL
 done
-read -p "please enter git ref(default:'master'):" GIT_REF
+
+if [ -z $GIT_REF ];then
+    read -p "please enter git ref(default:'master'):" GIT_REF
+fi
 if [ -z $GIT_REF ];then
     GIT_REF="master"
 fi
+
 read -p "please enter git username(default:''):" GIT_USERNAME
 if [ -z $GIT_USERNAME ];then
     GIT_USERNAME=""
 fi
+
 read -p "please enter git password(default:''):" -s GIT_PASSWORD
 if [ -z $GIT_PASSWORD ];then
     GIT_PASSWORD=""
 fi
-read -p "please enter sleepTime(default:3600):" SLEEP_TIME
+
+if [ -z $SLEEP_TIME ];then
+    read -p "please enter sleepTime(default:3600):" SLEEP_TIME
+fi
 if [ -z $SLEEP_TIME ];then
     SLEEP_TIME="3600"
 fi
-read -p "please enter listen port(default:8888):" LISTEN_PORT
+
+if [ -z $LISTEN_PORT ];then
+    read -p "please enter listen port(default:8888):" LISTEN_PORT
+fi
 if [ -z $LISTEN_PORT ];then
     LISTEN_PORT="8888"
 fi
-read -p "please enter container name(default:'blog_vue'):" CONTAINER_NAME
+
+if [ -z $CONTAINER_NAME ];then
+    read -p "please enter container name(default:'blog_vue'):" CONTAINER_NAME
+fi
 if [ -z $CONTAINER_NAME ];then
     CONTAINER_NAME="blog_vue"
 fi

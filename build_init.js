@@ -1,22 +1,32 @@
 const git = require("isomorphic-git")
 const path = require('path')
 const fs = require('fs-extra')
+const httpRequest = require('request')
 
-const config = require('./config')
+const global_config = require('./global_config')
 
-const logger = createLogger('git_clone_pull')
+const logger = createLogger('build_init')
 
-const staticFileDataPath = 'staticFileData.json'
-logger.info('静态文件复制列表文件: {}', staticFileDataPath)
-
-const staticFolderName = '.static'
-logger.info('git静态文件路径: {}', staticFolderName)
-
-const repositoryPath = config.repositoryPath
+const repositoryPath = global_config.repositoryPath
 logger.info('仓库路径: {}', repositoryPath)
 
-const gitUrl = process.env.GIT_URL
-logger.info('gitUrl: {}', '***' + (gitUrl ? gitUrl.split('/')[gitUrl.split('/').length - 1] : 'null'))
+const configFilePath = join(repositoryPath, global_config.configFileName)
+logger.info('配置文件路径: {}', configFilePath)
+
+const staticFolderPath = join(repositoryPath, global_config.staticFolderName)
+logger.info('git静态文件夹路径: {}', staticFolderPath)
+
+const staticFileDataPath = global_config.staticFileDataPath
+logger.info('静态文件复制列表文件: {}', staticFileDataPath)
+
+const faviconPath = join('static', global_config.faviconPath)
+logger.info('网站图标保存路径: {}', faviconPath)
+
+const avatarPath = join('static', global_config.avatarPath)
+logger.info('头像保存路径: {}', avatarPath)
+
+const gitUrl = process.env.GIT_URL ? process.env.GIT_URL : ''
+logger.info('gitUrl: {}', '***/' + gitUrl.split('/')[gitUrl.split('/').length - 1])
 
 const ref = process.env.GIT_REF ? process.env.GIT_REF : 'master'
 logger.info('git分支: {}', ref)
@@ -25,7 +35,7 @@ const username = process.env.GIT_USERNAME ? process.env.GIT_USERNAME : ''
 const password = process.env.GIT_PASSWORD ? process.env.GIT_PASSWORD : ''
 
 if (process.argv.length < 3) {
-  logger.error('未输入命令类型:clone,pull,copyStatusFile,removeStatusFile')
+  logger.error('未输入命令类型:clone,pull,copyStatusFile,removeStatusFile,downloadStatic,copyConfigFile')
 } else if (process.argv[2] == 'clone') {
   clone()
 } else if (process.argv[2] == 'pull') {
@@ -38,8 +48,43 @@ if (process.argv.length < 3) {
   copy(process.argv[3], process.argv[4])
 } else if (process.argv[2] == 'remove') {
   remove(process.argv[3])
+} else if (process.argv[2] == 'downloadStatic') {
+  downloadStatic()
+} else if (process.argv[2] == 'copyConfigFile') {
+  copyConfigFile()
 } else {
   logger.error('非法命令类型: {}', process.argv[2])
+}
+
+function downloadStatic() {
+  const config = fs.readJsonSync(configFilePath)
+  if (config == null || config.site == null) {
+    logger.warn('配置文件没有siteConfig')
+    return
+  }
+  const avatarUrl = config.site.avatarUrl
+  if (avatarUrl == null || avatarUrl == '') {
+    logger.warn('配置文件没有头像URL')
+  } else {
+    download(avatarUrl, avatarPath)
+  }
+  const faviconUrl = config.site.faviconUrl
+  if (faviconUrl == null || faviconUrl == '') {
+    logger.warn('配置文件没有网站图标URL')
+  } else {
+    download(faviconUrl, faviconPath)
+  }
+}
+
+function download(url, filePath) {
+  httpRequest.head(url, function (err, res, body) {
+    if (!~[200, 304].indexOf(res.statusCode)) {
+      logger.error('下载文件的状态码非法,statusCode: {}, avatarUrl:{}', res.statusCode, url)
+      return
+    }
+    logger.info('下载文件: {}', url)
+    httpRequest(url).pipe(fs.createWriteStream(filePath))
+  })
 }
 
 async function clone() {
@@ -90,16 +135,14 @@ function removeStatusFile() {
 
 function copyStatusFile() {
   logger.info('开始复制静态文件')
-  const staticFolderPath = join(repositoryPath, staticFolderName)
-  logger.info('创建静态文件夹路径,staticFolderPath: {}', staticFolderPath)
   if (!isFolder(staticFolderPath)) {
-    logger.error('静态文件文件夹不存在或者不是文件夹')
+    logger.warn('静态文件文件夹不存在或者不是文件夹')
     return
   }
   const staticFilePaths = []
   const filePaths = listAllFilePath(staticFolderPath)
   for (let i = 0; i < filePaths.length; i++) {
-    let targetStaticPath = filePaths[i].split(staticFolderName)
+    let targetStaticPath = filePaths[i].split(staticFolderPath)
     targetStaticPath = targetStaticPath[targetStaticPath.length - 1]
     targetStaticPath = join('static', targetStaticPath)
     logger.info('创建静态文件目标路径,targetStaticPath: {}', targetStaticPath)
@@ -125,6 +168,10 @@ function listAllFilePath(folderPath) {
     return filePaths
   }
   return [folderPath]
+}
+
+function copyConfigFile() {
+  copy(configFilePath, 'middleware/config.json')
 }
 
 function copy(sourcePath, targetPath) {

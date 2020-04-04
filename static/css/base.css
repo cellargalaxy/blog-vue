@@ -18,10 +18,10 @@
     background-attachment: fixed;
     background-size: auto;
     min-height: 100vh;
-    min-width: 100vw;
+    /*min-width: 100vw;*//*这句不能加，加了不知道为什么会导致窗口略微撑大*/
 }
 
-/*图片大图的背景蒙版半透明*/
+/*图片点击查看大图的背景蒙版半透明*/
 div.zoom-overlay {
     background-color: rgba(255, 255, 255, 0.6);
 }
@@ -55,6 +55,10 @@ blockquote {
 thead {
     background: rgba(84, 155, 196, 0.2);
     white-space: nowrap;
+}
+
+.hljs {
+    background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
 .hljs ol {

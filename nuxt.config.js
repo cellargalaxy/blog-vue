@@ -1,5 +1,6 @@
+import global_config from './global_config'
 import configService from './middleware/service/configService'
-import articleService from './middleware/service/articleService'
+import fileService from './middleware/service/fileService'
 
 export default {
   mode: 'universal',
@@ -25,13 +26,13 @@ export default {
       {src: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js'},
       {src: 'https://cdn.jsdelivr.net/npm/jquery.backstretch@2.1.15/jquery.backstretch.min.js'},
       {src: '/js/zoom.js'},
-      {src: '/base.js'},
+      {src: '/js/base.js'},
       {src: configService.getSiteConfig().staticJsUrl},
     ],
     link: [
       {rel: 'stylesheet', href: '/css/zoom.css'},
-      {rel: 'stylesheet', href: '/base.css'},
-      {rel: 'icon', type: 'image/x-icon', href: configService.getSiteConfig().faviconUrl},
+      {rel: 'stylesheet', href: '/css/base.css'},
+      {rel: 'icon', type: 'image/x-icon', href: global_config.faviconPath},
       {rel: 'stylesheet', href: configService.getSiteConfig().staticCssUrl},
     ]
   },
@@ -124,14 +125,14 @@ export default {
     generate: true, // Enable me when using nuxt generate
     exclude: [],
     routes(callback) {
-      const articles = articleService.listArticleByPath('')
-      let routes = articles.map(article => article.url)
+      const files = fileService.listFileByPath('')
+      let routes = files.map(file => file.url)
       callback(null, routes)
     }
   },
 
   generate: {
     fallback: true,
-    routes: articleService.listRoutes(),
+    routes: fileService.listRoutes(),
   },
 }
