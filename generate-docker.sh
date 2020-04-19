@@ -10,7 +10,7 @@ npm run generate
 node build_init.js removeStatusFile
 node build_init.js remove public
 node build_init.js copy dist public
-nohup node ./node_modules/http-server/bin/http-server -g true -d false >http.log 2>&1 &
+nohup node ./node_modules/http-server/bin/http-server -g true -d false -c-1 >http.log 2>&1 &
 while :
 do
     sleep $SLEEP_TIME
