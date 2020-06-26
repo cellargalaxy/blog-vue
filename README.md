@@ -78,3 +78,4 @@ Reference https://github.com/cellargalaxy/blog-code, promise`.static`Store stati
 11. 新增一个自定义的文章排序，文章文件名`title.{num}.md`排序数为num，`title.md`默认为0。
   例如`title.-1.md<title.md<title.1.md`。自定义排序优先于日期排序。
 12. 标准化url路径名称
+13. 弃坑stackedit，做自己样式的在线实时效果查看
