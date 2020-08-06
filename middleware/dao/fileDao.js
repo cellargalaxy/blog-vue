@@ -10,6 +10,11 @@ const logger = log('fileDao')
 const REPOSITORY_PATH = global_config.repositoryPath
 logger.info('仓库路径: {}', REPOSITORY_PATH)
 
+/**
+ * 获取文件的文本内容
+ * @param filePath
+ * @returns {string|null} 文件的文本内容
+ */
 function getFileContent(filePath) {
   const baseFilePath = fileIO.join(REPOSITORY_PATH, filePath)
   logger.info('创建baseFilePath: {}', baseFilePath)
@@ -26,6 +31,12 @@ function getFileContent(filePath) {
   return content
 }
 
+/**
+ * 递归获取文件夹下的全部文件的文本内容
+ * @param folderPath
+ * @param extension
+ * @returns {'filePath': 'markdown'}
+ */
 function getFolderContent(folderPath, extension) {
   //{'filePath': 'markdown'}
   let folderContent = {}
