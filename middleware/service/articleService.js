@@ -26,7 +26,14 @@ function getPageInfoByPath(folderPath, currentPage) {
   for (let i in pageInfo.filePage) {
     filePage.push(createArticle(pageInfo.filePage[i]))
   }
-  return {folderPath: pageInfo.folderPath, files: files, currentPage: pageInfo.currentPage, filePage: filePage}
+  return {
+    folderPath: pageInfo.folderPath,
+    files: files,
+    pageSize: pageInfo.pageSize,
+    total: pageInfo.total,
+    currentPage: pageInfo.currentPage,
+    filePage: filePage
+  }
 }
 
 function createArticle(file) {

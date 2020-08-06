@@ -33,7 +33,7 @@ function initBackstretch() {
     const urls = []
     for (let j = 0; j < backgroundImage.images.length; j++) {
       const image = backgroundImage.images[j]
-      if (image.isPc == undefined || image.isPc == null || image.isPc == isPc) {
+      if (image.isPc === undefined || image.isPc == null || image.isPc == isPc) {
         urls.push(image.url)
         console.log('add background image: ' + image.description)
       }

@@ -81,4 +81,4 @@ Reference https://github.com/cellargalaxy/blog-code, promise`.static`Store stati
 13. 弃坑stackedit，做自己样式的在线实时效果查看
 14. 使用webhook监听github的push事件+cron
 15. 使用`npm install forever`
-16. 归档能进行分页和按年来分页
+16. ~~归档能进行分页和按年来分页~~（已完成）

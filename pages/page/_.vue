@@ -26,7 +26,7 @@
   import utils from "../../middleware/utils/utils"
 
   export default {
-    name: "articlePath",
+    name: "pagePath",
     async asyncData({params, error}) {
       const navbarConfig = configService.getNavbarConfig()
       if (!navbarConfig) {
@@ -67,12 +67,11 @@
           attributes: pageInfo.filePage[i].attributes
         }
       }
-
       return {
         articles: pageInfo.filePage,
         currentPage: pageInfo.currentPage,
         pageSize: pageInfo.pageSize,
-        total: pageInfo.files.length,
+        total: pageInfo.total,
         navbarConfig: navbarConfig,
         homeConfig: homeConfig,
         pageFootConfig: pageFootConfig,

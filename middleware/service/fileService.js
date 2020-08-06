@@ -76,15 +76,48 @@ function getPageInfoByPath(folderPath, currentPage) {
   const files = listFileByPath(folderPath)
   const skipNum = (currentPage - 1) * PAGE_SIZE
   const filePage = (skipNum + PAGE_SIZE >= files.length) ? files.slice(skipNum, files.length) : files.slice(skipNum, skipNum + PAGE_SIZE)
-  return {folderPath: folderPath, files: files, currentPage: currentPage, filePage: filePage}
+  return {
+    folderPath: folderPath,
+    files: files,
+    total: files.length,
+    pageSize: PAGE_SIZE,
+    currentPage: currentPage,
+    filePage: filePage
+  }
+}
+
+function listArchiveInfo(folderPath, currentPage) {
+  const allFiles = listFileByPath(folderPath)
+  const yearFiles = {}
+  for (let i in allFiles) {
+    const file = allFiles[i]
+    let year = ''
+    if (file.date) {
+      year = file.date.getFullYear()
+    }
+    let files = yearFiles[year]
+    if (files === undefined || files == null) {
+      files = []
+      yearFiles[year] = files
+    }
+    files.push(file)
+  }
+  const years = Object.keys(yearFiles).sort().reverse()
+  const timeLines = listTimeLine(yearFiles[years[currentPage - 1]])
+  return {
+    folderPath: folderPath,
+    files: allFiles,
+    total: years.length,
+    pageSize: 1,
+    currentPage: currentPage,
+    filePage: timeLines
+  }
 }
 
 /**
  * [{"date":"date","dateString":"dateString","files":[{"file_key":"file_value"}]}]
  */
-function getTimeLines() {
-  const files = listFileByPath('')
-
+function listTimeLine(files) {
   //用于保存数据的临时对象
   //{'dateString': [{'file_key': 'file_value'}]}
   let timeLines = {}
@@ -174,6 +207,12 @@ function listRoutes() {
       routes.push(fileIO.join('/page', sort, page.toString(), '/'))
     }
   }
+  for (let sort in sorts) {
+    const archiveInfo = listArchiveInfo(sort, 1)
+    for (let page = 1; page <= archiveInfo.total; page++) {
+      routes.push(fileIO.join('/archives', sort, page.toString(), '/'))
+    }
+  }
   return routes
 }
 
@@ -185,7 +224,7 @@ function listRoutes() {
  */
 function createFile(filePath, content) {
   const fileConfig = getFileConfig(filePath)
-  if (!fileConfig || fileConfig.extension == undefined || fileConfig.urlPath == undefined || fileConfig.folderPath == undefined) {
+  if (!fileConfig || fileConfig.extension === undefined || fileConfig.urlPath === undefined || fileConfig.folderPath === undefined) {
     logger.error('未配置该文件所在目录配置')
     return null
   }
@@ -273,6 +312,6 @@ export default {
   listFileByPath: listFileByPath,
   getPageInfoByPath: getPageInfoByPath,
   listRoutes: listRoutes,
-  getTimeLines: getTimeLines,
+  listArchiveInfo: listArchiveInfo,
   getFileConfig: getFileConfig,
 }
