@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import aomponent from '../components/articleComment.vue'
+  import aomponent from '../components/preview'
 
   export default {
     name: "test",
