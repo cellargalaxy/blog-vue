@@ -334,6 +334,11 @@ function getFileConfig(filePath) {
 }
 
 function sortFiles(file1, file2) {
+  const level1 = utils.isNum(file1.level) ? parseInt(file1.level) : 0
+  const level2 = utils.isNum(file2.level) ? parseInt(file2.level) : 0
+  if (level1 !== level2) {
+    return level1 - level2
+  }
   if (!file1.date && !file2.date) {
     return file1.title.localeCompare(file2.title)
   }
