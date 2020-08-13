@@ -2,6 +2,7 @@ const git = require("isomorphic-git")
 const path = require('path')
 const fs = require('fs-extra')
 const httpRequest = require('request')
+const http = require('isomorphic-git/http/node')
 
 const global_config = require('./global_config')
 
@@ -94,13 +95,15 @@ async function clone() {
   logger.info('开始clone仓库')
   await git.clone({
     'fs': fs,
+    'http': http,
     'dir': repositoryPath,
     'url': gitUrl,
-    'ref': ref,
-    'username': username,
-    'password': password,
     'singleBranch': true,
     'depth': 1,
+    'ref': ref,
+    'onAuth': url => {
+      return {username: username, password: password}
+    },
   })
   logger.info('完成clone仓库')
 }
@@ -109,11 +112,13 @@ async function pull() {
   logger.info('开始pull仓库')
   await git.pull({
     'fs': fs,
+    'http': http,
     'dir': repositoryPath,
     'ref': ref,
-    'username': username,
-    'password': password,
     'singleBranch': true,
+    'onAuth': url => {
+      return {username: username, password: password}
+    },
   })
   logger.info('完成pull仓库')
 }

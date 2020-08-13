@@ -47,8 +47,11 @@
         return
       }
 
+
       let url = params.pathMatch //-> a/b/1/
-      url = url.substring(0, url.length - 1) //-> a/b/1
+      if (utils.endsWith(url, '/')) {
+        url = url.substring(0, url.length - 1) //-> a/b/1
+      }
       let index = url.lastIndexOf("/")
       let folderPath = url.substring(0, index)//-> a/b
       let page = url.substring(index + 1, url.length)//-> 1
