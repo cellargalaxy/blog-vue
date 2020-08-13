@@ -59,6 +59,16 @@
         error(errorConfig)
         return
       }
+      for (let i = 0; i < pageInfo.filePage.length; i++) {
+        const files = pageInfo.filePage[i].files
+        for (let j = 0; j < files.length; j++) {
+          pageInfo.filePage[i].files[j] = {
+            url: pageInfo.filePage[i].files[j].url,
+            title: pageInfo.filePage[i].files[j].title,
+            dateString: pageInfo.filePage[i].files[j].dateString,
+          }
+        }
+      }
       return {
         archives: pageInfo.filePage,
         currentPage: pageInfo.currentPage,
