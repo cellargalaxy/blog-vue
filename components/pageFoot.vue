@@ -23,7 +23,7 @@
       config: {
         default() {
           return {
-            "buildTimeFormat": "yyyy-MM-dd hh:mm",
+            "buildTimeFormat": "YYYY-MM-DD HH:mm",
             "rowContents": [
               [
                 {"text": "Copyright © 2017-? ."},
@@ -41,7 +41,7 @@
       },
       buildTimeString: {
         default() {
-          return utils.formatDate(new Date(), "yyyy-MM-dd hh:mm:ss")
+          return utils.formatDate(new Date(), "YYYY-MM-dd HH:mm:ss")
         }
       },
     },

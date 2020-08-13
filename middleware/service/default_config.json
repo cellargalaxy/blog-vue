@@ -102,7 +102,7 @@
     "pathDateFormat": "YYYYMMDD",
     "pageSize": 10,
     "summaryRow": 6,
-    "dateStringFormat": "yyyy-MM-dd",
+    "dateStringFormat": "YYYY-MM-DD",
     "fileConfigs": [
       {
         "urlPath": "article",
@@ -112,7 +112,7 @@
     ]
   },
   "pageFoot": {
-    "buildTimeFormat": "yyyy-MM-dd hh:mm",
+    "buildTimeFormat": "YYYY-MM-DD HH:mm",
     "rowContents": [
       [
         {

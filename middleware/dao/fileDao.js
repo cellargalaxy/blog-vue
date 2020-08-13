@@ -11,9 +11,9 @@ const REPOSITORY_PATH = global_config.repositoryPath
 logger.info('仓库路径: {}', REPOSITORY_PATH)
 
 /**
- * 获取文件的文本内容
+ *
  * @param filePath
- * @returns {string|null} 文件的文本内容
+ * @returns {{path: *, content: string}|null}
  */
 function getFileContent(filePath) {
   const baseFilePath = fileIO.join(REPOSITORY_PATH, filePath)
@@ -22,13 +22,72 @@ function getFileContent(filePath) {
     logger.error('文件路径不在仓库里')
     return null
   }
-  if (!fileIO.isFile(baseFilePath)) {
-    logger.error('所读取的文件不存在或者不是文件')
+  if (fileIO.isFile(baseFilePath)) {
+    const data = fs.readFileSync(baseFilePath)
+    const content = data.toString()
+    return {path: filePath, content: content}
+  }
+
+  const fatherFilePath = path.dirname(filePath)
+  const fatherBaseFilePath = fileIO.join(REPOSITORY_PATH, fatherFilePath)
+  if (!utils.startsWith(fatherBaseFilePath, REPOSITORY_PATH)) {
+    logger.error('父文件路径不在仓库里')
     return null
   }
-  const data = fs.readFileSync(baseFilePath)
-  const content = data.toString()
-  return content
+  if (!fileIO.isFolder(fatherBaseFilePath)) {
+    logger.error('父文件路径不是文件夹')
+    return null
+  }
+  const extension = path.extname(filePath)
+  const subFilename = path.basename(filePath, extension)
+  const files = fs.readdirSync(fatherBaseFilePath)
+  for (let i = 0; i < files.length; i++) {
+    const filename = files[i]
+    if (utils.startsWith(filename, subFilename) && utils.endsWith(filename, extension)) {
+      const filePath = fileIO.join(fatherFilePath, filename)
+      const baseFilePath = fileIO.join(REPOSITORY_PATH, filePath)
+      const data = fs.readFileSync(baseFilePath)
+      const content = data.toString()
+      return {path: filePath, content: content}
+    }
+  }
+
+  return getFileContentFromAllFile('', subFilename, extension)
+}
+
+function getFileContentFromAllFile(folderPath, subFilename, extension) {
+  const baseFolderPath = fileIO.join(REPOSITORY_PATH, folderPath)
+  logger.info('创建baseFolderPath: {}', baseFolderPath)
+  if (!utils.startsWith(baseFolderPath, REPOSITORY_PATH)) {
+    logger.error('读取文件夹路径不在仓库里')
+    return null
+  }
+
+  const filename = path.basename(baseFolderPath)
+  if (utils.startsWith(filename, '.')) {
+    return null
+  }
+
+  if (fileIO.isFile(baseFolderPath) && utils.startsWith(filename, subFilename) && utils.endsWith(filename, extension)) {
+    const data = fs.readFileSync(baseFolderPath)
+    const content = data.toString()
+    return {path: folderPath, content: content}
+  }
+
+  if (fileIO.isFolder(baseFolderPath)) {
+    const files = fs.readdirSync(baseFolderPath)
+    for (let i = 0; i < files.length; i++) {
+      const childFolderPath = fileIO.join(folderPath, files[i])
+      logger.info('创建childFolderPath: {}', childFolderPath)
+      const fileContent = getFileContentFromAllFile(childFolderPath, subFilename, extension)
+      if (fileContent != null) {
+        return fileContent
+      }
+    }
+  }
+
+  logger.error('未知类型路径baseFolderPath: {}', baseFolderPath)
+  return null
 }
 
 /**

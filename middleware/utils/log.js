@@ -1,7 +1,7 @@
 import utils from './utils'
 
 function log(level, name, massage) {
-  console.log(utils.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss') + ' ' + level + ' ' + name + ' ' + massage)
+  console.log(utils.formatDate(new Date(), 'YYYY-MM-DD HH:mm:ss') + ' ' + level + ' ' + name + ' ' + massage)
 }
 
 function formatString(string, ...infos) {

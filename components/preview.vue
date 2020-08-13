@@ -34,7 +34,7 @@
         article: {
           "title": "preview markdown", "url": "#", "content": "# content", "summary": "# summary",
           "attributes": [
-            {"name": "date", "value": utils.formatDate(new Date(), 'yyyy-MM-dd')},
+            {"name": "date", "value": utils.formatDate(new Date(), 'YYYY-MM-DD')},
             {"name": "sort", "value": "preview", "url": "#"},
             {"name": "word", "value": "12345"},
             {"name": "read time", "value": "12 min"},

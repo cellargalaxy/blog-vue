@@ -35,11 +35,11 @@ function getFile(filePath) {
     }
     filePath = filePath + extension //-> a/b/c.md
     logger.info('重整filePath: {}', filePath)
-    const content = fileDao.getFileContent(filePath)
-    if (content == null) {
+    const fileContent = fileDao.getFileContent(filePath)
+    if (fileContent == null) {
       return null
     }
-    const file = createFile(filePath, content)
+    const file = createFile(fileContent.path, fileContent.content)
     return file
   } catch (e) {
     logger.error('读取文件失败: {}', e)
@@ -127,7 +127,7 @@ function listTimeLine(files) {
     const file = files[i]
     if (file.date) {
       //有时间的文件
-      const dateString = utils.formatDate(file.date, 'yyyy-MM')
+      const dateString = utils.formatDate(file.date, 'YYYY-MM')
       let timeLine = timeLines[dateString]
       if (!timeLine) {
         timeLine = []
@@ -232,11 +232,19 @@ function createFile(filePath, content) {
   const urlPath = fileConfig.urlPath
   const folderPath = fileConfig.folderPath
 
+  // `/a/b/c/filename.md`,`/a/b/c/file2.0name.md`,`/a/b/c/filename.key1=value1,key2=value2.md`
+  const fatherFilePath = path.dirname(filePath)
+  const filename = path.basename(filePath)
+  const firstIndex = filename.indexOf('\.')
+  const lastIndex = filename.lastIndexOf('\.')
+  const pathParameter = filename.substring(firstIndex + 1, lastIndex)
+  const containPathParameter = firstIndex < lastIndex && pathParameter.indexOf('=') > 0
+
   const file = {}
   file.path = filePath
   file.content = content
-  file.title = path.basename(filePath).replace(extension, '')
-  file.url = fileIO.join('/', urlPath, filePath.replace(folderPath, '').replace(extension, ''), '/')
+  file.title = containPathParameter ? filename.substring(0, firstIndex) : filename.substring(0, lastIndex)
+  file.url = fileIO.join('/', urlPath, fatherFilePath.replace(folderPath, ''), file.title, '/')
 
   let summary = ''
   const contents = file.content.split('\n')
@@ -251,14 +259,12 @@ function createFile(filePath, content) {
 
   const attributes = []
 
+  //只会正则第一个
   let dateExec = PATH_DATE_REGULAR_OBJECT.exec(filePath)
   if (dateExec) {
     let dateString = dateExec.toString()
     const date = new Date(moment(dateString, PATH_DATE_FORMAT))
-    file.date = date
-  }
-  if (file.date) {
-    const dateString = utils.formatDate(file.date, DATE_STRING_FORMAT)
+    dateString = utils.formatDate(date, DATE_STRING_FORMAT)
     file.dateString = dateString
     attributes.push({"name": "date", "value": dateString})
   }
@@ -268,13 +274,47 @@ function createFile(filePath, content) {
     let dateString = dateExec.toString()
     sort = sort.split(dateString)[0]
   }
-  if (sort == null || sort == '') {
+  if (sort == null || sort === '') {
     sort = '/'
   }
   const sortUrl = fileIO.join('/page', sort, '1/')
   file.sort = sort
   file.sortUrl = sortUrl
   attributes.push({"name": "sort", "value": sort, "url": sortUrl})
+
+  if (containPathParameter) {
+    const parameters = pathParameter.split(',')
+    main:
+      for (let i = 0; i < parameters.length; i++) {
+        const parameter = parameters[i].split('=')
+        if (parameter.length !== 2) {
+          continue
+        }
+        const key = parameter[0]
+        const value = parameter[1]
+        if (key === '' || value === '') {
+          continue
+        }
+        file[key] = value
+        for (let j = 0; j < attributes.length; j++) {
+          if (attributes[j].name === key) {
+            attributes[j].value = value
+            continue main
+          }
+        }
+        attributes.push({"name": key, "value": value})
+      }
+  }
+  for (let j = 0; j < attributes.length; j++) {
+    if (attributes[j].name === 'dateString') {
+      attributes[j].name = 'date'
+    }
+  }
+
+  if (file.dateString !== undefined && file.dateString != null && file.dateString !== '') {
+    const date = new Date(moment(file.dateString, DATE_STRING_FORMAT))
+    file.date = date
+  }
 
   file.attributes = attributes
   return file

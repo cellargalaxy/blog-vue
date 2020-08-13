@@ -79,6 +79,6 @@ Reference https://github.com/cellargalaxy/blog-code, promise`.static`Store stati
   例如`title.-1.md<title.md<title.1.md`。自定义排序优先于日期排序。
 12. ~~标准化url路径名称~~（已完成）
 13. ~~弃坑stackedit，做自己样式的在线实时效果查看~~（已完成）
-14. 使用webhook监听github的push事件+cron
-15. 使用`npm install forever`
+14. ~~使用webhook监听github的push事件+cron~~（懒得搞）
+15. ~~使用npm install forever/pm2~~（不合适）
 16. ~~归档能进行分页和按年来分页~~（已完成）
