@@ -17,7 +17,7 @@
       <b-list-group-item class="white-background-8">
         <b-row class="text-center">
           <b-col>
-            <b-input-group prepend="encrypt content">
+            <b-input-group>
               <b-form-input :state="decryptSuccess" placeholder="secret"
                             type="password" v-model="secret"></b-form-input>
               <b-input-group-append>
@@ -83,6 +83,11 @@
       }
       this.secret = secret
       this.decrypt()
+    },
+    watch: {
+      article() {
+        this.isDecrypt = false
+      }
     },
     methods: {
       decrypt() {
