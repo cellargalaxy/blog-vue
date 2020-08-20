@@ -82,3 +82,4 @@ Reference https://github.com/cellargalaxy/blog-code, promise`.static`Store stati
 14. ~~使用webhook监听github的push事件+cron~~（懒得搞）
 15. ~~使用npm install forever/pm2~~（不合适）
 16. ~~归档能进行分页和按年来分页~~（已完成）
+17. ~~文章加密功能~~（已完成）

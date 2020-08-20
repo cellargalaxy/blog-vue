@@ -67,6 +67,7 @@
           summary: pageInfo.filePage[i].summary,
           title: pageInfo.filePage[i].title,
           url: pageInfo.filePage[i].url,
+          isEncrypt: pageInfo.filePage[i].isEncrypt,
           attributes: pageInfo.filePage[i].attributes
         }
       }

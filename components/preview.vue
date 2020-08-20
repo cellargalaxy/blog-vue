@@ -1,24 +1,40 @@
 <template>
-  <b-container fluid>
-    <b-row no-gutters>
+  <div>
+    <b-row>
       <b-col>
-        <b-button-group>
-          <b-button @click="showTextarea" variant="info">编辑</b-button>
-          <b-button @click="showArticleView" variant="success">预览</b-button>
-          <b-button @click="copyContent" variant="info">复制</b-button>
-        </b-button-group>
+        <b-input-group>
+          <b-form-input @input="changeArticle" placeholder="path" v-model="filePath"></b-form-input>
+          <b-input-group-append>
+            <b-button @click="showTextarea" variant="info">edit</b-button>
+            <b-button @click="showArticleView" variant="success">preview</b-button>
+            <b-button @click="copyContent" variant="info">copy</b-button>
+          </b-input-group-append>
+        </b-input-group>
       </b-col>
     </b-row>
+
+    <b-row>
+      <b-col>
+        <b-input-group>
+          <b-form-input :state="cryptSuccess" placeholder="secret" v-model="secret"></b-form-input>
+          <b-input-group-append>
+            <b-button @click="encrypt" variant="success">encrypt</b-button>
+            <b-button @click="decrypt" variant="info">decrypt</b-button>
+          </b-input-group-append>
+        </b-input-group>
+      </b-col>
+    </b-row>
+
     <b-row no-gutters>
       <b-col :cols="textareaCol" v-if="textareaCol>0">
-        <b-form-textarea @change="changeContent" class="white-background-8" max-rows="10000" rows="3"
+        <b-form-textarea @input="changeArticle" class="white-background-8" max-rows="10000" rows="3"
                          v-model="article.content"/>
       </b-col>
       <b-col :cols="articleViewCol" v-if="articleViewCol>0">
         <article-view :article="article" :isSummary="false"/>
       </b-col>
     </b-row>
-  </b-container>
+  </div>
 </template>
 
 <preview/>
@@ -26,22 +42,19 @@
 <script>
   import articleView from './articleView'
   import utils from '../middleware/utils/utils'
+  import fileService from '../middleware/service/fileService'
+  import articleService from '../middleware/service/articleService'
 
   export default {
     name: "preview",
     data() {
       return {
-        article: {
-          "title": "preview markdown", "url": "#", "content": "# content", "summary": "# summary",
-          "attributes": [
-            {"name": "date", "value": utils.formatDate(new Date(), 'YYYY-MM-DD')},
-            {"name": "sort", "value": "preview", "url": "#"},
-            {"name": "word", "value": "12345"},
-            {"name": "read time", "value": "12 min"},
-          ],
-        },
+        filePath: 'preview/' + utils.formatDate(new Date(), 'YYYYMMDD') + '/preview markdown.md',
+        article: {content: '# content', isEncrypt: false},
         textareaCol: 6,
         articleViewCol: 6,
+        secret: 'secret',
+        cryptSuccess: true,
       }
     },
     mounted() {
@@ -50,21 +63,13 @@
         return "确认离开当前页面"
       }
     },
+    created() {
+      this.changeArticle()
+    },
     methods: {
-      changeContent(content) {
-        this.article.content = content
-        for (let i = 0; i < this.article.attributes.length; i++) {
-          if (this.article.attributes[i].name == 'word') {
-            this.article.attributes[i].value = content.length
-          }
-          if (this.article.attributes[i].name == 'read time') {
-            let readTime = Math.round(content.length / 300)
-            if (readTime == 0) {
-              readTime = 1
-            }
-            this.article.attributes[i].value = readTime + ' min'
-          }
-        }
+      changeArticle() {
+        const file = fileService.createFile(this.filePath, this.article.content)
+        this.article = articleService.createArticle(file)
       },
       showTextarea() {
         if (this.textareaCol == 6 && this.articleViewCol == 6) {
@@ -74,8 +79,6 @@
           this.textareaCol = 6
           this.articleViewCol = 6
         }
-        console.log('this.textareaCol', this.textareaCol)
-        console.log('this.articleViewCol', this.articleViewCol)
       },
       showArticleView() {
         if (this.textareaCol == 6 && this.articleViewCol == 6) {
@@ -85,13 +88,11 @@
           this.textareaCol = 6
           this.articleViewCol = 6
         }
-        console.log('this.textareaCol', this.textareaCol)
-        console.log('this.articleViewCol', this.articleViewCol)
       },
       copyContent() {
         this.writeClipboard(this.article.content)
       },
-      writeClipboard: (text) => {
+      writeClipboard(text) {
         const textarea = document.createElement('textarea')
         textarea.style.opacity = 0
         textarea.style.position = 'absolute'
@@ -103,6 +104,32 @@
         textarea.setSelectionRange(0, text.length)
         document.execCommand('copy')
         document.body.removeChild(textarea)
+      },
+      encrypt() {
+        if (this.article.isEncrypt) {
+          return
+        }
+        const content = fileService.encryptText(this.article.content, this.secret)
+        if (content === undefined || content == null || content === '') {
+          this.cryptSuccess = false
+          setTimeout(() => this.cryptSuccess = true, 1000 * 3)
+          return
+        }
+        this.article.content = content
+        this.article.isEncrypt = true
+      },
+      decrypt() {
+        if (!this.article.isEncrypt) {
+          return
+        }
+        const content = fileService.decryptText(this.article.content, this.secret)
+        if (content === undefined || content == null || content === '') {
+          this.cryptSuccess = false
+          setTimeout(() => this.cryptSuccess = true, 1000 * 3)
+          return
+        }
+        this.article.content = content
+        this.article.isEncrypt = false
       },
     },
     components: {

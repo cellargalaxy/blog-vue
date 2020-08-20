@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import aomponent from '../components/preview'
+  import aomponent from '../components/articleView'
 
   export default {
     name: "test",

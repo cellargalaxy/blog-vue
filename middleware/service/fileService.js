@@ -5,6 +5,7 @@ import moment from "moment"
 import path from "path"
 import utils from "../utils/utils"
 import fileIO from "../utils/fileIO"
+import crypto from 'crypto-js'
 
 const logger = log('fileService')
 
@@ -217,7 +218,7 @@ function listRoutes() {
 }
 
 /**
- * 会初始化path、markdown、summary、title、url、sort、sortUrl、(date、dateString)属性
+ * 会初始化path、markdown、summary、title、url、sort、(date、dateString)属性
  * @param filePath
  * @param markdown
  * @returns {{}}
@@ -245,6 +246,7 @@ function createFile(filePath, content) {
   file.content = content
   file.title = containPathParameter ? filename.substring(0, firstIndex) : filename.substring(0, lastIndex)
   file.url = fileIO.join('/', urlPath, fatherFilePath.replace(folderPath, ''), file.title, '/')
+  file.isEncrypt = false
 
   let summary = ''
   const contents = file.content.split('\n')
@@ -258,6 +260,7 @@ function createFile(filePath, content) {
   file.summary = summary
 
   const attributes = []
+  file.attributes = attributes
 
   //只会正则第一个
   let dateExec = PATH_DATE_REGULAR_OBJECT.exec(filePath)
@@ -277,9 +280,8 @@ function createFile(filePath, content) {
   if (sort == null || sort === '') {
     sort = '/'
   }
-  const sortUrl = fileIO.join('/page', sort, '1/')
   file.sort = sort
-  file.sortUrl = sortUrl
+  const sortUrl = fileIO.join('/page', sort, '1/')
   attributes.push({"name": "sort", "value": sort, "url": sortUrl})
 
   if (containPathParameter) {
@@ -290,8 +292,8 @@ function createFile(filePath, content) {
         if (parameter.length !== 2) {
           continue
         }
-        const key = parameter[0]
-        const value = parameter[1]
+        const key = parameter[0].trim()
+        const value = parameter[1].trim()
         if (key === '' || value === '') {
           continue
         }
@@ -316,7 +318,22 @@ function createFile(filePath, content) {
     file.date = date
   }
 
-  file.attributes = attributes
+  if ('encrypt' in file) {
+    const secret = file['encrypt']
+    delete file['encrypt']
+    for (let j = 0; j < attributes.length; j++) {
+      if (attributes[j].name === 'encrypt') {
+        attributes.splice(j, 1)
+        break
+      }
+    }
+    if (secret !== undefined && secret != null && secret !== '') {
+      file.content = encryptText(file.content, secret)
+      file.summary = encryptText(file.summary, secret)
+      file.isEncrypt = true
+    }
+  }
+
   return file
 }
 
@@ -352,6 +369,16 @@ function sortFiles(file1, file2) {
   return file2.date.getTime() - file1.date.getTime()
 }
 
+function encryptText(text, secret) {
+  const encrypt = crypto.AES.encrypt(text, secret)
+  return encrypt !== undefined && encrypt != null ? encrypt.toString() : null
+}
+
+function decryptText(text, secret) {
+  const encrypt = crypto.AES.decrypt(text, secret)
+  return encrypt !== undefined && encrypt != null ? encrypt.toString(crypto.enc.Utf8) : null
+}
+
 export default {
   getFile: getFile,
   listFileByPath: listFileByPath,
@@ -359,4 +386,7 @@ export default {
   listRoutes: listRoutes,
   listArchiveInfo: listArchiveInfo,
   getFileConfig: getFileConfig,
+  createFile: createFile,
+  encryptText: encryptText,
+  decryptText: decryptText,
 }

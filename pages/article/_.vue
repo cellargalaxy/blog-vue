@@ -63,6 +63,7 @@
         content: article.content,
         title: article.title,
         url: article.url,
+        isEncrypt: article.isEncrypt,
         attributes: article.attributes
       }
 

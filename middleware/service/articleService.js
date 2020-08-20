@@ -62,4 +62,5 @@ function createArticle(file) {
 export default {
   getArticle: getArticle,
   getPageInfoByPath: getPageInfoByPath,
+  createArticle: createArticle,
 }
