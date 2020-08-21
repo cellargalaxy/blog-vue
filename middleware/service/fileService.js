@@ -294,10 +294,13 @@ function createFile(filePath, content) {
         }
         const key = parameter[0].trim()
         const value = parameter[1].trim()
-        if (key === '' || value === '') {
+        if (key === '') {
           continue
         }
         file[key] = value
+        if (value === '') {
+          continue
+        }
         for (let j = 0; j < attributes.length; j++) {
           if (attributes[j].name === key) {
             attributes[j].value = value
@@ -327,10 +330,10 @@ function createFile(filePath, content) {
         break
       }
     }
+    file.isEncrypt = true
     if (secret !== undefined && secret != null && secret !== '') {
       file.content = encryptText(file.content, secret)
       file.summary = encryptText(file.summary, secret)
-      file.isEncrypt = true
     }
   }
 
@@ -370,13 +373,23 @@ function sortFiles(file1, file2) {
 }
 
 function encryptText(text, secret) {
-  const encrypt = crypto.AES.encrypt(text, secret)
-  return encrypt !== undefined && encrypt != null ? encrypt.toString() : null
+  try {
+    const encrypt = crypto.AES.encrypt(text, secret)
+    return encrypt !== undefined && encrypt != null ? encrypt.toString() : null
+  } catch (e) {
+    logger.error('encrypt fail: {}', e)
+    return null
+  }
 }
 
 function decryptText(text, secret) {
-  const encrypt = crypto.AES.decrypt(text, secret)
-  return encrypt !== undefined && encrypt != null ? encrypt.toString(crypto.enc.Utf8) : null
+  try {
+    const encrypt = crypto.AES.decrypt(text, secret)
+    return encrypt !== undefined && encrypt != null ? encrypt.toString(crypto.enc.Utf8) : null
+  } catch (e) {
+    logger.error('decrypt fail: {}', e)
+    return null
+  }
 }
 
 export default {
