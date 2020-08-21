@@ -1,8 +1,8 @@
 <template>
-  <div class="full-scrub-image" :style="{backgroundImage:'url('+scrubUrl+'), url('+imageUrl+')'}"></div>
+  <div :style="{backgroundImage:'url('+scrubUrl+'), url('+imageUrl+')'}" class="full-scrub-image"></div>
 </template>
 
-<full-scrub-image :scrubUrl="scrubUrl" :imageUrl="imageUrl"/>
+<full-scrub-image :imageUrl="imageUrl" :scrubUrl="scrubUrl"/>
 
 <script>
   export default {

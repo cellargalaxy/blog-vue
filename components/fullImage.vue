@@ -1,5 +1,5 @@
 <template>
-  <div class="full-image" :style="{backgroundImage:'url('+imageUrl+')'}"/>
+  <div :style="{backgroundImage:'url('+imageUrl+')'}" class="full-image"/>
 </template>
 
 <full-image :imageUrl="imageUrl"/>

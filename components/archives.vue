@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body class="white-background-8" style="border: none">
+  <b-card class="white-background-8" no-body style="border: none">
     <br/>
     <el-timeline>
       <el-timeline-item :key="i" :timestamp="archive.dateString+' ('+archive.files.length+')'"

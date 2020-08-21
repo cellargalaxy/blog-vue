@@ -1,9 +1,9 @@
 <template>
   <b-card class="text-center blue-background-8" style="border:none;">
     <b-card-text :key="i" class="white" v-for="(contents,i) in config.rowContents">
-      <b-badge class="transparent" style="margin-left: 0.5em;margin-right: 0.5em;"
-               v-for="(content,j) in contents" :key="j">
-        <a class="white" target="_blank" v-text="content.text" :href="content.url"/>
+      <b-badge :key="j" class="transparent"
+               style="margin-left: 0.5em;margin-right: 0.5em;" v-for="(content,j) in contents">
+        <a :href="content.url" class="white" target="_blank" v-text="content.text"/>
       </b-badge>
     </b-card-text>
     <b-card-text class="white">

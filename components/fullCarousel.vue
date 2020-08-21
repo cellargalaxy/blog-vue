@@ -1,30 +1,30 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <b-carousel indicators fade :interval="config.brandInterval">
+  <b-carousel :interval="config.brandInterval" fade indicators>
 
-    <b-carousel-slide background="rgba(255, 255, 255, 1)" v-for="(brand,i) in config.brands" :key="i">
+    <b-carousel-slide :key="i" background="rgba(255, 255, 255, 1)" v-for="(brand,i) in config.brands">
       <template v-slot:img>
         <full-image :imageUrl="brand.imageUrl"/>
       </template>
       <b-container fluid>
         <b-row align-v="center" class="text-center">
-          <b-col xl="2" lg="2" md="1" sm="0"/>
-          <b-col xl="8" lg="8" md="10" sm="12">
+          <b-col lg="2" md="1" sm="0" xl="2"/>
+          <b-col lg="8" md="10" sm="12" xl="8">
             <b-card :title="brand.title" class="black-background-5" style="border: none" title-tag="h1"
                     v-if="brand.title">
-              <b-card-text class="white" v-for="(text,j) in brand.texts" :key="j">{{text}}</b-card-text>
+              <b-card-text :key="j" class="white" v-for="(text,j) in brand.texts">{{text}}</b-card-text>
             </b-card>
           </b-col>
-          <b-col xl="2" lg="2" md="1" sm="0"/>
+          <b-col lg="2" md="1" sm="0" xl="2"/>
         </b-row>
 
         <b-row align-v="center" class="text-center">
-          <b-col xl="2" lg="2" md="1" sm="0"/>
-          <b-col xl="8" lg="8" md="10" sm="12">
-            <b-badge pill class="black-background-5" v-for="(nav,k) in config.navs" :key="k">
-              <a class="white" target="_blank" v-text="nav.text" :href="nav.url"/>
+          <b-col lg="2" md="1" sm="0" xl="2"/>
+          <b-col lg="8" md="10" sm="12" xl="8">
+            <b-badge :key="k" class="black-background-5" pill v-for="(nav,k) in config.navs">
+              <a :href="nav.url" class="white" target="_blank" v-text="nav.text"/>
             </b-badge>
           </b-col>
-          <b-col xl="2" lg="2" md="1" sm="0"/>
+          <b-col lg="2" md="1" sm="0" xl="2"/>
         </b-row>
       </b-container>
     </b-carousel-slide>

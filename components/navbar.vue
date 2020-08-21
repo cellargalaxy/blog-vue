@@ -1,7 +1,8 @@
 <template>
-  <b-navbar fixed="top" style="transition: background-color 1000ms" toggleable="md"
-            :class="show?'white-background-8':'transparent'" @mouseenter.native="show=true"
-            @mouseleave.native="show=false">
+  <b-navbar :class="show?'white-background-8':'transparent'" @mouseenter.native="show=true"
+            @mouseleave.native="show=false"
+            fixed="top" style="transition: background-color 1000ms"
+            toggleable="md">
 
     <b-navbar-brand :class="show?'transparent':'white-background-6'" :href="config.brandUrl"
                     style="border-radius: 0.5em;padding: 0.2em;transition: background-color 1000ms;" tag="h1">
@@ -13,7 +14,7 @@
     <!--这里的v-if自然是控制是否显示，但是v-show却有式文本渐变出现的功能-->
     <b-collapse id="nav-collapse" is-nav v-if="show" v-show="show">
       <b-navbar-nav align="center">
-        <b-nav-item v-for="(nav,i) in config.navs?config.navs:[]" :key="i" :href="nav.url">
+        <b-nav-item :href="nav.url" :key="i" v-for="(nav,i) in config.navs?config.navs:[]">
           <b>{{nav.text}}</b>
         </b-nav-item>
       </b-navbar-nav>

@@ -1,12 +1,12 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <b-carousel :interval="0" controls fade indicators v-model="slide">
 
-    <b-carousel-slide background="rgba(255, 255, 255, 0)" v-for="(brand,i) in config.brands" :key="i">
+    <b-carousel-slide :key="i" background="rgba(255, 255, 255, 0)" v-for="(brand,i) in config.brands">
       <template v-slot:img>
         <full-image :imageUrl="brand.imageUrl" style="max-height: 50vh;"/>
       </template>
       <b-card :title="brand.title" class="black-background-5" style="border: none" title-tag="h1" v-if="brand.title">
-        <b-card-text class="white" v-for="(text,j) in brand.texts" :key="j">{{text}}</b-card-text>
+        <b-card-text :key="j" class="white" v-for="(text,j) in brand.texts">{{text}}</b-card-text>
       </b-card>
     </b-carousel-slide>
 

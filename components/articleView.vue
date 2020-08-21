@@ -2,10 +2,10 @@
   <b-list-group style="margin-bottom: 1em">
     <b-list-group-item class="white-background-8">
       <h1 style="font-size: 2em;">
-        <b-link :href="article.url" v-text="article.title" target="_blank"/>
+        <b-link :href="article.url" target="_blank" v-text="article.title"/>
       </h1>
 
-      <b-badge v-for="(attribute,i) in article.attributes" :key="i" style="margin-left: 0.1em;margin-right: 0.1em;">
+      <b-badge :key="i" style="margin-left: 0.1em;margin-right: 0.1em;" v-for="(attribute,i) in article.attributes">
         {{attribute.name+': '}}<a :href="attribute.url" class="white" v-text="attribute.value"/>
       </b-badge>
     </b-list-group-item>

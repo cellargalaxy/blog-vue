@@ -1,9 +1,9 @@
 <template>
-  <b-pagination class="white-background-8" pills align="center" :hide-ellipsis="true" :limit="12"
-                :value="currentPage" :total-rows="total" :per-page="pageSize" @change="change"></b-pagination>
+  <b-pagination :hide-ellipsis="true" :limit="12" :per-page="pageSize" :total-rows="total" :value="currentPage"
+                @change="change" align="center" class="white-background-8" pills></b-pagination>
 </template>
 
-<pagination :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
+<pagination :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
 
 <script>
   export default {

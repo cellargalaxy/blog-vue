@@ -1,11 +1,11 @@
 <template>
   <div>
     <article-list :articles="articles"/>
-    <pagination :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
+    <pagination :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
   </div>
 </template>
 
-<article-list-and-page :articles="articles" :total="total" :pageSize="pageSize" :currentPage="currentPage"/>
+<article-list-and-page :articles="articles" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
 
 <script>
   import articleList from './articleList'
