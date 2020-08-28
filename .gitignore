@@ -1,5 +1,7 @@
 # build
+repository
 public
+public-back
 staticFileData.json
 http.log
 static/images/avatar.jpg

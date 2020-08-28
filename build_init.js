@@ -45,10 +45,6 @@ if (process.argv.length < 3) {
   copyStatusFile()
 } else if (process.argv[2] == 'removeStatusFile') {
   removeStatusFile()
-} else if (process.argv[2] == 'copy') {
-  copy(process.argv[3], process.argv[4])
-} else if (process.argv[2] == 'remove') {
-  remove(process.argv[3])
 } else if (process.argv[2] == 'downloadStatic') {
   downloadStatic()
 } else if (process.argv[2] == 'copyConfigFile') {
@@ -63,18 +59,25 @@ function downloadStatic() {
     logger.warn('配置文件没有siteConfig')
     return
   }
+  let staticFilePaths = []
+  if (exists(staticFileDataPath)) {
+    staticFilePaths = fs.readJsonSync(staticFileDataPath)
+  }
   const avatarUrl = config.site.avatarUrl
   if (avatarUrl == null || avatarUrl == '') {
     logger.warn('配置文件没有头像URL')
   } else {
+    staticFilePaths.push(avatarPath)
     download(avatarUrl, avatarPath)
   }
   const faviconUrl = config.site.faviconUrl
   if (faviconUrl == null || faviconUrl == '') {
     logger.warn('配置文件没有网站图标URL')
   } else {
+    staticFilePaths.push(faviconPath)
     download(faviconUrl, faviconPath)
   }
+  fs.outputJsonSync(staticFileDataPath, staticFilePaths)
 }
 
 function download(url, filePath) {
@@ -135,6 +138,7 @@ function removeStatusFile() {
     fs.removeSync(filePaths[i])
     logger.info('完成删除静态文件: {}', filePaths[i])
   }
+  fs.outputJsonSync(staticFileDataPath, [])
   logger.info('完成删除静态文件')
 }
 
@@ -144,7 +148,10 @@ function copyStatusFile() {
     logger.warn('静态文件文件夹不存在或者不是文件夹')
     return
   }
-  const staticFilePaths = []
+  let staticFilePaths = []
+  if (exists(staticFileDataPath)) {
+    staticFilePaths = fs.readJsonSync(staticFileDataPath)
+  }
   const filePaths = listAllFilePath(staticFolderPath)
   for (let i = 0; i < filePaths.length; i++) {
     let targetStaticPath = filePaths[i].split(staticFolderPath)
@@ -176,14 +183,14 @@ function listAllFilePath(folderPath) {
 }
 
 function copyConfigFile() {
-  copy(configFilePath, 'middleware/config.json')
-}
-
-function copy(sourcePath, targetPath) {
-  fs.copySync(sourcePath, targetPath)
+  fs.copySync(configFilePath, 'middleware/config.json')
 }
 
 function remove(targetPath) {
+  if (!exists(targetPath)) {
+    logger.warn('删除目标文件不存在, targetPath: {}', targetPath)
+    return
+  }
   if (isFolder(targetPath)) {
     const files = fs.readdirSync(targetPath)
     for (let i = 0; i < files.length; i++) {

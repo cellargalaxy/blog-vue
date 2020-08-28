@@ -53,7 +53,7 @@ function createArticle(file) {
       readTime = 1
     }
     file.readTime = readTime
-    file.attributes.push({name: 'read time', value: readTime + ' min'})
+    file.attributes.push({name: 'readtime', value: readTime + ' min'})
   }
 
   return file
