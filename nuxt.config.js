@@ -89,6 +89,12 @@ export default {
       config.node = {
         'cluster': 'empty',
         'fs': 'empty',
+        'fs-extra': 'empty',
+        'http-server': 'empty',
+        'isomorphic-git': 'empty',
+        'request': 'empty',
+        'moment': 'empty',
+        '@nuxtjs/sitemap': 'empty',
       }
     }
   },
