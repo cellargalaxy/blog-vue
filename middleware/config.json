@@ -33,8 +33,8 @@
         "url": "/page/1/"
       },
       {
-        "text": "时间轴",
-        "url": "/timeLine/"
+        "text": "归档",
+        "url": "/archives/1/"
       },
       {
         "text": "关于我",
@@ -42,7 +42,7 @@
       },
       {
         "text": "写作",
-        "url": "/write/"
+        "url": "/preview/"
       },
       {
         "text": "开源",
@@ -102,7 +102,7 @@
     "pathDateFormat": "YYYYMMDD",
     "pageSize": 10,
     "summaryRow": 6,
-    "dateStringFormat": "yyyy-MM-dd",
+    "dateStringFormat": "YYYY-MM-DD",
     "fileConfigs": [
       {
         "urlPath": "article",
@@ -112,7 +112,7 @@
     ]
   },
   "pageFoot": {
-    "buildTimeFormat": "yyyy-MM-dd hh:mm",
+    "buildTimeFormat": "YYYY-MM-DD HH:mm",
     "rowContents": [
       [
         {
