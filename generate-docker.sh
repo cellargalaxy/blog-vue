@@ -8,17 +8,16 @@ node build_init.js copyStatusFile
 node build_init.js downloadStatic
 npm run generate
 node build_init.js removeStatusFile
-mkdir -p public-back
-if [ -d "public-back" ]; then
-  rm -rf public-back/*
+mkdir -p generate
+rm -rf generate/public_back
+if [ -d "generate/public" ]; then
+  mv generate/public generate/public_back
 fi
-if [ -d "public" ]; then
-  mv public/* public-back/*
-fi
+rm -rf generate/public
 if [ -d "dist" ]; then
-  mv dist/* public/*
-elif [ -d "public-back" ]; then
-  mv public-back/* public/*
+  mv dist generate/public
+elif [ -d "generate/public_back" ]; then
+  mv generate/public_back generate/public
 fi
 nohup node ./node_modules/http-server/bin/http-server -g true -d false -c-1 >/tmp/http.log 2>&1 &
 while :; do
@@ -33,15 +32,14 @@ while :; do
   node build_init.js downloadStatic
   npm run generate
   node build_init.js removeStatusFile
-  if [ -d "public-back" ]; then
-    rm -rf public-back/*
+  rm -rf generate/public_back
+  if [ -d "generate/public" ]; then
+    mv generate/public generate/public_back
   fi
-  if [ -d "public" ]; then
-    mv public/* public-back/*
-  fi
+  rm -rf generate/public
   if [ -d "dist" ]; then
-    mv dist/* public/*
-  elif [ -d "public-back" ]; then
-    mv public-back/* public/*
+    mv dist generate/public
+  elif [ -d "generate/public_back" ]; then
+    mv generate/public_back generate/public
   fi
 done

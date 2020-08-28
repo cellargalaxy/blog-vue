@@ -62,7 +62,7 @@ docker run -d \
   --restart=always \
   --name $CONTAINER_NAME \
   -p $LISTEN_PORT:8080 \
-  -v $CONTAINER_NAME:/src/public \
+  -v $CONTAINER_NAME:/src/generate \
   -e GIT_URL=$GIT_URL \
   -e GIT_REF=$GIT_REF \
   -e GIT_USERNAME=$GIT_USERNAME \

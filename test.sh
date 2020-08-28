@@ -3,16 +3,14 @@ node build_init.js copyConfigFile
 node build_init.js copyStatusFile
 npm run generate
 node build_init.js removeStatusFile
-mkdir -p public-back
-if [ -d "public-back" ]; then
-  rm -rf public-back/*
+rm -rf generate/public_back
+if [ -d "generate/public" ]; then
+  mv generate/public generate/public_back
 fi
-if [ -d "public" ]; then
-  mv public/* public-back/*
-fi
+rm -rf generate/public
 if [ -d "dist" ]; then
-  mv dist/* public/*
-elif [ -d "public-back" ]; then
-  mv public-back/* public/*
+  mv dist generate/public
+elif [ -d "generate/public_back" ]; then
+  mv generate/public_back generate/public
 fi
 node ./node_modules/http-server/bin/http-server -g true -c-1 -d false
