@@ -19,11 +19,14 @@ if [ -d "dist" ]; then
 elif [ -d "public-back" ]; then
   mv public-back public
 fi
-nohup node ./node_modules/http-server/bin/http-server -g true -d false -c-1 >http.log 2>&1 &
+nohup node ./node_modules/http-server/bin/http-server -g true -d false -c-1 >/tmp/http.log 2>&1 &
 while :; do
   echo 'sleep '$SLEEP_TIME
   sleep $SLEEP_TIME
   node build_init.js pull
+  if [ $? -eq 0 ]; then
+    continue
+  fi
   node build_init.js copyConfigFile
   node build_init.js copyStatusFile
   node build_init.js downloadStatic

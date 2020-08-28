@@ -35,22 +35,33 @@ logger.info('git分支: {}', ref)
 const username = process.env.GIT_USERNAME ? process.env.GIT_USERNAME : ''
 const password = process.env.GIT_PASSWORD ? process.env.GIT_PASSWORD : ''
 
-if (process.argv.length < 3) {
-  logger.error('未输入命令类型:clone,pull,copyStatusFile,removeStatusFile,downloadStatic,copyConfigFile')
-} else if (process.argv[2] == 'clone') {
-  clone()
-} else if (process.argv[2] == 'pull') {
-  pull()
-} else if (process.argv[2] == 'copyStatusFile') {
-  copyStatusFile()
-} else if (process.argv[2] == 'removeStatusFile') {
-  removeStatusFile()
-} else if (process.argv[2] == 'downloadStatic') {
-  downloadStatic()
-} else if (process.argv[2] == 'copyConfigFile') {
-  copyConfigFile()
-} else {
-  logger.error('非法命令类型: {}', process.argv[2])
+try {
+  run()
+} catch (e) {
+  logger.error('error: {}', e)
+}
+
+function run() {
+  if (process.argv.length < 3) {
+    logger.error('未输入命令类型:clone,pull,copyStatusFile,removeStatusFile,downloadStatic,copyConfigFile')
+    return
+  }
+  const key = process.argv[2].trim()
+  if (key === 'clone') {
+    clone()
+  } else if (key === 'pull') {
+    pull()
+  } else if (key === 'copyStatusFile') {
+    copyStatusFile()
+  } else if (key === 'removeStatusFile') {
+    removeStatusFile()
+  } else if (key === 'downloadStatic') {
+    downloadStatic()
+  } else if (key === 'copyConfigFile') {
+    copyConfigFile()
+  } else {
+    logger.error('非法命令类型: {}', process.argv[2])
+  }
 }
 
 function downloadStatic() {
@@ -64,14 +75,14 @@ function downloadStatic() {
     staticFilePaths = fs.readJsonSync(staticFileDataPath)
   }
   const avatarUrl = config.site.avatarUrl
-  if (avatarUrl == null || avatarUrl == '') {
+  if (avatarUrl == null || avatarUrl === '') {
     logger.warn('配置文件没有头像URL')
   } else {
     staticFilePaths.push(avatarPath)
     download(avatarUrl, avatarPath)
   }
   const faviconUrl = config.site.faviconUrl
-  if (faviconUrl == null || faviconUrl == '') {
+  if (faviconUrl == null || faviconUrl === '') {
     logger.warn('配置文件没有网站图标URL')
   } else {
     staticFilePaths.push(faviconPath)
@@ -81,6 +92,7 @@ function downloadStatic() {
 }
 
 function download(url, filePath) {
+  logger.info('开始下载文件: {}', url)
   httpRequest.head(url, function (err, res, body) {
     if (!~[200, 304].indexOf(res.statusCode)) {
       logger.error('下载文件的状态码非法,statusCode: {}, avatarUrl:{}', res.statusCode, url)
@@ -107,29 +119,55 @@ async function clone() {
     'onAuth': url => {
       return {username: username, password: password}
     },
+  }).catch((e) => {
+    logger.error('clone error: {}', e)
   })
+  let commit = await getLastCommit()
+  const oid = commit ? commit.oid : ''
+  logger.info('clone,oid: {}', oid)
   logger.info('完成clone仓库')
 }
 
 async function pull() {
   logger.info('开始pull仓库')
+  let commit = await getLastCommit()
+  const oldOid = commit ? commit.oid : ''
+  logger.info('旧提交oid: {}', oldOid)
   await git.pull({
     'fs': fs,
     'http': http,
     'dir': repositoryPath,
     'ref': ref,
     'singleBranch': true,
+    'fastForwardOnly': true,
+    'author': {name: 'none'},
     'onAuth': url => {
       return {username: username, password: password}
     },
+  }).catch((e) => {
+    logger.error('pull error: {}', e)
   })
+  commit = await getLastCommit()
+  const newOid = commit ? commit.oid : ''
+  logger.info('新提交oid: {}', newOid)
   logger.info('完成pull仓库')
+  process.exit(oldOid === newOid ? 0 : 1)
+}
+
+async function getLastCommit() {
+  let commits = await git.log({
+    'fs': fs,
+    'dir': repositoryPath,
+    depth: 1,
+  })
+  const commit = commits && commits.length > 0 ? commits[0] : null
+  return commit
 }
 
 function removeStatusFile() {
   logger.info('开始删除静态文件')
   const filePaths = fs.readJsonSync(staticFileDataPath)
-  if (!filePaths || filePaths.length == 0) {
+  if (!filePaths || filePaths.length === 0) {
     logger.info('没有静态文件需要被删除')
     return
   }
@@ -272,7 +310,7 @@ function formatDate(date, fmt) {
   }
   for (let k in o) {
     if (new RegExp('(' + k + ')').test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
     }
   }
   return fmt
