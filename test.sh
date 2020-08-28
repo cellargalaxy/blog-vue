@@ -12,6 +12,6 @@ fi
 if [ -d "dist" ]; then
   mv dist public
 elif [ -d "public-back" ]; then
-  mv public-back public
+  mv public-back publics
 fi
 node ./node_modules/http-server/bin/http-server -g true -c-1 -d false

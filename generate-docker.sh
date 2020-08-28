@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 if [ -z $SLEEP_TIME ]; then
-  SLEEP_TIME="3600"
+  SLEEP_TIME="3"
 fi
 node build_init.js clone
 node build_init.js copyConfigFile
