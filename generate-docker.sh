@@ -19,7 +19,7 @@ if [ -d "dist" ]; then
 elif [ -d "generate/public_back" ]; then
   mv generate/public_back generate/public
 fi
-nohup node ./node_modules/http-server/bin/http-server -g true -d false -c-1 >/tmp/http.log 2>&1 &
+nohup node ./node_modules/http-server/bin/http-server generate/public -g true -d false -c-1 >/tmp/http.log 2>&1 &
 while :; do
   echo 'sleep '$SLEEP_TIME
   sleep $SLEEP_TIME

@@ -47,4 +47,4 @@ if [ -d "dist" ]; then
 elif [ -d "generate/public_back" ]; then
   mv generate/public_back generate/public
 fi
-node ./node_modules/http-server/bin/http-server -g true -c-1 -d false
+node ./node_modules/http-server/bin/http-server generate/public -g true -c-1 -d false
