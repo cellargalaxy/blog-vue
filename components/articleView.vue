@@ -6,7 +6,7 @@
       </h1>
 
       <b-badge :key="i" style="margin-left: 0.1em;margin-right: 0.1em;" v-for="(attribute,i) in article.attributes">
-        {{attribute.name+': '}}<a :href="attribute.url" class="white" v-text="attribute.value"/>
+        {{ attribute.name + ': ' }}<a :href="attribute.url" class="white" v-text="attribute.value"/>
       </b-badge>
     </b-list-group-item>
 
@@ -35,89 +35,113 @@
 <article-view :article="article" :isSummary="isSummary"/>
 
 <script>
-  import fileService from '../middleware/service/fileService'
+import textService from '../middleware/service/textService'
+import utils from '../middleware/utils/utils'
 
-  export default {
-    name: "articleView",
-    props: {
-      article: {
-        default() {
-          return {
-            "title": "测试文章标题-1-1", "url": "#", "content": "content", "summary": "summary", "isEncrypt": false,
-            "attributes": [
-              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
-              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
-              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
-              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
-              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
-            ],
-          }
+export default {
+  name: "articleView",
+  props: {
+    article: {
+      default() {
+        return {
+          "title": "测试文章标题-1-1", "url": "#", "content": "content", "summary": "summary", "isEncrypt": false,
+          "attributes": [
+            {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+            {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+            {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+            {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+            {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+          ],
         }
-      },
-      isSummary: {
-        default() {
-          return false
-        }
-      },
-    },
-    data() {
-      return {
-        secret: '',
-        decryptSuccess: true,
-        isDecrypt: false,
-        decryptContent: '',
       }
     },
-    computed: {
-      markdown() {
-        if (this.article.isEncrypt && this.isDecrypt) {
-          return this.decryptContent
-        }
-        return this.isSummary ? this.article.summary : this.article.content
+    isSummary: {
+      default() {
+        return false
       }
     },
-    mounted() {
-      const secret = this.getUrlQuery('secret')
-      if (secret === undefined || secret == null || secret === '') {
+  },
+  data() {
+    return {
+      secret: '',
+      decryptSuccess: true,
+      isDecrypt: false,
+      decryptContent: '',
+    }
+  },
+  computed: {
+    markdown() {
+      if (this.article.isEncrypt && this.isDecrypt) {
+        return this.decryptContent
+      }
+      return this.isSummary ? this.article.summary : this.article.content
+    }
+  },
+  mounted() {
+    const cipherSecret = this.getUrlQuery('secret')
+    if (cipherSecret === undefined || cipherSecret == null || cipherSecret === '') {
+      return
+    }
+    this.secret = this.decryptUrlSecret(this.markdown, cipherSecret)
+    this.decrypt()
+  },
+  watch: {
+    article() {
+      this.isDecrypt = false
+    }
+  },
+  methods: {
+    decrypt() {
+      if (this.secret === undefined || this.secret == null || this.secret === '') {
+        this.decryptSuccess = false
+        setTimeout(() => this.decryptSuccess = true, 1000 * 3)
         return
       }
-      this.secret = secret
-      this.decrypt()
-    },
-    watch: {
-      article() {
-        this.isDecrypt = false
+      const content = textService.decryptText(this.markdown, this.secret)
+      if (content === undefined || content == null || content === '') {
+        this.decryptSuccess = false
+        setTimeout(() => this.decryptSuccess = true, 1000 * 3)
+        return false
       }
+      this.decryptContent = content
+      this.isDecrypt = true
     },
-    methods: {
-      decrypt() {
-        const content = fileService.decryptText(this.markdown, this.secret)
-        if (content === undefined || content == null || content === '') {
-          this.decryptSuccess = false
-          setTimeout(() => this.decryptSuccess = true, 1000 * 3)
-          return
+    getUrlQuery(name) {
+      const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i")
+      const r = window.location.search.substr(1).match(reg)
+      if (r != null) {
+        return decodeURIComponent(r[2])
+      }
+      return null
+    },
+    decryptUrlSecret(markdown, cipherSecret) {
+      const content = textService.decryptText(markdown, cipherSecret)
+      if (content !== undefined && content != null && content !== '') {
+        return cipherSecret
+      }
+      cipherSecret = textService.deBase64(cipherSecret)
+      const string = utils.formatDate(new Date(), 'YYYYMMDDHHmmss')
+      let space = ''
+      for (let i = string.length; i >= 0; i--) {
+        const key = string.substring(0, i) + space
+        space = space + '-'
+        const secret = textService.decryptText(cipherSecret, key)
+        if (secret !== undefined && secret != null && secret !== '') {
+          return secret
         }
-        this.decryptContent = content
-        this.isDecrypt = true
-      },
-      getUrlQuery(name) {
-        const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i")
-        const r = window.location.search.substr(1).match(reg)
-        if (r != null) {
-          return decodeURI(r[2])
-        }
-        return null
-      },
-    }
+      }
+      return null
+    },
   }
+}
 </script>
 
 <style scoped>
-  .white-background-8 {
-    background-color: rgba(255, 255, 255, 0.8);
-  }
+.white-background-8 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
 
-  .white {
-    color: rgba(255, 255, 255, 1);
-  }
+.white {
+  color: rgba(255, 255, 255, 1);
+}
 </style>

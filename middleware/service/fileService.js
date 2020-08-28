@@ -5,7 +5,7 @@ import moment from "moment"
 import path from "path"
 import utils from "../utils/utils"
 import fileIO from "../utils/fileIO"
-import crypto from 'crypto-js'
+import textService from './textService'
 
 const logger = log('fileService')
 
@@ -332,8 +332,8 @@ function createFile(filePath, content) {
     }
     file.isEncrypt = true
     if (secret !== undefined && secret != null && secret !== '') {
-      file.content = encryptText(file.content, secret)
-      file.summary = encryptText(file.summary, secret)
+      file.content = textService.encryptText(file.content, secret)
+      file.summary = textService.encryptText(file.summary, secret)
     }
   }
 
@@ -372,26 +372,6 @@ function sortFiles(file1, file2) {
   return file2.date.getTime() - file1.date.getTime()
 }
 
-function encryptText(text, secret) {
-  try {
-    const encrypt = crypto.AES.encrypt(text, secret)
-    return encrypt !== undefined && encrypt != null ? encrypt.toString() : null
-  } catch (e) {
-    logger.error('encrypt fail: {}', e)
-    return null
-  }
-}
-
-function decryptText(text, secret) {
-  try {
-    const encrypt = crypto.AES.decrypt(text, secret)
-    return encrypt !== undefined && encrypt != null ? encrypt.toString(crypto.enc.Utf8) : null
-  } catch (e) {
-    logger.error('decrypt fail: {}', e)
-    return null
-  }
-}
-
 export default {
   getFile: getFile,
   listFileByPath: listFileByPath,
@@ -400,6 +380,4 @@ export default {
   listArchiveInfo: listArchiveInfo,
   getFileConfig: getFileConfig,
   createFile: createFile,
-  encryptText: encryptText,
-  decryptText: decryptText,
 }

@@ -25,6 +25,15 @@
       </b-col>
     </b-row>
 
+    <b-row>
+      <b-col>
+        <b-input-group>
+          <b-form-input placeholder="secretKey" v-model="secretKey" maxlength="14"></b-form-input>
+          <b-form-input placeholder="secret" v-model="cipherSecret" readonly></b-form-input>
+        </b-input-group>
+      </b-col>
+    </b-row>
+
     <b-row no-gutters>
       <b-col :cols="textareaCol" v-if="textareaCol>0">
         <b-form-textarea @input="changeArticle" class="white-background-8" max-rows="10000" rows="3"
@@ -40,106 +49,113 @@
 <preview/>
 
 <script>
-  import articleView from './articleView'
-  import utils from '../middleware/utils/utils'
-  import fileService from '../middleware/service/fileService'
-  import articleService from '../middleware/service/articleService'
+import articleView from './articleView'
+import utils from '../middleware/utils/utils'
+import textService from '../middleware/service/textService'
+import fileService from '../middleware/service/fileService'
+import articleService from '../middleware/service/articleService'
 
-  export default {
-    name: "preview",
-    data() {
-      return {
-        filePath: 'preview/' + utils.formatDate(new Date(), 'YYYYMMDD') + '/preview markdown.md',
-        article: {content: '# content', isEncrypt: false},
-        textareaCol: 6,
-        articleViewCol: 6,
-        secret: 'secret',
-        cryptSuccess: true,
+export default {
+  name: "preview",
+  data() {
+    return {
+      filePath: 'preview/' + utils.formatDate(new Date(), 'YYYYMMDD') + '/preview markdown.md',
+      article: {content: '# content', isEncrypt: false},
+      textareaCol: 6,
+      articleViewCol: 6,
+      secret: 'secret',
+      cryptSuccess: true,
+      secretKey: utils.formatDate(new Date(), 'YYYYMMDDHHmmss'),
+    }
+  },
+  computed: {
+    cipherSecret() {
+      return textService.enBase64(textService.encryptText(this.secret, this.secretKey))
+    }
+  },
+  mounted() {
+    window.onbeforeunload = () => {
+      this.copyContent()
+      return "确认离开当前页面"
+    }
+  },
+  created() {
+    this.changeArticle()
+  },
+  methods: {
+    changeArticle() {
+      const file = fileService.createFile(this.filePath, this.article.content)
+      this.article = articleService.createArticle(file)
+    },
+    showTextarea() {
+      if (this.textareaCol == 6 && this.articleViewCol == 6) {
+        this.textareaCol = 12
+        this.articleViewCol = 0
+      } else {
+        this.textareaCol = 6
+        this.articleViewCol = 6
       }
     },
-    mounted() {
-      window.onbeforeunload = () => {
-        this.copyContent()
-        return "确认离开当前页面"
+    showArticleView() {
+      if (this.textareaCol == 6 && this.articleViewCol == 6) {
+        this.textareaCol = 0
+        this.articleViewCol = 12
+      } else {
+        this.textareaCol = 6
+        this.articleViewCol = 6
       }
     },
-    created() {
-      this.changeArticle()
+    copyContent() {
+      this.writeClipboard(this.article.content)
     },
-    methods: {
-      changeArticle() {
-        const file = fileService.createFile(this.filePath, this.article.content)
-        this.article = articleService.createArticle(file)
-      },
-      showTextarea() {
-        if (this.textareaCol == 6 && this.articleViewCol == 6) {
-          this.textareaCol = 12
-          this.articleViewCol = 0
-        } else {
-          this.textareaCol = 6
-          this.articleViewCol = 6
-        }
-      },
-      showArticleView() {
-        if (this.textareaCol == 6 && this.articleViewCol == 6) {
-          this.textareaCol = 0
-          this.articleViewCol = 12
-        } else {
-          this.textareaCol = 6
-          this.articleViewCol = 6
-        }
-      },
-      copyContent() {
-        this.writeClipboard(this.article.content)
-      },
-      writeClipboard(text) {
-        const textarea = document.createElement('textarea')
-        textarea.style.opacity = 0
-        textarea.style.position = 'absolute'
-        textarea.style.left = '-100000px'
-        document.body.appendChild(textarea)
+    writeClipboard(text) {
+      const textarea = document.createElement('textarea')
+      textarea.style.opacity = 0
+      textarea.style.position = 'absolute'
+      textarea.style.left = '-100000px'
+      document.body.appendChild(textarea)
 
-        textarea.value = text
-        textarea.select()
-        textarea.setSelectionRange(0, text.length)
-        document.execCommand('copy')
-        document.body.removeChild(textarea)
-      },
-      encrypt() {
-        if (this.article.isEncrypt) {
-          return
-        }
-        const content = fileService.encryptText(this.article.content, this.secret)
-        if (content === undefined || content == null || content === '') {
-          this.cryptSuccess = false
-          setTimeout(() => this.cryptSuccess = true, 1000 * 3)
-          return
-        }
-        this.article.content = content
-        this.article.isEncrypt = true
-      },
-      decrypt() {
-        if (!this.article.isEncrypt) {
-          return
-        }
-        const content = fileService.decryptText(this.article.content, this.secret)
-        if (content === undefined || content == null || content === '') {
-          this.cryptSuccess = false
-          setTimeout(() => this.cryptSuccess = true, 1000 * 3)
-          return
-        }
-        this.article.content = content
-        this.article.isEncrypt = false
-      },
+      textarea.value = text
+      textarea.select()
+      textarea.setSelectionRange(0, text.length)
+      document.execCommand('copy')
+      document.body.removeChild(textarea)
     },
-    components: {
-      articleView,
+    encrypt() {
+      if (this.article.isEncrypt) {
+        return
+      }
+      const content = textService.encryptText(this.article.content, this.secret)
+      if (content === undefined || content == null || content === '') {
+        this.cryptSuccess = false
+        setTimeout(() => this.cryptSuccess = true, 1000 * 3)
+        return
+      }
+      this.article.content = content
+      this.article.isEncrypt = true
     },
-  }
+    decrypt() {
+      if (!this.article.isEncrypt) {
+        return
+      }
+      const content = textService.decryptText(this.article.content, this.secret)
+      if (content === undefined || content == null || content === '') {
+        this.cryptSuccess = false
+        setTimeout(() => this.cryptSuccess = true, 1000 * 3)
+        return
+      }
+      this.article.content = content
+      this.article.isEncrypt = false
+    },
+  },
+  components: {
+    articleView,
+  },
+}
 </script>
 
 <style scoped>
-  .white-background-8 {
-    background-color: rgba(255, 255, 255, 0.8);
-  }
+.white-background-8 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
 </style>
