@@ -83,3 +83,5 @@ Reference https://github.com/cellargalaxy/blog-code, promise`.static`Store stati
 15. ~~使用npm install forever/pm2~~（不合适）
 16. ~~归档能进行分页和按年来分页~~（已完成）
 17. ~~文章加密功能~~（已完成）
+18. ~~图片懒加载~~（已完成）
+19. 归档里加个文章的分类，看看内容能不能用图标装住
