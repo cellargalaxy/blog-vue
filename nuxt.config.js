@@ -65,7 +65,8 @@ export default {
     comments: true
   },
   plugins: [
-    {src: '~plugins/element-ui', ssr: true}
+    {src: '~plugins/element-ui', ssr: true},
+    "@/plugins/vue-lazyload",
   ],
 
   /*

@@ -11,7 +11,7 @@
     </b-list-group-item>
 
     <div v-if="!article.isEncrypt||isDecrypt">
-      <b-list-group-item class="white-background-8" v-html="$md.render(markdown)"/>
+      <b-list-group-item class="white-background-8" v-html="html" v-lazy-container="{selector:'img'}"/>
     </div>
     <div v-else>
       <b-list-group-item class="white-background-8">
@@ -75,7 +75,15 @@ export default {
         return this.decryptContent
       }
       return this.isSummary ? this.article.summary : this.article.content
-    }
+    },
+    html() {
+      //google: `vue v-html img lazy`
+      //https://yasminzy.com/nuxt/vue-lazyload.html
+      //https://juejin.im/post/6844904030552997896
+      let html = this.$md.render(this.markdown)
+      html = html.replace(/<img src/g, '<img data-src')
+      return html
+    },
   },
   mounted() {
     const cipherSecret = this.getUrlQuery('secret')
