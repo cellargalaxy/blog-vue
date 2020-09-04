@@ -35,20 +35,20 @@
 <article-view :article="article" :isSummary="isSummary"/>
 
 <script>
-import textService from '../middleware/service/textService'
-import utils from '../middleware/utils/utils'
+  import textService from '../middleware/service/textService'
+  import utils from '../middleware/utils/utils'
 
-export default {
-  name: "articleView",
-  props: {
-    article: {
-      default() {
-        return {
-          "title": "测试文章标题-1-1", "url": "#", "content": "content", "summary": "summary", "isEncrypt": false,
-          "attributes": [
-            {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
-            {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
-            {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+  export default {
+    name: "articleView",
+    props: {
+      article: {
+        default() {
+          return {
+            "title": "测试文章标题-1-1", "url": "#", "content": "content", "summary": "summary", "isEncrypt": false,
+            "attributes": [
+              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
             {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
             {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
           ],

@@ -49,23 +49,23 @@
 <preview/>
 
 <script>
-import articleView from './articleView'
-import utils from '../middleware/utils/utils'
-import textService from '../middleware/service/textService'
-import fileService from '../middleware/service/fileService'
-import articleService from '../middleware/service/articleService'
+  import articleView from './articleView'
+  import utils from '../middleware/utils/utils'
+  import textService from '../middleware/service/textService'
+  import fileService from '../middleware/service/fileService'
+  import articleService from '../middleware/service/articleService'
 
-export default {
-  name: "preview",
-  data() {
-    return {
-      filePath: 'preview/' + utils.formatDate(new Date(), 'YYYYMMDD') + '/preview markdown.md',
-      article: {content: '# content', isEncrypt: false},
-      textareaCol: 6,
-      articleViewCol: 6,
-      secret: 'secret',
-      cryptSuccess: true,
-      secretKey: utils.formatDate(new Date(), 'YYYYMMDDHHmmss'),
+  export default {
+    name: "preview",
+    data() {
+      return {
+        filePath: 'preview/' + utils.formatDate(new Date(), 'YYYYMMDD') + '/preview markdown.md',
+        article: {content: '# content', isEncrypt: false},
+        textareaCol: 6,
+        articleViewCol: 6,
+        secret: 'secret',
+        cryptSuccess: true,
+        secretKey: utils.formatDate(new Date(), 'YYYYMMDDHHmmss'),
     }
   },
   computed: {
