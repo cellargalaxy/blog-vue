@@ -6,7 +6,12 @@
                         placement="top" v-for="(archive,i) in archives">
         <b-card :key="j" class="transparent" no-body style="border:none;" v-for="(file,j) in archive.files">
           <b-link :href="file.url">{{file.title}}</b-link>
-          <p v-if="file.dateString">({{file.dateString}})</p>
+          <b-row>
+            <b-badge :key="i" style="margin-left: 0.1em;margin-right: 0.1em;" v-for="(attribute,i) in file.attributes">
+              {{ attribute.name + ': ' }}<a :href="attribute.url" class="white" v-text="attribute.value"/>
+            </b-badge>
+          </b-row>
+          <br/>
         </b-card>
       </el-timeline-item>
     </el-timeline>
@@ -60,5 +65,9 @@
 
   .white-background-8 {
     background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .white {
+    color: rgba(255, 255, 255, 1);
   }
 </style>

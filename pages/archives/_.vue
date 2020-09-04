@@ -65,7 +65,7 @@
           pageInfo.filePage[i].files[j] = {
             url: pageInfo.filePage[i].files[j].url,
             title: pageInfo.filePage[i].files[j].title,
-            dateString: pageInfo.filePage[i].files[j].dateString,
+            attributes: pageInfo.filePage[i].files[j].attributes,
           }
         }
       }
