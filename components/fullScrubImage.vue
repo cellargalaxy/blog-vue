@@ -10,7 +10,7 @@
     props: {
       scrubUrl: {
         default: function () {
-          return '/images/blurry.png'
+          return '/image/blurry.png'
         }
       },
       imageUrl: {

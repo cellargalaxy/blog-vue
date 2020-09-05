@@ -12,7 +12,7 @@
 
 /*背景图片磨砂*/
 #__nuxt {
-    background-image: url("/images/blurry.png");
+    background-image: url("/image/blurry.png");
     background-repeat: repeat;
     background-position: 0% 0%;
     background-attachment: fixed;
