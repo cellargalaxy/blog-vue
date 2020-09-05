@@ -252,8 +252,8 @@ function createFile(filePath, content) {
   const contents = file.content.split('\n')
   let count = 0
   for (let i = 0; i < contents.length && count < SUMMARY_ROW; i++) {
-    if (contents[i] && (contents[i] = contents[i].trim()).length > 0) {
-      summary = summary + contents[i] + '\n'
+    summary = summary + contents[i] + '\n'
+    if (contents[i] && contents[i].trim().length > 0) {
       count = count + 1
     }
   }
