@@ -54,7 +54,7 @@ echo 'input any key go on,or control+c over'
 read
 
 echo 'docker build'
-docker build -t blog_vue .
+docker build -t $CONTAINER_NAME .
 echo 'docker create volume'
 docker volume create $CONTAINER_NAME
 echo 'docker run'
@@ -68,6 +68,6 @@ docker run -d \
   -e GIT_USERNAME=$GIT_USERNAME \
   -e GIT_PASSWORD=$GIT_PASSWORD \
   -e SLEEP_TIME=$SLEEP_TIME \
-  blog_vue
+  $CONTAINER_NAME
 
 echo 'all finish'
