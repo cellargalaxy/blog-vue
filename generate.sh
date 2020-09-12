@@ -37,6 +37,7 @@ node build_init.js copyStatusFile
 node build_init.js downloadStatic
 npm run generate
 node build_init.js removeStatusFile
+mkdir -p generate
 rm -rf generate/public_back
 if [ -d "generate/public" ]; then
   mv generate/public generate/public_back

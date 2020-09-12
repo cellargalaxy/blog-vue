@@ -7,9 +7,10 @@
         <b-card :key="j" class="transparent" no-body style="border:none;" v-for="(file,j) in archive.files">
           <b-link :href="file.url">{{file.title}}</b-link>
           <b-row>
-            <b-badge :key="i" style="margin-left: 0.1em;margin-right: 0.1em;" v-for="(attribute,i) in file.attributes">
-              {{ attribute.name + ': ' }}<a :href="attribute.url" class="white" v-text="attribute.value"/>
-            </b-badge>
+            <auto-color-badge :key="i" :name="attribute.name"
+                              :url="attribute.url" :value="attribute.value"
+                              style="margin-left: 0.1em;margin-right: 0.1em;"
+                              v-for="(attribute,i) in file.attributes"/>
           </b-row>
           <br/>
         </b-card>
@@ -21,6 +22,8 @@
 <archives :archives="archives"/>
 
 <script>
+  import autoColorBadge from './autoColorBadge'
+
   export default {
     name: "archives",
     props: {
@@ -55,6 +58,9 @@
         }
       },
     },
+    components: {
+      autoColorBadge,
+    },
   }
 </script>
 
@@ -65,9 +71,5 @@
 
   .white-background-8 {
     background-color: rgba(255, 255, 255, 0.8);
-  }
-
-  .white {
-    color: rgba(255, 255, 255, 1);
   }
 </style>

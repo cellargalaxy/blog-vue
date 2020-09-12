@@ -3,8 +3,8 @@ public
 public-back
 staticFileData.json
 http.log
-static/images/avatar.jpg
-static/images/favicon.ico
+static/image/avatar.jpg
+static/image/favicon.ico
 
 # dependencies
 node_modules

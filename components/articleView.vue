@@ -5,13 +5,16 @@
         <b-link :href="article.url" target="_blank" v-text="article.title"/>
       </h1>
 
-      <b-badge :key="i" style="margin-left: 0.1em;margin-right: 0.1em;" v-for="(attribute,i) in article.attributes">
-        {{ attribute.name + ': ' }}<a :href="attribute.url" class="white" v-text="attribute.value"/>
-      </b-badge>
+      <auto-color-badge :key="i" :name="attribute.name"
+                        :url="attribute.url" :value="attribute.value" style="margin-left: 0.1em;margin-right: 0.1em;"
+                        v-for="(attribute,i) in article.attributes"/>
     </b-list-group-item>
 
     <div v-if="!article.isEncrypt||isDecrypt">
-      <b-list-group-item class="white-background-8" v-html="html" v-lazy-container="{selector:'img'}"/>
+      <!--google: `vue v-html img lazy`-->
+      <!--https://yasminzy.com/nuxt/vue-lazyload.html-->
+      <!--https://juejin.im/post/6844904030552997896-->
+      <b-list-group-item class="white-background-8" v-html="$md.render(markdown)" v-lazy-container="{selector:'img'}"/>
     </div>
     <div v-else>
       <b-list-group-item class="white-background-8">
@@ -35,6 +38,7 @@
 <article-view :article="article" :isSummary="isSummary"/>
 
 <script>
+  import autoColorBadge from './autoColorBadge'
   import textService from '../middleware/service/textService'
   import utils from '../middleware/utils/utils'
 
@@ -49,107 +53,98 @@
               {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
               {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
               {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
-            {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
-            {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
-          ],
+              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+              {"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别1", "url": "#"},
+            ],
+          }
         }
+      },
+      isSummary: {
+        default() {
+          return false
+        }
+      },
+    },
+    data() {
+      return {
+        secret: '',
+        decryptSuccess: true,
+        isDecrypt: false,
+        decryptContent: '',
       }
     },
-    isSummary: {
-      default() {
-        return false
-      }
+    computed: {
+      markdown() {
+        if (this.article.isEncrypt && this.isDecrypt) {
+          return this.decryptContent
+        }
+        return this.isSummary ? this.article.summary : this.article.content
+      },
     },
-  },
-  data() {
-    return {
-      secret: '',
-      decryptSuccess: true,
-      isDecrypt: false,
-      decryptContent: '',
-    }
-  },
-  computed: {
-    markdown() {
-      if (this.article.isEncrypt && this.isDecrypt) {
-        return this.decryptContent
-      }
-      return this.isSummary ? this.article.summary : this.article.content
-    },
-    html() {
-      //google: `vue v-html img lazy`
-      //https://yasminzy.com/nuxt/vue-lazyload.html
-      //https://juejin.im/post/6844904030552997896
-      let html = this.$md.render(this.markdown)
-      html = html.replace(/<img src/g, '<img data-src')
-      return html
-    },
-  },
-  mounted() {
-    const cipherSecret = this.getUrlQuery('secret')
-    if (cipherSecret === undefined || cipherSecret == null || cipherSecret === '') {
-      return
-    }
-    this.secret = this.decryptUrlSecret(this.markdown, cipherSecret)
-    this.decrypt()
-  },
-  watch: {
-    article() {
-      this.isDecrypt = false
-    }
-  },
-  methods: {
-    decrypt() {
-      if (this.secret === undefined || this.secret == null || this.secret === '') {
-        this.decryptSuccess = false
-        setTimeout(() => this.decryptSuccess = true, 1000 * 3)
+    mounted() {
+      const cipherSecret = this.getUrlQuery('secret')
+      if (cipherSecret === undefined || cipherSecret == null || cipherSecret === '') {
         return
       }
-      const content = textService.decryptText(this.markdown, this.secret)
-      if (content === undefined || content == null || content === '') {
-        this.decryptSuccess = false
-        setTimeout(() => this.decryptSuccess = true, 1000 * 3)
-        return false
-      }
-      this.decryptContent = content
-      this.isDecrypt = true
+      this.secret = this.decryptUrlSecret(this.markdown, cipherSecret)
+      this.decrypt()
     },
-    getUrlQuery(name) {
-      const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i")
-      const r = window.location.search.substr(1).match(reg)
-      if (r != null) {
-        return decodeURIComponent(r[2])
+    watch: {
+      article() {
+        this.isDecrypt = false
       }
-      return null
     },
-    decryptUrlSecret(markdown, cipherSecret) {
-      const content = textService.decryptText(markdown, cipherSecret)
-      if (content !== undefined && content != null && content !== '') {
-        return cipherSecret
-      }
-      cipherSecret = textService.deBase64(cipherSecret)
-      const string = utils.formatDate(new Date(), 'YYYYMMDDHHmmss')
-      let space = ''
-      for (let i = string.length; i >= 0; i--) {
-        const key = string.substring(0, i) + space
-        space = space + '-'
-        const secret = textService.decryptText(cipherSecret, key)
-        if (secret !== undefined && secret != null && secret !== '') {
-          return secret
+    methods: {
+      decrypt() {
+        if (this.secret === undefined || this.secret == null || this.secret === '') {
+          this.decryptSuccess = false
+          setTimeout(() => this.decryptSuccess = true, 1000 * 3)
+          return
         }
-      }
-      return null
+        const content = textService.decryptText(this.markdown, this.secret)
+        if (content === undefined || content == null || content === '') {
+          this.decryptSuccess = false
+          setTimeout(() => this.decryptSuccess = true, 1000 * 3)
+          return false
+        }
+        this.decryptContent = content
+        this.isDecrypt = true
+      },
+      getUrlQuery(name) {
+        const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i")
+        const r = window.location.search.substr(1).match(reg)
+        if (r != null) {
+          return decodeURIComponent(r[2])
+        }
+        return null
+      },
+      decryptUrlSecret(markdown, cipherSecret) {
+        const content = textService.decryptText(markdown, cipherSecret)
+        if (content !== undefined && content != null && content !== '') {
+          return cipherSecret
+        }
+        cipherSecret = textService.deBase64(cipherSecret)
+        const string = utils.formatDate(new Date(), 'YYYYMMDDHHmmss')
+        let space = ''
+        for (let i = string.length; i >= 0; i--) {
+          const key = string.substring(0, i) + space
+          space = space + '-'
+          const secret = textService.decryptText(cipherSecret, key)
+          if (secret !== undefined && secret != null && secret !== '') {
+            return secret
+          }
+        }
+        return null
+      },
+    },
+    components: {
+      autoColorBadge,
     },
   }
-}
 </script>
 
 <style scoped>
-.white-background-8 {
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-.white {
-  color: rgba(255, 255, 255, 1);
-}
+  .white-background-8 {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
 </style>

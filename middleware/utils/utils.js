@@ -71,6 +71,19 @@ function endsWith(string, end) {
   return string.substring(string.length - end.length) == end
 }
 
+function hashString(string) {
+  let hash = 0
+  if (string === undefined || string == null || string.length === 0) {
+    return hash
+  }
+  for (let i = 0; i < string.length; i++) {
+    const char = string.charCodeAt(i)
+    hash = ((hash << 5) - hash) + char
+    hash |= 0
+  }
+  return hash
+}
+
 export default {
   formatTimestamp: formatTimestamp,
   formatDate: formatDate,
@@ -80,4 +93,5 @@ export default {
   isNum: isNum,
   startsWith: startsWith,
   endsWith: endsWith,
+  hashString: hashString,
 }
