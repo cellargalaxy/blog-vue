@@ -1,6 +1,5 @@
 # build
-public
-public-back
+generate
 staticFileData.json
 http.log
 static/image/avatar.jpg
