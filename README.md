@@ -86,3 +86,4 @@ Reference https://github.com/cellargalaxy/blog-code, promise`.static`Store stati
 18. ~~图片懒加载~~（已完成）
 19. ~~归档里加个文章的分类，看看内容能不能用图标装住~~（已完成）
 20. ~~图标加载中和加载失败图标~~（已完成）
+21. 添加可以分组的，名言图片随机走马灯文件样式
