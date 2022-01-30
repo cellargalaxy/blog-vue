@@ -30,7 +30,7 @@
 import autoColorBadge from './autoColorBadge'
 
 export default {
-  name: "archives",
+  name: "archives", //归档
   props: {
     archives: {
       default() {

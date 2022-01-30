@@ -1,18 +1,18 @@
 <template>
   <div>
     <aomponent/>
-    <page-head/>
-    <page-head/>
-    <page-head/>
-    <page-head/>
-    <page-head/>
-    <page-head/>
-    <page-head/>
+<!--    <page-head/>-->
+<!--    <page-head/>-->
+<!--    <page-head/>-->
+<!--    <page-head/>-->
+<!--    <page-head/>-->
+<!--    <page-head/>-->
+<!--    <page-head/>-->
   </div>
 </template>
 
 <script>
-import aomponent from '../components/backtop.vue'
+import aomponent from '../components/articleView.vue'
 import pageHead from '../components/pageHead.vue'
 
 export default {

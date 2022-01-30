@@ -5,7 +5,7 @@
 <auto-color-badge :name="name" :url="url" :value="value"/>
 
 <script>
-import util from '../middleware/util/util'
+import util from '../middleware/util'
 
 export default {
   name: "autoColorBadge", //随机轮换颜色的badge
@@ -22,7 +22,7 @@ export default {
     },
     url: {
       default() {
-        return '#'
+        return undefined
       }
     },
   },
