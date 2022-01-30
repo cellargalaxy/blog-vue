@@ -1,0 +1,34 @@
+<template>
+  <div>
+    <aomponent/>
+    <!--    <page-head/>-->
+    <!--    <page-head/>-->
+    <!--    <page-head/>-->
+    <!--    <page-head/>-->
+    <!--    <page-head/>-->
+    <!--    <page-head/>-->
+    <!--    <page-head/>-->
+  </div>
+</template>
+
+<script>
+import aomponent from '../components/archives.vue'
+import pageHead from '../components/pageHead.vue'
+
+export default {
+  name: "test",
+  data() {
+    return {}
+  },
+  components: {
+    aomponent,
+    pageHead,
+  },
+}
+</script>
+
+<style>
+body {
+  background-color: burlywood;
+}
+</style>
