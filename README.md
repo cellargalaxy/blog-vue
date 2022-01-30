@@ -1,89 +1,81 @@
-# 简介
-一个博客，每间隔一段时间从指定git仓库里拉取文章，使用nuxt做服务端渲染。最终达到部署服务后，把文章更新到git上，博客就会自动更新博文。
+# blog-vue
 
-# 本地使用
+## Build Setup
+
 ```bash
-cd blog-vue
-npm i
-bash generate.sh
+# install dependencies
+$ npm install
+
+# serve with hot reload at localhost:3000
+$ npm run dev
+
+# build for production and launch server
+$ npm run build
+$ npm run start
+
+# generate static project
+$ npm run generate
 ```
-然后依照提示填写信息。`generate.sh`执行到最后，会监听`8080`端口，在浏览器打开`127.0.0.1:8080`即可
 
-# docker安装
-```bash
-cd blog-vue
-npm i
-bash install-docker.sh
-```
-然后依照提示填写信息。`install-docker.sh`执行完成后，还需要一段时间来生成html（大约一分钟到二十分钟）。之后会监听`8080`端口，在浏览器打开`127.0.0.1:8080`即可
+For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
-# 参数
-|参数|默认值|含义|
-|-|-|-|
-|git url|没有默认值|git的地址|
-|git ref|master|git的分支|
-|git username|""|git的账号，如果是私有仓库需要填写|
-|git password|""|git的密码，如果是私有仓库需要填写|
-|sleepTime|3600(秒)|每间隔3600秒拉取一次git的文件进行编译，docker中使用|
-|listen port|8888|docker的监听端口|
-|container name|blog_vue|docker的容器的名字|
+## Special Directories
 
-# 文章git结构
-参考https://github.com/cellargalaxy/blog-code ，约定`.static`存放静态文件，git目录下有`config.json`作为站点的配置
+You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can
+delete them if you don't want to use their functionality.
 
-# Summary
-A blog, pull articles from the git repository at interval, use nuxt as server。After deploying the service, push articles to git and blog will auto update.
+### `assets`
 
-# local use
-```bash
-cd blog-vue
-npm i
-bash generate.sh
-```
-Fill in the information as prompted. `generate.sh`execution to the end, will listen`8080`port, open`127.0.0.1:8080`in the browser.
+The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
 
-# docker install
-```bash
-cd blog-vue
-npm i
-bash install-docker.sh
-```
-Fill in the information as prompted. After`install-docker.sh`execution, it still takes a while to generate the html(About one minute to twenty minutes). will listen`8080`port, open`127.0.0.1:8080`in the browser.
+More information about the usage of this directory
+in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
 
-# Parameter
-|parameter|defaults|meaning|
-|-|-|-|
-|git url|no default|git address|
-|git ref|master|git branch|
-|git username|""|git username, need to fill in if it is private|
-|git password|""|git password, need to fill in if it is private|
-|sleepTime|3600(second)|pull the git file every 3600 seconds for compilation, use in docker|
-|listen port|8888|docker listen port|
-|container name|blog_vue|docker container name|
+### `components`
 
-# Article git structure
-Reference https://github.com/cellargalaxy/blog-code, promise`.static`Store static files, git path has`config.json`configuration as a site
+The components directory contains your Vue.js components. Components make up the different parts of your page and can be
+reused and imported into your pages, layouts and even other components.
 
-# 计划
-1. ~~修改编译时间的bug~~（已修复）
-2. ~~为什么宽会有多~~（已修复）
-3. ~~减少无关字段在文章编译时输出~~（已完成）
-4. ~~修改文章日期结构为20200121形式~~（已完成）
-5. ~~看看叶头的图片需不需要位置的大小更改适配~~（不需要）
-6. ~~博客头像固定url~~（已完成）
-7. ~~支持stackedit~~（已完成）
-8. ~~支持子目录分类型解析，为以后继续挖坑做准备~~（已完成）
-9. ~~代码行的多出一行bug~~（已修复）
-10. ~~增加评论~~（已完成）
-11. ~~新增一个自定义的文章排序，文章文件名`title.{num}.md`排序数为num，`title.md`默认为0。
-    例如`title.-1.md<title.md<title.1.md`。自定义排序优先于日期排序。~~（已完成）
-12. ~~标准化url路径名称~~（已完成）
-13. ~~弃坑stackedit，做自己样式的在线实时效果查看~~（已完成）
-14. ~~使用webhook监听github的push事件+cron~~（懒得搞）
-15. ~~使用npm install forever/pm2~~（不合适）
-16. ~~归档能进行分页和按年来分页~~（已完成）
-17. ~~文章加密功能~~（已完成）
-18. ~~图片懒加载~~（已完成）
-19. ~~归档里加个文章的分类，看看内容能不能用图标装住~~（已完成）
-20. ~~图标加载中和加载失败图标~~（已完成）
-21. 添加可以分组的，名言图片随机走马灯文件样式
+More information about the usage of this directory
+in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+
+### `layouts`
+
+Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a
+sidebar or have distinct layouts for mobile and desktop.
+
+More information about the usage of this directory
+in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+
+### `pages`
+
+This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory
+and setup Vue Router automatically.
+
+More information about the usage of this directory
+in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
+
+### `plugins`
+
+The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application.
+This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you
+should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
+
+More information about the usage of this directory
+in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
+
+### `static`
+
+This directory contains your static files. Each file inside this directory is mapped to `/`.
+
+Example: `/static/robots.txt` is mapped as `/robots.txt`.
+
+More information about the usage of this directory
+in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
+
+### `store`
+
+This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
+
+More information about the usage of this directory
+in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
