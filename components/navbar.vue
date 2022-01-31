@@ -31,7 +31,7 @@ export default {
     config: {
       default() {
         return {
-          "brandText": "主页名",
+          "brandText": "主页の名",
           "brandUrl": "#",
           "navs": [
             {"text": "导航-1", "url": "#"},

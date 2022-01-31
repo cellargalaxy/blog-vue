@@ -84,6 +84,7 @@ function content2File(content) {
   }
   file.createAt = new Date(content.createdAt)
   file.updateAt = new Date(content.updatedAt)
+  file.dir = content.dir
 
   file.attributes = []
   if (content.attributes) {
@@ -93,6 +94,12 @@ function content2File(content) {
   }
   file.attributes.push({name: "createAt", value: util.formatDate(file.createAt, 'YYYY-MM-DD')})
   file.attributes.push({name: "updateAt", value: util.formatDate(file.updateAt, 'YYYY-MM-DD')})
+  let sortUrl = '/page' + file.dir
+  if (!util.endWith(sortUrl, '/')) {
+    sortUrl += '/'
+  }
+  sortUrl += '1/'
+  file.attributes.push({name: "sort", value: file.dir, url: sortUrl})
 
   return file
 }

@@ -2,7 +2,7 @@
   <b-list-group class="nuxt-content" style="margin-bottom: 1em">
     <b-list-group-item class="white-background-8">
       <h1>
-        <b-link v-text="article.title" :href="article.path" target="_blank"/>
+        <b-link v-text="article.title" :href="article.url" target="_blank"/>
       </h1>
       <auto-color-badges :attributes="article.attributes"/>
     </b-list-group-item>
