@@ -1,19 +1,18 @@
 <template>
   <div>
-    <archive-by-content :contents="contents"/>
-    <br/>
+    <article-list :contents="contents"/>
     <pagination :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
   </div>
 </template>
 
-<archive-and-page :contents="contents" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
+<article-list-and-page :contents="contents" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
 
 <script>
-  import archiveByContent from './archiveByContent'
+  import articleList from './articleList'
   import pagination from './pagination'
 
   export default {
-    name: "archiveAndPage", //归档与分页
+    name: "articleListAndPage",
     props: {
       contents: {
         default() {
@@ -37,12 +36,8 @@
       },
     },
     components: {
-      archiveByContent,
+      articleList,
       pagination,
     },
   }
 </script>
-
-<style scoped>
-
-</style>

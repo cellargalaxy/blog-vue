@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import aomponent from '../components/archive.vue'
+import aomponent from '../components/articleListAndPage.vue'
 import pageHead from '../components/pageHead.vue'
 
 export default {

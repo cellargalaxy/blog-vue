@@ -1,11 +1,11 @@
 <template>
   <div>
-    <article-view :article="article" :isSummary="false"/>
+    <article-view :content="content" :isSummary="false"/>
     <comment/>
   </div>
 </template>
 
-<article-comment :article="article"/>
+<article-comment :content="content"/>
 
 <script>
 import articleView from './articleView'

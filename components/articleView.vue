@@ -1,13 +1,10 @@
 <template>
-  <b-list-group style="margin-bottom: 1em">
+  <b-list-group class="nuxt-content" style="margin-bottom: 1em">
     <b-list-group-item class="white-background-8">
       <h1>
         <b-link v-text="article.title" :href="article.path" target="_blank"/>
       </h1>
-
-      <auto-color-badge v-for="(attribute,i) in article.attributes" :key="i"
-                        :name="attribute.name" :value="attribute.value" :url="attribute.url"
-                        style="margin-left: 0.1em;margin-right: 0.1em;"/>
+      <auto-color-badges :attributes="article.attributes"/>
     </b-list-group-item>
 
     <b-list-group-item class="white-background-8">
@@ -19,8 +16,8 @@
 <article-view :content="content" :isSummary="isSummary"/>
 
 <script>
-import autoColorBadge from './autoColorBadge'
-import service from '../middleware/service'
+import autoColorBadges from './autoColorBadges'
+import service from '../middleware/model'
 
 export default {
   name: "articleView",
@@ -29,7 +26,6 @@ export default {
       default() {
         return {
           "slug": "a_title",
-          "description": "a_description",
           "createdAt": "2022-01-01T00:00:00.000Z",
           "updatedAt": "2022-02-02T00:00:00.000Z",
           "toc": [
@@ -146,9 +142,7 @@ export default {
               }
             ]
           },
-          "dir": "/",
           "path": "/a_title",
-          "extension": ".md",
         }
       }
     },
@@ -164,7 +158,7 @@ export default {
     },
   },
   components: {
-    autoColorBadge,
+    autoColorBadges,
   },
 }
 </script>

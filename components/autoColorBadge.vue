@@ -1,8 +1,8 @@
 <template>
-  <b-badge :variant="variant">{{ name + ': ' }}<a :href="url" class="white" v-text="value"/></b-badge>
+  <b-badge :variant="variant">{{ name + ': ' }}<a v-text="value" :href="url" class="white"/></b-badge>
 </template>
 
-<auto-color-badge :name="name" :url="url" :value="value"/>
+<auto-color-badge :name="name" :value="value" :url="url"/>
 
 <script>
 import util from '../middleware/util'

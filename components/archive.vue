@@ -12,9 +12,7 @@
             </b-row>
 
             <b-row>
-              <auto-color-badge v-for="(attribute,i) in file.attributes" :key="i"
-                                :name="attribute.name" :url="attribute.url" :value="attribute.value"
-                                style="margin-left: 0.1em;margin-right: 0.1em;"/>
+              <auto-color-badges :attributes="file.attributes"/>
             </b-row>
           </b-list-group-item>
         </b-list-group>
@@ -24,47 +22,45 @@
   </b-card>
 </template>
 
-<archive :contents="contents"/>
+<archive :archives="archives"/>
 
 <script>
-import autoColorBadge from './autoColorBadge'
-import service from "../middleware/service";
+import autoColorBadges from './autoColorBadges'
 
 export default {
   name: "archive", //归档
   props: {
-    contents: {
+    archives: {
       default() {
         return [
           {
-            "slug": "a_title",
-            "createdAt": "2022-01-01T00:00:00.000Z",
-            "updatedAt": "2022-01-02T00:00:00.000Z",
-            "path": "/a_title",
+            dateString: "2020-01",
+            files: [
+              {
+                title: "测试文章标题-1-1", url: "#",
+                attributes: [{"name": "时间", "value": "2020-01-01"}, {"name": "分类", "value": "类别-1-1", "url": "#"},]
+              },
+              {
+                title: "测试文章标题-1-2", url: "#",
+                attributes: [{"name": "时间", "value": "2020-01-02"}, {"name": "分类", "value": "类别-1-2", "url": "#"},]
+              },
+            ],
           },
           {
-            "slug": "b_title",
-            "createdAt": "2022-01-03T00:00:00.000Z",
-            "updatedAt": "2022-01-04T00:00:00.000Z",
-            "path": "/b_title",
-          },
-          {
-            "slug": "c_title",
-            "createdAt": "2022-02-01T00:00:00.000Z",
-            "updatedAt": "2022-02-02T00:00:00.000Z",
-            "path": "/c_title",
+            dateString: "2020-02",
+            files: [
+              {
+                title: "测试文章标题-2-1", url: "#",
+                attributes: [{"name": "时间", "value": "2020-02-01"}, {"name": "分类", "value": "类别-2-1", "url": "#"},]
+              },
+            ],
           },
         ]
       }
     },
   },
-  computed: {
-    archives() {
-      return service.content2Archives(this.contents)
-    },
-  },
   components: {
-    autoColorBadge,
+    autoColorBadges,
   },
 }
 </script>
