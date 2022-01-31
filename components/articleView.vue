@@ -1,7 +1,9 @@
 <template>
   <b-list-group style="margin-bottom: 1em">
     <b-list-group-item class="white-background-8">
-      <h1 v-text="article.title"></h1>
+      <h1>
+        <b-link v-text="article.title" :href="article.path" target="_blank"/>
+      </h1>
 
       <auto-color-badge v-for="(attribute,i) in article.attributes" :key="i"
                         :name="attribute.name" :value="attribute.value" :url="attribute.url"
@@ -18,7 +20,7 @@
 
 <script>
 import autoColorBadge from './autoColorBadge'
-import util from '../middleware/util'
+import service from '../middleware/service'
 
 export default {
   name: "articleView",
@@ -146,7 +148,7 @@ export default {
           },
           "dir": "/",
           "path": "/a_title",
-          "extension": ".md"
+          "extension": ".md",
         }
       }
     },
@@ -158,27 +160,7 @@ export default {
   },
   computed: {
     article() {
-      const article = {}
-      article.title = this.content.slug
-      article.toc = this.content.toc
-      article.body = this.isSummary ? this.content.excerpt : this.content.body
-
-      article.attributes = []
-      if (this.content.attributes) {
-        for (let i = 0; i < this.content.attributes.length; i++) {
-          article.attributes.push(this.content.attributes[i])
-        }
-      }
-      article.attributes.push({
-        name: "createdAt",
-        value: util.formatDate(new Date(this.content.createdAt), 'YYYY-MM-DD')
-      })
-      article.attributes.push({
-        name: "updatedAt",
-        value: util.formatDate(new Date(this.content.updatedAt), 'YYYY-MM-DD')
-      })
-
-      return article
+      return service.content2Article(this.content, this.isSummary)
     },
   },
   components: {
