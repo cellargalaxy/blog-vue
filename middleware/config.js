@@ -36,9 +36,14 @@ function getPageFootConfig() {
   return getConfig('pageFoot')
 }
 
+function getPageSize() {
+  return getConfig('pageSize')
+}
+
 export default {
   getSiteConfig: getSiteConfig,
   getNavbarConfig: getNavbarConfig,
   getHomeConfig: getHomeConfig,
   getPageFootConfig: getPageFootConfig,
+  getPageSize: getPageSize,
 }

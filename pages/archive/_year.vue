@@ -50,7 +50,7 @@ export default {
     let basePath = '../..'
     copies = service.setBasePaths(copies, basePath)
 
-    copies = model.sortFile(copies)
+    copies = model.sortContent(copies)
 
     return {
       navbarConfig: navbarConfig,

@@ -25,30 +25,30 @@ function file2Archives(files) {
   for (let i = 0; i < months.length; i++) {
     const archive = {}
     archive.month = months[i]
-    archive.files = sortFile(fileMap[months[i]])
+    archive.files = sortContent(fileMap[months[i]])
     archives.push(archive)
   }
   return archives
 }
 
-function sortFile(files) {
-  const fileMap = {}
-  for (let i = 0; i < files.length; i++) {
-    const key = files[i].createdAt + files[i].title
-    fileMap[key] = files[i]
+function sortContent(contents) {
+  const contentMap = {}
+  for (let i = 0; i < contents.length; i++) {
+    const key = contents[i].createdAt + contents[i].path
+    contentMap[key] = contents[i]
   }
 
   const keys = []
-  for (let key in fileMap) {
+  for (let key in contentMap) {
     keys.push(key)
   }
   keys.sort()
 
-  files = []
+  contents = []
   for (let i = 0; i < keys.length; i++) {
-    files.push(fileMap[keys[i]])
+    contents.push(contentMap[keys[i]])
   }
-  return files
+  return contents
 }
 
 function content2Article(content, isSummary) {
@@ -76,32 +76,45 @@ function content2File(content) {
     return content
   }
 
-  const file = {}
-  file.title = content.slug
-  file.url = '#'
+  content.title = content.slug
+  content.url = '#'
   if (content.basePath && content.path) {
-    file.url = content.basePath + content.path
+    content.url = content.basePath + '/article' + content.path
   }
-  file.createAt = new Date(content.createdAt)
-  file.updateAt = new Date(content.updatedAt)
-  file.dir = content.dir
+  content.createAt = new Date(content.createdAt)
+  content.updateAt = new Date(content.updatedAt)
 
-  file.attributes = []
-  if (content.attributes) {
-    for (let i = 0; i < content.attributes.length; i++) {
-      file.attributes.push(content.attributes[i])
+  setAttribute(content,{name: "createAt", value: util.formatDate(content.createAt, 'YYYY-MM-DD')})
+  setAttribute(content,{name: "updateAt", value: util.formatDate(content.updateAt, 'YYYY-MM-DD')})
+  if (content.basePath && content.dir) {
+    let sortUrl = content.basePath + '/page' + content.dir
+    if (!util.endWith(sortUrl, '/')) {
+      sortUrl += '/'
+    }
+    sortUrl += '1/'
+    setAttribute(content,{name: "sort", value: content.dir, url: sortUrl})
+  }
+  return content
+}
+
+function setAttribute(object, attribute) {
+  if (object === undefined || object == null) {
+    return object
+  }
+  if (attribute === undefined || attribute == null) {
+    return object
+  }
+  if (!object.attributes) {
+    object.attributes = []
+  }
+  for (let i = 0; i < object.attributes.length; i++) {
+    if (object.attributes[i].name === attribute.name) {
+      object.attributes[i] = attribute
+      return object
     }
   }
-  file.attributes.push({name: "createAt", value: util.formatDate(file.createAt, 'YYYY-MM-DD')})
-  file.attributes.push({name: "updateAt", value: util.formatDate(file.updateAt, 'YYYY-MM-DD')})
-  let sortUrl = '/page' + file.dir
-  if (!util.endWith(sortUrl, '/')) {
-    sortUrl += '/'
-  }
-  sortUrl += '1/'
-  file.attributes.push({name: "sort", value: file.dir, url: sortUrl})
-
-  return file
+  object.attributes.push(attribute)
+  return object
 }
 
 function setBasePaths(contents, basePath) {
@@ -131,5 +144,5 @@ export default {
   content2Article: content2Article,
   setBasePaths: setBasePaths,
   setBasePath: setBasePath,
-  sortFile: sortFile,
+  sortContent: sortContent,
 }

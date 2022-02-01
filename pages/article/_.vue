@@ -33,9 +33,11 @@ export default {
     const pageFootConfig = config.getPageFootConfig()
     const siteConfig = config.getSiteConfig()
 
-    const {folderPath} = service.parsePath(params.pathMatch)
+    const path = service.initPath(params.pathMatch)
+    const {folderPath} = service.parsePath(path)
 
-    let contents = await $content(folderPath, {deep: false}).fetch()
+    let contents = await $content(path, {deep: false}).fetch()
+    console.log('contents', JSON.stringify(contents))
     contents = service.initContents(contents)
     if (contents.length === 0) {
       error()
@@ -59,12 +61,12 @@ export default {
     }
   },
   head() {
-    if (this.content.slug) {
-      return {
-        title: this.content.slug + ' | ' + this.siteName,
-      }
-    }
-    return {title: this.siteName}
+    // if (this.content.slug) {
+    //   return {
+    //     title: this.content.slug + ' | ' + this.siteName,
+    //   }
+    // }
+    // return {title: this.siteName}
   },
   components: {
     navbar,
@@ -76,6 +78,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+body {
+  background-color: burlywood;
+}
 </style>

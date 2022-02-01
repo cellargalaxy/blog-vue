@@ -31,11 +31,9 @@ export default {
     const navbarConfig = config.getNavbarConfig()
     const homeConfig = config.getHomeConfig()
     const pageFootConfig = config.getPageFootConfig()
+    const pageSize = config.getPageSize()
 
     const {folderPath, currentPage} = service.parsePath(params.pathMatch)
-
-    let contents = await $content(folderPath, {deep: true}).fetch()
-    contents = service.initContents(contents)
 
     //             page/1
     let basePath = '../..'
@@ -43,12 +41,12 @@ export default {
     for (let i = 0; i < folderPaths.length; i++) {
       basePath += '/..'
     }
-    contents = service.setBasePaths(contents, basePath)
 
-    contents = model.sortFile(contents)
+    let contents = await $content(folderPath, {deep: true}).fetch()
+    contents = service.initContents(contents, basePath)
+    contents = model.sortContent(contents)
     contents.reverse()
 
-    const pageSize = 10
     const contentPage = service.page(contents, currentPage, pageSize)
 
     return {
@@ -71,6 +69,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+body {
+  background-color: burlywood;
+}
 </style>

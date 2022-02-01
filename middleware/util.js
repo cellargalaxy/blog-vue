@@ -25,13 +25,6 @@ function formatDate(date, fmt) {
   return fmt
 }
 
-function isNum(s) {
-  if (s != null && s !== '') {
-    return !isNaN(s)
-  }
-  return false;
-}
-
 function startWith(string, start) {
   return string.indexOf(start) === 0
 }
@@ -62,10 +55,24 @@ function randomString(n) {
   return string
 }
 
+function isNum(string) {
+  if (string != null && string !== '') {
+    return !isNaN(string)
+  }
+  return false
+}
+
+function string2Int(string) {
+  if (!isNum(string)) {
+    return 0
+  }
+  return parseInt(string)
+}
+
 export default {
   formatTimestamp: formatTimestamp,
   formatDate: formatDate,
-  isNum: isNum,
+  string2Int: string2Int,
   startWith: startWith,
   endWith: endWith,
   hashString: hashString,
