@@ -1,11 +1,11 @@
 <template>
   <div>
-    <article-list :contents="contents"/>
+    <article-list :files="files"/>
     <pagination :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
   </div>
 </template>
 
-<article-list-and-page :contents="contents" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
+<article-list-and-page :files="files" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
 
 <script>
 import articleList from './articleList'
@@ -14,7 +14,7 @@ import pagination from './pagination'
 export default {
   name: "articleListAndPage",
   props: {
-    contents: {
+    files: {
       default() {
         return undefined
       }

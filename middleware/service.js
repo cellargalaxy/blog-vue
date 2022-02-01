@@ -18,8 +18,8 @@ function parsePath(path) {
   return {folderPath, currentPage}
 }
 
-function initContents(contents, basePath) {
-  if (!contents instanceof Array) {
+function content2Files(contents, basePath) {
+  if (contents.length === undefined) {
     contents = [contents]
   }
   let copies = []
@@ -30,7 +30,8 @@ function initContents(contents, basePath) {
     copies.push(contents[i])
   }
   copies = model.setBasePaths(copies, basePath)
-  return copies
+  const files = model.content2Files(copies)
+  return files
 }
 
 function page(list, currentPage, pageSize) {
@@ -42,6 +43,6 @@ function page(list, currentPage, pageSize) {
 export default {
   initPath: initPath,
   parsePath: parsePath,
-  initContents: initContents,
+  content2Files: content2Files,
   page: page,
 }

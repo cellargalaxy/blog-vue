@@ -1,21 +1,21 @@
 <template>
   <div>
-    <archive-by-content :contents="contents"/>
+    <archive-by-file :files="files"/>
     <br/>
     <pagination :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
   </div>
 </template>
 
-<archive-and-page :contents="contents" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
+<archive-and-page :files="files" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
 
 <script>
-import archiveByContent from './archiveByContent'
+import archiveByFile from './archiveByFile'
 import pagination from './pagination'
 
 export default {
   name: "archiveAndPage", //归档与分页
   props: {
-    contents: {
+    files: {
       default() {
         return undefined
       }
@@ -37,7 +37,7 @@ export default {
     },
   },
   components: {
-    archiveByContent,
+    archiveByFile,
     pagination,
   },
 }

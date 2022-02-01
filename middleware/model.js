@@ -6,6 +6,9 @@ function content2Archives(contents) {
 }
 
 function file2Archives(files) {
+  if (files === undefined || files == null) {
+    return files
+  }
   const fileMap = {}
   for (let i = 0; i < files.length; i++) {
     const month = util.formatDate(files[i].createAt, 'YYYY-MM')
@@ -51,16 +54,17 @@ function sortContent(contents) {
   return contents
 }
 
-function content2Article(content, isSummary) {
-  const article = content2File(content)
-  if (article === undefined || article == null) {
-    return article
+function file2Article(file, isSummary) {
+  if (file === undefined || file == null) {
+    return file
   }
+  file.body = isSummary ? file.excerpt : file.body
+  return file
+}
 
-  article.toc = content.toc
-  article.body = isSummary ? content.excerpt : content.body
-
-  return article
+function content2Article(content, isSummary) {
+  const file = content2File(content)
+  return file2Article(file, isSummary)
 }
 
 function content2Files(contents) {
@@ -140,6 +144,9 @@ function setBasePath(content, basePath) {
 }
 
 export default {
+  content2Files: content2Files,
+  file2Article: file2Article,
+  file2Archives: file2Archives,
   content2Archives: content2Archives,
   content2Article: content2Article,
   setBasePaths: setBasePaths,

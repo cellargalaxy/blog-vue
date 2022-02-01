@@ -33,10 +33,18 @@ export default {
     const homeConfig = config.getHomeConfig()
     const pageFootConfig = config.getPageFootConfig()
 
-    const currentPage = parseInt(params.year)
+    const currentPage = util.string2Int(params.year)
+
+    //         archive/2022
+    let basePath = '../..'
 
     let contents = await $content('', {deep: true}).fetch()
-    contents = service.initContents(contents)
+    contents = service.initContents(contents,basePath)
+
+    // const yearMap={}
+    // for (let i = 0; i < contents.length; i++) {
+    //   const year=contents[i].
+    // }
 
     let copies = []
     for (let i = 0; i < contents.length; i++) {
@@ -45,10 +53,6 @@ export default {
       }
       copies.push(contents[i])
     }
-
-    //         archive/2022
-    let basePath = '../..'
-    copies = service.setBasePaths(copies, basePath)
 
     copies = model.sortContent(copies)
 
@@ -71,8 +75,6 @@ export default {
 }
 </script>
 
-<style>
-body {
-  background-color: burlywood;
-}
+<style scoped>
+
 </style>

@@ -6,7 +6,7 @@
       <br/>
       <page-head :config="homeConfig"/>
       <br/>
-      <article-comment :content="content"/>
+      <article-comment :file="file"/>
       <br/>
     </b-container>
 
@@ -36,37 +36,35 @@ export default {
     const path = service.initPath(params.pathMatch)
     const {folderPath} = service.parsePath(path)
 
-    let contents = await $content(path, {deep: false}).fetch()
-    console.log('contents', JSON.stringify(contents))
-    contents = service.initContents(contents)
-    if (contents.length === 0) {
-      error()
-      return
-    }
-
-    //          article/1
-    let basePath = '../..'
+    //          article
+    let basePath = '..'
     const folderPaths = folderPath.split('/')
     for (let i = 0; i < folderPaths.length; i++) {
       basePath += '/..'
     }
-    contents = service.setBasePaths(contents, basePath)
+
+    let contents = await $content(path, {deep: false}).fetch()
+    let  files = service.content2Files(contents,basePath)
+    if (files.length === 0) {
+      error()
+      return
+    }
 
     return {
       navbarConfig: navbarConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
-      content: contents[0],
+      file: files[0],
       siteName: siteConfig.siteName,
     }
   },
   head() {
-    // if (this.content.slug) {
-    //   return {
-    //     title: this.content.slug + ' | ' + this.siteName,
-    //   }
-    // }
-    // return {title: this.siteName}
+    if (this.file.slug) {
+      return {
+        title: this.file.slug + ' | ' + this.siteName,
+      }
+    }
+    return {title: this.siteName}
   },
   components: {
     navbar,
@@ -78,8 +76,6 @@ export default {
 }
 </script>
 
-<style>
-body {
-  background-color: burlywood;
-}
+<style scoped>
+
 </style>

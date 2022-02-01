@@ -1,10 +1,10 @@
 <template>
   <div>
-    <article-view v-for="(content,i) in contents" :key="i" :content="content" :isSummary="true"/>
+    <article-view v-for="(file,i) in files" :key="i" :file="file" :isSummary="true"/>
   </div>
 </template>
 
-<article-list :contents="contents"/>
+<article-list :files="files"/>
 
 <script>
 import articleView from './articleView'
@@ -12,7 +12,7 @@ import articleView from './articleView'
 export default {
   name: "articleList",
   props: {
-    contents: {
+    files: {
       default() {
         return [undefined, undefined, undefined, undefined, undefined, undefined]
       }

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <article-view :content="content" :isSummary="false"/>
+    <article-view :file="file" :isSummary="false"/>
     <comment/>
   </div>
 </template>
 
-<article-comment :content="content"/>
+<article-comment :file="file"/>
 
 <script>
 import articleView from './articleView'
@@ -14,7 +14,7 @@ import comment from './comment'
 export default {
   name: "articleComment",
   props: {
-    content: {
+    file: {
       default() {
         return undefined
       }

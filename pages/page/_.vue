@@ -6,7 +6,7 @@
       <br/>
       <page-head :config="homeConfig"/>
       <br/>
-      <article-list-and-page :contents="contents" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
+      <article-list-and-page :files="files" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
     </b-container>
 
     <page-foot :config="pageFootConfig"/>
@@ -43,11 +43,11 @@ export default {
     }
 
     let contents = await $content(folderPath, {deep: true}).fetch()
-    contents = service.initContents(contents, basePath)
-    contents = model.sortContent(contents)
-    contents.reverse()
+    let files = service.content2Files(contents, basePath)
+    files = model.sortContent(files)
+    files.reverse()
 
-    const contentPage = service.page(contents, currentPage, pageSize)
+    const filePage = service.page(files, currentPage, pageSize)
 
     return {
       navbarConfig: navbarConfig,
@@ -56,7 +56,7 @@ export default {
       pageSize: pageSize,
       total: contents.length,
       currentPage: currentPage,
-      contents: contentPage,
+      files: filePage,
     }
   },
   components: {
@@ -69,8 +69,6 @@ export default {
 }
 </script>
 
-<style>
-body {
-  background-color: burlywood;
-}
+<style scoped>
+
 </style>

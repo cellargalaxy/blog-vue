@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import aomponent from '../components/articleListAndPage.vue'
+import aomponent from '../components/articleList.vue'
 import pageHead from '../components/pageHead.vue'
 
 export default {
@@ -27,8 +27,6 @@ export default {
 }
 </script>
 
-<style>
-body {
-  background-color: burlywood;
-}
+<style scoped>
+
 </style>
