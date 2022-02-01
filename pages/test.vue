@@ -1,13 +1,13 @@
 <template>
   <div>
     <aomponent/>
-<!--    <page-head/>-->
-<!--    <page-head/>-->
-<!--    <page-head/>-->
-<!--    <page-head/>-->
-<!--    <page-head/>-->
-<!--    <page-head/>-->
-<!--    <page-head/>-->
+    <!--    <page-head/>-->
+    <!--    <page-head/>-->
+    <!--    <page-head/>-->
+    <!--    <page-head/>-->
+    <!--    <page-head/>-->
+    <!--    <page-head/>-->
+    <!--    <page-head/>-->
   </div>
 </template>
 
