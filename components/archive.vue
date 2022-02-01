@@ -4,7 +4,7 @@
 
     <el-timeline>
       <el-timeline-item v-for="(archive,i) in archives" :key="i"
-                        :timestamp="archive.dateString+' ('+archive.files.length+')'" placement="top">
+                        :timestamp="archive.month+' ('+archive.files.length+')'" placement="top">
         <b-list-group>
           <b-list-group-item v-for="(file,j) in archive.files" :key="j" class="transparent" style="border:none;">
             <b-row>
@@ -34,7 +34,7 @@ export default {
       default() {
         return [
           {
-            dateString: "2020-01",
+            month: "2020-01",
             files: [
               {
                 title: "测试文章标题-1-1", url: "#",
@@ -47,7 +47,7 @@ export default {
             ],
           },
           {
-            dateString: "2020-02",
+            month: "2020-02",
             files: [
               {
                 title: "测试文章标题-2-1", url: "#",
@@ -66,11 +66,5 @@ export default {
 </script>
 
 <style scoped>
-.transparent {
-  background-color: rgba(255, 255, 255, 0);
-}
 
-.white-background-8 {
-  background-color: rgba(255, 255, 255, 0.8);
-}
 </style>

@@ -79,11 +79,5 @@ export default {
 </script>
 
 <style scoped>
-.black-background-5 {
-  background-color: rgba(0, 0, 0, 0.5);
-}
 
-.white {
-  color: rgba(255, 255, 255, 1);
-}
 </style>

@@ -71,15 +71,5 @@ export default {
   text-align: center;
 }
 
-.transparent {
-  background-color: rgba(255, 255, 255, 0);
-}
 
-.white-background-6 {
-  background-color: rgba(255, 255, 255, 0.6);
-}
-
-.white-background-8 {
-  background-color: rgba(255, 255, 255, 0.8);
-}
 </style>

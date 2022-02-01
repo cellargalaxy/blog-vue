@@ -24,7 +24,7 @@ function file2Archives(files) {
   const archives = []
   for (let i = 0; i < months.length; i++) {
     const archive = {}
-    archive.dateString = months[i]
+    archive.month = months[i]
     archive.files = sortFile(fileMap[months[i]])
     archives.push(archive)
   }
@@ -131,4 +131,5 @@ export default {
   content2Article: content2Article,
   setBasePaths: setBasePaths,
   setBasePath: setBasePath,
+  sortFile: sortFile,
 }

@@ -6,7 +6,7 @@
       <br/>
       <page-head :config="homeConfig"/>
       <br/>
-      <article-list-and-page :contents="contents" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
+      <archive-and-page :contents="contents" :currentPage="currentPage" :pageSize="1" :total="total"/>
     </b-container>
 
     <page-foot :config="pageFootConfig"/>
@@ -19,58 +19,60 @@ import navbar from '../../components/navbar'
 import pageHead from '../../components/pageHead'
 import pageFoot from '../../components/pageFoot'
 import backtop from '../../components/backtop'
-import articleListAndPage from '../../components/articleListAndPage'
+import archiveAndPage from '../../components/archiveAndPage'
 
 import config from '../../middleware/config'
 import service from '../../middleware/service'
 import model from '../../middleware/model'
+import util from '../../middleware/util'
 
 export default {
-  name: "page",
+  name: "archive",
   async asyncData({params, $content}) {
     const navbarConfig = config.getNavbarConfig()
     const homeConfig = config.getHomeConfig()
     const pageFootConfig = config.getPageFootConfig()
 
-    const {folderPath, currentPage} = service.parsePath(params.pathMatch)
+    const currentPage = parseInt(params.year)
 
-    let contents = await $content(folderPath, {deep: true}).fetch()
+    let contents = await $content('', {deep: true}).fetch()
     contents = service.initContents(contents)
 
-    //             page/1
-    let basePath = '../..'
-    const folderPaths = folderPath.split('/')
-    for (let i = 0; i < folderPaths.length; i++) {
-      basePath += '/..'
+    let copies = []
+    for (let i = 0; i < contents.length; i++) {
+      if (!util.startWith(contents[i].createdAt, currentPage)) {
+        continue
+      }
+      copies.push(contents[i])
     }
-    contents = service.setBasePaths(contents, basePath)
 
-    contents = model.sortFile(contents)
-    contents.reverse()
+    //         archive/2022
+    let basePath = '../..'
+    copies = service.setBasePaths(copies, basePath)
 
-    const pageSize = 10
-    const contentPage = service.page(contents, currentPage, pageSize)
+    copies = model.sortFile(copies)
 
     return {
       navbarConfig: navbarConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
-      pageSize: pageSize,
-      total: contents.length,
       currentPage: currentPage,
-      contents: contentPage,
+      total: parseInt(util.formatDate(new Date(), 'YYYY')),
+      contents: copies,
     }
   },
   components: {
     navbar,
     pageHead,
-    articleListAndPage,
+    archiveAndPage,
     pageFoot,
     backtop,
   },
 }
 </script>
 
-<style scoped>
-
+<style>
+body {
+  background-color: burlywood;
+}
 </style>

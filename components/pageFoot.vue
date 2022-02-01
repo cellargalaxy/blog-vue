@@ -40,17 +40,5 @@ export default {
 </script>
 
 <style scoped>
-.blue-background-8 {
-  background-color: rgba(84, 155, 196, 0.8);
-  border-color: rgba(84, 155, 196, 0.8);
-}
 
-.transparent {
-  background-color: rgba(255, 255, 255, 0);
-  border-color: rgba(255, 255, 255, 0);
-}
-
-.white {
-  color: rgba(255, 255, 255, 1);
-}
 </style>

@@ -14,7 +14,7 @@ import comment from './comment'
 export default {
   name: "articleComment",
   props: {
-    article: {
+    content: {
       default() {
         return undefined
       }

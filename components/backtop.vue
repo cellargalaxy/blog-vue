@@ -11,7 +11,5 @@ export default {
 </script>
 
 <style scoped>
-.white-background-6 {
-  background-color: rgba(255, 255, 255, 0.6);
-}
+
 </style>

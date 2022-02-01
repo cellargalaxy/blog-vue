@@ -58,7 +58,5 @@ export default {
 </script>
 
 <style scoped>
-.black-background-5 {
-  background-color: rgba(0, 0, 0, 0.5);
-}
+
 </style>
