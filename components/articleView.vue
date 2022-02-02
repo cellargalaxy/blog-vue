@@ -17,7 +17,7 @@
 
 <script>
 import autoColorBadges from './autoColorBadges'
-import service from '../middleware/model'
+import model from '../middleware/model'
 
 export default {
   name: "articleView",
@@ -26,6 +26,7 @@ export default {
       default() {
         return {
           title: "a_title",
+          url: "#",
           "toc": [
             {
               "id": "a_context",
@@ -156,7 +157,7 @@ export default {
   },
   computed: {
     article() {
-      return service.file2Article(this.file, this.isSummary)
+      return model.file2Article(this.file, this.isSummary)
     },
   },
   components: {

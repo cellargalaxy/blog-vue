@@ -6,7 +6,7 @@
       <br/>
       <page-head :config="homeConfig"/>
       <br/>
-      <article-list-and-page :files="files" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
+      <file-list-and-page :files="files" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
     </b-container>
 
     <page-foot :config="pageFootConfig"/>
@@ -19,7 +19,7 @@ import navbar from '../../components/navbar'
 import pageHead from '../../components/pageHead'
 import pageFoot from '../../components/pageFoot'
 import backtop from '../../components/backtop'
-import articleListAndPage from '../../components/articleListAndPage'
+import fileListAndPage from '../../components/fileListAndPage'
 
 import config from '../../middleware/config'
 import service from '../../middleware/service'
@@ -42,7 +42,7 @@ export default {
       basePath += '/..'
     }
 
-    let contents = await $content(folderPath, {deep: true}).fetch()
+    const contents = await $content(folderPath, {deep: true}).fetch()
     let files = service.content2Files(contents, basePath)
     files = model.sortContent(files)
     files.reverse()
@@ -54,7 +54,7 @@ export default {
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
       pageSize: pageSize,
-      total: contents.length,
+      total: files.length,
       currentPage: currentPage,
       files: filePage,
     }
@@ -62,7 +62,7 @@ export default {
   components: {
     navbar,
     pageHead,
-    articleListAndPage,
+    fileListAndPage,
     pageFoot,
     backtop,
   },

@@ -1,18 +1,18 @@
 <template>
   <div>
-    <article-list :files="files"/>
+    <file-list :files="files"/>
     <pagination :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
   </div>
 </template>
 
-<article-list-and-page :files="files" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
+<file-list-and-page :files="files" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
 
 <script>
-import articleList from './articleList'
+import fileList from './fileList'
 import pagination from './pagination'
 
 export default {
-  name: "articleListAndPage",
+  name: "fileListAndPage",
   props: {
     files: {
       default() {
@@ -36,7 +36,7 @@ export default {
     },
   },
   components: {
-    articleList,
+    fileList,
     pagination,
   },
 }

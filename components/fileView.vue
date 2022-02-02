@@ -1,20 +1,21 @@
 <template>
-  <div>
-    <article-view :file="file" :isSummary="false"/>
-    <comment/>
-  </div>
+  <article-view :file="file" :isSummary="isSummary"/>
 </template>
 
-<article-comment :file="file"/>
+<file-view :file="file" :isSummary="isSummary"/>
 
 <script>
 import articleView from './articleView'
-import comment from './comment'
 
 export default {
-  name: "articleComment",
+  name: "fileView",
   props: {
     file: {
+      default() {
+        return undefined
+      }
+    },
+    isSummary: {
       default() {
         return undefined
       }
@@ -22,7 +23,6 @@ export default {
   },
   components: {
     articleView,
-    comment,
   },
 }
 </script>

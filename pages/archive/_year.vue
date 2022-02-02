@@ -6,7 +6,7 @@
       <br/>
       <page-head :config="homeConfig"/>
       <br/>
-      <archive-and-page :contents="contents" :currentPage="currentPage" :pageSize="1" :total="total"/>
+      <archive-and-page :files="files" :currentPage="currentPage" :pageSize="1" :total="total"/>
     </b-container>
 
     <page-foot :config="pageFootConfig"/>
@@ -33,36 +33,38 @@ export default {
     const homeConfig = config.getHomeConfig()
     const pageFootConfig = config.getPageFootConfig()
 
-    const currentPage = util.string2Int(params.year)
+    let currentPage = params.year
 
     //         archive/2022
     let basePath = '../..'
 
-    let contents = await $content('', {deep: true}).fetch()
-    contents = service.initContents(contents,basePath)
+    const contents = await $content('', {deep: true}).fetch()
+    let files = service.content2Files(contents, basePath)
+    files = model.sortContent(files)
 
-    // const yearMap={}
-    // for (let i = 0; i < contents.length; i++) {
-    //   const year=contents[i].
-    // }
-
-    let copies = []
-    for (let i = 0; i < contents.length; i++) {
-      if (!util.startWith(contents[i].createdAt, currentPage)) {
-        continue
-      }
-      copies.push(contents[i])
+    let total = '1'
+    if (files.length > 0) {
+      total = util.formatDate(files[files.length - 1].createAt, 'YYYY')
+    }
+    if (util.string2Int(currentPage) <= 0) {
+      currentPage = total
     }
 
-    copies = model.sortContent(copies)
+    let copies = []
+    for (let i = 0; i < files.length; i++) {
+      if (!util.startWith(files[i].createdAt, currentPage)) {
+        continue
+      }
+      copies.push(files[i])
+    }
 
     return {
       navbarConfig: navbarConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
-      currentPage: currentPage,
-      total: parseInt(util.formatDate(new Date(), 'YYYY')),
-      contents: copies,
+      currentPage: util.string2Int(currentPage),
+      total: util.string2Int(total),
+      files: copies,
     }
   },
   components: {

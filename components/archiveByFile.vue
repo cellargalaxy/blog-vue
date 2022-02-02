@@ -6,7 +6,7 @@
 
 <script>
 import archive from './archive'
-import service from "../middleware/model"
+import model from "../middleware/model"
 
 export default {
   name: "archiveByFile", //归档
@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     archives() {
-      return service.file2Archives(this.files)
+      return model.file2Archives(this.files)
     },
   },
   components: {

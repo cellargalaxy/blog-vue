@@ -1,16 +1,16 @@
 <template>
   <div>
-    <article-view v-for="(file,i) in files" :key="i" :file="file" :isSummary="true"/>
+    <file-view v-for="(file,i) in files" :key="i" :file="file" :isSummary="true"/>
   </div>
 </template>
 
-<article-list :files="files"/>
+<file-list :files="files"/>
 
 <script>
-import articleView from './articleView'
+import fileView from './fileView'
 
 export default {
-  name: "articleList",
+  name: "fileList",
   props: {
     files: {
       default() {
@@ -19,7 +19,7 @@ export default {
     },
   },
   components: {
-    articleView,
+    fileView,
   },
 }
 </script>

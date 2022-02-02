@@ -16,7 +16,7 @@ export default {
   props: {
     attributes: {
       default() {
-        return undefined
+        return [undefined, undefined, undefined]
       }
     },
   },

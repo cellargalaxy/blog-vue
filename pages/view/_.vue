@@ -6,7 +6,7 @@
       <br/>
       <page-head :config="homeConfig"/>
       <br/>
-      <article-comment :file="file"/>
+      <file-comment :file="file"/>
       <br/>
     </b-container>
 
@@ -18,15 +18,15 @@
 <script>
 import navbar from '../../components/navbar'
 import pageHead from '../../components/pageHead'
-import articleComment from '../../components/articleComment'
+import fileComment from '../../components/fileComment'
 import pageFoot from '../../components/pageFoot'
 import backtop from '../../components/backtop'
 
-import config from "../../middleware/config";
-import service from "../../middleware/service";
+import config from "../../middleware/config"
+import service from "../../middleware/service"
 
 export default {
-  name: "articleView",
+  name: "view",
   async asyncData({params, $content, error}) {
     const navbarConfig = config.getNavbarConfig()
     const homeConfig = config.getHomeConfig()
@@ -36,14 +36,14 @@ export default {
     const path = service.initPath(params.pathMatch)
     const {folderPath} = service.parsePath(path)
 
-    //          article
+    //          view
     let basePath = '..'
     const folderPaths = folderPath.split('/')
     for (let i = 0; i < folderPaths.length; i++) {
       basePath += '/..'
     }
 
-    let contents = await $content(path, {deep: false}).fetch()
+    const contents = await $content(path, {deep: false}).fetch()
     let  files = service.content2Files(contents,basePath)
     if (files.length === 0) {
       error()
@@ -54,14 +54,14 @@ export default {
       navbarConfig: navbarConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
-      file: files[0],
       siteName: siteConfig.siteName,
+      file: files[0],
     }
   },
   head() {
-    if (this.file.slug) {
+    if (this.file.title) {
       return {
-        title: this.file.slug + ' | ' + this.siteName,
+        title: this.file.title + ' | ' + this.siteName,
       }
     }
     return {title: this.siteName}
@@ -69,7 +69,7 @@ export default {
   components: {
     navbar,
     pageHead,
-    articleComment,
+    fileComment,
     pageFoot,
     backtop,
   },

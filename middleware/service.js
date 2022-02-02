@@ -10,7 +10,7 @@ function initPath(path) {
 }
 
 function parsePath(path) {
-  path = initPath(path)
+  path = initPath(path) //-> a/b/1
   let index = path.lastIndexOf("/")
   let folderPath = path.substring(0, index)//-> a/b
   let currentPage = path.substring(index + 1, path.length)//-> 1
@@ -29,12 +29,39 @@ function content2Files(contents, basePath) {
     }
     copies.push(contents[i])
   }
-  copies = model.setBasePaths(copies, basePath)
+  copies = setBasePaths(copies, basePath)
   const files = model.content2Files(copies)
   return files
 }
 
+function setBasePaths(contents, basePath) {
+  if (contents === undefined || contents == null) {
+    return contents
+  }
+  for (let i = 0; i < contents.length; i++) {
+    contents[i] = setBasePath(contents[i], basePath)
+  }
+  return contents
+}
+
+function setBasePath(content, basePath) {
+  if (content === undefined || content == null) {
+    return content
+  }
+  content.basePath = basePath
+  return content
+}
+
 function page(list, currentPage, pageSize) {
+  if (list === undefined || list == null) {
+    return list
+  }
+  if (currentPage === undefined || currentPage == null || currentPage <= 0) {
+    currentPage = 1
+  }
+  if (pageSize === undefined || pageSize == null || pageSize <= 0) {
+    pageSize = 10
+  }
   const skipNum = (currentPage - 1) * pageSize
   const page = (skipNum + pageSize >= list.length) ? list.slice(skipNum, list.length) : list.slice(skipNum, skipNum + pageSize)
   return page
