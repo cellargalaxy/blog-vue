@@ -46,5 +46,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     vendor: ['element-ui']
+  },
+
+  router: {
+    base: './'
   }
 }
