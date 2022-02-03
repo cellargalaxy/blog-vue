@@ -1,5 +1,6 @@
-import util from "./util";
-import model from "./model";
+import util from "./util"
+import model from "./model"
+import config from "./config"
 
 function initPath(path) {
   //-> a/b/1/
@@ -23,9 +24,15 @@ function content2Files(contents, basePath) {
     contents = [contents]
   }
   let copies = []
-  for (let i = 0; i < contents.length; i++) {
+  main: for (let i = 0; i < contents.length; i++) {
     if (contents[i].path === '/config' && contents[i].extension === '.json') {
       continue
+    }
+    const names = contents[i].path.split('/')
+    for (let j = 0; j < names.length; j++) {
+      if (util.startWith(names[j], '.')) {
+        continue main
+      }
     }
     copies.push(contents[i])
   }
@@ -67,9 +74,19 @@ function page(list, currentPage, pageSize) {
   return page
 }
 
+function getBasePath() {
+  const site = config.getSiteConfig()
+  let basePath = site.basePath
+  if (basePath === undefined || basePath == null) {
+    basePath = '/'
+  }
+  return process.env.DEPLOY_ENV === 'DEV' ? '/' : basePath
+}
+
 export default {
   initPath: initPath,
   parsePath: parsePath,
   content2Files: content2Files,
   page: page,
+  getBasePath: getBasePath,
 }

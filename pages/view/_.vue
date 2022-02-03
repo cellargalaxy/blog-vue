@@ -26,7 +26,7 @@ import config from "../../middleware/config"
 import service from "../../middleware/service"
 
 export default {
-  name: "view",
+  name: "fileView",
   async asyncData({params, $content, error}) {
     const navbarConfig = config.getNavbarConfig()
     const homeConfig = config.getHomeConfig()

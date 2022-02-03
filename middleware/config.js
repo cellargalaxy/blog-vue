@@ -12,7 +12,7 @@ function getConfig(key) {
     if (config[key]) {
       return config[key]
     }
-    logger.warn('读取配置为空')
+    logger.warn('读取配置为空: {}', key)
     return {}
   } catch (e) {
     logger.error('读取配置文件异常: {}', e)
@@ -21,23 +21,30 @@ function getConfig(key) {
 }
 
 function getSiteConfig() {
-  return getConfig('site')
+  const config = getConfig('site')
+  return config
 }
 
 function getNavbarConfig() {
-  return getConfig('navbar')
+  const site = getSiteConfig()
+  const config = getConfig('navbar')
+  if (config.brandText === undefined || config.brandText == null || config.brandText === '') {
+    config.brandText = site.siteName
+  }
+  if (config.brandUrl === undefined || config.brandUrl == null || config.brandUrl === '') {
+    config.brandUrl = site.siteUrl
+  }
+  return config
 }
 
 function getHomeConfig() {
-  return getConfig('home')
+  const config = getConfig('home')
+  return config
 }
 
 function getPageFootConfig() {
-  return getConfig('pageFoot')
-}
-
-function getPageSize() {
-  return getConfig('pageSize')
+  const config = getConfig('pageFoot')
+  return config
 }
 
 export default {
@@ -45,5 +52,4 @@ export default {
   getNavbarConfig: getNavbarConfig,
   getHomeConfig: getHomeConfig,
   getPageFootConfig: getPageFootConfig,
-  getPageSize: getPageSize,
 }

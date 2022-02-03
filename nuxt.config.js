@@ -1,3 +1,5 @@
+import service from './middleware/service'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -45,10 +47,20 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    vendor: ['element-ui']
+    vendor: ['element-ui'],
+    babel: {
+      compact: false
+    }
+  },
+
+  generate: {
+    fallback: true,
+    routes: [
+      '/blog/my-first-blog-post'
+    ],
   },
 
   router: {
-    base: './'
+    base: service.getBasePath()
   }
 }

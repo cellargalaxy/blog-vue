@@ -31,7 +31,7 @@ export default {
     const navbarConfig = config.getNavbarConfig()
     const homeConfig = config.getHomeConfig()
     const pageFootConfig = config.getPageFootConfig()
-    const pageSize = config.getPageSize()
+    const siteConfig = config.getSiteConfig()
 
     const {folderPath, currentPage} = service.parsePath(params.pathMatch)
 
@@ -47,13 +47,13 @@ export default {
     files = model.sortContent(files)
     files.reverse()
 
-    const filePage = service.page(files, currentPage, pageSize)
+    const filePage = service.page(files, currentPage, siteConfig.pageSize)
 
     return {
       navbarConfig: navbarConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
-      pageSize: pageSize,
+      pageSize: siteConfig.pageSize,
       total: files.length,
       currentPage: currentPage,
       files: filePage,
