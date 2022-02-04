@@ -1,5 +1,5 @@
 import util from "./util"
-import * as path from "path";
+import path from "path"
 
 function sortContent(contents) {
   if (contents === undefined || contents == null) {
@@ -62,7 +62,6 @@ function content2File(content, basePath) {
     sortUrl += '/'
   }
   sortUrl += '1/'
-  content.sortUrl = sortUrl
   content = setAttribute(content, {name: "sort", value: content.dir, url: sortUrl})
   return content
 }

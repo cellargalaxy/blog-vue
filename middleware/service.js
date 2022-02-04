@@ -1,6 +1,7 @@
 import util from "./util"
 import model from "./model"
 import config from "./config"
+import path from "path"
 
 function initPath(path) {
   //-> a/b/1/
@@ -66,19 +67,49 @@ function getBasePath() {
 }
 
 async function listRoute(files) {
+  const sortMap = {}
   const routeMap = {}
+  routeMap['archive/0'] = ''
   for (let i = 0; i < files.length; i++) {
-    routeMap[files[i].url] = files[i].url
-    routeMap[files[i].sortUrl] = files[i].sortUrl
+    sortMap[files[i].dir] = ''
+
+    routeMap[path.join('view', files[i].path)] = ''
+    const year = util.formatDate(files[i].createAt, 'YYYY')
+    routeMap['archive/' + year] = ''
   }
-  const basePath = getBasePath()
+
+  for (let sort in sortMap) {
+    const list = listSortRoute(files, sort)
+    for (let i = 0; i < list.length; i++) {
+      routeMap[list[i]] = ''
+    }
+  }
+
   const routes = []
-  for (let key in routeMap) {
-    if (key === undefined || key == null) {
+  for (let route in routeMap) {
+    if (route === undefined || route == null) {
       continue
     }
-    key = key.replace(basePath, '')
-    routes.push(key)
+    routes.push(route)
+  }
+  return routes
+}
+
+function listSortRoute(files, sort) {
+  let count = 0
+  for (let i = 0; i < files.length; i++) {
+    if (util.startWith(files[i].dir, sort)) {
+      count++
+    }
+  }
+  const pageSize = config.getSiteConfig().pageSize
+  let page = count / pageSize
+  if (count % pageSize > 0) {
+    page++
+  }
+  const routes = []
+  for (let i = 1; i <= page; i++) {
+    routes.push(path.join('page', sort, i + ''))
   }
   return routes
 }
