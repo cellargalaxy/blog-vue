@@ -36,7 +36,8 @@ function content2Files(contents) {
     }
     copies.push(contents[i])
   }
-  const files = model.content2Files(copies)
+  const basePath = getBasePath()
+  const files = model.content2Files(copies, basePath)
   return files
 }
 
@@ -70,11 +71,13 @@ async function listRoute(files) {
     routeMap[files[i].url] = files[i].url
     routeMap[files[i].sortUrl] = files[i].sortUrl
   }
+  const basePath = getBasePath()
   const routes = []
   for (let key in routeMap) {
-    if (key===undefined||key==null){
+    if (key === undefined || key == null) {
       continue
     }
+    key = key.replace(basePath, '')
     routes.push(key)
   }
   return routes

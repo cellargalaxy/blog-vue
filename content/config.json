@@ -11,11 +11,11 @@
     "navs": [
       {
         "text": "page",
-        "url": "/page/1/"
+        "url": "/blog-vue/dist/page/1/"
       },
       {
         "text": "archive",
-        "url": "/archive/0/"
+        "url": "/blog-vue/dist/archive/0/"
       }
     ]
   },

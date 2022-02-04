@@ -45,19 +45,19 @@ function setAttribute(object, attribute) {
   return object
 }
 
-function content2File(content) {
+function content2File(content, basePath) {
   if (content === undefined || content == null) {
     return content
   }
 
   content.title = content.slug
-  content.url = path.join('/view', content.path)
+  content.url = path.join(basePath, '/view', content.path)
   content.createAt = new Date(content.createdAt)
   content.updateAt = new Date(content.updatedAt)
 
   content = setAttribute(content, {name: "createAt", value: util.formatDate(content.createAt, 'YYYY-MM-DD')})
   content = setAttribute(content, {name: "updateAt", value: util.formatDate(content.updateAt, 'YYYY-MM-DD')})
-  let sortUrl = path.join('/page', content.dir)
+  let sortUrl = path.join(basePath, '/page', content.dir)
   if (!util.endWith(sortUrl, '/')) {
     sortUrl += '/'
   }
@@ -67,10 +67,10 @@ function content2File(content) {
   return content
 }
 
-function content2Files(contents) {
+function content2Files(contents, basePath) {
   const files = []
   for (let i = 0; i < contents.length; i++) {
-    const file = content2File(contents[i])
+    const file = content2File(contents[i], basePath)
     if (file === undefined || file == null) {
       continue
     }
