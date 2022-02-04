@@ -2,7 +2,7 @@
   <b-list-group class="nuxt-content" style="margin-bottom: 1em">
     <b-list-group-item class="white-background-8">
       <h1>
-        <b-link v-text="article.title" :href="article.url" :target="this.isSummary?'_blank':''"/>
+        <b-link v-text="article.title" :href="article.url" :target="isSummary?'_blank':''"/>
       </h1>
       <auto-color-badges :attributes="article.attributes"/>
     </b-list-group-item>
@@ -25,18 +25,18 @@ export default {
     file: {
       default() {
         return {
-          title: "a_title",
+          title: "title_t",
           url: "#",
           "toc": [
             {
-              "id": "a_context",
+              "id": "h2_t",
               "depth": 2,
-              "text": "a_context"
+              "text": "h2_t"
             },
             {
-              "id": "b_context",
+              "id": "h3_t",
               "depth": 3,
-              "text": "b_context"
+              "text": "h3_t"
             }
           ],
           "body": {
@@ -49,7 +49,7 @@ export default {
                 "children": [
                   {
                     "type": "text",
-                    "value": "a_description"
+                    "value": "description_t"
                   }
                 ]
               },
@@ -57,7 +57,7 @@ export default {
                 "type": "element",
                 "tag": "h2",
                 "props": {
-                  "id": "a_context"
+                  "id": "h2_t"
                 },
                 "children": [
                   {
@@ -65,7 +65,7 @@ export default {
                     "tag": "a",
                     "props": {
                       "ariaHidden": "true",
-                      "href": "#a_context",
+                      "href": "#h2_t",
                       "tabIndex": -1
                     },
                     "children": [
@@ -84,7 +84,7 @@ export default {
                   },
                   {
                     "type": "text",
-                    "value": "a_context"
+                    "value": "h2_t"
                   }
                 ]
               },
@@ -92,7 +92,7 @@ export default {
                 "type": "element",
                 "tag": "h3",
                 "props": {
-                  "id": "b_context"
+                  "id": "h3_t"
                 },
                 "children": [
                   {
@@ -100,7 +100,7 @@ export default {
                     "tag": "a",
                     "props": {
                       "ariaHidden": "true",
-                      "href": "#b_context",
+                      "href": "#h3_t",
                       "tabIndex": -1
                     },
                     "children": [
@@ -119,7 +119,7 @@ export default {
                   },
                   {
                     "type": "text",
-                    "value": "b_context"
+                    "value": "h3_t"
                   }
                 ]
               }
@@ -135,7 +135,7 @@ export default {
                 "children": [
                   {
                     "type": "text",
-                    "value": "a_description"
+                    "value": "description_t"
                   }
                 ]
               }

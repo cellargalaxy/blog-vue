@@ -1,77 +1,37 @@
 {
   "site": {
-    "siteUrl": "http://127.0.0.1:3000",
-    "siteName": "主页の名",
-    "faviconUrl": "https://i.loli.net/2019/07/09/5d2484e68fddd81209.jpg",
-    "avatarUrl": "https://i.loli.net/2019/07/09/5d2484e68fddd81209.jpg",
-    "description": "主页の名",
-    "cssUrl": "",
-    "jsUrl": ""
+    "siteName": "siteName",
+    "siteUrl": "/blog-vue/dist/",
+    "basePath": "/blog-vue/dist/",
+    "pageSize": 3
   },
   "navbar": {
-    "brandText": "主页の名",
-    "brandUrl": "/",
+    "brandText": "",
+    "brandUrl": "",
     "navs": [
       {
-        "text": "文章",
+        "text": "page",
         "url": "/page/1/"
       },
       {
-        "text": "归档",
+        "text": "archive",
         "url": "/archive/0/"
-      },
-      {
-        "text": "开源",
-        "url": "https://github.com/cellargalaxy/blog-vue"
       }
     ]
   },
   "home": {
-    "interval": 5000,
+    "brandInterval": 10000,
     "brands": [
       {
-        "imageUrl": "https://i.loli.net/2018/08/21/5b7bb5dd4f0df.png",
-        "title": "这是大招牌-1",
+        "imageUrl": "https://i.loli.net/2020/01/21/mMEAnwY5XPC2pFb.jpg",
+        "title": "日常",
         "texts": [
-          "这是一段招牌的演示文字-1-1",
-          "这是一段招牌的演示文字-1-2"
-        ]
-      },
-      {
-        "imageUrl": "https://i.loli.net/2018/04/10/5accdcbcb1738.jpg",
-        "title": "这是大招牌-2",
-        "texts": [
-          "这是一段招牌的演示文字-2-1",
-          "这是一段招牌的演示文字-2-2"
-        ]
-      },
-      {
-        "imageUrl": "https://i.loli.net/2018/08/21/5b7bbc8ec3633.jpg",
-        "title": "这是大招牌-3",
-        "texts": [
-          "这是一段招牌的演示文字-3-1",
-          "这是一段招牌的演示文字-3-2"
+          "我们所度过的每个平凡的日常，也许就是连续不断发生的奇迹。",
+          "日々、私たちが過ごしている日常は、実は奇跡の連続なのかもしれない。"
         ]
       }
     ],
-    "navs": [
-      {
-        "text": "twitter",
-        "url": "https://twitter.com/"
-      },
-      {
-        "text": "facebook",
-        "url": "https://facebook.com/"
-      },
-      {
-        "text": "微博",
-        "url": "https://weibo.com/"
-      },
-      {
-        "text": "知乎",
-        "url": "https://www.zhihu.com/"
-      }
-    ]
+    "navs": []
   },
   "pageFoot": {
     "lines": [
@@ -83,23 +43,10 @@
           "text": "备案？不存在的"
         },
         {
-          "text": "Powered by Nuxt.js & Github"
-        }
-      ],
-      [
-        {
-          "text": "友链："
-        },
-        {
-          "text": "Github",
+          "text": "Powered by Nuxt.js & Github",
           "url": "https://github.com/"
-        },
-        {
-          "text": "Nuxt.js",
-          "url": "https://nuxtjs.org/"
         }
       ]
     ]
-  },
-  "pageSize": 2
+  }
 }

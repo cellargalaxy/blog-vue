@@ -61,7 +61,7 @@ function getBasePath() {
   if (basePath === undefined || basePath == null) {
     basePath = '/'
   }
-  return process.env.DEPLOY_ENV === 'DEV' ? '/' : basePath
+  return process.env.DEPLOY_ENV === 'DEV' ? '/blog-vue/dist/' : basePath
 }
 
 async function listRoute(files) {
