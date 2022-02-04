@@ -69,13 +69,13 @@ function getBasePath() {
 async function listRoute(files) {
   const sortMap = {}
   const routeMap = {}
-  routeMap['archive/0'] = ''
+  routeMap['/archive/0'] = ''
   for (let i = 0; i < files.length; i++) {
     sortMap[files[i].dir] = ''
 
-    routeMap[path.join('view', files[i].path)] = ''
+    routeMap[path.join('/view', files[i].path)] = ''
     const year = util.formatDate(files[i].createAt, 'YYYY')
-    routeMap['archive/' + year] = ''
+    routeMap[path.join('/archive' , year)] = ''
   }
 
   for (let sort in sortMap) {
@@ -109,7 +109,7 @@ function listSortRoute(files, sort) {
   }
   const routes = []
   for (let i = 1; i <= page; i++) {
-    routes.push(path.join('page', sort, i + ''))
+    routes.push(path.join('/page', sort, i + ''))
   }
   return routes
 }

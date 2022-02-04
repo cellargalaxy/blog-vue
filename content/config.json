@@ -3,7 +3,7 @@
     "siteName": "siteName",
     "siteUrl": "/blog-vue/dist/",
     "basePath": "/blog-vue/dist/",
-    "pageSize": 3
+    "pageSize": 2
   },
   "navbar": {
     "brandText": "",
