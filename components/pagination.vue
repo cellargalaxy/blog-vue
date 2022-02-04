@@ -7,6 +7,8 @@
 <pagination :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
 
 <script>
+import service from "../middleware/service"
+
 export default {
   name: "pagination", //分页
   props: {
@@ -28,7 +30,10 @@ export default {
   },
   methods: {
     change(page) {
-      window.location.href = '../' + page + '/'
+      const basePath = service.getBasePath()
+      const path = window.location.pathname.replace(basePath, '')
+      const {folderPath} = service.parsePath(path)
+      window.location.href = folderPath + '/' + page + '/'
     },
   },
 }

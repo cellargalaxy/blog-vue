@@ -50,17 +50,36 @@ export default {
     vendor: ['element-ui'],
     babel: {
       compact: false
+    },
+    extend(config, ctx) {
+      config.node = {
+        'cluster': 'empty',
+        'fs': 'empty',
+        'fs-extra': 'empty',
+        'http-server': 'empty',
+        'isomorphic-git': 'empty',
+        'request': 'empty',
+        'moment': 'empty',
+        'net': 'empty',
+        'fsevents': 'empty',
+      }
     }
   },
 
   generate: {
     fallback: true,
-    routes: [
-      '/blog/my-first-blog-post'
-    ],
+    routes: listRoute,
   },
 
   router: {
     base: service.getBasePath()
   }
+}
+
+async function listRoute() {
+  const {$content} = require('@nuxt/content')
+  const contents = await $content('', {deep: true}).fetch()
+  const files = service.content2Files(contents)
+  const routes = service.listRoute(files)
+  return routes
 }

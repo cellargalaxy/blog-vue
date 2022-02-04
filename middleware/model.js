@@ -1,4 +1,5 @@
-import util from "./util";
+import util from "./util"
+import * as path from "path";
 
 function sortContent(contents) {
   if (contents === undefined || contents == null) {
@@ -50,30 +51,30 @@ function content2File(content) {
   }
 
   content.title = content.slug
-  content.url = '#'
-  if (content.basePath && content.path) {
-    content.url = content.basePath + '/view' + content.path
-  }
+  content.url = path.join('/view', content.path)
   content.createAt = new Date(content.createdAt)
   content.updateAt = new Date(content.updatedAt)
 
-  setAttribute(content, {name: "createAt", value: util.formatDate(content.createAt, 'YYYY-MM-DD')})
-  setAttribute(content, {name: "updateAt", value: util.formatDate(content.updateAt, 'YYYY-MM-DD')})
-  if (content.basePath && content.dir) {
-    let sortUrl = content.basePath + '/page' + content.dir
-    if (!util.endWith(sortUrl, '/')) {
-      sortUrl += '/'
-    }
-    sortUrl += '1/'
-    setAttribute(content, {name: "sort", value: content.dir, url: sortUrl})
+  content = setAttribute(content, {name: "createAt", value: util.formatDate(content.createAt, 'YYYY-MM-DD')})
+  content = setAttribute(content, {name: "updateAt", value: util.formatDate(content.updateAt, 'YYYY-MM-DD')})
+  let sortUrl = path.join('/page', content.dir)
+  if (!util.endWith(sortUrl, '/')) {
+    sortUrl += '/'
   }
+  sortUrl += '1/'
+  content.sortUrl = sortUrl
+  content = setAttribute(content, {name: "sort", value: content.dir, url: sortUrl})
   return content
 }
 
 function content2Files(contents) {
   const files = []
   for (let i = 0; i < contents.length; i++) {
-    files.push(content2File(contents[i]))
+    const file = content2File(contents[i])
+    if (file === undefined || file == null) {
+      continue
+    }
+    files.push(file)
   }
   return files
 }

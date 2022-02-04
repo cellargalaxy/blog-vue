@@ -35,11 +35,8 @@ export default {
 
     let currentPage = params.year
 
-    //         archive/2022
-    let basePath = '../..'
-
     const contents = await $content('', {deep: true}).fetch()
-    let files = service.content2Files(contents, basePath)
+    let files = service.content2Files(contents)
     files = model.sortContent(files)
 
     let total = '1'

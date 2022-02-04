@@ -19,7 +19,7 @@ function parsePath(path) {
   return {folderPath, currentPage}
 }
 
-function content2Files(contents, basePath) {
+function content2Files(contents) {
   if (contents.length === undefined) {
     contents = [contents]
   }
@@ -36,27 +36,8 @@ function content2Files(contents, basePath) {
     }
     copies.push(contents[i])
   }
-  copies = setBasePaths(copies, basePath)
   const files = model.content2Files(copies)
   return files
-}
-
-function setBasePaths(contents, basePath) {
-  if (contents === undefined || contents == null) {
-    return contents
-  }
-  for (let i = 0; i < contents.length; i++) {
-    contents[i] = setBasePath(contents[i], basePath)
-  }
-  return contents
-}
-
-function setBasePath(content, basePath) {
-  if (content === undefined || content == null) {
-    return content
-  }
-  content.basePath = basePath
-  return content
 }
 
 function page(list, currentPage, pageSize) {
@@ -83,10 +64,27 @@ function getBasePath() {
   return process.env.DEPLOY_ENV === 'DEV' ? '/' : basePath
 }
 
+async function listRoute(files) {
+  const routeMap = {}
+  for (let i = 0; i < files.length; i++) {
+    routeMap[files[i].url] = files[i].url
+    routeMap[files[i].sortUrl] = files[i].sortUrl
+  }
+  const routes = []
+  for (let key in routeMap) {
+    if (key===undefined||key==null){
+      continue
+    }
+    routes.push(key)
+  }
+  return routes
+}
+
 export default {
   initPath: initPath,
   parsePath: parsePath,
   content2Files: content2Files,
   page: page,
   getBasePath: getBasePath,
+  listRoute: listRoute,
 }

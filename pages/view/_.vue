@@ -34,17 +34,9 @@ export default {
     const siteConfig = config.getSiteConfig()
 
     const path = service.initPath(params.pathMatch)
-    const {folderPath} = service.parsePath(path)
-
-    //          view
-    let basePath = '..'
-    const folderPaths = folderPath.split('/')
-    for (let i = 0; i < folderPaths.length; i++) {
-      basePath += '/..'
-    }
 
     const contents = await $content(path, {deep: false}).fetch()
-    let  files = service.content2Files(contents,basePath)
+    let files = service.content2Files(contents)
     if (files.length === 0) {
       error()
       return

@@ -35,15 +35,8 @@ export default {
 
     const {folderPath, currentPage} = service.parsePath(params.pathMatch)
 
-    //             page/1
-    let basePath = '../..'
-    const folderPaths = folderPath.split('/')
-    for (let i = 0; i < folderPaths.length; i++) {
-      basePath += '/..'
-    }
-
     const contents = await $content(folderPath, {deep: true}).fetch()
-    let files = service.content2Files(contents, basePath)
+    let files = service.content2Files(contents)
     files = model.sortContent(files)
     files.reverse()
 
