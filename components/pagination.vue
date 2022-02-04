@@ -33,7 +33,7 @@ export default {
       const basePath = service.getBasePath()
       const path = window.location.pathname.replace(basePath, '')
       const {folderPath} = service.parsePath(path)
-      window.location.href = folderPath + '/' + page + '/'
+      window.location.href = '.' + folderPath + '/' + page + '/'
     },
   },
 }
