@@ -18,9 +18,13 @@
 <script>
 import autoColorBadges from './autoColorBadges'
 import model from '../middleware/model'
+import prism from "../plugins/prism"
 
 export default {
   name: "articleView",
+  mounted() {
+    prism.highlightAll();
+  },
   props: {
     file: {
       default() {
