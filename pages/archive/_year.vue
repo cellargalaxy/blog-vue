@@ -37,7 +37,7 @@ export default {
 
     const contents = await $content('', {deep: true}).fetch()
     let files = service.content2Files(contents)
-    files = model.sortContent(files)
+    files = model.sortContentByTime(files)
 
     let total = '1'
     if (files.length > 0) {

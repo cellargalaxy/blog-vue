@@ -76,5 +76,6 @@ export default {
   startWith: startWith,
   endWith: endWith,
   hashString: hashString,
+  isNum: isNum,
   randomString: randomString,
 }

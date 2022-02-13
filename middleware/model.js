@@ -1,7 +1,38 @@
 import util from "./util"
 import path from "path"
 
-function sortContent(contents) {
+function sortContentByLevel(contents) {
+  if (contents === undefined || contents == null) {
+    return contents
+  }
+
+  const levelMap = {}
+  for (let i = 0; i < contents.length; i++) {
+    const level = util.string2Int(contents[i].level)
+    if (levelMap[level] === undefined || levelMap[level] == null) {
+      levelMap[level] = []
+    }
+    levelMap[level].push(contents[i])
+  }
+
+  const levels = []
+  for (let level in levelMap) {
+    levels.push(level)
+    levelMap[level] = sortContentByTime(levelMap[level])
+  }
+  levels.sort()
+
+  contents = []
+  for (let i = 0; i < levels.length; i++) {
+    const list = levelMap[levels[i]]
+    for (let j = 0; j < list.length; j++) {
+      contents.push(list[j])
+    }
+  }
+  return contents
+}
+
+function sortContentByTime(contents) {
   if (contents === undefined || contents == null) {
     return contents
   }
@@ -59,12 +90,19 @@ function content2File(content, basePath) {
 
   content = setAttribute(content, {name: "createAt", value: util.formatDate(content.createAt, 'YYYY-MM-DD')})
   content = setAttribute(content, {name: "updateAt", value: util.formatDate(content.updateAt, 'YYYY-MM-DD')})
+
   let sortUrl = path.join(basePath, '/page', content.dir)
   if (!util.endWith(sortUrl, '/')) {
     sortUrl += '/'
   }
   sortUrl += '1/'
   content = setAttribute(content, {name: "sort", value: content.dir, url: sortUrl})
+
+  const level = content.level
+  if (level !== undefined && level != null && util.isNum(level)) {
+    content = setAttribute(content, {name: "level", value: level})
+  }
+
   return content
 }
 
@@ -111,14 +149,15 @@ function file2Archives(files) {
   for (let i = 0; i < months.length; i++) {
     const archive = {}
     archive.month = months[i]
-    archive.files = sortContent(fileMap[months[i]])
+    archive.files = sortContentByTime(fileMap[months[i]])
     archives.push(archive)
   }
   return archives
 }
 
 export default {
-  sortContent: sortContent,
+  sortContentByLevel: sortContentByLevel,
+  sortContentByTime: sortContentByTime,
   content2Files: content2Files,
   file2Article: file2Article,
   file2Archives: file2Archives,

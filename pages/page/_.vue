@@ -37,7 +37,7 @@ export default {
 
     const contents = await $content(folderPath, {deep: true}).fetch()
     let files = service.content2Files(contents)
-    files = model.sortContent(files)
+    files = model.sortContentByLevel(files)
     files.reverse()
 
     const filePage = service.page(files, currentPage, siteConfig.pageSize)
