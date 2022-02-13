@@ -3,7 +3,11 @@
     "siteName": "siteName",
     "siteUrl": "/blog-vue/dist/",
     "basePath": "/blog-vue/dist/",
-    "pageSize": 2
+    "pageSize": 2,
+    "urlReplace": {
+      "http://": "https://",
+      "https://": "http://"
+    }
   },
   "navbar": {
     "brandText": "",

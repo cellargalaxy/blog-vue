@@ -37,9 +37,45 @@ function content2Files(contents) {
     }
     copies.push(contents[i])
   }
+  const urlReplace = getUrlReplace()
+  copies = initContentImgs(copies, urlReplace)
   const basePath = getBasePath()
   const files = model.content2Files(copies, basePath)
   return files
+}
+
+function initContentImgs(contents, replaceMap) {
+  for (let i = 0; i < contents.length; i++) {
+    contents[i] = initContentImg(contents[i], replaceMap)
+  }
+  return contents
+}
+
+function initContentImg(content, replaceMap) {
+  content.body = initImg(content.body, replaceMap)
+  content.excerpt = initImg(content.excerpt, replaceMap)
+  return content
+}
+
+function initImg(body, replaceMap) {
+  if (body === undefined || body == null) {
+    return body
+  }
+  if (body.tag === 'img' && body.props !== undefined && body.props != null) {
+    let url = body.props['src']
+    for (let old in replaceMap) {
+      url = url.replace(old, replaceMap[old])
+    }
+    body.props['src'] = url
+    return body
+  }
+  if (body.children === undefined || body.children == null) {
+    return body
+  }
+  for (let i = 0; i < body.children.length; i++) {
+    body.children[i] = initImg(body.children[i], replaceMap)
+  }
+  return body
 }
 
 function page(list, currentPage, pageSize) {
@@ -66,6 +102,15 @@ function getBasePath() {
   return process.env.DEPLOY_ENV === 'DEV' ? '/blog-vue/dist/' : basePath
 }
 
+function getUrlReplace() {
+  const site = config.getSiteConfig()
+  let urlReplace = site.urlReplace
+  if (urlReplace === undefined || urlReplace == null) {
+    urlReplace = {}
+  }
+  return urlReplace
+}
+
 async function listRoute(files) {
   const sortMap = {}
   const routeMap = {}
@@ -75,7 +120,7 @@ async function listRoute(files) {
 
     routeMap[path.join('/view', files[i].path)] = ''
     const year = util.formatDate(files[i].createAt, 'YYYY')
-    routeMap[path.join('/archive' , year)] = ''
+    routeMap[path.join('/archive', year)] = ''
   }
 
   for (let sort in sortMap) {
