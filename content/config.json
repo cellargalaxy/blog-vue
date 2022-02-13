@@ -23,15 +23,48 @@
     "brandInterval": 10000,
     "brands": [
       {
-        "imageUrl": "https://i.loli.net/2020/01/21/mMEAnwY5XPC2pFb.jpg",
-        "title": "日常",
+        "imageUrl": "https://i.loli.net/2018/08/21/5b7bb5dd4f0df.png",
+        "title": "这是大招牌-1",
         "texts": [
-          "我们所度过的每个平凡的日常，也许就是连续不断发生的奇迹。",
-          "日々、私たちが過ごしている日常は、実は奇跡の連続なのかもしれない。"
+          "这是一段招牌的演示文字-1-1",
+          "这是一段招牌的演示文字-1-2"
+        ]
+      },
+      {
+        "imageUrl": "https://i.loli.net/2018/04/10/5accdcbcb1738.jpg",
+        "title": "这是大招牌-2",
+        "texts": [
+          "这是一段招牌的演示文字-2-1",
+          "这是一段招牌的演示文字-2-2"
+        ]
+      },
+      {
+        "imageUrl": "https://i.loli.net/2018/08/21/5b7bbc8ec3633.jpg",
+        "title": "这是大招牌-3",
+        "texts": [
+          "这是一段招牌的演示文字-3-1",
+          "这是一段招牌的演示文字-3-2"
         ]
       }
     ],
-    "navs": []
+    "navs": [
+      {
+        "text": "Github",
+        "url": "https://github.com/"
+      },
+      {
+        "text": "Nuxt.js",
+        "url": "https://nuxtjs.org/"
+      },
+      {
+        "text": "BootstrapVue",
+        "url": "https://bootstrap-vue.org/"
+      },
+      {
+        "text": "Node.js",
+        "url": "https://nodejs.org/"
+      }
+    ]
   },
   "pageFoot": {
     "lines": [
@@ -43,8 +76,28 @@
           "text": "备案？不存在的"
         },
         {
-          "text": "Powered by Nuxt.js & Github",
+          "text": "Powered by Nuxt.js & Github"
+        }
+      ],
+      [
+        {
+          "text": "友链："
+        },
+        {
+          "text": "Github",
           "url": "https://github.com/"
+        },
+        {
+          "text": "Nuxt.js",
+          "url": "https://nuxtjs.org/"
+        },
+        {
+          "text": "BootstrapVue",
+          "url": "https://bootstrap-vue.org/"
+        },
+        {
+          "text": "Node.js",
+          "url": "https://nodejs.org/"
         }
       ]
     ]

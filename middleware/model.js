@@ -50,7 +50,9 @@ function content2File(content, basePath) {
     return content
   }
 
-  content.title = content.slug
+  if (content.title === undefined || content.title == null || content.title === '') {
+    content.title = content.slug
+  }
   content.url = path.join(basePath, '/view', content.path)
   content.createAt = new Date(content.createdAt)
   content.updateAt = new Date(content.updatedAt)
