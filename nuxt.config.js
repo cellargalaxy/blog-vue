@@ -73,7 +73,15 @@ export default {
 
   router: {
     base: service.getBasePath()
-  }
+  },
+
+  content: {
+    markdown: {
+      prism: {
+        theme: 'prism-themes/themes/prism-darcula.css'
+      }
+    }
+  },
 }
 
 async function listRoute() {
