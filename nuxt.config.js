@@ -16,15 +16,19 @@ export default {
       {hid: 'description', name: 'description', content: ''},
       {name: 'format-detection', content: 'telephone=no'}
     ],
+    script: [
+      {src: '/js/jquery.min.js'},
+      {src: '/js/base.js'},
+    ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
-    ]
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/assets/css/base.css',
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -47,7 +51,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    vendor: ['element-ui'],
+    vendor: [
+      'element-ui',
+    ],
     babel: {
       compact: false
     },
@@ -63,7 +69,7 @@ export default {
         'net': 'empty',
         'fsevents': 'empty',
       }
-    }
+    },
   },
 
   generate: {
