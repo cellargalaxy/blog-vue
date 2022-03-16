@@ -23,7 +23,8 @@ import prism from "../plugins/prism"
 export default {
   name: "articleView",
   mounted() {
-    prism.highlightAll();
+    prism.highlightAll()
+    $('.nuxt-content').find('table').addClass('table b-table table-striped table-hover table-responsive')
   },
   props: {
     file: {

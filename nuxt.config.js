@@ -1,5 +1,7 @@
 import service from './middleware/service'
 
+const webpack = require('webpack')
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -16,10 +18,7 @@ export default {
       {hid: 'description', name: 'description', content: ''},
       {name: 'format-detection', content: 'telephone=no'}
     ],
-    script: [
-      {src: '/js/jquery.min.js'},
-      {src: '/js/base.js'},
-    ],
+    script: [],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ],
@@ -70,6 +69,11 @@ export default {
         'fsevents': 'empty',
       }
     },
+    plugins: [
+      new webpack.ProvidePlugin({
+        '$': 'jquery'
+      })
+    ],
   },
 
   generate: {
