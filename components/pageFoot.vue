@@ -8,12 +8,20 @@
       </b-badge>
 
     </b-card-text>
+
+    <b-card-text class="white">
+      <b-badge class="transparent" style="margin-left: 0.5em;margin-right: 0.5em;">
+        <a class="white" v-text="'buildTime: '+buildDate"/>
+      </b-badge>
+    </b-card-text>
   </b-card>
 </template>
 
-<page-foot :config="config"/>
+<page-foot :config="config" :buildTime="buildTime"/>
 
 <script>
+import util from "@/middleware/util"
+
 export default {
   name: "pageFoot", //页尾
   props: {
@@ -34,6 +42,16 @@ export default {
           ]
         }
       }
+    },
+    buildTime: {
+      default() {
+        return new Date()
+      }
+    }
+  },
+  computed: {
+    buildDate() {
+      return util.formatDate(this.buildTime, 'YYYY-MM-DD HH:mm:ss')
     },
   },
 }

@@ -9,7 +9,7 @@
       <archive-and-page :files="files" :currentPage="currentPage" :pageSize="1" :total="total"/>
     </b-container>
 
-    <page-foot :config="pageFootConfig"/>
+    <page-foot :config="pageFootConfig" :buildTime="buildTime"/>
     <backtop/>
   </div>
 </template>
@@ -59,6 +59,7 @@ export default {
       navbarConfig: navbarConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
+      buildTime: new Date(),
       currentPage: util.string2Int(currentPage),
       total: util.string2Int(total),
       files: copies,

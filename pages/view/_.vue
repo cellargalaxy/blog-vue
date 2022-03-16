@@ -10,7 +10,7 @@
       <br/>
     </b-container>
 
-    <page-foot :config="pageFootConfig"/>
+    <page-foot :config="pageFootConfig" :buildTime="buildTime"/>
     <backtop/>
   </div>
 </template>
@@ -46,6 +46,7 @@ export default {
       navbarConfig: navbarConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
+      buildTime: new Date(),
       siteName: siteConfig.siteName,
       file: files[0],
     }

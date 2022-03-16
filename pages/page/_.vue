@@ -9,7 +9,7 @@
       <file-list-and-page :files="files" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
     </b-container>
 
-    <page-foot :config="pageFootConfig"/>
+    <page-foot :config="pageFootConfig" :buildTime="buildTime"/>
     <backtop/>
   </div>
 </template>
@@ -46,6 +46,7 @@ export default {
       navbarConfig: navbarConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
+      buildTime: new Date(),
       pageSize: siteConfig.pageSize,
       total: files.length,
       currentPage: currentPage,
