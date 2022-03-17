@@ -66,7 +66,9 @@ function initImg(body, replaceMap) {
     for (let old in replaceMap) {
       url = url.replace(old, replaceMap[old])
     }
-    body.props['src'] = url
+    // body.props['src'] = url
+    delete body.props['src']
+    body.props['data-src'] = url
     return body
   }
   if (body.children === undefined || body.children == null) {
