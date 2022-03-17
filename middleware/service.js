@@ -69,6 +69,8 @@ function initImg(body, replaceMap) {
     // body.props['src'] = url
     delete body.props['src']
     body.props['data-src'] = url
+    body.props['class'] = 'lazyload'
+    // body.props['loading'] = 'lazy'
     return body
   }
   if (body.children === undefined || body.children == null) {

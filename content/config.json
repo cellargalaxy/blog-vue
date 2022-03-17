@@ -5,8 +5,6 @@
     "basePath": "/blog-vue/dist/",
     "pageSize": 2,
     "urlReplace": {
-      "http://": "https://",
-      "https://": "http://"
     }
   },
   "navbar": {

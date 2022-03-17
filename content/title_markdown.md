@@ -185,17 +185,17 @@ testBox.add("jQuery").remove("jQuery");
 
 Image:
 
-![](https://pandao.github.io/editor.md/examples/images/4.jpg)
+![](https://s3.bmp.ovh/imgs/2022/03/0220af6579e287bc.png)
 
 > Follow your heart.
 
-![](https://pandao.github.io/editor.md/examples/images/8.jpg)
+![](https://s3.bmp.ovh/imgs/2022/03/bf7c85bd106c412b.jpg)
 
 > 图为：厦门白城沙滩
 
 图片加链接 (Image + Link)：
 
-[![](https://pandao.github.io/editor.md/examples/images/7.jpg)](https://pandao.github.io/editor.md/examples/images/7.jpg "李健首张专辑《似水流年》封面")
+[![](https://s3.bmp.ovh/imgs/2022/03/667fb45e1ad9d8d2.jpg)](https://s3.bmp.ovh/imgs/2022/03/667fb45e1ad9d8d2.jpg "李健首张专辑《似水流年》封面")
 
 > 图为：李健首张专辑《似水流年》封面
                 
