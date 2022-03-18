@@ -23,6 +23,7 @@
     "jquery": "^3.6.0",
     "lazysizes": "^5.3.2",
     "medium-zoom": "^1.0.6",
-    "jquery-backstretch": "^2.1.18"
+    "jquery-backstretch": "^2.1.18",
+    "mermaid": "^8.14.0"
   }
 }

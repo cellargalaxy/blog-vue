@@ -37,6 +37,7 @@ export default {
     {src: '@/plugins/lazysizes', ssr: false},
     {src: '@/plugins/medium-zoom', ssr: false},
     {src: '@/plugins/backstretch', ssr: false},
+    {src: '@/plugins/mermaid', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
