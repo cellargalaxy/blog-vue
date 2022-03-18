@@ -34,6 +34,7 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     "@/plugins/lazysizes",
+    '@/plugins/medium-zoom',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

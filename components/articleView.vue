@@ -25,7 +25,7 @@ export default {
   mounted() {
     prism.highlightAll()
     $('.nuxt-content').find('table').addClass('table b-table table-striped table-hover table-responsive')
-    $('.nuxt-content').find('img').addClass('lazyload img-fluid')
+    $('.nuxt-content').find('img').addClass('lazyload img-fluid zoom')
   },
   props: {
     file: {
