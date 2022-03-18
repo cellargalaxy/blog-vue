@@ -105,6 +105,15 @@ function getBasePath() {
   return process.env.DEPLOY_ENV === 'DEV' ? '/blog-vue/dist/' : basePath
 }
 
+function getBackgroundImage() {
+  const site = config.getSiteConfig()
+  let backgroundImage = site.backgroundImage
+  if (backgroundImage === undefined || backgroundImage == null) {
+    backgroundImage = {}
+  }
+  return backgroundImage
+}
+
 function getUrlReplace() {
   const site = config.getSiteConfig()
   let urlReplace = site.urlReplace
@@ -168,5 +177,6 @@ export default {
   content2Files: content2Files,
   page: page,
   getBasePath: getBasePath,
+  getBackgroundImage: getBackgroundImage,
   listRoute: listRoute,
 }

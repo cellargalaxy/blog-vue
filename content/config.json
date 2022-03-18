@@ -5,6 +5,27 @@
     "basePath": "/blog-vue/dist/",
     "pageSize": 2,
     "urlReplace": {
+    },
+    "backgroundImage": {
+      "duration": 10000,
+      "fade": 1000,
+      "images": [
+        {
+          "url": "https://i.loli.net/2018/08/21/5b7bb5dd4f0df.png",
+          "description": "wide image",
+          "type": "wide"
+        },
+        {
+          "url": "https://i.loli.net/2018/04/10/5accdcbcb1738.jpg",
+          "description": "high image",
+          "type": "high"
+        },
+        {
+          "url": "https://i.loli.net/2018/08/21/5b7bbc8ec3633.jpg",
+          "description": "wide or high image",
+          "type": ""
+        }
+      ]
     }
   },
   "navbar": {

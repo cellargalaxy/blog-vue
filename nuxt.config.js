@@ -31,10 +31,12 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+  //对于只需要在浏览器执行的插件，使用ssr: false
   plugins: [
-    '@/plugins/element-ui',
-    "@/plugins/lazysizes",
-    '@/plugins/medium-zoom',
+    {src: '@/plugins/element-ui', ssr: false},
+    {src: '@/plugins/lazysizes', ssr: false},
+    {src: '@/plugins/medium-zoom', ssr: false},
+    {src: '@/plugins/backstretch', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -73,7 +75,8 @@ export default {
     },
     plugins: [
       new webpack.ProvidePlugin({
-        '$': 'jquery'
+        '$': 'jquery',
+        'jQuery': 'jquery',
       })
     ],
   },
