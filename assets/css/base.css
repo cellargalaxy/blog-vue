@@ -34,3 +34,7 @@ body {
 .nuxt-content pre {
   background-color: rgba(0, 0, 0, 0.8) !important;
 }
+
+svg[id^="language-flow-"] {
+  min-width: 100%;
+}
