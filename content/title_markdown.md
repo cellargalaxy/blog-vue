@@ -165,14 +165,11 @@ address:
 
 ![](https://s3.bmp.ovh/imgs/2022/03/667fb45e1ad9d8d2.jpg)
 
-
-
-
 ### 科学公式 TeX(KaTeX)
 
 多行公式：
 
-```math
+```latex
 \displaystyle
 \left( \sum\_{k=1}^n a\_k b\_k \right)^2
 \leq
@@ -180,7 +177,7 @@ address:
 \left( \sum\_{k=1}^n b\_k^2 \right)
 ```
 
-```katex
+```latex
 \displaystyle 
     \frac{1}{
         \Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{
@@ -200,22 +197,101 @@ f(x) = \int_{-\infty}^\infty
 
 ### 绘制流程图 Flowchart
 
-```chart
-st=>start: 用户登陆
-op=>operation: 登陆操作
-cond=>condition: 登陆成功 Yes or No?
-e=>end: 进入后台
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
+```flow
+flowchart LR
+A[Hard] -->|Text| B(Round)
+B --> C{Decision}
+C -->|One| D[Result 1]
+C -->|Two| E[Result 2]
 ```
 
-### 绘制序列图 Sequence Diagram
+```flow
+sequenceDiagram
+Alice->>John: Hello John, how are you?
+loop Healthcheck
+    John->>John: Fight against hypochondria
+end
+Note right of John: Rational thoughts!
+John-->>Alice: Great!
+John->>Bob: How about you?
+Bob-->>John: Jolly good!
+```
 
-```chart
-Andrew->China: Says Hello 
-Note right of China: China thinks\nabout it 
-China-->Andrew: How are you? 
-Andrew->>China: I am good thanks!
+```flow
+gantt
+    section Section
+    Completed :done,    des1, 2014-01-06,2014-01-08
+    Active        :active,  des2, 2014-01-07, 3d
+    Parallel 1   :         des3, after des1, 1d
+    Parallel 2   :         des4, after des1, 1d
+    Parallel 3   :         des5, after des3, 1d
+    Parallel 4   :         des6, after des4, 1d
+```
+
+```flow
+classDiagram
+Class01 <|-- AveryLongClass : Cool
+<<Interface>> Class01
+Class09 --> C2 : Where am i?
+Class09 --* C3
+Class09 --|> Class07
+Class07 : equals()
+Class07 : Object[] elementData
+Class01 : size()
+Class01 : int chimp
+Class01 : int gorilla
+class Class10 {
+  <<service>>
+  int id
+  size()
+}
+```
+
+```flow
+stateDiagram-v2
+[*] --> Still
+Still --> [*]
+Still --> Moving
+Moving --> Still
+Moving --> Crash
+Crash --> [*]
+```
+
+```flow
+pie
+"Dogs" : 386
+"Cats" : 85
+"Rats" : 15
+```
+
+```flow
+gitGraph:
+options
+{
+    "nodeSpacing": 150,
+    "nodeRadius": 10
+}
+end
+commit
+branch newbranch
+checkout newbranch
+commit
+commit
+checkout master
+commit
+commit
+merge newbranch
+
+```
+
+```flow
+ journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me, Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 3: Me
 ```

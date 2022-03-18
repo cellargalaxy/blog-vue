@@ -33,7 +33,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   //对于只需要在浏览器执行的插件，使用ssr: false
   plugins: [
-    {src: '@/plugins/element-ui', ssr: false},
+    {src: '@/plugins/element-ui', ssr: true},
     {src: '@/plugins/lazysizes', ssr: false},
     {src: '@/plugins/medium-zoom', ssr: false},
     {src: '@/plugins/backstretch', ssr: false},
