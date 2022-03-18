@@ -51,6 +51,7 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
     '@nuxt/content',
+    '@nuxtjs/sitemap',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -95,7 +96,9 @@ export default {
     markdown: {
       prism: {
         theme: 'prism-themes/themes/prism-darcula.css'
-      }
+      },
+      remarkPlugins: ['remark-math'],
+      rehypePlugins: ['rehype-mathjax'],
     }
   },
 }
