@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     buildDate() {
-      return util.formatDate(this.buildTime, 'YYYY-MM-DD HH:mm:ss')
+      return util.formatDate(this.buildTime, 'YYYY-MM-DD')
     },
   },
 }
