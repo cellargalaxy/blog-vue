@@ -135,6 +135,9 @@ function getNavbarConfig() {
     conf.brandUrl = site.basePath
   }
   for (let i = 0; i < conf.navs.length; i++) {
+    if (util.startWith(conf.navs[i].url, site.basePath)) {
+      continue
+    }
     conf.navs[i].url = path.join(site.basePath, conf.navs[i].url)
   }
 
