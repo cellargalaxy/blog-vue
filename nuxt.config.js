@@ -8,7 +8,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'view-vue',
+    title: service.getSiteConfig().siteName,
     htmlAttrs: {
       lang: 'en'
     },
@@ -90,7 +90,7 @@ export default {
   },
 
   router: {
-    base: service.getBasePath()
+    base: service.getSiteConfig().basePath
   },
 
   content: {
@@ -104,7 +104,7 @@ export default {
   },
 
   sitemap: {
-    hostname: service.getSiteHost(),
+    hostname: service.getSiteConfig().siteHost,
     path: '/sitemap.xml',
     gzip: true,
     exclude: [],

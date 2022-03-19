@@ -28,10 +28,10 @@ import model from '../../middleware/model'
 export default {
   name: "page",
   async asyncData({params, $content}) {
-    const navbarConfig = config.getNavbarConfig()
-    const homeConfig = config.getHomeConfig()
-    const pageFootConfig = config.getPageFootConfig()
-    const siteConfig = config.getSiteConfig()
+    const navbarConfig = service.getNavbarConfig()
+    const homeConfig = service.getHomeConfig()
+    const pageFootConfig = service.getPageFootConfig()
+    const siteConfig = service.getSiteConfig()
 
     const {folderPath, currentPage} = service.parsePath(params.pathMatch)
 

@@ -28,10 +28,10 @@ import service from "../../middleware/service"
 export default {
   name: "fileView",
   async asyncData({params, $content, error}) {
-    const navbarConfig = config.getNavbarConfig()
-    const homeConfig = config.getHomeConfig()
-    const pageFootConfig = config.getPageFootConfig()
-    const siteConfig = config.getSiteConfig()
+    const navbarConfig = service.getNavbarConfig()
+    const homeConfig = service.getHomeConfig()
+    const pageFootConfig = service.getPageFootConfig()
+    const siteConfig = service.getSiteConfig()
 
     const path = service.initPath(params.pathMatch)
 

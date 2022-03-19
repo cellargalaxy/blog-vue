@@ -37,9 +37,9 @@ function content2Files(contents) {
     }
     copies.push(contents[i])
   }
-  const urlReplace = getUrlReplace()
+  const urlReplace = getSiteConfig().urlReplace
   copies = initContentImgs(copies, urlReplace)
-  const basePath = getBasePath()
+  const basePath = getSiteConfig().basePath
   const files = model.content2Files(copies, basePath)
   return files
 }
@@ -100,40 +100,71 @@ function page(list, currentPage, pageSize) {
   return page
 }
 
-function getSiteHost() {
-  const site = config.getSiteConfig()
-  let siteHost = site.siteHost
-  if (siteHost === undefined || siteHost == null) {
-    siteHost = 'http://127.0.0.1'
+function getSiteConfig() {
+  const conf = config.getSiteConfig()
+
+  if (conf.siteName === undefined || conf.siteName == null || conf.siteName === '') {
+    conf.siteName = 'blog-vue'
   }
-  return siteHost
+  if (conf.siteHost === undefined || conf.siteHost == null || conf.siteHost === '') {
+    conf.siteHost = 'http://127.0.0.1'
+  }
+  if (conf.basePath === undefined || conf.basePath == null || conf.basePath === '') {
+    conf.basePath = '/'
+  }
+  if (conf.pageSize === undefined || conf.pageSize == null || conf.pageSize === '' || conf.pageSize <= 0) {
+    conf.pageSize = 10
+  }
+  if (conf.urlReplace === undefined || conf.urlReplace == null) {
+    conf.urlReplace = {}
+  }
+  if (conf.backgroundImage === undefined || conf.backgroundImage == null) {
+    conf.backgroundImage = {}
+  }
+  return conf
 }
 
-function getBasePath() {
-  const site = config.getSiteConfig()
-  let basePath = site.basePath
-  if (basePath === undefined || basePath == null) {
-    basePath = '/'
+function getNavbarConfig() {
+  const site = getSiteConfig()
+  const conf = config.getNavbarConfig()
+
+  if (conf.brandText === undefined || conf.brandText == null || conf.brandText === '') {
+    conf.brandText = site.siteName
   }
-  return basePath
+  if (conf.brandUrl === undefined || conf.brandUrl == null || conf.brandUrl === '') {
+    conf.brandUrl = site.basePath
+  }
+  for (let i = 0; i < conf.navs.length; i++) {
+    conf.navs[i].url = path.join(site.basePath, conf.navs[i].url)
+  }
+
+  return conf
 }
 
-function getBackgroundImage() {
-  const site = config.getSiteConfig()
-  let backgroundImage = site.backgroundImage
-  if (backgroundImage === undefined || backgroundImage == null) {
-    backgroundImage = {}
+function getHomeConfig() {
+  const conf = config.getHomeConfig()
+
+  if (conf.brandInterval === undefined || conf.brandInterval == null || conf.brandInterval === '' || conf.brandInterval <= 0) {
+    conf.pageSize = 10000
   }
-  return backgroundImage
+  if (conf.brands === undefined || conf.brands == null) {
+    conf.brands = []
+  }
+  if (conf.navs === undefined || conf.navs == null) {
+    conf.navs = []
+  }
+
+  return conf
 }
 
-function getUrlReplace() {
-  const site = config.getSiteConfig()
-  let urlReplace = site.urlReplace
-  if (urlReplace === undefined || urlReplace == null) {
-    urlReplace = {}
+function getPageFootConfig() {
+  const conf = config.getPageFootConfig()
+
+  if (conf.lines === undefined || conf.lines == null) {
+    conf.lines = []
   }
-  return urlReplace
+
+  return conf
 }
 
 async function listRoute(files) {
@@ -172,7 +203,7 @@ function listSortRoute(files, sort) {
       count++
     }
   }
-  const pageSize = config.getSiteConfig().pageSize
+  const pageSize = getSiteConfig().pageSize
   let page = count / pageSize
   if (count % pageSize > 0) {
     page++
@@ -189,8 +220,9 @@ export default {
   parsePath: parsePath,
   content2Files: content2Files,
   page: page,
-  getSiteHost: getSiteHost,
-  getBasePath: getBasePath,
-  getBackgroundImage: getBackgroundImage,
+  getSiteConfig: getSiteConfig,
+  getNavbarConfig: getNavbarConfig,
+  getHomeConfig: getHomeConfig,
+  getPageFootConfig: getPageFootConfig,
   listRoute: listRoute,
 }

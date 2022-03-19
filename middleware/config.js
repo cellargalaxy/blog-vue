@@ -27,17 +27,7 @@ function getSiteConfig() {
 }
 
 function getNavbarConfig() {
-  const site = getSiteConfig()
   const config = getConfig('navbar')
-  if (config.brandText === undefined || config.brandText == null || config.brandText === '') {
-    config.brandText = site.siteName
-  }
-  if (config.brandUrl === undefined || config.brandUrl == null || config.brandUrl === '') {
-    config.brandUrl = site.basePath
-  }
-  for (let i = 0; i < config.navs.length; i++) {
-    config.navs[i].url = path.join(site.basePath, config.navs[i].url)
-  }
   return config
 }
 

@@ -10,13 +10,13 @@
 import navbar from '../components/navbar'
 import fullCarousel from '../components/fullCarousel'
 
-import config from '../middleware/config'
+import service from '../middleware/service'
 
 export default {
   name: "index",
   async asyncData() {
-    const navbarConfig = config.getNavbarConfig()
-    const homeConfig = config.getHomeConfig()
+    const navbarConfig = service.getNavbarConfig()
+    const homeConfig = service.getHomeConfig()
     return {
       navbarConfig: navbarConfig,
       homeConfig: homeConfig,

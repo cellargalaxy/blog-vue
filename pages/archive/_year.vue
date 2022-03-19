@@ -21,7 +21,6 @@ import pageFoot from '../../components/pageFoot'
 import backtop from '../../components/backtop'
 import archiveAndPage from '../../components/archiveAndPage'
 
-import config from '../../middleware/config'
 import service from '../../middleware/service'
 import model from '../../middleware/model'
 import util from '../../middleware/util'
@@ -29,9 +28,9 @@ import util from '../../middleware/util'
 export default {
   name: "archive",
   async asyncData({params, $content}) {
-    const navbarConfig = config.getNavbarConfig()
-    const homeConfig = config.getHomeConfig()
-    const pageFootConfig = config.getPageFootConfig()
+    const navbarConfig = service.getNavbarConfig()
+    const homeConfig = service.getHomeConfig()
+    const pageFootConfig = service.getPageFootConfig()
 
     let currentPage = params.year
 
