@@ -32,7 +32,7 @@ function getNavbarConfig() {
     config.brandText = site.siteName
   }
   if (config.brandUrl === undefined || config.brandUrl == null || config.brandUrl === '') {
-    config.brandUrl = site.siteUrl
+    config.brandUrl = site.basePath
   }
   return config
 }

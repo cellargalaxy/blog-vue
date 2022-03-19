@@ -96,6 +96,15 @@ function page(list, currentPage, pageSize) {
   return page
 }
 
+function getSiteHost() {
+  const site = config.getSiteConfig()
+  let siteHost = site.siteHost
+  if (siteHost === undefined || siteHost == null) {
+    siteHost = 'http://127.0.0.1'
+  }
+  return siteHost
+}
+
 function getBasePath() {
   const site = config.getSiteConfig()
   let basePath = site.basePath
@@ -176,6 +185,7 @@ export default {
   parsePath: parsePath,
   content2Files: content2Files,
   page: page,
+  getSiteHost: getSiteHost,
   getBasePath: getBasePath,
   getBackgroundImage: getBackgroundImage,
   listRoute: listRoute,

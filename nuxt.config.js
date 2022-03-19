@@ -101,6 +101,13 @@ export default {
       rehypePlugins: ['rehype-mathjax'],
     }
   },
+
+  sitemap: {
+    hostname: service.getSiteHost(),
+    path: '/sitemap.xml',
+    gzip: true,
+    exclude: [],
+  },
 }
 
 async function listRoute() {
