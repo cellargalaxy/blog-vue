@@ -5,6 +5,7 @@
     "basePath": "/blog-vue/dist/",
     "pageSize": 2,
     "urlReplace": {
+      "^/imgs": "https://s3.bmp.ovh/imgs"
     },
     "backgroundImage": {
       "duration": 10000,

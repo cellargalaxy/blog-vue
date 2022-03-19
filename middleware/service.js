@@ -64,7 +64,11 @@ function initImg(body, replaceMap) {
   if (body.tag === 'img' && body.props !== undefined && body.props != null) {
     let url = body.props['src']
     for (let old in replaceMap) {
-      url = url.replace(old, replaceMap[old])
+      if (old === undefined || old == null || old === '') {
+        continue
+      }
+      const regex = new RegExp(old)
+      url = url.replace(regex, replaceMap[old])
     }
     // body.props['src'] = url
     delete body.props['src']
