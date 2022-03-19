@@ -266,7 +266,7 @@ merge newbranch
 
 https://tiddlywiki.com/plugins/tiddlywiki/katex/
 
-```
+
 Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following equation.
 
 $$
@@ -288,4 +288,3 @@ $$
 $$
 \ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$}
 $$
-```
