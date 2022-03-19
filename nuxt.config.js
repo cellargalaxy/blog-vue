@@ -52,6 +52,7 @@ export default {
     'bootstrap-vue/nuxt',
     '@nuxt/content',
     '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
