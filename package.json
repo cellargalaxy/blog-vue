@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "DEPLOY_ENV=DEV nuxt",
+    "dev": "nuxt",
+    "gen": "bash generate.sh",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"

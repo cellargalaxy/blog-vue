@@ -115,7 +115,7 @@ function getBasePath() {
   if (basePath === undefined || basePath == null) {
     basePath = '/'
   }
-  return process.env.DEPLOY_ENV === 'DEV' ? '/blog-vue/dist/' : basePath
+  return basePath
 }
 
 function getBackgroundImage() {
