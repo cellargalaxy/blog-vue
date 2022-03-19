@@ -3,7 +3,7 @@ require('jquery-backstretch')
 import service from '../middleware/service'
 
 const type = window.innerWidth >= window.innerHeight ? 'wide' : 'high'
-const backgroundImage = service.getBackgroundImage()
+const backgroundImage = service.getSiteConfig().backgroundImage
 const urls = []
 for (let j = 0; j < backgroundImage.images.length; j++) {
   const image = backgroundImage.images[j]
