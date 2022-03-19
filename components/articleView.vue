@@ -18,15 +18,9 @@
 <script>
 import autoColorBadges from './autoColorBadges'
 import model from '../middleware/model'
-import prism from "../plugins/prism"
 
 export default {
   name: "articleView",
-  mounted() {
-    prism.highlightAll()
-    $('.nuxt-content').find('table').addClass('table b-table table-striped table-hover table-responsive')
-    $('.nuxt-content').find('img').addClass('img-fluid')
-  },
   props: {
     file: {
       default() {

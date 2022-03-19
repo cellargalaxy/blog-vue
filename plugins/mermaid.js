@@ -1,7 +1,7 @@
 //https://github.com/mermaid-js/mermaid
 import mermaid from 'mermaid'
 
-$(window).ready(function () {
+function init() {
   $('.nuxt-content').find('.language-flow').each((i, node) => {
     node = $(node)
     const flow = node.text()
@@ -10,4 +10,8 @@ $(window).ready(function () {
       $(node).html(html)
     })
   })
-})
+}
+
+export default {
+  init: init,
+}

@@ -1,6 +1,6 @@
 //https://www.zemna.net/articles/how-to-use-codeblocks-syntax-highlighting-in-nuxtjs-content/
 
-import Prism from 'prismjs'
+import prism from 'prismjs'
 
 // Include the toolbar plugin: (optional)
 import "prismjs/plugins/toolbar/prism-toolbar"
@@ -25,6 +25,12 @@ import "prismjs/components/prism-sql.js"
 import "prismjs/components/prism-yaml.js"
 
 // Set vue SFC to markdown
-Prism.languages.vue = Prism.languages.markup
+prism.languages.vue = prism.languages.markup
 
-export default Prism
+function init() {
+  prism.highlightAll()
+}
+
+export default {
+  init: init,
+}
