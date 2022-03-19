@@ -1,5 +1,6 @@
 import config from '../content/config'
 import log from './log'
+import path from 'path'
 
 const logger = log('config')
 
@@ -33,6 +34,9 @@ function getNavbarConfig() {
   }
   if (config.brandUrl === undefined || config.brandUrl == null || config.brandUrl === '') {
     config.brandUrl = site.basePath
+  }
+  for (let i = 0; i < config.navs.length; i++) {
+    config.navs[i].url = path.join(site.basePath, config.navs[i].url)
   }
   return config
 }
