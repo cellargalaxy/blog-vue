@@ -30,10 +30,17 @@ export default {
   },
   methods: {
     change(page) {
-      const basePath = service.getBasePath()
-      const path = window.location.pathname.replace(basePath, '')
-      const {folderPath} = service.parsePath(path)
-      window.location.href =  folderPath + '/' + page + '/'
+      const path = window.location.pathname
+      const paths = path.split('/')
+      for (let i = paths.length - 1; i >= 0; i--) {
+        if (paths[i] === '') {
+          continue
+        }
+        paths[i] = page
+        window.location.href = paths.join('/')
+        return
+      }
+      window.location.href = '/'
     },
   },
 }
