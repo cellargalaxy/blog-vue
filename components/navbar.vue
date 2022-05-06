@@ -12,13 +12,23 @@
 
     <!--这里的v-if自然是控制是否显示，但是v-show却有式文本渐变出现的功能-->
     <b-collapse v-if="show" v-show="show" id="nav-collapse" is-nav>
-      <b-navbar-nav align="center">
+      <b-navbar-nav align="right">
         <b-nav-item v-for="(nav,i) in config.navs?config.navs:[]" :key="i" :href="nav.url">
           <b>{{ nav.text }}</b>
         </b-nav-item>
       </b-navbar-nav>
-    </b-collapse>
 
+      <b-navbar-nav align="right">
+        <b-nav-form>
+          <b-input-group size="sm">
+            <b-form-input placeholder="Search" style="background-color: rgba(0, 0, 0, 0);"/>
+            <b-input-group-append>
+              <b-button variant="outline-secondary">Search</b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-nav-form>
+      </b-navbar-nav>
+    </b-collapse>
   </b-navbar>
 </template>
 

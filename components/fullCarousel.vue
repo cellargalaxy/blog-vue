@@ -10,7 +10,7 @@
         <b-row align-v="center" class="text-center">
           <b-col lg="2" md="1" sm="0" xl="2"/>
           <b-col lg="8" md="10" sm="12" xl="8">
-            <b-card v-if="brand.title" :title="brand.title"
+            <b-card v-if="brand.title || brand.texts" :title="brand.title"
                     class="black-background-5" style="border: none" title-tag="h1">
               <b-card-text v-for="(text,j) in brand.texts" :key="j" class="white">{{ text }}</b-card-text>
             </b-card>
@@ -63,10 +63,10 @@ export default {
             },
           ],
           "navs": [
-            {"text": "twitter", "url": "https://twitter.com/"},
-            {"text": "facebook", "url": "https://facebook.com/"},
-            {"text": "微博", "url": "https://weibo.com/"},
-            {"text": "知乎", "url": "https://www.zhihu.com/"},
+            {"text": "Github", "url": "https://github.com/"},
+            {"text": "Nuxt.js", "url": "https://nuxtjs.org/"},
+            {"text": "BootstrapVue", "url": "https://bootstrap-vue.org/"},
+            {"text": "Node.js", "url": "https://nodejs.org/"},
           ]
         }
       }
