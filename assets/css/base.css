@@ -38,3 +38,14 @@ body {
 svg[id^="language-flow-"] {
   min-width: 100%;
 }
+
+/*背景图片磨砂*/
+#__nuxt {
+  background-image: url("@/assets/image/scrub.png");
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-attachment: fixed;
+  background-size: auto;
+  min-height: 100vh;
+  max-width: 100vw;
+}

@@ -19,14 +19,14 @@
       </b-navbar-nav>
 
       <b-navbar-nav align="right">
-        <b-nav-form>
-          <b-input-group size="sm">
-            <b-form-input placeholder="Search" style="background-color: rgba(0, 0, 0, 0);"/>
-            <b-input-group-append>
-              <b-button variant="outline-secondary">Search</b-button>
-            </b-input-group-append>
-          </b-input-group>
-        </b-nav-form>
+<!--        <b-nav-form>-->
+<!--          <b-input-group size="sm">-->
+<!--            <b-form-input placeholder="Search" style="background-color: rgba(0, 0, 0, 0);"/>-->
+<!--            <b-input-group-append>-->
+<!--              <b-button variant="outline-secondary">Search</b-button>-->
+<!--            </b-input-group-append>-->
+<!--          </b-input-group>-->
+<!--        </b-nav-form>-->
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
