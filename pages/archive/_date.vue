@@ -6,7 +6,7 @@
       <br/>
       <page-head :config="homeConfig"/>
       <br/>
-      <archive-and-page :files="files" :currentPage="currentPage" :pageSize="1" :total="total"/>
+      <archive-and-page :files="files" :startPage="startPage" :endPage="endPage" :currentPage="currentPage"/>
     </b-container>
 
     <page-foot :config="pageFootConfig" :buildTime="buildTime"/>
@@ -32,23 +32,33 @@ export default {
     const homeConfig = service.getHomeConfig()
     const pageFootConfig = service.getPageFootConfig()
 
-    let currentPage = params.year
+    let currentPage = params.date
 
     const contents = await $content('', {deep: true}).fetch()
     let files = service.content2Files(contents)
     files = model.sortContentByTime(files)
 
-    let total = '1'
-    if (files.length > 0) {
-      total = util.formatDate(files[files.length - 1].createAt, 'YYYY')
+    const dateMap = {}
+    for (let i = 0; i < files.length; i++) {
+      const date = util.formatDate(files[i].createAt, 'YYYY')
+      dateMap[date] = date
     }
+    const dates = []
+    for (let date in dateMap) {
+      dates.push(date)
+    }
+    dates.sort()
+
+    const startPage = dates.length === 0 ? 0 : util.string2Int(dates[0])
+    const endPage = dates.length === 0 ? 0 : util.string2Int(dates[dates.length - 1])
     if (util.string2Int(currentPage) <= 0) {
-      currentPage = total
+      currentPage = endPage
     }
 
     let copies = []
     for (let i = 0; i < files.length; i++) {
-      if (!util.startWith(files[i].createdAt, currentPage)) {
+      const date = util.formatDate(files[i].createAt, 'YYYYMMDD')
+      if (!util.startWith(date, currentPage)) {
         continue
       }
       copies.push(files[i])
@@ -59,8 +69,9 @@ export default {
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
       buildTime: new Date(),
+      startPage: util.string2Int(startPage),
+      endPage: util.string2Int(endPage),
       currentPage: util.string2Int(currentPage),
-      total: util.string2Int(total),
       files: copies,
     }
   },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <file-list :files="files"/>
-    <pagination :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
+    <pagination-page :total="total" :size="pageSize" :current="currentPage"/>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 
 <script>
 import fileList from './fileList'
-import pagination from './pagination'
+import paginationPage from './paginationPage'
 
 export default {
   name: "fileListAndPage",
@@ -37,7 +37,7 @@ export default {
   },
   components: {
     fileList,
-    pagination,
+    paginationPage,
   },
 }
 </script>

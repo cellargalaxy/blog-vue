@@ -2,11 +2,11 @@
   <div>
     <archive-by-file :files="files"/>
     <br/>
-    <pagination :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
+    <pagination :start="startPage" :end="endPage" :current="currentPage"/>
   </div>
 </template>
 
-<archive-and-page :files="files" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
+<archive-and-page :files="files" :startPage="startPage" :endPage="endPage" :currentPage="currentPage"/>
 
 <script>
 import archiveByFile from './archiveByFile'
@@ -20,12 +20,12 @@ export default {
         return undefined
       }
     },
-    total: {
+    startPage: {
       default() {
         return undefined
       }
     },
-    pageSize: {
+    endPage: {
       default() {
         return undefined
       }

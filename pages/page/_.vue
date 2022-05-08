@@ -21,7 +21,6 @@ import pageFoot from '../../components/pageFoot'
 import backtop from '../../components/backtop'
 import fileListAndPage from '../../components/fileListAndPage'
 
-import config from '../../middleware/config'
 import service from '../../middleware/service'
 import model from '../../middleware/model'
 
