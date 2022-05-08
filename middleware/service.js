@@ -199,7 +199,7 @@ async function listRoute(files) {
     if (route === undefined || route == null) {
       continue
     }
-    routes[i] = routes[i].replaceAll('%', '$')
+    route = route.replaceAll('%', '$')
     routes.push(route)
   }
 
