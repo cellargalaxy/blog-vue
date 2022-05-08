@@ -6,7 +6,8 @@
       <br/>
       <page-head :config="homeConfig"/>
       <br/>
-      <file-list-and-page :files="files" :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
+      <file-list-and-page :basePath="basePath" :folderPath="folderPath" :files="files"
+                          :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
     </b-container>
 
     <page-foot :config="pageFootConfig" :buildTime="buildTime"/>
@@ -46,6 +47,8 @@ export default {
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
       buildTime: new Date(),
+      basePath: '/page',
+      folderPath: folderPath,
       pageSize: siteConfig.pageSize,
       total: files.length,
       currentPage: currentPage,

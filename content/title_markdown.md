@@ -2,24 +2,11 @@
 createdAt: '2020-01-22' updatedAt: '2020-01-23' level: 1
 ---
 
-### 主要特性
-
-- 支持“标准”Markdown / CommonMark和Github风格的语法，也可变身为代码编辑器；
-- 支持实时预览、图片（跨域）上传、预格式文本/代码/表格插入、代码折叠、搜索替换、只读模式、自定义样式主题和多语言语法高亮等功能；
-- 支持ToC（Table of Contents）、Emoji表情、Task lists、@链接等Markdown扩展语法；
-- 支持TeX科学公式（基于KaTeX）、流程图 Flowchart 和 时序图 Sequence Diagram;
-- 支持识别和解析HTML标签，并且支持自定义过滤标签解析，具有可靠的安全性和几乎无限的扩展性；
-- 支持 AMD / CMD 模块化加载（支持 Require.js & Sea.js），并且支持自定义扩展插件；
-- 兼容主流的浏览器（IE8+）和Zepto.js，且支持iPad等平板设备；
-- 支持自定义主题样式；
-
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:se="http://svg-edit.googlecode.com" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="150" height="150">                                    <title>my vector image</title>                                    <!-- Created with Vector Paint - http://www.vectorpaint.yaks.com/ https://chrome.google.com/webstore/detail/hnbpdiengicdefcjecjbnjnoifekhgdo -->                                    <rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="#FFFFFF" stroke="none"/>                                <g class="currentLayer" style=""><title>Layer 1</title><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M6.640625148429592,139.84375312575148L29.687500663567388,78.90625176369221" id="svg_1"/><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M29.687500663567388,78.90625176369221L46.484376039006804,111.32812748837759" id="svg_3"/><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M46.484376039006804,111.32812748837759L79.68750178115454,44.14062598661988" id="svg_5"/><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M79.68750178115454,44.14062598661988L91.79687705182016,73.82812665018724" id="svg_7"/><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M91.79687705182016,73.82812665018724L130.85937792493513,12.109375270665652" id="svg_9"/><rect fill="#eb1a1a" stroke="#222222" stroke-width="2" stroke-linejoin="round" stroke-dashoffset="" fill-rule="nonzero" id="svg_2" x="9" y="76" width="49" height="0" style="color: rgb(74, 144, 214);"/><path fill="#eb1a1a" fill-opacity="1" stroke="#eb1a1a" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M12.500000279396831,78.90625176369221L130.07812790747283,79.68750178115451" id="svg_4"/></g></svg>
-
-<!--more-->
-
 # blog-vue
 
 ![](https://img.shields.io/github/issues/cellargalaxy/blog-vue) ![](https://img.shields.io/github/forks/cellargalaxy/blog-vue) ![](https://img.shields.io/github/stars/cellargalaxy/blog-vue) ![](https://img.shields.io/github/license/cellargalaxy/blog-vue)
+
+<!--more-->
 
 # Heading 1
 
@@ -41,21 +28,13 @@ This is an H2
 
 ---
 
-+ 列表一
-+ 列表二
++ [X]  列表一
++ [ ]  列表二
   - 列表1
   - 列表2
-  - 列表3
-+ 列表三
 
 1. 第一行
 2. 第二行
-3. 第三行
-
-- [X]  GFM task list 1
-- [X]  GFM task list 2
-- [ ]  GFM task list 3
-- [ ]  GFM task list 4
 
 |     | 类型一       | 类型二                     |
 |-----|-----------|-------------------------|
@@ -66,14 +45,14 @@ This is an H2
 
 上标：X<sub>2</sub>，下标：O<sup>2</sup>
 
-> 引用：如果想要插入空白换行`即<br />标签`，在插入处先键入两个以上的空格然后回车即可，[普通链接](http://localhost/)。
-
-[普通链接带标题](http://localhost/ "普通链接带标题")
+> 引用：如果想要插入空白换行`即<br />标签`，在插入处先键入两个以上的空格然后回车即可，[普通链接带标题](http://localhost/ "普通链接带标题")。
 
 ![](https://s3.bmp.ovh/imgs/2022/03/0220af6579e287bc.png)
 ![](/imgs/2022/03/bf7c85bd106c412b.jpg)
 
 ![](https://s3.bmp.ovh/imgs/2022/03/667fb45e1ad9d8d2.jpg)
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:se="http://svg-edit.googlecode.com" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="150" height="150">                                    <title>my vector image</title>                                    <!-- Created with Vector Paint - http://www.vectorpaint.yaks.com/ https://chrome.google.com/webstore/detail/hnbpdiengicdefcjecjbnjnoifekhgdo -->                                    <rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="#FFFFFF" stroke="none"/>                                <g class="currentLayer" style=""><title>Layer 1</title><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M6.640625148429592,139.84375312575148L29.687500663567388,78.90625176369221" id="svg_1"/><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M29.687500663567388,78.90625176369221L46.484376039006804,111.32812748837759" id="svg_3"/><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M46.484376039006804,111.32812748837759L79.68750178115454,44.14062598661988" id="svg_5"/><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M79.68750178115454,44.14062598661988L91.79687705182016,73.82812665018724" id="svg_7"/><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M91.79687705182016,73.82812665018724L130.85937792493513,12.109375270665652" id="svg_9"/><rect fill="#eb1a1a" stroke="#222222" stroke-width="2" stroke-linejoin="round" stroke-dashoffset="" fill-rule="nonzero" id="svg_2" x="9" y="76" width="49" height="0" style="color: rgb(74, 144, 214);"/><path fill="#eb1a1a" fill-opacity="1" stroke="#eb1a1a" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M12.500000279396831,78.90625176369221L130.07812790747283,79.68750178115451" id="svg_4"/></g></svg>
 
 执行命令：`npm install marked`
 

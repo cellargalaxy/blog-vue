@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import aomponent from '../components/paginationPage.vue'
+import aomponent from '../components/breadcrumbPath.vue'
 import pageHead from '../components/pageHead.vue'
 
 export default {
