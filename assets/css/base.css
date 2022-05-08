@@ -41,7 +41,7 @@ svg[id^="language-flow-"] {
 
 /*背景图片磨砂*/
 #__nuxt {
-  background-image: url("@/assets/image/scrub.png");
+  background-image: url("@/assets/image/scrub.svg");
   background-repeat: repeat;
   background-position: 0 0;
   background-attachment: fixed;

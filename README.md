@@ -26,10 +26,10 @@
 34. github评论
 35. 加载静态js和css
 36. 全文搜索
-37. 
-38. 在线编辑预览
-39. 文章加密
-40. 图标加载中和加载失败图标
+37. 图标加载中和加载失败图标
+38. 
+39. 在线编辑预览
+40. 文章加密
 
 
 https://gilberttanner.com/blog/creating-a-blog-with-nuxt-content

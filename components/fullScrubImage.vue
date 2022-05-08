@@ -10,7 +10,7 @@ export default {
   props: {
     scrub: {
       default: function () {
-        return require('@/assets/image/scrub.png')
+        return require('@/assets/image/scrub.svg')
       }
     },
     url: {
