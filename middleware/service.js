@@ -192,18 +192,15 @@ async function listRoute(files) {
     }
   }
 
+  //todo
   const routes = []
   for (let route in routeMap) {
+    route = encodeURI(route)
     if (route === undefined || route == null) {
       continue
     }
-    routes.push(route)
-  }
-
-  //todo
-  for (let i = 0; i < routes.length; i++) {
-    routes[i] = encodeURI(routes[i])
     routes[i] = routes[i].replaceAll('%', '$')
+    routes.push(route)
   }
 
   console.log('routes', routes)
