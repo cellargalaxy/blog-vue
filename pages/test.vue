@@ -1,6 +1,6 @@
 <template>
   <div>
-    <aomponent/>
+<!--    <aomponent/>-->
     <!--    <page-head/>-->
     <!--    <page-head/>-->
     <!--    <page-head/>-->

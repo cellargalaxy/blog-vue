@@ -4,6 +4,9 @@ import config from "./config"
 import path from "path"
 
 function initPath(path) {
+  //todo
+  path = path.replaceAll('$', '%')
+  path = decodeURI(path)
   //-> a/b/1/
   if (util.endWith(path, '/')) {
     path = path.substring(0, path.length - 1) //-> a/b/1
@@ -196,6 +199,15 @@ async function listRoute(files) {
     }
     routes.push(route)
   }
+
+  //todo
+  for (let i = 0; i < routes.length; i++) {
+    routes[i] = encodeURI(routes[i])
+    routes[i] = routes[i].replaceAll('%', '$')
+  }
+
+  console.log('routes', routes)
+
   return routes
 }
 
