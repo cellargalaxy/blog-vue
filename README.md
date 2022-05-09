@@ -19,17 +19,17 @@
 27. 分页
 28. 面包屑
 29. 时序流程公式底色
-30. 
-31. 自更新
-32. git
-33. 目录
 34. github评论
+32. git
+30. 
+33. 目录
 35. 加载静态js和css
 36. 全文搜索
 37. 图标加载中和加载失败图标
 38. 
 39. 在线编辑预览
 40. 文章加密
+31. ~~自更新~~
 
 
 https://gilberttanner.com/blog/creating-a-blog-with-nuxt-content

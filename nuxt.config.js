@@ -50,6 +50,7 @@ export default {
     '@nuxt/content',
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
+    'nuxt-content-git',
   ],
 
   bootstrapVue: {

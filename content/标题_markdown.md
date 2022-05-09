@@ -1,5 +1,7 @@
 ---
-createdAt: '2020-01-22' updatedAt: '2020-01-23' level: 1
+createdAt: '2020-01-22' 
+updatedAt: '2020-01-23' 
+level: 1
 ---
 
 # blog-vue
