@@ -22,6 +22,7 @@ import pageFoot from '../../components/pageFoot'
 import backtop from '../../components/backtop'
 import fileListAndPage from '../../components/fileListAndPage'
 
+import path from 'path'
 import service from '../../middleware/service'
 import model from '../../middleware/model'
 
@@ -47,7 +48,7 @@ export default {
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
       buildTime: new Date(),
-      basePath: '/page',
+      basePath: path.join(siteConfig.basePath, '/page'),
       folderPath: folderPath,
       pageSize: siteConfig.pageSize,
       total: files.length,
