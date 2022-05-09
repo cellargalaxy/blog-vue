@@ -73,13 +73,4 @@ export default {
   width: 100%;
   text-align: center;
 }
-
-/*导航栏居中*/
-.navbar-nav li {
-  float: none;
-  display: inline-block;
-  text-align: center;
-}
-
-
 </style>
