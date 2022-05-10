@@ -7,6 +7,12 @@
       <auto-color-badges :attributes="article.attributes"/>
     </b-list-group-item>
 
+    <b-list-group-item class="white-background-8" v-if="!isSummary">
+      <li v-for="(toc,i) in article.toc" :key="i">
+        <b-link v-text="'['+toc.depth+'] '+toc.text" :href="article.url+'#'+toc.id"/>
+      </li>
+    </b-list-group-item>
+
     <b-list-group-item class="white-background-8">
       <nuxt-content :document="article"/>
     </b-list-group-item>
