@@ -14,7 +14,7 @@
     </b-list-group-item>
 
     <b-list-group-item class="white-background-8">
-      <nuxt-content :document="article"/>
+      <nuxt-content :document="article" v-lazy-container="{selector:'img'}"/>
     </b-list-group-item>
   </b-list-group>
 </template>

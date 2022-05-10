@@ -73,10 +73,8 @@ function initImg(body, replaceMap) {
       const regex = new RegExp(old)
       url = url.replace(regex, replaceMap[old])
     }
-    // body.props['src'] = url
     delete body.props['src']
     body.props['data-src'] = url
-    body.props['loading'] = 'lazy'
     return body
   }
   if (body.children === undefined || body.children == null) {
