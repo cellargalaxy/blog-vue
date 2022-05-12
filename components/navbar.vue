@@ -19,14 +19,15 @@
       </b-navbar-nav>
 
       <b-navbar-nav align="right">
-<!--        <b-nav-form>-->
-<!--          <b-input-group size="sm">-->
-<!--            <b-form-input placeholder="Search" style="background-color: rgba(0, 0, 0, 0);"/>-->
-<!--            <b-input-group-append>-->
-<!--              <b-button variant="outline-secondary">Search</b-button>-->
-<!--            </b-input-group-append>-->
-<!--          </b-input-group>-->
-<!--        </b-nav-form>-->
+        <b-nav-form>
+          <b-input-group size="sm">
+            <b-form-input placeholder="Search" style="background-color: rgba(0, 0, 0, 0);"
+                          v-model="key" @keyup.enter.native="search"/>
+            <b-input-group-append>
+              <b-button variant="outline-secondary" @click="search">Search</b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-nav-form>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -62,7 +63,17 @@ export default {
   data() {
     return {
       show: false,
+      key: '',
     }
+  },
+  methods: {
+    search() {
+      console.log('this.key', this.key)
+      if (this.key === undefined || this.key == null || this.key === '') {
+        return
+      }
+      window.location.href = '/search/' + this.key + '/'
+    },
   },
 }
 </script>

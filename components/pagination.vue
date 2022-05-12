@@ -1,6 +1,6 @@
 <template>
   <b-pagination-nav :limit="9" :pages="pages" v-model="currentPage" @change="change" :hide-ellipsis="true"
-                    class="white-background-8" align="center"
+                    class="white-background-8" align="center" style="border-radius: 0.2em"
                     pills use-router first-number last-number></b-pagination-nav>
 </template>
 
