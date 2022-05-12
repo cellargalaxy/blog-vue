@@ -48,8 +48,6 @@ export default {
     const pageFootConfig = service.getPageFootConfig()
 
     let key = query.key
-    console.log('query',query)
-    console.log('key',key)
     if (key === undefined || key == null || key === '') {
       return {
         siteConfig: siteConfig,
