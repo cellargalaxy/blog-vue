@@ -73,7 +73,7 @@ export default {
       if (this.key === undefined || this.key == null || this.key === '') {
         return
       }
-      window.location.href = path.join(this.config.basePath, '/search/' + this.key + '/')
+      window.location.href = path.join(this.config.basePath, '/search/?key=' + this.key)
     },
   },
 }

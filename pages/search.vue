@@ -30,24 +30,26 @@
 </template>
 
 <script>
-import navbar from '../../components/navbar'
-import pageHead from '../../components/pageHead'
-import pageFoot from '../../components/pageFoot'
-import backtop from '../../components/backtop'
-import fileListAndPage from '../../components/fileListAndPage'
+import navbar from '../components/navbar'
+import pageHead from '../components/pageHead'
+import pageFoot from '../components/pageFoot'
+import backtop from '../components/backtop'
+import fileListAndPage from '../components/fileListAndPage'
 
-import service from '../../middleware/service'
-import model from '../../middleware/model'
+import service from '../middleware/service'
+import model from '../middleware/model'
 import path from 'path'
 
 export default {
   name: "search",
-  async asyncData({params, $content}) {
+  async asyncData({query, $content}) {
     const siteConfig = service.getSiteConfig()
     const homeConfig = service.getHomeConfig()
     const pageFootConfig = service.getPageFootConfig()
 
-    let key = params.key
+    let key = query.key
+    console.log('query',query)
+    console.log('key',key)
     if (key === undefined || key == null || key === '') {
       return {
         siteConfig: siteConfig,
@@ -78,7 +80,7 @@ export default {
       if (this.key === undefined || this.key == null || this.key === '') {
         return
       }
-      window.location.href = path.join(this.basePath, '/search/' + this.key + '/')
+      window.location.href = path.join(this.basePath, '/search/?key=' + this.key)
     },
   },
   components: {
