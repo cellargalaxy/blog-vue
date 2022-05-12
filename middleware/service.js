@@ -113,6 +113,12 @@ function getSiteConfig() {
   if (conf.basePath === undefined || conf.basePath == null || conf.basePath === '') {
     conf.basePath = '/'
   }
+  for (let i = 0; i < conf.navs.length; i++) {
+    if (util.startWith(conf.navs[i].url, conf.basePath)) {
+      continue
+    }
+    conf.navs[i].url = path.join(conf.basePath, conf.navs[i].url)
+  }
   if (conf.pageSize === undefined || conf.pageSize == null || conf.pageSize === '' || conf.pageSize <= 0) {
     conf.pageSize = 10
   }
@@ -122,26 +128,6 @@ function getSiteConfig() {
   if (conf.backgroundImage === undefined || conf.backgroundImage == null) {
     conf.backgroundImage = {}
   }
-  return conf
-}
-
-function getNavbarConfig() {
-  const site = getSiteConfig()
-  const conf = config.getNavbarConfig()
-
-  if (conf.brandText === undefined || conf.brandText == null || conf.brandText === '') {
-    conf.brandText = site.siteName
-  }
-  if (conf.brandUrl === undefined || conf.brandUrl == null || conf.brandUrl === '') {
-    conf.brandUrl = site.basePath
-  }
-  for (let i = 0; i < conf.navs.length; i++) {
-    if (util.startWith(conf.navs[i].url, site.basePath)) {
-      continue
-    }
-    conf.navs[i].url = path.join(site.basePath, conf.navs[i].url)
-  }
-
   return conf
 }
 
@@ -232,7 +218,6 @@ export default {
   content2Files: content2Files,
   page: page,
   getSiteConfig: getSiteConfig,
-  getNavbarConfig: getNavbarConfig,
   getHomeConfig: getHomeConfig,
   getPageFootConfig: getPageFootConfig,
   listRoute: listRoute,

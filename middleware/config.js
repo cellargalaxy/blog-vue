@@ -26,11 +26,6 @@ function getSiteConfig() {
   return config
 }
 
-function getNavbarConfig() {
-  const config = getConfig('navbar')
-  return config
-}
-
 function getHomeConfig() {
   const config = getConfig('home')
   return config
@@ -43,7 +38,6 @@ function getPageFootConfig() {
 
 export default {
   getSiteConfig: getSiteConfig,
-  getNavbarConfig: getNavbarConfig,
   getHomeConfig: getHomeConfig,
   getPageFootConfig: getPageFootConfig,
 }

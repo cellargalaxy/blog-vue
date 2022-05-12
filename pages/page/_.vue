@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :config="navbarConfig"/>
+    <navbar :config="siteConfig"/>
 
     <b-container>
       <br/>
@@ -29,10 +29,9 @@ import model from '../../middleware/model'
 export default {
   name: "page",
   async asyncData({params, $content}) {
-    const navbarConfig = service.getNavbarConfig()
+    const siteConfig = service.getSiteConfig()
     const homeConfig = service.getHomeConfig()
     const pageFootConfig = service.getPageFootConfig()
-    const siteConfig = service.getSiteConfig()
 
     const {folderPath, currentPage} = service.parsePath(params.pathMatch)
 
@@ -44,7 +43,7 @@ export default {
     const filePage = service.page(files, currentPage, siteConfig.pageSize)
 
     return {
-      navbarConfig: navbarConfig,
+      siteConfig: siteConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
       buildTime: new Date(),

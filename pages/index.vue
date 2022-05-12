@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :config="navbarConfig"/>
+    <navbar :config="siteConfig"/>
 
     <full-carousel :config="homeConfig"/>
   </div>
@@ -15,10 +15,10 @@ import service from '../middleware/service'
 export default {
   name: "index",
   async asyncData() {
-    const navbarConfig = service.getNavbarConfig()
+    const siteConfig = service.getSiteConfig()
     const homeConfig = service.getHomeConfig()
     return {
-      navbarConfig: navbarConfig,
+      siteConfig: siteConfig,
       homeConfig: homeConfig,
     }
   },

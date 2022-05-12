@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :config="navbarConfig"/>
+    <navbar :config="siteConfig"/>
 
     <b-container>
       <br/>
@@ -38,18 +38,19 @@ import fileListAndPage from '../../components/fileListAndPage'
 
 import service from '../../middleware/service'
 import model from '../../middleware/model'
+import path from 'path'
 
 export default {
   name: "search",
   async asyncData({params, $content}) {
-    const navbarConfig = service.getNavbarConfig()
+    const siteConfig = service.getSiteConfig()
     const homeConfig = service.getHomeConfig()
     const pageFootConfig = service.getPageFootConfig()
 
     let key = params.key
     if (key === undefined || key == null || key === '') {
       return {
-        navbarConfig: navbarConfig,
+        siteConfig: siteConfig,
         homeConfig: homeConfig,
         pageFootConfig: pageFootConfig,
         buildTime: new Date(),
@@ -63,11 +64,12 @@ export default {
     files.reverse()
 
     return {
-      navbarConfig: navbarConfig,
+      siteConfig: siteConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
       buildTime: new Date(),
       key: key,
+      basePath: siteConfig.basePath,
       files: files,
     }
   },
@@ -76,7 +78,7 @@ export default {
       if (this.key === undefined || this.key == null || this.key === '') {
         return
       }
-      window.location.href = '/search/' + this.key + '/'
+      window.location.href = path.join(this.basePath, '/search/' + this.key + '/')
     },
   },
   components: {

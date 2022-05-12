@@ -3,9 +3,9 @@
             style="transition: background-color 1000ms"
             toggleable="md" @mouseenter.native="show=true" @mouseleave.native="show=false">
 
-    <b-navbar-brand :class="show?'transparent':'white-background-6'" :href="config.brandUrl"
+    <b-navbar-brand :class="show?'transparent':'white-background-6'" :href="config.basePath"
                     style="border-radius: 0.5em;padding: 0.2em;transition: background-color 1000ms;" tag="h1">
-      <b style="color: rgba(51, 51, 51, 0.7);">{{ config.brandText }}</b>
+      <b style="color: rgba(51, 51, 51, 0.7);">{{ config.siteName }}</b>
     </b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -36,14 +36,16 @@
 <navbar :config="config"/>
 
 <script>
+import path from 'path'
+
 export default {
   name: "navbar", //导航
   props: {
     config: {
       default() {
         return {
-          "brandText": "主页の名",
-          "brandUrl": "#",
+          "siteName": "主页の名",
+          "basePath": "#",
           "navs": [
             {"text": "导航-1", "url": "#"},
             {"text": "导航-2", "url": "#"},
@@ -68,11 +70,10 @@ export default {
   },
   methods: {
     search() {
-      console.log('this.key', this.key)
       if (this.key === undefined || this.key == null || this.key === '') {
         return
       }
-      window.location.href = '/search/' + this.key + '/'
+      window.location.href = path.join(this.config.basePath, '/search/' + this.key + '/')
     },
   },
 }

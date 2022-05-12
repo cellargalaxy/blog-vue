@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :config="navbarConfig"/>
+    <navbar :config="siteConfig"/>
 
     <b-container>
       <br/>
@@ -28,10 +28,9 @@ import service from "../../middleware/service"
 export default {
   name: "fileView",
   async asyncData({params, $content, error}) {
-    const navbarConfig = service.getNavbarConfig()
+    const siteConfig = service.getSiteConfig()
     const homeConfig = service.getHomeConfig()
     const pageFootConfig = service.getPageFootConfig()
-    const siteConfig = service.getSiteConfig()
 
     const path = service.initPath(params.pathMatch)
 
@@ -43,7 +42,7 @@ export default {
     }
 
     return {
-      navbarConfig: navbarConfig,
+      siteConfig: siteConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
       buildTime: new Date(),

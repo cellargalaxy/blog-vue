@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar :config="navbarConfig"/>
+    <navbar :config="siteConfig"/>
 
     <b-container>
       <br/>
@@ -28,7 +28,7 @@ import util from '../../middleware/util'
 export default {
   name: "archive",
   async asyncData({params, $content}) {
-    const navbarConfig = service.getNavbarConfig()
+    const siteConfig = service.getSiteConfig()
     const homeConfig = service.getHomeConfig()
     const pageFootConfig = service.getPageFootConfig()
 
@@ -65,7 +65,7 @@ export default {
     }
 
     return {
-      navbarConfig: navbarConfig,
+      siteConfig: siteConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
       buildTime: new Date(),
