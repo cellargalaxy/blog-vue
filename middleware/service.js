@@ -178,7 +178,10 @@ async function listRoute(files) {
   const sortMap = {}
   const routeMap = {}
   routeMap['/archive/0'] = ''
-  routeMap['/view/标题_markdown'] = '' //todo
+  const siteConfig = getSiteConfig()
+  if (siteConfig.siteHost === 'https://cellargalaxy.github.io' && util.startWith(siteConfig.basePath, '/blog-vue/')) {
+    routeMap['/view/标题_markdown'] = '' //todo
+  }
   for (let i = 0; i < files.length; i++) {
     sortMap[files[i].dir] = ''
 
