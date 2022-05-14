@@ -4,9 +4,7 @@ import config from "./config"
 import path from "path"
 
 function initPath(path) {
-  //todo
-  path = path.replaceAll('$', '%')
-  path = decodeURI(path)
+  path = model.decodeUrl(path)
   //-> a/b/1/
   if (util.endWith(path, '/')) {
     path = path.substring(0, path.length - 1) //-> a/b/1
@@ -176,19 +174,14 @@ async function listRoute(files) {
     }
   }
 
-  //todo
   const routes = []
   for (let route in routeMap) {
     route = encodeURI(route)
     if (route === undefined || route == null) {
       continue
     }
-    route = route + ''
-    route = route.replaceAll('%', '$')
     routes.push(route)
   }
-
-  console.log('routes', routes)
 
   return routes
 }

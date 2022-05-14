@@ -1,6 +1,32 @@
 import util from "./util"
 import path from "path"
 
+function encodeUrl(url) {
+  if (url === undefined || url == null) {
+    return ''
+  }
+  if (!util.endWith(url, '/')) {
+    url += '/'
+  }
+  url = encodeURI(url)
+  url = url.replaceAll('$', '$$')
+  url = url.replaceAll('%', '$')
+  return url
+}
+
+function decodeUrl(url) {
+  if (url === undefined || url == null) {
+    return ''
+  }
+  if (!util.endWith(url, '/')) {
+    url += '/'
+  }
+  url = url.replaceAll('$', '%')
+  url = url.replaceAll('%%', '$')
+  url = decodeURI(url)
+  return url
+}
+
 function sortContentByLevel(contents) {
   if (contents === undefined || contents == null) {
     return contents
@@ -63,6 +89,9 @@ function setAttribute(object, attribute) {
   if (attribute === undefined || attribute == null) {
     return object
   }
+  if (attribute.url !== undefined) {
+    attribute.url = encodeUrl(attribute.url)
+  }
   if (object.attributes === undefined || object.attributes == null) {
     object.attributes = []
   }
@@ -85,6 +114,7 @@ function content2File(content, basePath) {
     content.title = content.slug
   }
   content.url = path.join(basePath, '/view', content.path)
+  content.url = encodeUrl(content.url)
   content.createAt = new Date(content.createdAt)
   content.updateAt = new Date(content.updatedAt)
 
@@ -156,6 +186,8 @@ function file2Archives(files) {
 }
 
 export default {
+  encodeUrl: encodeUrl,
+  decodeUrl: decodeUrl,
   sortContentByLevel: sortContentByLevel,
   sortContentByTime: sortContentByTime,
   content2Files: content2Files,
