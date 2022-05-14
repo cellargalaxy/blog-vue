@@ -99,12 +99,15 @@ function page(list, currentPage, pageSize) {
   return page
 }
 
-function listCrumb(parentPath, folderPath) {
-  let rootPath = path.join(getSiteConfig().basePath, parentPath)
+function listCrumb(folderPath) {
+  let rootPath = path.join(getSiteConfig().basePath, '/page')
   const crumbs = []
   const paths = folderPath.split('/')
   let url = rootPath
   for (let i = 0; i < paths.length; i++) {
+    if (paths[i] === undefined || paths[i] == null || paths[i] === '') {
+      continue
+    }
     url = path.join(url, paths[i])
     crumbs.push({text: paths[i], url: url + '/1/'})
   }
@@ -192,10 +195,10 @@ async function listRoute(files) {
 
   const routes = []
   for (let route in routeMap) {
-    route = encodeURI(route)
-    if (route === undefined || route == null) {
+    if (route === undefined || route == null || route === '') {
       continue
     }
+    route = model.encodeUrl(route)
     routes.push(route)
   }
 
@@ -216,7 +219,8 @@ function listSortRoute(files, sort) {
   }
   const routes = []
   for (let i = 1; i <= page; i++) {
-    routes.push(path.join('/page', sort, i + ''))
+    let url = path.join('/page', sort, i + '')
+    routes.push(url)
   }
   return routes
 }

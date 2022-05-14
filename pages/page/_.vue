@@ -42,7 +42,7 @@ export default {
 
     const filePage = service.page(files, currentPage, siteConfig.pageSize)
 
-    const {rootPath, crumbs} = service.listCrumb('/page', folderPath)
+    const {rootPath, crumbs} = service.listCrumb(folderPath)
 
     return {
       siteConfig: siteConfig,
