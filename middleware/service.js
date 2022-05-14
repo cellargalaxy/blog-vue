@@ -178,6 +178,7 @@ async function listRoute(files) {
   const sortMap = {}
   const routeMap = {}
   routeMap['/archive/0'] = ''
+  routeMap['/view/标题_markdown'] = '' //todo
   for (let i = 0; i < files.length; i++) {
     sortMap[files[i].dir] = ''
 
