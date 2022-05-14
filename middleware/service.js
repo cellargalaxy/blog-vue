@@ -178,10 +178,6 @@ async function listRoute(files) {
   const sortMap = {}
   const routeMap = {}
   routeMap['/archive/0'] = ''
-  const siteConfig = getSiteConfig()
-  if (siteConfig.siteHost === 'https://cellargalaxy.github.io' && util.startWith(siteConfig.basePath, '/blog-vue/')) {
-    routeMap['/view/标题_markdown'] = '' //todo
-  }
   for (let i = 0; i < files.length; i++) {
     sortMap[files[i].dir] = ''
 
@@ -204,6 +200,11 @@ async function listRoute(files) {
     }
     route = model.encodeUrl(route)
     routes.push(route)
+  }
+
+  const siteConfig = getSiteConfig()
+  if (util.contain(siteConfig.siteHost, 'cellargalaxy.github.io') && util.contain(siteConfig.basePath, 'blog-vue')) {
+    routes.push('/view/标题_markdown') //todo
   }
 
   return routes

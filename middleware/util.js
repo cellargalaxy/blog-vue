@@ -25,6 +25,10 @@ function formatDate(date, fmt) {
   return fmt
 }
 
+function contain(string, start) {
+  return string.indexOf(start) >= 0
+}
+
 function startWith(string, start) {
   return string.indexOf(start) === 0
 }
@@ -73,6 +77,7 @@ export default {
   formatTimestamp: formatTimestamp,
   formatDate: formatDate,
   string2Int: string2Int,
+  contain: contain,
   startWith: startWith,
   endWith: endWith,
   hashString: hashString,
