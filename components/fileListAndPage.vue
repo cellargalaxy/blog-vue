@@ -1,12 +1,12 @@
 <template>
   <div>
-    <breadcrumb-path :basePath="basePath" :folderPath="folderPath"/>
+    <breadcrumb-path :rootPath="rootPath" :crumbs="crumbs"/>
     <file-list :files="files"/>
     <pagination-page :total="total" :size="pageSize" :current="currentPage"/>
   </div>
 </template>
 
-<file-list-and-page :basePath="basePath" :folderPath="folderPath" :files="files"
+<file-list-and-page :rootPath="rootPath" :crumbs="crumbs" :files="files"
                     :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
 
 <script>
@@ -17,12 +17,12 @@ import paginationPage from './paginationPage'
 export default {
   name: "fileListAndPage",
   props: {
-    basePath: {
+    rootPath: {
       default() {
         return undefined
       }
     },
-    folderPath: {
+    crumbs: {
       default() {
         return undefined
       }

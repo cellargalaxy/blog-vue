@@ -6,7 +6,7 @@
       <br/>
       <page-head :config="homeConfig"/>
       <br/>
-      <file-list-and-page :basePath="basePath" :folderPath="folderPath" :files="files"
+      <file-list-and-page :rootPath="rootPath" :crumbs="crumbs" :files="files"
                           :currentPage="currentPage" :pageSize="pageSize" :total="total"/>
     </b-container>
 
@@ -42,13 +42,15 @@ export default {
 
     const filePage = service.page(files, currentPage, siteConfig.pageSize)
 
+    const {rootPath, crumbs} = service.listCrumb('/page', folderPath)
+
     return {
       siteConfig: siteConfig,
       homeConfig: homeConfig,
       pageFootConfig: pageFootConfig,
       buildTime: new Date(),
-      basePath: path.join(siteConfig.basePath, '/page'),
-      folderPath: folderPath,
+      rootPath: rootPath,
+      crumbs: crumbs,
       pageSize: siteConfig.pageSize,
       total: files.length,
       currentPage: currentPage,

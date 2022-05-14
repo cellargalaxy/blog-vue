@@ -99,6 +99,22 @@ function page(list, currentPage, pageSize) {
   return page
 }
 
+function listCrumb(parentPath, folderPath) {
+  let rootPath = path.join(getSiteConfig().basePath, parentPath)
+  const crumbs = []
+  const paths = folderPath.split('/')
+  let url = rootPath
+  for (let i = 0; i < paths.length; i++) {
+    url = path.join(url, paths[i])
+    crumbs.push({text: paths[i], url: url + '/1/'})
+  }
+  for (let i = 0; i < crumbs.length; i++) {
+    crumbs[i].url = model.encodeUrl(crumbs[i].url)
+  }
+  rootPath = rootPath + '/1/'
+  return {rootPath, crumbs}
+}
+
 function getSiteConfig() {
   const conf = config.getSiteConfig()
 
@@ -210,6 +226,7 @@ export default {
   parsePath: parsePath,
   content2Files: content2Files,
   page: page,
+  listCrumb: listCrumb,
   getSiteConfig: getSiteConfig,
   getHomeConfig: getHomeConfig,
   getPageFootConfig: getPageFootConfig,

@@ -9,7 +9,7 @@ function encodeUrl(url) {
     url += '/'
   }
   url = encodeURI(url)
-  url = url.replaceAll('$', '$$')
+  url = url.replaceAll('$', '$$$$')
   url = url.replaceAll('%', '$')
   return url
 }
