@@ -8,7 +8,7 @@ function encodeUrl(url) {
   if (!util.endWith(url, '/')) {
     url += '/'
   }
-  url = encodeURI(url)
+  // url = encodeURI(url)
   url = url.replaceAll('$', '$$$$')
   url = url.replaceAll('%', '$')
   return url
@@ -23,7 +23,7 @@ function decodeUrl(url) {
   }
   url = url.replaceAll('$', '%')
   url = url.replaceAll('%%', '$')
-  url = decodeURI(url)
+  // url = decodeURI(url)
   return url
 }
 

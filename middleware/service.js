@@ -202,10 +202,10 @@ async function listRoute(files) {
     routes.push(route)
   }
 
-  const siteConfig = getSiteConfig()
-  if (util.contain(siteConfig.siteHost, 'cellargalaxy.github.io') && util.contain(siteConfig.basePath, 'blog-vue')) {
-    routes.push('/view/标题_markdown') //todo
-  }
+  // const siteConfig = getSiteConfig()
+  // if (util.contain(siteConfig.siteHost, 'cellargalaxy.github.io') && util.contain(siteConfig.basePath, 'blog-vue')) {
+  //   routes.push('/view/标题_markdown') //todo
+  // }
 
   return routes
 }
