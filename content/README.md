@@ -2,6 +2,7 @@
 createdAt: '2020-01-22'
 updatedAt: '2020-01-23'
 level: 1
+_path: /README
 ---
 
 # blog-vue
