@@ -1,40 +1,73 @@
 {
   "site": {
-    "siteName": "siteName",
+    "siteName": "无名の窝",
     "siteHost": "https://cellargalaxy.github.io",
-    "basePath": "/blog-vue/",
+    "basePath": "/blog-code/",
     "navs": [
       {
-        "text": "page",
+        "text": "文章",
         "url": "/page/1/"
       },
       {
-        "text": "archive",
+        "text": "归档",
         "url": "/archive/0/"
+      },
+      {
+        "text": "画画",
+        "url": "/html/hua.html"
+      },
+      {
+        "text": "开源",
+        "url": "https://github.com/cellargalaxy/blog-vue"
       }
     ],
-    "pageSize": 2,
+    "pageSize": 10,
     "urlReplace": {
-      "^/imgs": "https://s3.bmp.ovh/imgs"
+      "^/file/blog/code": "https://oracleamd1.dynv6.net/file/file/blog/code"
     },
     "backgroundImage": {
       "duration": 10000,
       "fade": 1000,
       "images": [
         {
-          "url": "https://i.loli.net/2018/08/21/5b7bb5dd4f0df.png",
-          "description": "wide image",
+          "url": "https://i.loli.net/2020/01/25/cofTzDQXitjeVZ6.jpg",
+          "description": "青春猪头-牧之原翔子-江之岛",
           "type": "wide"
         },
         {
-          "url": "https://i.loli.net/2018/04/10/5accdcbcb1738.jpg",
-          "description": "high image",
-          "type": "high"
+          "url": "https://i.loli.net/2020/01/25/sfaRJ2lVeM3NDbE.jpg",
+          "description": "青春猪头-牧之原翔子-江之岛",
+          "type": "wide"
         },
         {
-          "url": "https://i.loli.net/2018/08/21/5b7bbc8ec3633.jpg",
-          "description": "wide or high image",
-          "type": ""
+          "url": "https://i.loli.net/2020/01/26/KybiTdftam5Su7x.jpg",
+          "description": "青春猪头-双葉理央",
+          "type": "wide"
+        },
+        {
+          "url": "https://i.loli.net/2020/09/08/xdX73nfs24qgOYk.jpg",
+          "description": "京吹-明日香,久美子",
+          "type": "wide"
+        },
+        {
+          "url": "https://i.loli.net/2020/02/14/MAiruNcEFW2HYtg.jpg",
+          "description": "终将成为你-七海灯子,小糸侑",
+          "type": "wide"
+        },
+        {
+          "url": "https://i.loli.net/2020/02/05/EojdAxTDJsFpbPw.jpg",
+          "description": "玉子市场-北白川玉子",
+          "type": "wide"
+        },
+        {
+          "url": "https://i.loli.net/2020/01/31/AXxwJDRS9fmN2uU.jpg",
+          "description": "fate_hf-弓道馆",
+          "type": "wide"
+        },
+        {
+          "url": "https://i.loli.net/2020/02/01/aHhVObpJus6dnM4.jpg",
+          "description": "fate_hf-樱花树",
+          "type": "wide"
         }
       ]
     }
@@ -43,46 +76,26 @@
     "brandInterval": 10000,
     "brands": [
       {
-        "imageUrl": "https://i.loli.net/2018/08/21/5b7bb5dd4f0df.png",
-        "title": "这是大招牌-1",
+        "imageUrl": "https://i.loli.net/2020/01/21/mMEAnwY5XPC2pFb.jpg",
+        "title": "日常",
         "texts": [
-          "这是一段招牌的演示文字-1-1",
-          "这是一段招牌的演示文字-1-2"
+          "我们所度过的每个平凡的日常，也许就是连续不断发生的奇迹。",
+          "日々、私たちが過ごしている日常は、実は奇跡の連続なのかもしれない。"
         ]
       },
       {
-        "imageUrl": "https://i.loli.net/2018/04/10/5accdcbcb1738.jpg",
-        "title": "这是大招牌-2",
+        "imageUrl": "https://i.loli.net/2020/04/19/H1MmXb9xPcYEhT2.jpg",
+        "title": "昨日之歌",
         "texts": [
-          "这是一段招牌的演示文字-2-1",
-          "这是一段招牌的演示文字-2-2"
-        ]
-      },
-      {
-        "imageUrl": "https://i.loli.net/2018/08/21/5b7bbc8ec3633.jpg",
-        "title": "这是大招牌-3",
-        "texts": [
-          "这是一段招牌的演示文字-3-1",
-          "这是一段招牌的演示文字-3-2"
+          "时间梭梭箭如飞，人道漫漫步蹒跚",
+          "人間そんな変わるもんじゃないのに、月日ばっかどんどん過ぎて"
         ]
       }
     ],
     "navs": [
       {
         "text": "Github",
-        "url": "https://github.com/"
-      },
-      {
-        "text": "Nuxt.js",
-        "url": "https://nuxtjs.org/"
-      },
-      {
-        "text": "BootstrapVue",
-        "url": "https://bootstrap-vue.org/"
-      },
-      {
-        "text": "Node.js",
-        "url": "https://nodejs.org/"
+        "url": "https://github.com/cellargalaxy/"
       }
     ]
   },
@@ -97,27 +110,6 @@
         },
         {
           "text": "Powered by Nuxt.js & Github"
-        }
-      ],
-      [
-        {
-          "text": "友链："
-        },
-        {
-          "text": "Github",
-          "url": "https://github.com/"
-        },
-        {
-          "text": "Nuxt.js",
-          "url": "https://nuxtjs.org/"
-        },
-        {
-          "text": "BootstrapVue",
-          "url": "https://bootstrap-vue.org/"
-        },
-        {
-          "text": "Node.js",
-          "url": "https://nodejs.org/"
         }
       ]
     ]

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>你今日画咗未？</title>
+    <link href="//unpkg.com/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//unpkg.com/bootstrap-vue@2.16.0/dist/bootstrap-vue.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body style="background-color: black">
+<div id="app">
+    <b-input-group size="sm">
+        <b-form-file v-model="file" placeholder="file" @change="changeFile"></b-form-file>
+        <b-form-input v-model="url" placeholder="url"></b-form-input>
+    </b-input-group>
+    <b-input-group size="sm">
+        <b-form-input placeholder="leftSpace(0px)" v-model="leftSpace"></b-form-input>
+        <b-form-input placeholder="topSpace(0px)" v-model="topSpace"></b-form-input>
+        <b-form-input placeholder="imageWidth(200px)" v-model="imageWidth"></b-form-input>
+        <b-form-input placeholder="imageHeight(200px)" v-model="imageHeight"></b-form-input>
+        <b-form-input placeholder="whirl(0)" type="number" v-model="whirl"></b-form-input>
+        <b-form-input placeholder="barrier(99)" type="number" v-model="barrier"></b-form-input>
+        <b-form-input placeholder="clientWidth(99vw)" v-model="clientWidth"></b-form-input>
+        <b-form-input placeholder="clientHeight(100vw)" v-model="clientHeight"></b-form-input>
+        <b-form-input placeholder="widthBarrierCount(0)" type="number" v-model="widthBarrierCount"></b-form-input>
+        <b-form-input placeholder="heightBarrierCount(0)" type="number" v-model="heightBarrierCount"></b-form-input>
+    </b-input-group>
+
+    <div style="position:absolute;z-index:1;">
+        <img :src="url"
+             :style="{'height':imageHeight,'width':imageWidth,'margin-left':leftSpace,'margin-top':topSpace,'transform':'rotate('+whirl+'deg)'}"/>
+    </div>
+    <div style="position:absolute;z-index:2;">
+        <div :key="index" :style="{'width':clientWidth,'margin-top':barrier+'px','transform':'rotate('+whirl+'deg)'}"
+             style="float:top;height:1px;background-color:rgba(255, 255, 255, 0.8);"
+             v-for="(item, index) in heightBarrierList"></div>
+    </div>
+    <div style="position:absolute;z-index:3;">
+        <div :key="index" :style="{'height':clientHeight,'margin-left':barrier+'px','transform':'rotate('+whirl+'deg)'}"
+             style="float:left;width: 1px;background-color:rgba(255, 255, 255, 0.8);"
+             v-for="(item, index) in widthBarrierList"></div>
+    </div>
+</div>
+</body>
+<script src="//unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+<script src="//unpkg.com/bootstrap-vue@2.16.0/dist/bootstrap-vue.min.js"></script>
+<script src="//unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            file: null,
+            url: '',
+            leftSpace: '0px',
+            topSpace: '0px',
+            imageWidth: '200px',
+            imageHeight: '200px',
+            whirl: 0,
+            barrier: 99,
+            clientWidth: '99vw',
+            clientHeight: '100vh',
+            widthBarrierCount: parseInt(getStorageNum('clientWidth', document.body.clientWidth) / getStorageNum('barrier', 100)) - 1,
+            heightBarrierCount: parseInt(getStorageNum('clientHeight', document.body.clientHeight) / getStorageNum('barrier', 100)) - 1,
+        },
+        computed: {
+            widthBarrierList: function () {
+                return Array.from({length: this.widthBarrierCount})
+            },
+            heightBarrierList: function () {
+                return Array.from({length: this.heightBarrierCount})
+            },
+        },
+        methods: {
+            changeFile: function (event) {
+                const reader = new FileReader()
+                reader.onload = () => this.url = reader.result
+                reader.readAsDataURL(event.target.files[0])
+            },
+        },
+    })
+
+    readConfig()
+    window.onbeforeunload = saveConfig
+
+    function getStorage(key, defaultValue) {
+        const value = localStorage[key]
+        return value != undefined && value != null && value != '' ? value : defaultValue
+    }
+
+    function getStorageNum(key, defaultValue) {
+        const value = parseInt(localStorage[key])
+        if (isNum(value)) {
+            return value
+        }
+        return defaultValue
+    }
+
+    function readConfig() {
+        vm.url = getStorage('url', vm.url)
+        vm.leftSpace = getStorage('leftSpace', vm.leftSpace)
+        vm.topSpace = getStorage('topSpace', vm.topSpace)
+        vm.imageWidth = getStorage('imageWidth', vm.imageWidth)
+        vm.imageHeight = getStorage('imageHeight', vm.imageHeight)
+        vm.clientWidth = getStorage('clientWidth', vm.clientWidth)
+        vm.clientHeight = getStorage('clientHeight', vm.clientHeight)
+
+        vm.whirl = getStorageNum('whirl', vm.whirl)
+        vm.barrier = getStorageNum('barrier', vm.barrier)
+        vm.widthBarrierCount = getStorageNum('widthBarrierCount', vm.widthBarrierCount)
+        vm.heightBarrierCount = getStorageNum('heightBarrierCount', vm.heightBarrierCount)
+    }
+
+    function saveConfig() {
+        localStorage.setItem('url', vm.url)
+        localStorage.setItem('leftSpace', vm.leftSpace)
+        localStorage.setItem('topSpace', vm.topSpace)
+        localStorage.setItem('imageWidth', vm.imageWidth)
+        localStorage.setItem('imageHeight', vm.imageHeight)
+        localStorage.setItem('whirl', vm.whirl)
+        localStorage.setItem('barrier', vm.barrier)
+        localStorage.setItem('clientWidth', vm.clientWidth)
+        localStorage.setItem('clientHeight', vm.clientHeight)
+        localStorage.setItem('widthBarrierCount', vm.widthBarrierCount)
+        localStorage.setItem('heightBarrierCount', vm.heightBarrierCount)
+    }
+
+    function isNum(s) {
+        if (s != null && s != '') {
+            return !isNaN(s)
+        }
+        return false;
+    }
+</script>
+</html>
