@@ -14,8 +14,8 @@ export default {
 div {
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(5px);
-  /*filter: blur(5px);*/
-  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(6px);
+  /*filter: blur(3px);*/
+  background: rgba(190, 190, 190, 0.5);
 }
 </style>

@@ -17,7 +17,6 @@ div {
   background-repeat: repeat; /*重复*/
   background-size: auto; /*自动大小*/
   background-position: 0 0; /*对齐*/
-  /*background-attachment: fixed; !*背景图片不会随着页面的滚动而滚动*!*/
   background-image: url('@/assets/img/fence.svg');
 }
 </style>
