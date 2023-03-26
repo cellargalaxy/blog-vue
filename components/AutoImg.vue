@@ -1,5 +1,5 @@
 <template>
-  <div :style="{backgroundImage:'url('+url+')'}"/>
+  <div class="auto-img" :style="{backgroundImage:'url('+url+')'}"/>
 </template>
 
 <auto-img :url="url"/>
@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style scoped>
-div {
+.auto-img {
   width: 100%;
   height: 100%;
   background-repeat: no-repeat; /*不重复*/

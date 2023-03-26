@@ -1,8 +1,10 @@
 <template>
-  <div/>
+  <div class="fence">
+    <slot/>
+  </div>
 </template>
 
-<fence/>
+<fence></fence>
 
 <script>
 export default {
@@ -11,7 +13,7 @@ export default {
 </script>
 
 <style scoped>
-div {
+.fence {
   width: 100%;
   height: 100%;
   background-repeat: repeat; /*重复*/
