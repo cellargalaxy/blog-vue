@@ -6,9 +6,10 @@
 
     <div style="width:100%;position:absolute;">
 
-<!--            <div class="fence" style="height: 50vh"/>-->
+      <!--            <div class="fence" style="height: 50vh"/>-->
       <fence-scrollbar style="height: 50vh">
-        <h1>初羽的魔法日记</h1>
+        <p class="text-4xl">初羽的魔法日记</p>
+        <br/>
         <p>
           🌸这是一个记录有关技术的魔法日记🔮🌸这是一个记录有关技术的魔法日记🔮🌸这是一个记录有关技术的魔法日记🔮🌸这是一个记录有关技术的魔法日记🔮</p>
         <p>🌸这是一个记录有关技术的魔法日记🔮</p>
@@ -30,11 +31,7 @@
         <p>🌸这是一个记录有关技术的魔法日记🔮</p>
       </fence-scrollbar>
 
-      <div class="scrub">
-        <div v-for="item in 200" :key="item" class="scrollbar-demo-item" style="background-color: aquamarine">
-          {{ item }}
-        </div>
-      </div>
+      <scrub-layout style="height: 300vh"></scrub-layout>
     </div>
 
   </div>
@@ -44,11 +41,5 @@
 body {
   margin: 0;
   background-color: peru;
-}
-
-.bottom{
-  position: relative;
-  top: 50%;
-  transform: translate(0%, -100%);
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
   <fence>
     <el-row style="height: 100%">
-      <el-col :xs="1" :sm="2" :md="3" :lg="4" :xl="5" style="height: 100%"/>
-      <el-col :xs="22" :sm="20" :md="18" :lg="16" :xl="14" style="height: 100%">
+      <el-col :xs="0" :sm="0" :md="5" :lg="6" :xl="7" style="height: 100%"/>
+      <el-col :xs="24" :sm="24" :md="14" :lg="12" :xl="10" style="height: 100%;">
         <el-scrollbar class="card">
           <slot/>
         </el-scrollbar>
       </el-col>
-      <el-col :xs="1" :sm="2" :md="3" :lg="4" :xl="5" style="height: 100%"/>
+      <el-col :xs="0" :sm="0" :md="5" :lg="6" :xl="7" style="height: 100%"/>
     </el-row>
   </fence>
 </template>
@@ -27,6 +27,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   max-height: 50%;
+  padding: 1%;
 
   text-align: center;
   color: rgba(255, 255, 255, 1);
