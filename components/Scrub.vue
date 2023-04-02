@@ -1,22 +1,22 @@
 <template>
-  <div class="scrub">
-    <slot/>
-  </div>
+    <div class="scrub">
+        <slot/>
+    </div>
 </template>
 
 <scrub></scrub>
 
 <script>
 export default {
-  name: "Scrub"
+    name: "Scrub"
 }
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
 .scrub {
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(6px);
-  background: rgba(190, 190, 190, 0.5);
+    @apply w-full;
+    @apply h-full;
+    @apply backdrop-blur;
+    @apply bg-gray-500/50;
 }
 </style>
