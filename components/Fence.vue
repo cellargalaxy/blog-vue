@@ -15,7 +15,7 @@ export default {
 <style lang="postcss" scoped>
 .fence {
     @apply w-full;
-    @apply h-full;
+    /*@apply h-full;*/
     @apply bg-repeat;
     @apply bg-auto;
     @apply bg-fixed;

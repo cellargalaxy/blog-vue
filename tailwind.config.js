@@ -1,5 +1,13 @@
 module.exports = {
-    plugins: [
-        require('tailwind-scrollbar')
-    ],
+    theme: {
+        extend: {
+            height: {
+                '1/2-screen': '50vh',
+            },
+            width: {
+                'main': '48rem',
+            },
+        }
+    },
+    plugins: [],
 };
