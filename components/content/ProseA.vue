@@ -13,7 +13,7 @@ defineProps({
     target: {
         type: String,
         default: undefined,
-        required: false
+        required: true
     }
 })
 </script>

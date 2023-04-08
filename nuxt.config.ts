@@ -4,5 +4,7 @@ export default defineNuxtConfig({
         '@nuxtjs/tailwindcss',
         '@element-plus/nuxt',
         '@nuxt/content',
+        'nuxt-icon',
+        '@nuxt/image-edge',
     ],
 })

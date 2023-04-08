@@ -2,7 +2,6 @@
 createdAt: '2020-01-22'
 updatedAt: '2020-01-23'
 level: 1
-_path: /README
 ---
 
 # blog-vue
@@ -23,10 +22,8 @@ _path: /README
 
 ###### Heading 6
 
-This is an H1
-=============
+text,我是文本。
 
-This is an H2
 -------------
 
 ---

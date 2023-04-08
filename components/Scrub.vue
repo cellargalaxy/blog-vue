@@ -11,6 +11,5 @@
     @apply w-full;
     @apply h-full;
     @apply backdrop-blur;
-    @apply bg-gray-500/50;
 }
 </style>
