@@ -9,7 +9,7 @@
                     <div class="flex-shrink h-full w-main">
                         <div-center class="h-1/3 w-full">
                             <el-scrollbar
-                                    class="px-2 text-center text-gray-50 [text-shadow:_0.1rem_0.1rem_0.2rem_var(--tw-shadow-color)] shadow-gray-900">
+                                    class="mx-2 text-center text-gray-50 [text-shadow:_0.1rem_0.1rem_0.2rem_var(--tw-shadow-color)] shadow-gray-900">
                                 <p class="text-4xl">初羽的魔法日记</p>
                                 <p>
                                     🌸这是一个记录有关技术的魔法日记🔮

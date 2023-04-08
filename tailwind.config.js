@@ -7,7 +7,10 @@ module.exports = {
             width: {
                 'main': '48rem',
             },
-        }
+            minHeight: {
+                '1/2-screen': '50vh',
+            },
+        },
     },
     plugins: [],
 };
