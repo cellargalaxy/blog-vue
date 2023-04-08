@@ -6,12 +6,6 @@
 
 <scrub></scrub>
 
-<script>
-export default {
-    name: "Scrub"
-}
-</script>
-
 <style lang="postcss" scoped>
 .scrub {
     @apply w-full;

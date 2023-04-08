@@ -6,12 +6,6 @@
 
 <div-center></div-center>
 
-<script>
-export default {
-    name: "DivCenter"
-}
-</script>
-
 <style lang="postcss" scoped>
 .div-center {
     @apply relative;

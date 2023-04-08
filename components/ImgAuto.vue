@@ -4,17 +4,13 @@
 
 <img-auto url="url"/>
 
-<script>
-export default {
-    name: "ImgAuto",
-    props: {
-        url: {
-            default() {
-                return ''
-            }
-        },
-    },
-}
+<script setup lang="ts">
+defineProps({
+    url: {
+        type: String,
+        default: ''
+    }
+})
 </script>
 
 <style lang="postcss" scoped>

@@ -6,12 +6,6 @@
 
 <fence></fence>
 
-<script>
-export default {
-    name: "Fence"
-}
-</script>
-
 <style lang="postcss" scoped>
 .fence {
     @apply w-full;
