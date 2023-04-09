@@ -1,5 +1,5 @@
 <template>
-    <nuxt-img :src="src" loading="lazy" class="my-2"/>
+    <nuxt-img :src="src" loading="lazy" class="my-2" @click=""/>
 </template>
 
 <script setup lang="ts">
@@ -13,4 +13,7 @@ defineProps({
 </script>
 
 <style lang="postcss" scoped>
+img {
+    @apply cursor-pointer;
+}
 </style>

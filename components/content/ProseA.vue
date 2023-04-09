@@ -18,8 +18,9 @@ defineProps({
 })
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
 a {
-    background-color: #0047e1;
+    @apply text-blue-500;
+    @apply hover:underline;
 }
 </style>

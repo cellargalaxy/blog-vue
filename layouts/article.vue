@@ -7,7 +7,7 @@
                     <div class="flex-grow h-full"/>
                     <div class="flex-shrink h-full w-main">
                         <div-center class="h-1/3 w-full">
-                            <div  class="px-2 text-center text-gray-50 [text-shadow:_0.1rem_0.1rem_0.2rem_var(--tw-shadow-color)] shadow-gray-900 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-100/60 h-full">
+                            <div class="px-2 text-center text-gray-100 [text-shadow:_0.1rem_0.1rem_0.2rem_var(--tw-shadow-color)] shadow-gray-900 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-100/50 h-full">
                                 <p class="text-4xl">初羽的魔法日记</p>
                                 <p>
                                     🌸这是一个记录有关技术的魔法日记🔮
@@ -49,7 +49,7 @@
                     <div class="flex-grow h-full" style="background-color: #a38108">
                     </div>
                     <div class="flex-shrink h-full w-main">
-                        <scrub class="p-2 bg-gray-100/60 shadow-2xl rounded-2xl">
+                        <scrub class="p-2 bg-gray-100/50 shadow-2xl rounded-2xl">
                             <ContentDoc/>
                         </scrub>
                     </div>

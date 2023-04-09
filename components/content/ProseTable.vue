@@ -1,5 +1,5 @@
 <template>
-    <div class="overflow-auto my-2 scrollbar-thin scrollbar-thumb-gray-500/50" style="max-height: 50vh;">
+    <div class="overflow-auto my-2 scrollbar-thin scrollbar-thumb-gray-100/50" style="max-height: 50vh;">
         <table>
             <slot/>
         </table>

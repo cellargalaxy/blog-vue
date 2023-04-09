@@ -6,6 +6,6 @@
 
 <style lang="postcss" scoped>
 tr {
-    @apply hover:bg-gray-500/50;
+    @apply hover:bg-gray-100/50;
 }
 </style>
