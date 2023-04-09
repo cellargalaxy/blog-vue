@@ -2,10 +2,6 @@
     <nuxt-img :src="src" loading="lazy" class="cursor-pointer my-2" @click="click(src)"/>
 </template>
 
-<!--    <div class="items-center flex w-mix justify-center my-2">-->
-<!--        <nuxt-img :src="src" loading="lazy" class="cursor-pointer" @click="click(src)"/>-->
-<!--    </div>-->
-
 <script>
 export default {
     props: {
@@ -57,8 +53,10 @@ export default {
     @apply items-center;
     @apply justify-center;
     @apply cursor-pointer;
+    @apply overflow-auto;
     @apply overscroll-contain;
 }
+
 .preview-img-container .preview-img {
     @apply object-contain;
     min-width: 10%;
