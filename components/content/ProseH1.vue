@@ -1,7 +1,7 @@
 <template>
     <h1 :id="id">
         <NuxtLink :href="`#${id}`">
-            <Icon name="line-md:hash-small"/>
+            <Icon name="solar:hashtag-circle-linear"/>
             <slot/>
         </NuxtLink>
     </h1>
@@ -18,6 +18,7 @@ defineProps({
 
 <style lang="postcss" scoped>
 h1 {
-    @apply text-5xl;
+    @apply text-2xl;
+    @apply my-2;
 }
 </style>

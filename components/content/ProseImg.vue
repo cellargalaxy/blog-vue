@@ -1,5 +1,5 @@
 <template>
-    <nuxt-img :src="src" loading="lazy" class="my-1"/>
+    <nuxt-img :src="src" loading="lazy" class="my-2"/>
 </template>
 
 <script setup lang="ts">
