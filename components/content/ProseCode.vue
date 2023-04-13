@@ -1,3 +1,9 @@
+<template>
+    <div :class="[`highlight-${language}`]" class="code">
+        <slot/>
+    </div>
+</template>
+
 <script setup lang="ts">
 import type {PropType} from 'vue'
 import type {Lang} from 'shiki-es'
@@ -15,20 +21,16 @@ defineProps({
         type: String,
         default: null
     },
-    highlights: {
-        type: Array as () => number[],
-        default: () => []
-    }
 })
 </script>
 
-<template>
-    <div :class="[`highlight-${language}`]" class="prose-code">
-        <span v-if="filename" class="filename"> {{ filename }}  </span>
-        <slot/>
-    </div>
-</template>
-
-<style lang="ts" scoped>
-
+<style lang="postcss" scoped>
+.code {
+    @apply bg-gray-100/50;
+    @apply my-2;
+    @apply p-2;
+    @apply border-2;
+    @apply rounded-lg;
+    @apply shadow-inner;
+}
 </style>
