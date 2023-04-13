@@ -16,15 +16,16 @@ export default {
             //创建预览器
             let container = document.createElement("div")
             container.classList.add("preview-img-container")
-            container.onclick = function () {
+            container.onclick = () => {
                 container.remove()
+                this.enableScroll()
             }
             //创建预览图片
             let img = document.createElement("img")
             img.src = src
             img.classList.add("preview-img")
             //绑定滚动事件
-            container.onwheel = function (event) {
+            container.onwheel = (event) => {
                 const width = getComputedStyle(img).width.slice(0, -2)
                 const height = getComputedStyle(img).height.slice(0, -2)
                 if (event.deltaY > 0) { //向下滚动放大
@@ -39,6 +40,60 @@ export default {
             container.append(img)
             //将预览器添加到 body 中
             document.body.append(container)
+            this.disableScroll()
+        },
+        preventDefault(e) {
+            e.preventDefault();
+        },
+        preventDefaultForScrollKeys(e) {
+            // left: 37, up: 38, right: 39, down: 40
+            const keys = {37: 1, 38: 1, 39: 1, 40: 1};
+            if (keys[e.keyCode]) {
+                this.preventDefault(e);
+                return false;
+            }
+        },
+        disableScroll() {
+            //https://blog.51cto.com/u_12471633/4626317
+
+            let supportsPassive = false;
+            try {
+                window.addEventListener("test", null, Object.defineProperty({}, "passive", {
+                        get: () => {
+                            supportsPassive = true;
+                        },
+                    })
+                );
+            } catch (e) {
+            }
+
+            const wheelOpt = supportsPassive ? {passive: false} : false;
+            const wheelEvent = "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
+
+            window.addEventListener("DOMMouseScroll", this.preventDefault, false); // older FF
+            window.addEventListener(wheelEvent, this.preventDefault, wheelOpt); // modern desktop
+            window.addEventListener("touchmove", this.preventDefault, wheelOpt); // mobile
+            window.addEventListener("keydown", this.preventDefaultForScrollKeys, false);
+        },
+        enableScroll() {
+            let supportsPassive = false;
+            try {
+                window.addEventListener("test", null, Object.defineProperty({}, "passive", {
+                        get: () => {
+                            supportsPassive = true;
+                        },
+                    })
+                );
+            } catch (e) {
+            }
+
+            const wheelOpt = supportsPassive ? {passive: false} : false;
+            const wheelEvent = "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
+
+            window.removeEventListener("DOMMouseScroll", this.preventDefault, false);
+            window.removeEventListener(wheelEvent, this.preventDefault, wheelOpt);
+            window.removeEventListener("touchmove", this.preventDefault, wheelOpt);
+            window.removeEventListener("keydown", this.preventDefaultForScrollKeys, false);
         },
     },
 }
@@ -53,8 +108,6 @@ export default {
     @apply items-center;
     @apply justify-center;
     @apply cursor-pointer;
-    @apply overflow-auto;
-    @apply overscroll-contain;
 }
 
 .preview-img-container .preview-img {

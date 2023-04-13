@@ -5,7 +5,10 @@
 </template>
 
 <style lang="postcss" scoped>
-tr {
+thead tr {
+    @apply bg-gray-100/80;
+}
+tbody tr {
     @apply hover:bg-gray-100/50;
 }
 </style>
