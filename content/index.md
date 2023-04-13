@@ -290,4 +290,6 @@ $$
 $\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$}
 $$
 
+# 图片懒加载
+
 ![](https://s3.bmp.ovh/imgs/2022/03/667fb45e1ad9d8d2.jpg)
