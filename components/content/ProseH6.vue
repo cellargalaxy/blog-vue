@@ -2,8 +2,8 @@
     <h6 :id="id">
         <NuxtLink :href="`#${id}`">
             <Icon name="solar:hashtag-circle-line-duotone"/>
-            <slot/>
         </NuxtLink>
+        <slot/>
     </h6>
 </template>
 
