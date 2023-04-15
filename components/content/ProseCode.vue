@@ -1,5 +1,5 @@
 <template>
-    <div v-if="code" class="my-2">
+    <div v-if="code" class="my-2 shadow">
         <div class="flex p-1 rounded-t bg-gray-500/50">
             <div class="flex-grow text-left">
                 <ProseCodeInline v-if="filename">
