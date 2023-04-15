@@ -139,11 +139,10 @@ https://tiddlywiki.com/plugins/tiddlywiki/katex/
 
 https://github.com/nuxt/content/issues/1774
 
-Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following
-equation.
+Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following equation.
 
 $$
-f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
+L = \frac{1}{2} \rho v^2 S C_L
 $$
 
 ## 图片懒加载
