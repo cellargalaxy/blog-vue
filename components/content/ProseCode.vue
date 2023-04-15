@@ -12,7 +12,7 @@
                 </ProseCodeInline>
             </div>
             <div class="flex-grow text-right w-max">
-                <ButtonIcon name="ic:round-unfold-less" @click="fold"/>
+                <ButtonIcon name="ic:round-unfold-less" @click="show=!show"/>
                 <ButtonCopy :text="code"/>
             </div>
         </div>
@@ -26,6 +26,11 @@
 
 <script>
 export default {
+    data() {
+        return {
+            show: true,
+        }
+    },
     props: {
         language: {
             default() {
@@ -42,48 +47,10 @@ export default {
                 return ''
             }
         },
-        show: {
-            default() {
-                return true
-            }
-        },
-    },
-    methods: {
-        fold() {
-            this.show = !this.show
-        },
     },
 }
 </script>
 
-<!--<script setup lang="ts">-->
-<!--import type {PropType} from 'vue'-->
-<!--import type {Lang} from 'shiki-es'-->
-
-<!--const props = defineProps({-->
-<!--    code: {-->
-<!--        type: String,-->
-<!--        default: ''-->
-<!--    },-->
-<!--    language: {-->
-<!--        type: String as PropType<Lang>,-->
-<!--        default: null-->
-<!--    },-->
-<!--    filename: {-->
-<!--        type: String,-->
-<!--        default: null-->
-<!--    },-->
-<!--    show: {-->
-<!--        type: Boolean,-->
-<!--        default: true-->
-<!--    },-->
-<!--})-->
-
-<!--const fold = () => {-->
-<!--    props.show = !props.show-->
-<!--    console.log('show', props.show)-->
-<!--}-->
-<!--</script>-->
 
 <style lang="postcss" scoped>
 
