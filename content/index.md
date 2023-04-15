@@ -111,11 +111,6 @@ function enableScroll() {
 ## 图表
 
 <Mermaid>
-  flowchart LR
-      A-- This is the text! ---B
-</Mermaid>
-
-<Mermaid>
 flowchart LR
 A[Hard] -->|Text| B(Round)
 B --> C{Decision}
