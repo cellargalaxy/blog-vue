@@ -110,7 +110,7 @@ function enableScroll() {
 
 ## 图表
 
-```flow
+```mermaid
 flowchart LR
 A[Hard] -->|Text| B(Round)
 B --> C{Decision}
@@ -118,7 +118,7 @@ C -->|One| D[Result 1]
 C -->|Two| E[Result 2]
 ```
 
-```flow
+```mermaid
 sequenceDiagram
 Alice->>John: Hello John, how are you?
 loop Healthcheck
@@ -130,7 +130,7 @@ John->>Bob: How about you?
 Bob-->>John: Jolly good!
 ```
 
-```flow
+```mermaid
 gantt
     section Section
     Completed :done,    des1, 2014-01-06,2014-01-08
@@ -141,7 +141,7 @@ gantt
     Parallel 4   :         des6, after des4, 1d
 ```
 
-```flow
+```mermaid
 classDiagram
 Class01 <|-- AveryLongClass : Cool
 <<Interface>> Class01
@@ -160,7 +160,7 @@ class Class10 {
 }
 ```
 
-```flow
+```mermaid
 stateDiagram-v2
 [*] --> Still
 Still --> [*]
@@ -170,14 +170,14 @@ Moving --> Crash
 Crash --> [*]
 ```
 
-```flow
+```mermaid
 pie
 "Dogs" : 386
 "Cats" : 85
 "Rats" : 15
 ```
 
-```flow
+```mermaid
 gitGraph:
 options
 {
@@ -197,7 +197,7 @@ merge newbranch
 
 ```
 
-```flow
+```mermaid
  journey
     title My working day
     section Go to work
