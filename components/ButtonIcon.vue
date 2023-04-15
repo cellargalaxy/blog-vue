@@ -1,5 +1,5 @@
 <template>
-    <button class="hover:scale-125 opacity-25 focus:opacity-100">
+    <button class="hover:scale-125 opacity-50 focus:opacity-100 mx-px">
         <Icon :name="name"/>
     </button>
 </template>

@@ -8,8 +8,9 @@
 .code-in-line {
     @apply bg-gray-100/50;
     @apply px-1;
+    @apply mx-1;
     @apply rounded;
-    /*@apply select-all;*/
+    @apply select-all;
 }
 </style>
 <script setup lang="ts">

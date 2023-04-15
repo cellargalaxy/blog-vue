@@ -70,7 +70,7 @@ text,我是文本。
 
 ## 代码
 
-执行命令：`nuxt dev`
+执行命令：`nuxt dev`再打开浏览器
 
 ```javascript [javascript.js]
 function test() {
@@ -92,15 +92,6 @@ testBox.add("jQuery").remove("jQuery");
 <h1>Hello world!</h1>
 </body>
 </html>
-```
-
-```javascript [javascript.js]
-function test() {
-    console.log("Hello world!");
-}
-
-var testBox = box();
-testBox.add("jQuery").remove("jQuery");
 ```
 
 ## 图表

@@ -1,17 +1,15 @@
 <template>
     <div v-if="code" class="my-2">
         <div class="flex p-1 rounded-t bg-gray-500/50">
-            <div class="flex-grow text-left w-max">
+            <div class="flex-grow text-left">
+                <ProseCodeInline v-if="filename">
+                    {{ filename }}
+                </ProseCodeInline>
                 <ProseCodeInline v-if="language">
                     {{ language }}
                 </ProseCodeInline>
             </div>
-            <div class="flex-shrink-0 text-center w-max">
-                <ProseCodeInline v-if="filename">
-                    {{ filename }}
-                </ProseCodeInline>
-            </div>
-            <div class="flex-grow text-right w-max">
+            <div class="flex-grow text-right">
                 <ButtonIcon name="ic:round-unfold-less" @click="show=!show"/>
                 <ButtonCopy :text="code"/>
             </div>
@@ -22,7 +20,6 @@
         </div>
     </div>
 </template>
-
 
 <script>
 export default {
@@ -50,7 +47,6 @@ export default {
     },
 }
 </script>
-
 
 <style lang="postcss" scoped>
 
