@@ -12,9 +12,7 @@
     "@nuxtjs/tailwindcss": "^6.6.5",
     "nuxt": "^3.4.0",
     "nuxt-icon": "^0.3.3",
-    "tailwind-scrollbar": "^3.0.0"
-  },
-  "dependencies": {
+    "tailwind-scrollbar": "^3.0.0",
     "@vueuse/core": "^10.0.2",
     "mermaid": "^10.1.0"
   }
