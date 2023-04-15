@@ -48,7 +48,7 @@
                 <div class="h-full flex">
                     <div class="flex-grow h-full" style="background-color: #a38108">
                     </div>
-                    <div class="flex-shrink h-full w-main">
+                    <div class="flex-shrink h-full w-full max-w-main">
                         <scrub class="p-2 bg-gray-100/50 shadow-2xl rounded-2xl">
                             <ContentDoc/>
                         </scrub>
