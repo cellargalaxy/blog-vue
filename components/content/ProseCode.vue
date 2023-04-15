@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div :class="[`highlight-${language}`]" class="p-1 rounded-b bg-gray-100/50" v-show="show">
+        <div :class="[`highlight-${language}`]" class="p-1 rounded-b overflow-y-auto scrollbar-thin scrollbar-thumb-gray-100/50 bg-gray-100/50" v-show="show">
             <slot/>
         </div>
     </div>

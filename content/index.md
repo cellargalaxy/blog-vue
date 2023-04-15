@@ -72,15 +72,6 @@ text,我是文本。
 
 执行命令：`nuxt dev`再打开浏览器
 
-```javascript [javascript.js]
-function test() {
-    console.log("Hello world!");
-}
-
-var testBox = box();
-testBox.add("jQuery").remove("jQuery");
-```
-
 ```html [index.html]
 <!DOCTYPE html>
 <html>
@@ -92,6 +83,29 @@ testBox.add("jQuery").remove("jQuery");
 <h1>Hello world!</h1>
 </body>
 </html>
+```
+
+```javascript [enableScroll.js]
+function enableScroll() {
+    let supportsPassive = false;
+    try {
+        window.addEventListener("test", null, Object.defineProperty({}, "passive", {
+                get: () => {
+                    supportsPassive = true;
+                },
+            })
+        );
+    } catch (e) {
+    }
+
+    const wheelOpt = supportsPassive ? {passive: false} : false;
+    const wheelEvent = "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
+
+    window.removeEventListener("DOMMouseScroll", this.preventDefault, false);
+    window.removeEventListener(wheelEvent, this.preventDefault, wheelOpt);
+    window.removeEventListener("touchmove", this.preventDefault, wheelOpt);
+    window.removeEventListener("keydown", this.preventDefaultForScrollKeys, false);
+}
 ```
 
 ## 图表
