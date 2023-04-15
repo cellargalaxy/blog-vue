@@ -19,7 +19,15 @@ export default defineNuxtConfig({
             theme: {
                 dark: 'github-dark',
                 default: 'github-light'
-            }
+            },
+        },
+        markdown: {
+            rehypePlugins: [
+                'rehype-katex'
+            ],
+            remarkPlugins: [
+                'remark-math'
+            ],
         },
     },
 })

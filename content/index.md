@@ -110,6 +110,10 @@ function enableScroll() {
 
 ## 图表
 
+https://github.com/nuxt/content/issues/1866
+
+https://github.com/nuxt/content/issues/746
+
 <Mermaid>
 flowchart LR
 A[Hard] -->|Text| B(Round)
@@ -133,29 +137,13 @@ gantt
 
 https://tiddlywiki.com/plugins/tiddlywiki/katex/
 
-Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following equation.
+https://github.com/nuxt/content/issues/1774
+
+Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following
+equation.
 
 $$
-L = \frac{1}{2} \rho v^2 S C_L
-$$
-
-$$
-\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}}
-{1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }
-$$
-
-$$
-1 + \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
-\quad\quad \text{for }\lvert q\rvert<1.
-$$
-
-$$
-\ce{CO2 + C -> 2 CO}
-$$
-
-$$
-\ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]
-$\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$}
+f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
 $$
 
 ## 图片懒加载
