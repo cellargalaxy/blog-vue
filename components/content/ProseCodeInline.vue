@@ -1,14 +1,19 @@
 <template>
-    <code>
-        <slot/>
-    </code>
+    <div class="code-in-line">
+        <code>
+            <slot/>
+        </code>
+    </div>
 </template>
 
 <style lang="postcss" scoped>
-code {
-    @apply bg-red-300/50;
+.code-in-line {
+    @apply bg-gray-100/50;
     @apply px-1;
     @apply rounded;
-    @apply select-all;
+    @apply w-max;
+    /*@apply select-all;*/
 }
 </style>
+<script setup lang="ts">
+</script>
