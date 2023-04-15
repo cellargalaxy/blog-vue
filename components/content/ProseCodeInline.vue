@@ -9,7 +9,6 @@
     @apply bg-gray-100/50;
     @apply px-1;
     @apply rounded;
-    /*@apply w-max;*/
     /*@apply select-all;*/
 }
 </style>

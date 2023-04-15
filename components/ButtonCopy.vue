@@ -1,7 +1,5 @@
 <template>
-    <button class="hover:scale-125 opacity-25 focus:opacity-100">
-        <Icon name="material-symbols:content-copy-outline" @click="copy"/>
-    </button>
+    <ButtonIcon name="material-symbols:content-copy-outline" @click="copy"/>
 </template>
 
 <script setup lang="ts">
