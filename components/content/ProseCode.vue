@@ -1,6 +1,6 @@
 <template>
-    <div v-if="code">
-        <div class="flex p-1">
+    <div v-if="code" class="my-2">
+        <div class="flex p-1 bg-gray-500/50">
             <div class="flex-grow text-left w-max">
                 <ProseCodeInline v-if="language">
                     {{ language }}
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div :class="[`highlight-${language}`]" class="p-1">
+        <div :class="[`highlight-${language}`]" class="p-1 bg-gray-100/50">
             <slot/>
         </div>
     </div>
