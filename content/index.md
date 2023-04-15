@@ -129,37 +129,6 @@ gantt
     Parallel 4   :         des6, after des4, 1d
 </Mermaid>
 
-<Mermaid>
-gitGraph:
-options
-{
-    "nodeSpacing": 150,
-    "nodeRadius": 10
-}
-end
-commit
-branch newbranch
-checkout newbranch
-commit
-commit
-checkout master
-commit
-commit
-merge newbranch
-</Mermaid>
-
-<Mermaid>
- journey
-    title My working day
-    section Go to work
-      Make tea: 5: Me
-      Go upstairs: 3: Me
-      Do work: 1: Me, Cat
-    section Go home
-      Go downstairs: 5: Me
-      Sit down: 3: Me
-</Mermaid>
-
 ## 公式
 
 https://tiddlywiki.com/plugins/tiddlywiki/katex/
