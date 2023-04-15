@@ -1,6 +1,6 @@
 <template>
     <div v-if="code">
-        <div class="flex bg-gray-500/50 p-1">
+        <div class="flex p-1">
             <div class="flex-grow text-left w-max">
                 <ProseCodeInline v-if="language">
                     {{ language }}
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div :class="[`highlight-${language}`]" class="bg-gray-100/50 p-1">
+        <div :class="[`highlight-${language}`]" class="p-1">
             <slot/>
         </div>
     </div>
@@ -43,11 +43,5 @@ defineProps({
 </script>
 
 <style lang="postcss" scoped>
-.code {
-    @apply bg-gray-100/50;
-    @apply p-1;
-    /*@apply border-2;*/
-    /*@apply rounded-lg;*/
-    /*@apply shadow-inner;*/
-}
+
 </style>

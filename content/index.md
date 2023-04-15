@@ -94,6 +94,15 @@ testBox.add("jQuery").remove("jQuery");
 </html>
 ```
 
+```javascript [javascript.js]
+function test() {
+    console.log("Hello world!");
+}
+
+var testBox = box();
+testBox.add("jQuery").remove("jQuery");
+```
+
 ## 图表
 
 ```flow
