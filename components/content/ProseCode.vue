@@ -1,7 +1,7 @@
 <template>
     <div v-if="code" class="my-2 shadow">
         <div class="flex p-1 rounded-t bg-gray-500/50">
-            <div class="flex-grow text-left">
+            <div class="flex-grow text-left overflow-y-auto scrollbar-thin scrollbar-thumb-gray-100/50">
                 <ProseCodeInline v-if="filename">
                     {{ filename }}
                 </ProseCodeInline>

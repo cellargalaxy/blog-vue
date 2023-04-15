@@ -22,5 +22,6 @@ defineProps({
 a {
     @apply text-blue-500;
     @apply hover:underline;
+    @apply break-words;
 }
 </style>
