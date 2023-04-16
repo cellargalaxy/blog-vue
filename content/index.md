@@ -114,15 +114,15 @@ https://github.com/nuxt/content/issues/1866
 
 https://github.com/nuxt/content/issues/746
 
-<Mermaid>
+```mermaid
 flowchart LR
 A[Hard] -->|Text| B(Round)
 B --> C{Decision}
 C -->|One| D[Result 1]
 C -->|Two| E[Result 2]
-</Mermaid>
+```
 
-<Mermaid>
+```mermaid
 gantt
     section Section
     Completed :done,    des1, 2014-01-06,2014-01-08
@@ -131,7 +131,7 @@ gantt
     Parallel 2   :         des4, after des1, 1d
     Parallel 3   :         des5, after des3, 1d
     Parallel 4   :         des6, after des4, 1d
-</Mermaid>
+```
 
 ## 公式
 

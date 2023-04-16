@@ -1,10 +1,17 @@
 <template>
-    <pre class="mermaid"  >
-        <slot/>
+    <pre class="mermaid" v-if="show">
+        {{text}}
     </pre>
 </template>
 
 <script setup lang="ts">
+defineProps({
+    text: {
+        type: String,
+        default: ''
+    },
+})
+
 let show = ref(false)
 
 const {$mermaid} = useNuxtApp()

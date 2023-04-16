@@ -15,9 +15,14 @@
             </div>
         </div>
 
-        <div v-show="show" :class="[`highlight-${language}`]"
-             class="p-1 rounded-b overflow-y-auto scrollbar-thin scrollbar-thumb-gray-100/50 bg-gray-100/50">
-            <slot/>
+        <div v-show="show">
+            <div v-if="language==='mermaid'">
+                <MermaidText :text="code"/>
+            </div>
+            <div v-else :class="[`highlight-${language}`]"
+                 class="p-1 rounded-b overflow-y-auto scrollbar-thin scrollbar-thumb-gray-100/50 bg-gray-100/50">
+                <slot/>
+            </div>
         </div>
     </div>
 </template>
