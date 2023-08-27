@@ -1,0 +1,9 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
+
+theme = "hyde"
+
+[params]
+    description = "这里是Tony Bai的个人博客"
+    themeColor = "theme-base-08" # for hyde theme
