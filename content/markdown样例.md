@@ -1,8 +1,11 @@
----
-createdAt: '2020-01-22' 
-updatedAt: '2020-01-23' 
-level: 1
----
++++
+Categories = ["Development", "GoLang"]
+Description = ""
+Tags = ["Development", "golang"]
+date = "2015-09-23T16:30:37+08:00"
+menu = "main"
+title = "markdown样例"
++++
 
 # blog-vue
 
@@ -66,7 +69,6 @@ This is an H2
 function test() {
   console.log("Hello world!");
 }
-
 var testBox = box();
 testBox.add("jQuery").remove("jQuery");
 ```

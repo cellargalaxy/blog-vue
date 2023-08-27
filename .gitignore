@@ -2,3 +2,4 @@
 blog-vue
 hugo
 resources
+.hugo_build.lock
