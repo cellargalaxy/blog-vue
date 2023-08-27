@@ -1,11 +1,12 @@
-+++
-Categories = ["Development", "GoLang"]
-Description = ""
-Tags = ["Development", "golang"]
-date = "2015-09-23T16:30:37+08:00"
-menu = "main"
-title = "markdown样例"
-+++
+---
+title: "markdown样例"
+date: 2019-11-01T05:15:33+08:00
+draft: true
+author: "Suroppo"
+tags: []
+keywords: []
+description: ""
+---
 
 # blog-vue
 
