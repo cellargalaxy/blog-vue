@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .img-auto {
+        @apply w-full;
+        @apply h-full;
+        @apply bg-no-repeat;
+        @apply bg-cover;
+        @apply bg-center;
+        @apply bg-scroll;
+    }
+    .fence{
+        @apply w-full;
+        @apply bg-repeat;
+        @apply bg-auto;
+        @apply bg-fixed;
+    }
+    .div-center {
+        @apply relative;
+        @apply top-1/2;
+        @apply left-1/2;
+        transform: translate(-50%, -50%);
+    }
+}

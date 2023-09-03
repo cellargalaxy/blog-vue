@@ -34,3 +34,7 @@
 
 https://gilberttanner.com/blog/creating-a-blog-with-nuxt-content
 https://github.com/nuxt/content/issues/949
+
+
+https://flaviocopes.com/hugo-add-tailwind/
+https://www.unsungnovelty.org/posts/03/2022/how-to-add-tailwind-css-3-to-a-hugo-website-in-2022/

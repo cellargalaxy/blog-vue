@@ -1,0 +1,8 @@
+<div>
+    <div class="img-auto w-full h-screen fixed bg-fixed" style="background-image: url('https://i.loli.net/2018/08/21/5b7bb5dd4f0df.png')"/>
+</div>
+
+{{ $fence := resources.Get "img/fence.svg" }}
+<div class="w-full absolute top-0">
+    <div class="fence object-center h-1/2-screen" style="background-image: url('{{ $fence.Permalink }}')"/>
+</div>
