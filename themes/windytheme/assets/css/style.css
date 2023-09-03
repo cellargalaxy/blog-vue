@@ -752,3 +752,20 @@ h6 {
 .\[text-shadow\:_0\.1rem_0\.1rem_0\.2rem_var\(--tw-shadow-color\)\] {
   text-shadow: 0.1rem 0.1rem 0.2rem var(--tw-shadow-color);
 }
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 0.25rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}

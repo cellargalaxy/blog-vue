@@ -48,3 +48,17 @@
         @apply my-2;
     }
 }
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+::-webkit-scrollbar-track {
+    background: #f8fafc;
+}
+::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+    border-radius: 0.25rem;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
