@@ -11,11 +11,22 @@
         @apply bg-center;
         @apply bg-scroll;
     }
-    .fence{
+    .img-back {
+        @apply img-auto;
+        @apply h-screen;
+        @apply fixed;
+        @apply bg-fixed;
+    }
+    .fence {
         @apply w-full;
         @apply bg-repeat;
         @apply bg-auto;
         @apply bg-fixed;
+    }
+    .fence-board {
+        @apply fence;
+        @apply object-center;
+        @apply h-1/2-screen;
     }
     .div-center {
         @apply relative;
