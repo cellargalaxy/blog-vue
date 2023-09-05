@@ -1,5 +1,30 @@
 {{ define "main" }}
 
+{{ $content := os.ReadFile "_index.md" }}
+{{ $lines := split $content "\n" }}
+{{ $contents := newScratch }}
+{{ $image := "" }}
+{{ $images := slice }}
+{{ range $lines }}
+{{ if strings.Contains . "![" }}
+{{ $texts := split . "](" }}
+{{ $texts_len := $texts | len }}
+{{ if $texts_len > 1 }}
+{{ $img := index $texts $text_len-1 }}
+{{ $texts = split $img ")" }}
+{{ $texts_len = $texts | len }}
+{{if $texts_len > 0 }}
+{{ $image = index $texts 0 }}
+{{ $images = $images | append $image }}
+{{end}}
+{{end}}
+{{end}}
+{{ if ne $image "" }}
+{{ $scratch.Add $image "\n" }}
+{{ $scratch.Add $image . }}
+{{end}}
+{{ end }}
+
 <div class="img-back" style="background-image: url('https://i.loli.net/2018/08/21/5b7bb5dd4f0df.png')"></div>
 
 {{ $fence := resources.Get "img/fence.svg" }}
@@ -16,14 +41,27 @@
                         <div class="px-2 text-center text-gray-100 [text-shadow:_0.1rem_0.1rem_0.2rem_var(--tw-shadow-color)] shadow-gray-900 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-100/50 h-full">
                             {{ $content := os.ReadFile "_index.md" }}
                             {{ $lines := split $content "\n" }}
-                            {{ $content := slice }}
+                            {{ $contents := newScratch }}
+                            {{ $image := "" }}
+                            {{ $images := slice }}
                             {{ range $lines }}
-                                {{ $img := . }}
-                                {{if strings.Contains $img "![](" }}
-                                    {{ $img = strings.Repeat $img "![](" }}
-                                    {{ $img = strings.Repeat $img ")" }}
+                            {{ if strings.Contains . "![" }}
+                            {{ $texts := split . "](" }}
+                            {{ $texts_len := $texts | len }}
+                            {{ if $texts_len > 1 }}
+                            {{ $img := index $texts $text_len-1 }}
+                            {{ $texts = split $img ")" }}
+                            {{ $texts_len = $texts | len }}
+                            {{if $texts_len > 0 }}
+                            {{ $image = index $texts 0 }}
+                            {{ $images = $images | append $image }}
+                            {{end}}
+                            {{end}}
                                 {{end}}
-
+                            {{ if ne $image "" }}
+                            {{ $scratch.Add $image "\n" }}
+                            {{ $scratch.Add $image . }}
+                            {{end}}
                             {{ end }}
                         </div>
                     </div>
