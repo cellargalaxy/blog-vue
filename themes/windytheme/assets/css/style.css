@@ -633,6 +633,14 @@ h6 {
   display: flex;
 }
 
+.contents {
+  display: contents;
+}
+
+.hidden {
+  display: none;
+}
+
 .h-1\/3 {
   height: 33.333333%;
 }
@@ -741,6 +749,10 @@ h6 {
   --scrollbar-thumb: rgb(243 244 246 / 0.5) !important;
 }
 
+.scrollbar-thumb-gray-500\/50 {
+  --scrollbar-thumb: rgb(107 114 128 / 0.5) !important;
+}
+
 .\[text-shadow\:_0\.1rem_0\.1rem_0\.2rem_var\(--tw-shadow-color\)\] {
   text-shadow: 0.1rem 0.1rem 0.2rem var(--tw-shadow-color);
 }
@@ -760,4 +772,69 @@ h6 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
+}
+
+.hover\:scrollbar:hover {
+  scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
+}
+
+.hover\:scrollbar:hover::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track);
+  border-radius: var(--scrollbar-track-radius);
+}
+
+.hover\:scrollbar:hover::-webkit-scrollbar-track:hover {
+  background-color: var(--scrollbar-track-hover, var(--scrollbar-track));
+}
+
+.hover\:scrollbar:hover::-webkit-scrollbar-track:active {
+  background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)));
+}
+
+.hover\:scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: var(--scrollbar-thumb-radius);
+}
+
+.hover\:scrollbar:hover::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb));
+}
+
+.hover\:scrollbar:hover::-webkit-scrollbar-thumb:active {
+  background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
+}
+
+.hover\:scrollbar:hover::-webkit-scrollbar-corner {
+  background-color: var(--scrollbar-corner);
+  border-radius: var(--scrollbar-corner-radius);
+}
+
+.hover\:scrollbar:hover::-webkit-scrollbar-corner:hover {
+  background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner));
+}
+
+.hover\:scrollbar:hover::-webkit-scrollbar-corner:active {
+  background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
+}
+
+.hover\:scrollbar:hover {
+  scrollbar-width: auto;
+}
+
+.hover\:scrollbar:hover::-webkit-scrollbar {
+  display: block;
+  width: var(--scrollbar-width, 16px);
+  height: var(--scrollbar-height, 16px);
+}
+
+.hover\:scrollbar-thumb-gray-500\/50 {
+  --scrollbar-thumb-hover: rgb(107 114 128 / 0.5) !important;
+}
+
+.hover\:scrollbar-thumb-gray-100 {
+  --scrollbar-thumb-hover: #f3f4f6 !important;
+}
+
+.hover\:scrollbar-thumb-gray-100\/80 {
+  --scrollbar-thumb-hover: rgb(243 244 246 / 0.8) !important;
 }

@@ -10,7 +10,8 @@
         {{ $texts := split . "](" }}
         {{ $texts_len := $texts | len }}
         {{ if gt $texts_len 1 }}
-            {{ $img := index $texts $text_len-1 }}
+            {{ $texts_len = sub $texts_len 1 }}
+            {{ $img := index $texts $texts_len }}
             {{ $texts = split $img ")" }}
             {{ $texts_len = $texts | len }}
             {{if gt $texts_len 0 }}
@@ -18,10 +19,9 @@
                 {{ $images = $images | append $image }}
             {{end}}
         {{end}}
-    {{end}}
-    {{ if ne $image "" }}
-        {{ $scratch.Add $image "\n" }}
-        {{ $scratch.Add $image . }}
+    {{ else if ne $image "" }}
+        {{ $contents.Add $image "\n" }}
+        {{ $contents.Add $image . }}
     {{end}}
 {{ end }}
 {{ $images_len := $images | len }}
@@ -42,16 +42,18 @@
                 <div class="h-full grow"></div>
                 <div class="h-full shrink w-main">
                     <div class="div-center w-full h-1/3">
-                        <div class="px-2 text-center text-gray-100 [text-shadow:_0.1rem_0.1rem_0.2rem_var(--tw-shadow-color)] shadow-gray-900 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-100/50 h-full">
-                            {{ $markdown := $scratch.Get $image }}
-                            {{ $markdown | markdownify }}
-                        </div>
-                        <div>
-                            {{ range $images }}
-                                {{ $markdown := $scratch.Get . }}
-                                {{ $html := $markdown | markdownify }}
-                                <input type="hidden" name="index-fence-board" value="{{ htmlEscape $html }}"/>
-                            {{ end }}
+                        <div class="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-100/50 hover:scrollbar-thumb-gray-100/80">
+                            <div class="px-2 text-center text-gray-100 [text-shadow:_0.1rem_0.1rem_0.2rem_var(--tw-shadow-color)] shadow-gray-900">
+                                {{ $markdown := $contents.Get $image }}
+                                {{ $markdown | markdownify }}
+                            </div>
+                            <div>
+                                {{ range $images }}
+                                    {{ $markdown := $contents.Get . }}
+                                    {{ $html := $markdown | markdownify }}
+                                    <input type="hidden" name="index-fence-board" value="{{ htmlEscape $html }}"/>
+                                {{ end }}
+                            </div>
                         </div>
                     </div>
                 </div>
