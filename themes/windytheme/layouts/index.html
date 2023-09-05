@@ -43,8 +43,15 @@
                 <div class="h-full shrink w-main">
                     <div class="div-center w-full h-1/3">
                         <div class="px-2 text-center text-gray-100 [text-shadow:_0.1rem_0.1rem_0.2rem_var(--tw-shadow-color)] shadow-gray-900 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-100/50 h-full">
-                            {{ $content = $scratch.Get $image }}
-                            {{ $content | markdownify }}
+                            {{ $markdown := $scratch.Get $image }}
+                            {{ $markdown | markdownify }}
+                        </div>
+                        <div>
+                            {{ range $images }}
+                                {{ $markdown := $scratch.Get . }}
+                                {{ $html := $markdown | markdownify }}
+                                <input type="hidden" name="index-fence-board" value="{{ htmlEscape $html }}"/>
+                            {{ end }}
                         </div>
                     </div>
                 </div>
