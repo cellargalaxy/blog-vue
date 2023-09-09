@@ -10,4 +10,3 @@ tags = []
 features = []
 min_version = "0.117.0"
 
-enableGitInf = true

@@ -9,6 +9,8 @@ draft = false
 
 <!--more-->
 
+---
+
 # Heading 1
 
 ## Heading 2
@@ -21,50 +23,90 @@ draft = false
 
 ###### Heading 6
 
-This is an H1
-=============
+~~Strikethrough~~
 
-This is an H2
--------------
+*This is italic text*
 
----
+_This is italic text_
 
-+ [X]  列表一
-+ [ ]  列表二
-  - 列表1
-  - 列表2
+**This is bold text**
 
-1. 第一行
-2. 第二行
+__This is bold text__
 
-|     | 类型一       | 类型二                     |
-|-----|-----------|-------------------------|
-| 删除线 | ~~删除线~~   | <s>删除线（开启识别HTML标签时）</s> |
-| 斜体字 | *斜体字*     | _斜体字_                   |
-| 粗体  | **粗体**    | __粗体__                  |
-| 粗斜体 | ***粗斜体*** | ___粗斜体___               |
+***This is bold italic text***
 
-上标：X<sub>2</sub>，下标：O<sup>2</sup>
+___This is bold italic text___
 
-> 引用：如果想要插入空白换行`即<br />标签`，在插入处先键入两个以上的空格然后回车即可，[普通链接带标题](http://localhost/ "普通链接带标题")。
+1. ol-1
+1. ol-2
+    1. ol-2-1
+    1. ol-2-2
 
-## 图片
+- ul-1
+- ul-2
+    - ul-2-1
+    - ul-2-2
 
-![](https://s3.bmp.ovh/imgs/2022/03/0220af6579e287bc.png)
-![](/imgs/2022/03/bf7c85bd106c412b.jpg)
++ [X] checkbox-ul-1
++ [ ] checkbox-ul-2
+    + [X] checkbox-ul-1-1
+    + [ ] checkbox-ul-2-2
 
-![](https://s3.bmp.ovh/imgs/2022/03/667fb45e1ad9d8d2.jpg)
+|           | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
+| big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table | big_table |
 
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:se="http://svg-edit.googlecode.com" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="150" height="150">                                    <title>my vector image</title>                                    <!-- Created with Vector Paint - http://www.vectorpaint.yaks.com/ https://chrome.google.com/webstore/detail/hnbpdiengicdefcjecjbnjnoifekhgdo -->                                    <rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="#FFFFFF" stroke="none"/>                                <g class="currentLayer" style=""><title>Layer 1</title><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M6.640625148429592,139.84375312575148L29.687500663567388,78.90625176369221" id="svg_1"/><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M29.687500663567388,78.90625176369221L46.484376039006804,111.32812748837759" id="svg_3"/><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M46.484376039006804,111.32812748837759L79.68750178115454,44.14062598661988" id="svg_5"/><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M79.68750178115454,44.14062598661988L91.79687705182016,73.82812665018724" id="svg_7"/><path fill="none" fill-opacity="1" stroke="#222222" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M91.79687705182016,73.82812665018724L130.85937792493513,12.109375270665652" id="svg_9"/><rect fill="#eb1a1a" stroke="#222222" stroke-width="2" stroke-linejoin="round" stroke-dashoffset="" fill-rule="nonzero" id="svg_2" x="9" y="76" width="49" height="0" style="color: rgb(74, 144, 214);"/><path fill="#eb1a1a" fill-opacity="1" stroke="#eb1a1a" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M12.500000279396831,78.90625176369221L130.07812790747283,79.68750178115451" id="svg_4"/></g></svg>
+> Blockquotes can also be nested
+>> by using additional greater-than signs right next to each other
+>>> or with spaces between arrows.
 
-## 代码
+## picture
 
-执行命令：`npm install marked`
+![0220af6579e287bc](https://s3.bmp.ovh/imgs/2022/03/0220af6579e287bc.png)
+![bf7c85bd106c412b](/imgs/2022/03/bf7c85bd106c412b.jpg)
+
+![667fb45e1ad9d8d2](https://s3.bmp.ovh/imgs/2022/03/667fb45e1ad9d8d2.jpg)
+
+## code
+
+Excuting an order:`npm install marked`,Likely to succeed.
 
 ```javascript
 function test() {
-  console.log("Hello world!");
+    console.log("Hello world!");
 }
+
 var testBox = box();
 testBox.add("jQuery").remove("jQuery");
 ```
@@ -73,8 +115,8 @@ testBox.add("jQuery").remove("jQuery");
 <!DOCTYPE html>
 <html>
 <head>
-  <mate charest="utf-8"/>
-  <title>Hello world!</title>
+    <mate charest="utf-8"/>
+    <title>Hello world!</title>
 </head>
 <body>
 <h1>Hello world!</h1>
@@ -95,12 +137,12 @@ lsof
 
 ```css
 body {
-  background-color: burlywood;
+    background-color: burlywood;
 }
 
 .black-background-5 {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: rgba(0, 0, 0, 0.5);
 }
 ```
 
@@ -152,7 +194,36 @@ address:
 
 ## 图表
 
-```flow
+```goat
+      .               .                .               .--- 1          .-- 1     / 1
+     / \              |                |           .---+            .-+         +
+    /   \         .---+---.         .--+--.        |   '--- 2      |   '-- 2   / \ 2
+   +     +        |       |        |       |    ---+            ---+          +
+  / \   / \     .-+-.   .-+-.     .+.     .+.      |   .--- 3      |   .-- 3   \ / 3
+ /   \ /   \    |   |   |   |    |   |   |   |     '---+            '-+         +
+ 1   2 3   4    1   2   3   4    1   2   3   4         '--- 4          '-- 4     \ 4
+
+```
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
+```mermaid
+stateDiagram-v2
+[*] --> Still
+Still --> [*]
+Still --> Moving
+Moving --> Still
+Moving --> Crash
+Crash --> [*]
+```
+
+```mermaid
 flowchart LR
 A[Hard] -->|Text| B(Round)
 B --> C{Decision}
@@ -160,7 +231,31 @@ C -->|One| D[Result 1]
 C -->|Two| E[Result 2]
 ```
 
-```flow
+```mermaid
+pie
+"Dogs" : 386
+"Cats" : 85
+"Rats" : 15
+```
+
+```mermaid
+classDiagram
+Class01 <|-- AveryLongClass : Cool
+Class03 *-- Class04
+Class05 o-- Class06
+Class07 .. Class08
+Class09 --> C2 : Where am i?
+Class09 --* C3
+Class09 --|> Class07
+Class07 : equals()
+Class07 : Object[] elementData
+Class01 : size()
+Class01 : int chimp
+Class01 : int gorilla
+Class08 <--> C2: Cool label
+```
+
+```mermaid
 sequenceDiagram
 Alice->>John: Hello John, how are you?
 loop Healthcheck
@@ -172,74 +267,25 @@ John->>Bob: How about you?
 Bob-->>John: Jolly good!
 ```
 
-```flow
+```mermaid
 gantt
-    section Section
-    Completed :done,    des1, 2014-01-06,2014-01-08
-    Active        :active,  des2, 2014-01-07, 3d
-    Parallel 1   :         des3, after des1, 1d
-    Parallel 2   :         des4, after des1, 1d
-    Parallel 3   :         des5, after des3, 1d
-    Parallel 4   :         des6, after des4, 1d
+    dateFormat  YYYY-MM-DD
+    title Adding GANTT diagram functionality to mermaid
+    section A section
+    Completed task            :done,    des1, 2014-01-06,2014-01-08
+    Active task               :active,  des2, 2014-01-09, 3d
+    Future task               :         des3, after des2, 5d
+    Future task2               :         des4, after des3, 5d
+    section Critical tasks
+    Completed task in the critical line :crit, done, 2014-01-06,24h
+    Implement parser and jison          :crit, done, after des1, 2d
+    Create tests for parser             :crit, active, 3d
+    Future task in critical line        :crit, 5d
+    Create tests for renderer           :2d
+    Add to mermaid                      :1d
 ```
 
-```flow
-classDiagram
-Class01 <|-- AveryLongClass : Cool
-<<Interface>> Class01
-Class09 --> C2 : Where am i?
-Class09 --* C3
-Class09 --|> Class07
-Class07 : equals()
-Class07 : Object[] elementData
-Class01 : size()
-Class01 : int chimp
-Class01 : int gorilla
-class Class10 {
-  <<service>>
-  int id
-  size()
-}
-```
-
-```flow
-stateDiagram-v2
-[*] --> Still
-Still --> [*]
-Still --> Moving
-Moving --> Still
-Moving --> Crash
-Crash --> [*]
-```
-
-```flow
-pie
-"Dogs" : 386
-"Cats" : 85
-"Rats" : 15
-```
-
-```flow
-gitGraph:
-options
-{
-    "nodeSpacing": 150,
-    "nodeRadius": 10
-}
-end
-commit
-branch newbranch
-checkout newbranch
-commit
-commit
-checkout master
-commit
-commit
-merge newbranch
-
-```
-
-```flow
+```mermaid
  journey
     title My working day
     section Go to work
@@ -255,7 +301,6 @@ merge newbranch
 
 https://tiddlywiki.com/plugins/tiddlywiki/katex/
 
-
 Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following equation.
 
 $$
@@ -263,11 +308,13 @@ L = \frac{1}{2} \rho v^2 S C_L
 $$
 
 $$
-\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }
+\frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}}
+{1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }
 $$
 
 $$
-1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \quad\quad \text{for }\lvert q\rvert<1.
+1 + \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
+\quad\quad \text{for }\lvert q\rvert<1.
 $$
 
 $$
@@ -275,5 +322,6 @@ $$
 $$
 
 $$
-\ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$}
+\ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]
+$\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$}
 $$

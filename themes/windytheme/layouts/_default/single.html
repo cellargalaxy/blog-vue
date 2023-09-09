@@ -53,12 +53,18 @@
     </div>
 </div>
 <div class="scrub min-h-1/2-screen">
-    <div class="h-full flex">
+    <div class="h-full w-full flex">
         <div class="grow"></div>
-        <div class="shrink w-main">
-            <div class="scrub p-2 bg-gray-100/50 shadow-2xl rounded-2xl">
+        <div class="shrink max-w-main w-full">
+            <div class="scrub p-2 bg-gray-100/50 shadow-2xl rounded-2xl" id="content">
                 {{.Content}}
             </div>
+            <script>
+                $(document).ready(function () {
+                    $("#content > table").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
+                    $("#content > div.highlight").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
+                })
+            </script>
         </div>
         <div class="grow"></div>
     </div>

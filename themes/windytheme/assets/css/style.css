@@ -540,7 +540,6 @@ video {
 }
 
 .img-back {
-  z-index: -1;
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
@@ -550,11 +549,11 @@ video {
   height: 100vh;
   position: fixed;
   background-attachment: fixed;
+  z-index: -1;
 }
 
 .scrub {
   width: 100%;
-  /*@apply h-full;*/
   --tw-backdrop-blur: blur(8px);
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
           backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
@@ -626,6 +625,108 @@ h6 {
   margin-bottom: 0.5rem;
 }
 
+p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+li {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+ul {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+li > ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-left: 1.25rem;
+}
+
+ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
+li > ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+  margin-left: 1.25rem;
+}
+
+table {
+  table-layout: auto;
+  border-collapse: collapse;
+  border-style: hidden;
+  width: 100%;
+}
+
+td:hover {
+  background-color: rgb(243 244 246 / 0.5);
+}
+
+td {
+  padding: 0.25rem;
+  border-style: dashed;
+  border-width: 1px;
+}
+
+th {
+  padding: 0.25rem;
+  border-style: dashed;
+  border-width: 1px;
+}
+
+thead {
+  position: sticky;
+  top: 0px;
+}
+
+thead tr {
+  background-color: rgb(243 244 246 / 0.8);
+}
+
+tbody tr:hover {
+  background-color: rgb(243 244 246 / 0.5);
+}
+
+blockquote {
+  border-left-width: 2px;
+  padding-left: 0.5rem;
+}
+
+p > code {
+  background-color: rgb(17 24 39 / 0.8);
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 0.25rem;
+  -webkit-user-select: all;
+     -moz-user-select: all;
+          user-select: all;
+}
+
+pre {
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+a {
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
 .block {
   display: block;
 }
@@ -634,12 +735,20 @@ h6 {
   display: flex;
 }
 
+.table {
+  display: table;
+}
+
 .h-1\/3 {
   height: 33.333333%;
 }
 
 .h-full {
   height: 100%;
+}
+
+.max-h-1\/2-screen {
+  max-height: 50vh;
 }
 
 .min-h-1\/2-screen {
@@ -654,12 +763,20 @@ h6 {
   width: 48rem;
 }
 
+.max-w-main {
+  max-width: 48rem;
+}
+
 .shrink {
   flex-shrink: 1;
 }
 
 .grow {
   flex-grow: 1;
+}
+
+.overflow-auto {
+  overflow: auto;
 }
 
 .overflow-y-auto {
@@ -762,6 +879,13 @@ h6 {
 
 .\[text-shadow\:_0\.1rem_0\.1rem_0\.2rem_var\(--tw-shadow-color\)\] {
   text-shadow: 0.1rem 0.1rem 0.2rem var(--tw-shadow-color);
+}
+
+.highlight {
+  margin-top: 0.5rem;
+  /* 8px */
+  margin-bottom: 0.5rem;
+  /* 8px */
 }
 
 ::-webkit-scrollbar {

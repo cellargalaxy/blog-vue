@@ -1,1 +1,9 @@
 theme = "windytheme"
+
+enableGitInf = true
+
+[markup.highlight]
+lineNos = true
+
+[params]
+img_base_url = "https://s3.bmp.ovh"

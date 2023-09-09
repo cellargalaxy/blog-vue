@@ -8,4 +8,30 @@
 
     {{ $jq := resources.Get "js/qs.min.js" }}
     <script src="{{ $jq.Permalink }}"></script>
+
+    <meta name="img_base_url" content="{{ .Site.Params.img_base_url }}"/>
+    <script>
+        $(document).ready(function () {
+            let domain = $("meta[name='img_base_url']").attr("content")
+            domain = domain.replace(/^\s+|\s+$/g, "")
+            if (domain !== undefined && domain !== null && domain !== "") {
+                $("img").each(
+                    function () {
+                        let img = $(this).attr("src")
+                        if (img.startsWith("http") || img.startsWith("//")) {
+                            return
+                        }
+                        img = img.replace(/^\s+|\s+$/g, '')
+                        img = domain + "/" + img
+                        $(this).attr("src", img)
+                    }
+                )
+            }
+        })
+    </script>
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
 </head>

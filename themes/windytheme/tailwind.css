@@ -13,16 +13,15 @@
     }
 
     .img-back {
-        z-index: -1;
         @apply img-auto;
         @apply h-screen;
         @apply fixed;
         @apply bg-fixed;
+        z-index: -1;
     }
 
     .scrub {
         @apply w-full;
-        /*@apply h-full;*/
         @apply backdrop-blur;
     }
 
@@ -75,6 +74,103 @@
         @apply text-base;
         @apply my-2;
     }
+
+    p {
+        @apply my-2;
+        @apply break-words;
+        @apply break-all;
+    }
+
+    li {
+        @apply my-1;
+    }
+
+    ul {
+        @apply list-disc;
+        @apply list-inside;
+    }
+
+    li > ul {
+        @apply list-disc;
+        @apply list-inside;
+        @apply ml-5;
+    }
+
+    ol {
+        @apply list-decimal;
+        @apply list-inside;
+    }
+
+    li > ol {
+        @apply list-decimal;
+        @apply list-inside;
+        @apply ml-5;
+    }
+
+    table {
+        @apply table-auto;
+        @apply border-collapse;
+        @apply border-hidden;
+        @apply w-full;
+    }
+
+    td {
+        @apply hover:bg-gray-100/50;
+        @apply p-1;
+        @apply border-dashed;
+        @apply border;
+    }
+
+    th {
+        @apply p-1;
+        @apply border-dashed;
+        @apply border;
+    }
+
+    thead {
+        @apply sticky;
+        @apply top-0;
+    }
+
+    thead tr {
+        @apply bg-gray-100/80;
+    }
+
+    tbody tr {
+        @apply hover:bg-gray-100/50;
+    }
+
+    blockquote {
+        @apply border-l-2;
+        @apply border-l-2;
+        @apply pl-2;
+    }
+
+    p > code {
+        @apply bg-gray-900/80;
+        @apply text-red-500;
+        @apply px-1;
+        @apply py-1;
+        @apply mx-2;
+        @apply rounded;
+        @apply select-all;
+    }
+
+    pre {
+        @apply pl-2;
+        @apply py-2;
+    }
+
+    a {
+        @apply break-words;
+        @apply break-all;
+    }
+}
+
+
+.highlight {
+    margin-top: 0.5rem; /* 8px */
+    margin-bottom: 0.5rem; /* 8px */
 }
 
 ::-webkit-scrollbar {
