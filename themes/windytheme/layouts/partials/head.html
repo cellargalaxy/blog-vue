@@ -6,7 +6,7 @@
     {{ $style := resources.Get "css/style.css" }}
     <link rel="stylesheet" href="{{ $style.Permalink }}">
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jq@1.7.2/dist/jquery.min.js"></script>
 
     <meta name="img_base_url" content="{{ .Site.Params.img_base_url }}"/>
     <script>
