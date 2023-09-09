@@ -297,7 +297,7 @@ gantt
       Sit down: 3: Me
 ```
 
-## 公式
+## katex
 
 https://tiddlywiki.com/plugins/tiddlywiki/katex/
 
@@ -305,6 +305,12 @@ Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following equat
 
 $$
 L = \frac{1}{2} \rho v^2 S C_L
+$$
+
+$$0.414213562373095048\approx6\*16^{-1}+a\*16^{-2}+0\*16^{-3}+\cdots$$
+
+$$
+{CO2 + C -> 2 CO}
 $$
 
 $$
@@ -317,11 +323,3 @@ $$
 \quad\quad \text{for }\lvert q\rvert<1.
 $$
 
-$$
-\ce{CO2 + C -> 2 CO}
-$$
-
-$$
-\ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]
-$\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$}
-$$

@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-<div id="img-back" class="img-back" style="background-image: url('https://bingw.jasonzeng.dev/?index=random')"></div>
+<div id="img-back" class="img-back" style="background-image: none"></div>
 
 {{ $fence := resources.Get "img/fence.svg" }}
 <div class="fence-board" style="background-image: url('{{ $fence.Permalink }}')"></div>
@@ -39,6 +39,8 @@
 
                             if (img !== "" && img !== null && img !== undefined) {
                                 $("#img-back").css({"background-image": "url('" + img + "')"})
+                            }else {
+                                $("#img-back").css({"background-image": "url('https://bingw.jasonzeng.dev/?index=random')"})
                             }
                             if (board !== "" && board !== null && board !== undefined) {
                                 $("#board").html(board)
