@@ -192,7 +192,7 @@ address:
     Suite 16
 ```
 
-## 图表
+## mermaid
 
 ```goat
       .               .                .               .--- 1          .-- 1     / 1
