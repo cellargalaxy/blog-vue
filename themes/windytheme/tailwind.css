@@ -161,7 +161,8 @@
         @apply py-2;
     }
 
-    a {
+    p > a {
+        @apply text-blue-700;
         @apply break-words;
         @apply break-all;
     }

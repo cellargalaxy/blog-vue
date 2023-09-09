@@ -722,7 +722,9 @@ pre {
   padding-bottom: 0.5rem;
 }
 
-a {
+p > a {
+  --tw-text-opacity: 1;
+  color: rgb(29 78 216 / var(--tw-text-opacity));
   overflow-wrap: break-word;
   word-break: break-all;
 }
