@@ -42,9 +42,13 @@
 
                                 if (img !== "" && img !== null && img !== undefined) {
                                     $("#img-back").css({"background-image": "url('" + img + "')"})
+                                } else {
+                                    $("#img-back").css({"background-image": "url('https://bingw.jasonzeng.dev/?index=random')"})
                                 }
                                 if (board !== "" && board !== null && board !== undefined) {
                                     $("#board").html(board)
+                                } else {
+                                    $("#board").html("<h1>" + window.location.host + "</h1>")
                                 }
                             })
                         </script>
