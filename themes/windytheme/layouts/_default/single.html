@@ -1,3 +1,16 @@
 {{ define "main" }}
-{{.Content}}
+
+<div id="img-back" class="img-back" style="background-image: none"></div>
+
+{{ $fence := resources.Get "img/fence.svg" }}
+<div class="w-full h-1/2-screen">
+    <div class="h-full w-full" style="background-color: blueviolet"></div>
+</div>
+<div class="w-full h-1/2-screen">
+    <div class="h-full w-full" style="background-color: aqua"></div>
+</div>
+<div class="w-full h-1/2-screen">
+    <div class="h-full w-full" style="background-color: coral"></div>
+</div>
+
 {{ end }}

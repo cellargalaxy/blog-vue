@@ -540,6 +540,7 @@ video {
 }
 
 .img-back {
+  z-index: -1;
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
@@ -617,20 +618,16 @@ h6 {
   margin-bottom: 0.5rem;
 }
 
-.absolute {
-  position: absolute;
-}
-
-.top-0 {
-  top: 0px;
-}
-
 .block {
   display: block;
 }
 
 .flex {
   display: flex;
+}
+
+.h-1\/2-screen {
+  height: 50vh;
 }
 
 .h-1\/3 {
