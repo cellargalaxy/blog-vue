@@ -20,6 +20,12 @@
         @apply bg-fixed;
     }
 
+    .scrub {
+        @apply w-full;
+        /*@apply h-full;*/
+        @apply backdrop-blur;
+    }
+
     .fence {
         @apply w-full;
         @apply bg-repeat;
@@ -72,7 +78,8 @@
 }
 
 ::-webkit-scrollbar {
-    width: 0.5rem;
+    width: 0.6rem;
+    height: 0.6rem;
 }
 
 ::-webkit-scrollbar-track {
