@@ -56,6 +56,11 @@
     <div class="h-full w-full flex">
         <div class="grow"></div>
         <div class="shrink max-w-main w-full">
+            <div class="scrub p-2 bg-gray-100/50 shadow-2xl rounded-2xl">
+                <h1>{{.Title}}</h1>
+                <p>{{.Date}}</p>
+                <p>{{.Lastmod}}</p>
+            </div>
             <div class="scrub p-2 bg-gray-100/50 shadow-2xl rounded-2xl" id="content">
                 {{.Content}}
             </div>

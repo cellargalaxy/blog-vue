@@ -1,6 +1,6 @@
 theme = "windytheme"
 
-enableGitInf = true
+enableGitInfo = true
 
 [markup.highlight]
 lineNos = true
