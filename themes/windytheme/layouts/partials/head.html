@@ -8,6 +8,4 @@
 
     {{ $jq := resources.Get "js/qs.min.js" }}
     <script src="{{ $jq.Permalink }}"></script>
-    {{ $util := resources.Get "js/util.js" }}
-    <script src="{{ $util.Permalink }}"></script>
 </head>
