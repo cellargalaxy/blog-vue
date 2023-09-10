@@ -1,9 +1,7 @@
 theme = "windytheme"
 
 enableGitInfo = true
+markup.highlight.lineNos = true
+markup.goldmark.renderer.unsafe = true
 
-[markup.highlight]
-lineNos = true
-
-[params]
-img_base_url = "https://s3.bmp.ovh"
+params.img_base_url = "https://s3.bmp.ovh"

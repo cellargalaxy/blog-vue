@@ -1,6 +1,7 @@
 +++
 title = 'elements'
 date = '2023-01-01'
+lastmod = ""
 weight = 0
 draft = false
 +++
@@ -108,6 +109,7 @@ Excuting an order:`npm install marked`,Likely to succeed.
 function test() {
     console.log("Hello world!");
 }
+
 var testBox = box();
 testBox.add("jQuery").remove("jQuery");
 ```
@@ -324,3 +326,21 @@ $$
 \quad\quad \text{for }\lvert q\rvert<1.
 $$
 
+# youtube
+
+<iframe style="height:500px;width:100%;" src="https://www.youtube.com/embed/Yh2xKRJGff4?si=GRg3ipZU56-Nfphm"></iframe>
+
+# tradingview
+
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+    new TradingView.widget(
+            {
+                "height": "500px",
+                "width": "100%",
+                "symbol": "NASDAQ:AAPL",
+                "interval": "D",
+                "theme": "dark"
+            }
+    )
+</script>

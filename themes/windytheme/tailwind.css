@@ -163,6 +163,7 @@
 
     p > a {
         @apply text-blue-700;
+        @apply hover:underline;
         @apply break-words;
         @apply break-all;
     }

@@ -725,6 +725,13 @@ pre {
 p > a {
   --tw-text-opacity: 1;
   color: rgb(29 78 216 / var(--tw-text-opacity));
+}
+
+p > a:hover {
+  text-decoration-line: underline;
+}
+
+p > a {
   overflow-wrap: break-word;
   word-break: break-all;
 }
