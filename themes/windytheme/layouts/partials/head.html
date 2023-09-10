@@ -10,17 +10,53 @@
 
     <script>
         $(document).ready(function () {
-            $("table").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
-            $("div.highlight").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
+            $("#content table").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
+            $("#content div.highlight").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
             setTimeout(() => {
-                $("span.katex-display").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
+                $("#content span.katex-display").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
             }, 0)
+            $("#content img").each(function () {
+                if ($(this).parent().prop("tagName") === "A") {
+                    return
+                }
+                $(this).wrap('<a data-fancybox="gallery" href="' + $(this).attr('src') + '" data-caption="' + $(this).attr('alt') + '"/>')
+            })
+        })
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+        $(document).ready(function () {
+            Fancybox.bind("[data-fancybox]", {
+                hideScrollbar: false,
+                wheel: "zoom",
+                Thumbs: {
+                    type: "modern",
+                },
+                Toolbar: {
+                    display: {
+                        left: ["infobar"],
+                        middle: [
+                            "zoomIn",
+                            "zoomOut",
+                            "toggle1to1",
+                            "rotateCCW",
+                            "rotateCW",
+                            "flipX",
+                            "flipY",
+                        ],
+                        right: ["slideshow", "thumbs", "close"],
+                    },
+                },
+            });
         })
     </script>
 
     <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs'
+
+        mermaid.initialize({startOnLoad: true})
     </script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css"
@@ -34,15 +70,12 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             renderMathInElement(document.body, {
-                // customised options
-                // • auto-render specific keys, e.g.:
                 delimiters: [
-                    { left: '$$', right: '$$', display: true },
-                    { left: '$', right: '$', display: false },
-                    { left: '\\(', right: '\\)', display: false },
-                    { left: '\\[', right: '\\]', display: true }
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
                 ],
-                // • rendering keys, e.g.:
                 throwOnError: false
             });
         });

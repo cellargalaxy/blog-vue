@@ -170,6 +170,9 @@
     }
 }
 
+.fancybox__container {
+    --fancybox-bg: rgba(0, 0, 0, 0.5) !important;
+}
 
 .highlight {
     margin-top: 0.5rem; /* 8px */

@@ -8,7 +8,10 @@ draft = false
 
 blog-vue
 
-![](https://img.shields.io/github/issues/cellargalaxy/blog-vue) ![](https://img.shields.io/github/forks/cellargalaxy/blog-vue) ![](https://img.shields.io/github/stars/cellargalaxy/blog-vue) ![](https://img.shields.io/github/license/cellargalaxy/blog-vue)
+[![](https://img.shields.io/github/issues/cellargalaxy/blog-vue)](https://github.com/cellargalaxy/blog-vue)
+[![](https://img.shields.io/github/forks/cellargalaxy/blog-vue)](https://github.com/cellargalaxy/blog-vue)
+[![](https://img.shields.io/github/stars/cellargalaxy/blog-vue)](https://github.com/cellargalaxy/blog-vue)
+[![](https://img.shields.io/github/license/cellargalaxy/blog-vue)](https://github.com/cellargalaxy/blog-vue)
 
 <!--more-->
 
@@ -93,13 +96,6 @@ ___This is bold italic text___
 > Blockquotes can also be nested
 >> by using additional greater-than signs right next to each other
 >>> or with spaces between arrows.
-
-## picture
-
-![0220af6579e287bc](https://s3.bmp.ovh/imgs/2022/03/0220af6579e287bc.png)
-![bf7c85bd106c412b](https://s3.bmp.ovh/imgs/2022/03/bf7c85bd106c412b.jpg)
-
-![667fb45e1ad9d8d2](https://s3.bmp.ovh/imgs/2022/03/667fb45e1ad9d8d2.jpg)
 
 ## code
 
@@ -325,6 +321,13 @@ $$
 1 + \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
 \quad\quad \text{for }\lvert q\rvert<1.
 $$
+
+## picture
+
+![0220af6579e287bc](https://s3.bmp.ovh/imgs/2022/03/0220af6579e287bc.png)
+![bf7c85bd106c412b](https://s3.bmp.ovh/imgs/2022/03/bf7c85bd106c412b.jpg)
+
+![667fb45e1ad9d8d2](https://s3.bmp.ovh/imgs/2022/03/667fb45e1ad9d8d2.jpg)
 
 # youtube
 
