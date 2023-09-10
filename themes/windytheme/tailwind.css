@@ -17,6 +17,7 @@
         @apply h-screen;
         @apply fixed;
         @apply bg-fixed;
+        @apply top-0;
         z-index: -1;
     }
 

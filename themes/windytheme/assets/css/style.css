@@ -549,6 +549,7 @@ video {
   height: 100vh;
   position: fixed;
   background-attachment: fixed;
+  top: 0px;
   z-index: -1;
 }
 
