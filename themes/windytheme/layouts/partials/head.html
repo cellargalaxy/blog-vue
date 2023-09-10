@@ -26,6 +26,12 @@
                     }
                 )
             }
+
+            $("table").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
+            $("div.highlight").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
+            setTimeout(() => {
+                $("span.katex-display").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
+            }, 0)
         })
     </script>
 

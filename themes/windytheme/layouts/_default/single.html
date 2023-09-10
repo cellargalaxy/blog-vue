@@ -14,15 +14,6 @@
             <div class="scrub p-2 bg-gray-100/50 shadow-2xl rounded-2xl" id="content">
                 {{.Content}}
             </div>
-            <script>
-                $(document).ready(function () {
-                    $("#content > table").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
-                    $("#content > div.highlight").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
-                    setTimeout(() => {
-                        $("span.katex-display").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
-                    }, 0)
-                })
-            </script>
         </div>
         <div class="grow"></div>
     </div>
