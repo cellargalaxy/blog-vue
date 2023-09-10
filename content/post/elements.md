@@ -97,7 +97,7 @@ ___This is bold italic text___
 ## picture
 
 ![0220af6579e287bc](https://s3.bmp.ovh/imgs/2022/03/0220af6579e287bc.png)
-![bf7c85bd106c412b](/imgs/2022/03/bf7c85bd106c412b.jpg)
+![bf7c85bd106c412b](https://s3.bmp.ovh/imgs/2022/03/bf7c85bd106c412b.jpg)
 
 ![667fb45e1ad9d8d2](https://s3.bmp.ovh/imgs/2022/03/667fb45e1ad9d8d2.jpg)
 

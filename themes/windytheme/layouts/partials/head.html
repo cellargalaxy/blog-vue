@@ -8,25 +8,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jq@1.7.2/dist/jquery.min.js"></script>
 
-    <meta name="img_base_url" content="{{ .Site.Params.img_base_url }}"/>
     <script>
         $(document).ready(function () {
-            let domain = $("meta[name='img_base_url']").attr("content")
-            domain = domain.replace(/^\s+|\s+$/g, "")
-            if (domain !== undefined && domain !== null && domain !== "") {
-                $("img").each(
-                    function () {
-                        let img = $(this).attr("src")
-                        if (img.startsWith("http") || img.startsWith("//")) {
-                            return
-                        }
-                        img = img.replace(/^\s+|\s+$/g, '')
-                        img = domain + "/" + img
-                        $(this).attr("src", img)
-                    }
-                )
-            }
-
             $("table").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
             $("div.highlight").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
             setTimeout(() => {
