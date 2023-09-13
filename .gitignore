@@ -4,3 +4,4 @@ hugo
 resources
 .hugo_build.lock
 node_modules
+.nuxt
