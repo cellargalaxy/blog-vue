@@ -8,6 +8,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jq@1.7.2/dist/jquery.min.js"></script>
 
+    <meta name="giscus" content="{{ .Site.Params.giscus | jsonify }}">
     <script>
         $(document).ready(function () {
             $("#content table").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')
@@ -21,6 +22,25 @@
                 }
                 $(this).wrap('<a data-fancybox="gallery" href="' + $(this).attr('src') + '" data-caption="' + $(this).attr('alt') + '"/>')
             })
+
+            let giscusMeta = $("meta[name='giscus']")
+            if (giscusMeta !== undefined && giscusMeta !== null) {
+                let giscusAttr = giscusMeta.attr('content')
+                if (giscusAttr !== undefined && giscusAttr !== null && giscusAttr !== "" && giscusAttr !== "null" && giscusAttr !== "{}") {
+                    let comment = document.getElementById("comment")
+                    if (comment !== undefined && comment !== null) {
+                        let hr = document.createElement("hr")
+                        hr.setAttribute("class", "border-2")
+                        let div = document.createElement("div")
+                        div.setAttribute("class", "p-4")
+                        let giscus = document.createElement("script")
+                        Object.entries(JSON.parse(giscusAttr)).forEach(([key, value]) => giscus.setAttribute(key, value))
+                        div.appendChild(giscus)
+                        comment.appendChild(hr)
+                        comment.appendChild(div)
+                    }
+                }
+            }
         })
     </script>
 

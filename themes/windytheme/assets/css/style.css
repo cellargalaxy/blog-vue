@@ -840,6 +840,14 @@ p > a {
   border-radius: 1rem;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
+.border-4 {
+  border-width: 4px;
+}
+
 .bg-gray-100\/50 {
   background-color: rgb(243 244 246 / 0.5);
 }

@@ -28,7 +28,7 @@
                         <p class="grow">
                             <a href="#">/aaa</a>
                             <a href="#">/bbb</a>
-                            <a href="#">/ccc</a>
+                            <a href="#">/{{.Ancestors}}</a>
                         </p>
                         <p class="flex-none">
                             <a href="{{ with .Next }}{{ .Permalink | safeURL  }}{{ end }}">
@@ -37,16 +37,20 @@
                         </p>
                     </div>
                 </div>
-                <hr/>
-                <div>
-                    <div class="p-4">
-                        {{ .TableOfContents }}
-                    </div>
-                    <hr/>
+                <hr class="border-2"/>
+
+                {{ if ne .TableOfContents `<nav id="TableOfContents"></nav>` }}
+                <div id="toc" class="p-4">
+                    {{ .TableOfContents }}
                 </div>
+                <hr class="border-2"/>
+                {{ end }}
+
                 <div id="content" class="p-4">
                     {{.Content}}
                 </div>
+
+                <div id="comment"></div>
             </div>
         </div>
         <div class="grow">
