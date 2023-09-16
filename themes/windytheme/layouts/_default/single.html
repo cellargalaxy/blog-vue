@@ -27,31 +27,25 @@
                             </a>
                             {{ end }}
                         </p>
-                        <div class="grow">
+                        <p class="grow">
                             {{ $base := trim .Site.BaseURL "/" }}
                             {{ $bases := split $base "/" }}
                             {{ $base = index $bases 0 }}
-                            <nav class="breadcrumb">
-                                <ol>
-                                    {{ range .Ancestors.Reverse }}
-                                    <li class="inline">
-                                        {{ $path := trim .RelPermalink "/" }}
-                                        {{ $paths := split $path "/" }}
-                                        {{ $path_len := $paths | len }}
-                                        {{ $path_len = sub $path_len 1 }}
-                                        {{ $path = index $paths $path_len }}
-                                        {{ if eq $path "" }}
-                                        {{ $path = $base }}
-                                        {{ end }}
-                                        <a href="{{ .RelPermalink }}">{{ $path }}</a>
-                                    </li>
-                                    {{ end }}
-                                    <li class="inline">
-                                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
+
+                            {{ range .Ancestors.Reverse }}
+                            {{ $path := trim .RelPermalink "/" }}
+                            {{ $paths := split $path "/" }}
+                            {{ $path_len := $paths | len }}
+                            {{ $path_len = sub $path_len 1 }}
+                            {{ $path = index $paths $path_len }}
+                            {{ if eq $path "" }}
+                            {{ $path = $base }}
+                            {{ end }}
+                            <a href="{{ .RelPermalink }}">{{ $path }}</a>
+                            /
+                            {{ end }}
+                            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                        </p>
                         <p class="flex-none">
                             {{ with .Next }}
                             <a href="{{ with .Next }}{{ .Permalink | safeURL  }}{{ end }}">
