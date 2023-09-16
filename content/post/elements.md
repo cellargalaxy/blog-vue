@@ -17,8 +17,6 @@ blog-vue
 
 ## base
 
----
-
 # Heading 1
 
 ## Heading 2
@@ -30,6 +28,8 @@ blog-vue
 ##### Heading 5
 
 ###### Heading 6
+
+---
 
 ~~Strikethrough~~
 
