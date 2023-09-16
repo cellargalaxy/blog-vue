@@ -33,12 +33,6 @@
         @apply bg-fixed;
     }
 
-    .fence-board {
-        @apply fence;
-        @apply object-center;
-        @apply h-1/2-screen;
-    }
-
     .div-center {
         @apply relative;
         @apply top-1/2;

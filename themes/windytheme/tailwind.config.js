@@ -5,6 +5,8 @@ module.exports = {
     extend: {
       height: {
         '1/2-screen': '50vh',
+        '3/10-screen': '30vh',
+        '7/10-screen': '70vh',
       },
       width: {
         'main': '48rem',

@@ -2,52 +2,51 @@
 
 {{ $fence := resources.Get "img/fence.svg" }}
 
-<div class="fence-board" style="background-image: url('{{ $fence.Permalink }}')">
+<div class="h-3/10-screen fence object-center" style="background-image: url('{{ $fence.Permalink }}')">
     <div class="h-full flex">
         <div class="grow"></div>
         <div class="shrink w-main">
-            <div class="div-center w-full h-1/3">
-                <div class="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-100/50 hover:scrollbar-thumb-gray-100/80">
-                    <div class="px-2 text-center text-gray-100 [text-shadow:_0.1rem_0.1rem_0.2rem_var(--tw-shadow-color)] shadow-gray-900"
-                         id="board"></div>
-                    <div style="display: none" class="display-board">{{ os.ReadFile "_index.md" | markdownify }}</div>
-                    <script>
-                        $(document).ready(function () {
-                            let htmls = $(".display-board").html().split("\n")
-                            let boards = {}
-                            let imgs = []
-                            let img = ""
-                            for (let i = 0; i < htmls.length; i++) {
-                                if (htmls[i].includes("<img")) {
-                                    img = htmls[i]
-                                    imgs.push(img)
-                                    boards[img] = []
-                                } else if (img !== "") {
-                                    boards[img].push(htmls[i])
-                                }
-                            }
-
-                            let hit = new Date().getTime() % imgs.length
-                            img = imgs[hit]
-                            let board = ""
-                            if (boards[img] != null && boards[img] !== undefined) {
-                                board = boards[img].join("")
-                            }
-                            img = $(img).find("img").attr("src")
-
-                            if (img !== "" && img !== null && img !== undefined) {
-                                $("#img-back").css({"background-image": "url('" + img + "')"})
-                            } else {
-                                $("#img-back").css({"background-image": "url('https://bingw.jasonzeng.dev/?index=random')"})
-                            }
-                            if (board !== "" && board !== null && board !== undefined) {
-                                $("#board").html(board)
-                            } else {
-                                $("#board").html("<h1>" + window.location.host + "</h1>")
-                            }
-                        })
-                    </script>
+            <div class="max-h-[60%] h-fit div-center overflow-y-auto scrollbar-thin scrollbar-thumb-gray-100/50 hover:scrollbar-thumb-gray-100/80">
+                <div class="px-2 text-center text-gray-100 [text-shadow:_0.1rem_0.1rem_0.2rem_var(--tw-shadow-color)] shadow-gray-900">
+                    <div id="board"></div>
                 </div>
+                <div style="display: none" class="display-board">{{ os.ReadFile "_index.md" | markdownify }}</div>
+                <script>
+                    $(document).ready(function () {
+                        let htmls = $(".display-board").html().split("\n")
+                        let boards = {}
+                        let imgs = []
+                        let img = ""
+                        for (let i = 0; i < htmls.length; i++) {
+                            if (htmls[i].includes("<img")) {
+                                img = htmls[i]
+                                imgs.push(img)
+                                boards[img] = []
+                            } else if (img !== "") {
+                                boards[img].push(htmls[i])
+                            }
+                        }
+
+                        let hit = new Date().getTime() % imgs.length
+                        img = imgs[hit]
+                        let board = ""
+                        if (boards[img] != null && boards[img] !== undefined) {
+                            board = boards[img].join("")
+                        }
+                        img = $(img).find("img").attr("src")
+
+                        if (img !== "" && img !== null && img !== undefined) {
+                            $("#img-back").css({"background-image": "url('" + img + "')"})
+                        } else {
+                            $("#img-back").css({"background-image": "url('https://bingw.jasonzeng.dev/?index=random')"})
+                        }
+                        if (board !== "" && board !== null && board !== undefined) {
+                            $("#board").html(board)
+                        } else {
+                            $("#board").html("<h1>" + window.location.host + "</h1>")
+                        }
+                    })
+                </script>
             </div>
         </div>
         <div class="grow"></div>

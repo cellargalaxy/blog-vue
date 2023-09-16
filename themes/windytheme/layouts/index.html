@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 {{ $fence := resources.Get "img/fence.svg" }}
-<div class="fence-board" style="background-image: url('{{ $fence.Permalink }}')"></div>
+<div class="h-7/10-screen fence" style="background-image: url('{{ $fence.Permalink }}')"></div>
 {{- partial "fence-board.html" . -}}
 
 {{ end }}

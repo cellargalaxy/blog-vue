@@ -3,64 +3,76 @@
 {{- partial "fence-board.html" . -}}
 
 <div class="scrub">
-    <div class="min-h-[5vh] p-2 bg-gray-100/50 shadow-2xl rounded-2xl md-2">
-        <div class="h-full w-full flex">
-            <div class="grow"></div>
-            <div class="shrink max-w-main w-full  text-center">
-                <h1>{{ .Title }}</h1>
-                <div class="flex flex-wrap">
-                    <p class="grow">🗓️ {{ .Date.Format "2006-01-02" }}</p>
-                    <p class="grow">♻️ {{ .Lastmod.Format "2006-01-02" }}</p>
-                    <p class="grow">🕒 {{ .ReadingTime }} mins</p>
-                    <p class="grow">📖 {{ .WordCount }} words</p>
-                </div>
-                <div class="flex flex-wrap">
-                    <p class="flex-none">←
-                        <a href="{{ with .Prev }}{{ .Permalink | safeURL  }}{{ end }}">
-                            {{ with .Prev }}{{ .Title }}{{ end }}
-                        </a>
-                    </p>
-                    <p class="grow">
-                        <a href="">aaa/</a>
-                        <a href="">bbb/</a>
-                        <a href="">ccc/</a>
-                    </p>
-                    <p class="flex-none">
-                        <a href="{{ with .Next }}{{ .Permalink | safeURL  }}{{ end }}">
-                            {{ with .Next }}{{ .Title }}{{ end }}
-                        </a>→
-                    </p>
-                </div>
-            </div>
-            <div class="grow"></div>
-        </div>
-    </div>
+    <!--        <div class="w-full flex">-->
+    <!--            <div class="grow"></div>-->
+    <!--            <div class="shrink max-w-main w-full">-->
+    <!--                <div class="p-2 bg-gray-100/50 shadow-2xl rounded-t-2xl">-->
+    <!--                    -->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <div class="grow"></div>-->
+    <!--        </div>-->
 
-    <div class="w-full flex my-2">
-        <div class="grow"></div>
-        <div class="shrink max-w-main w-full">
-            <div class="p-2 bg-gray-100/50 shadow-2xl rounded-2xl">
-                {{ .TableOfContents }}
-            </div>
-        </div>
-        <div class="grow"></div>
-    </div>
+    <!--    <div class="w-full flex">-->
+    <!--        <div class="grow"></div>-->
+    <!--        <div class="shrink max-w-main w-full">-->
+    <!--            <div class="p-2 bg-gray-100/50">-->
+    <!--                {{ .TableOfContents }}-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <div class="grow"></div>-->
+    <!--    </div>-->
 
 
-    <div class="min-h-1/2-screen w-full flex my-2">
+    <div class="w-full flex">
         <div class="grow">
             <div class="p-2 bg-gray-100/50 shadow-2xl rounded-2xl mr-2">
-                {{ .TableOfContents }}
+                左边
             </div>
         </div>
         <div class="shrink max-w-main w-full">
-            <div class="p-2 bg-gray-100/50 shadow-2xl rounded-2xl" id="content">
-                {{.Content}}
+            <div class="bg-gray-100/50 shadow-2xl rounded-2xl">
+                <div class="p-4 text-center">
+                    <h1>{{ .Title }}</h1>
+                    <div class="flex flex-wrap">
+                        <p class="grow">🗓️ {{ .Date.Format "2006-01-02" }}</p>
+                        <p class="grow">♻️ {{ .Lastmod.Format "2006-01-02" }}</p>
+                        <p class="grow">🕒 {{ .ReadingTime }} mins</p>
+                        <p class="grow">📖 {{ .WordCount }} words</p>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <p class="flex-none">←
+                            <a href="{{ with .Prev }}{{ .Permalink | safeURL  }}{{ end }}">
+                                {{ with .Prev }}{{ .Title }}{{ end }}
+                            </a>
+                        </p>
+                        <p class="grow">
+                            <a href="#">/aaa</a>
+                            <a href="#">/bbb</a>
+                            <a href="#">/ccc</a>
+                        </p>
+                        <p class="flex-none">
+                            <a href="{{ with .Next }}{{ .Permalink | safeURL  }}{{ end }}">
+                                {{ with .Next }}{{ .Title }}{{ end }}
+                            </a>→
+                        </p>
+                    </div>
+                </div>
+                <hr/>
+                <div>
+                    <div class="p-4">
+                        {{ .TableOfContents }}
+                    </div>
+                    <hr/>
+                </div>
+                <div id="content" class="p-4">
+                    {{.Content}}
+                </div>
             </div>
         </div>
         <div class="grow">
-            <div class="p-2 bg-gray-100/50 shadow-2xl rounded-2xl ml-2">
-                {{ .TableOfContents }}
+            <div class="p-4 bg-gray-100/50 shadow-2xl rounded-2xl ml-2">
+                右边
             </div>
         </div>
     </div>
