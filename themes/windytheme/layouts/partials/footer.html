@@ -1,13 +1,27 @@
-<div class="bg-gray-100/50 shadow-2xl rounded-2xl w-full flex mt-4">
+<div class="bg-gray-100/50 shadow-2xl rounded-2xl w-full flex mt-4 min-h-[5vh]">
     <div class="grow"></div>
     <div class="shrink max-w-main w-full">
         <div class="p-4">
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
+            <div id="footer"></div>
         </div>
+        <script>
+            $(document).ready(function () {
+                let htmls = $("#board-display").html().split("\n")
+                let list = []
+                let start = false
+                for (let i = 0; i < htmls.length; i++) {
+                    if (htmls[i].includes("<!--more-->")) {
+                        start = true
+                        continue
+                    }
+                    if (!start) {
+                        continue
+                    }
+                    list.push(htmls[i])
+                }
+                $("#footer").html(list.join(""))
+            })
+        </script>
     </div>
     <div class="grow"></div>
 </div>

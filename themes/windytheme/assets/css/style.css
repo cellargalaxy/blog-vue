@@ -772,6 +772,10 @@ p > a {
   min-height: 70vh;
 }
 
+.min-h-\[5vh\] {
+  min-height: 5vh;
+}
+
 .w-full {
   width: 100%;
 }

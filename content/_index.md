@@ -27,3 +27,11 @@
 低硬度から勇気を取ったら何もない
 
 低硬度から勇気を取ったら何もない
+
+<!--more-->
+
+备案？备个P
+
+© ? - 2023 blog-vue
+
+Power by [Hugo](https://gohugo.io/) & [blog-vue](https://github.com/cellargalaxy/blog-vue)

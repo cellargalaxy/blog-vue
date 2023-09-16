@@ -10,14 +10,17 @@
                 <div class="px-2 text-center text-gray-100 [text-shadow:_0.1rem_0.1rem_0.2rem_var(--tw-shadow-color)] shadow-gray-900">
                     <div id="board"></div>
                 </div>
-                <div style="display: none" class="display-board">{{ os.ReadFile "_index.md" | markdownify }}</div>
+                <div style="display: none" id="board-display">{{ os.ReadFile "_index.md" | markdownify }}</div>
                 <script>
                     $(document).ready(function () {
-                        let htmls = $(".display-board").html().split("\n")
+                        let htmls = $("#board-display").html().split("\n")
                         let boards = {}
                         let imgs = []
                         let img = ""
                         for (let i = 0; i < htmls.length; i++) {
+                            if (htmls[i].includes("<!--more-->")) {
+                                break
+                            }
                             if (htmls[i].includes("<img")) {
                                 img = htmls[i]
                                 imgs.push(img)
