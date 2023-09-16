@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jq@1.7.2/dist/jquery.min.js"></script>
 
     <meta name="giscus" content="{{ .Site.Params.giscus | jsonify }}">
+    <meta name="build_date" content='{{ now.Format "2006-01-02" }}'>
     <script>
         $(document).ready(function () {
             $("#content table").wrap('<div class="overflow-auto scrollbar-thin scrollbar-thumb-gray-100/50 max-h-1/2-screen"/>')

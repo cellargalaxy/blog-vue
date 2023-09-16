@@ -6,8 +6,9 @@
         </div>
         <script>
             $(document).ready(function () {
-                let htmls = $("#board-display").html().split("\n")
                 let list = []
+
+                let htmls = $("#board-display").html().split("\n")
                 let start = false
                 for (let i = 0; i < htmls.length; i++) {
                     if (htmls[i].includes("<!--more-->")) {
@@ -17,8 +18,17 @@
                     if (!start) {
                         continue
                     }
+                    if (htmls[i].includes("$build_date")) {
+                        let build_date = $("meta[name='build_date']")
+                        if (build_date !== undefined && build_date !== null) {
+                            build_date = build_date.attr('content')
+                        }
+                        console.log(build_date)
+                        htmls[i] = htmls[i].replace("$build_date", build_date)
+                    }
                     list.push(htmls[i])
                 }
+
                 $("#footer").html(list.join(""))
             })
         </script>

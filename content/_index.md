@@ -35,3 +35,5 @@
 © ? - 2023 blog-vue
 
 Power by [Hugo](https://gohugo.io/) & [blog-vue](https://github.com/cellargalaxy/blog-vue)
+
+Built on $build_date
