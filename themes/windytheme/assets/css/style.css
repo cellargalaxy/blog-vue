@@ -713,34 +713,18 @@ pre {
   padding-bottom: 0.5rem;
 }
 
-p > a {
+li,p > a {
   --tw-text-opacity: 1;
   color: rgb(29 78 216 / var(--tw-text-opacity));
 }
 
-p > a:hover {
+li:hover,p > a:hover {
   text-decoration-line: underline;
 }
 
-p > a {
+li,p > a {
   overflow-wrap: break-word;
   word-break: break-all;
-}
-
-.fixed {
-  position: fixed;
-}
-
-.absolute {
-  position: absolute;
-}
-
-.relative {
-  position: relative;
-}
-
-.bottom-0 {
-  bottom: 0px;
 }
 
 .mt-4 {
@@ -749,6 +733,10 @@ p > a {
 
 .block {
   display: block;
+}
+
+.inline {
+  display: inline;
 }
 
 .flex {
@@ -788,10 +776,6 @@ p > a {
   min-height: 70vh;
 }
 
-.min-h-\[5vh\] {
-  min-height: 5vh;
-}
-
 .w-full {
   width: 100%;
 }
@@ -804,12 +788,12 @@ p > a {
   max-width: 48rem;
 }
 
-.flex-none {
-  flex: none;
-}
-
 .flex-1 {
   flex: 1 1 0%;
+}
+
+.flex-none {
+  flex: none;
 }
 
 .shrink {
@@ -844,10 +828,6 @@ p > a {
   border-width: 2px;
 }
 
-.border-4 {
-  border-width: 4px;
-}
-
 .bg-gray-100\/50 {
   background-color: rgb(243 244 246 / 0.5);
 }
@@ -855,10 +835,6 @@ p > a {
 .object-center {
   -o-object-position: center;
      object-position: center;
-}
-
-.p-2 {
-  padding: 0.5rem;
 }
 
 .p-4 {
@@ -949,6 +925,10 @@ p > a {
 
 .\[text-shadow\:_0\.1rem_0\.1rem_0\.2rem_var\(--tw-shadow-color\)\] {
   text-shadow: 0.1rem 0.1rem 0.2rem var(--tw-shadow-color);
+}
+
+.breadcrumb li:not(:last-child)::after {
+  content: "»";
 }
 
 .fancybox__container {

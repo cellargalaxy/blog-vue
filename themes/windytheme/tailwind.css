@@ -156,12 +156,17 @@
         @apply py-2;
     }
 
-    p > a {
+    li,p > a {
         @apply text-blue-700;
         @apply hover:underline;
         @apply break-words;
         @apply break-all;
     }
+}
+
+
+.breadcrumb li:not(:last-child)::after {
+    content: "»";
 }
 
 .fancybox__container {
