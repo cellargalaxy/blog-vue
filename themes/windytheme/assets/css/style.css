@@ -713,16 +713,16 @@ pre {
   padding-bottom: 0.5rem;
 }
 
-li,p > a {
+p > a {
   --tw-text-opacity: 1;
   color: rgb(29 78 216 / var(--tw-text-opacity));
 }
 
-li:hover,p > a:hover {
+p > a:hover {
   text-decoration-line: underline;
 }
 
-li,p > a {
+p > a {
   overflow-wrap: break-word;
   word-break: break-all;
 }
@@ -733,10 +733,6 @@ li,p > a {
 
 .block {
   display: block;
-}
-
-.inline {
-  display: inline;
 }
 
 .flex {
@@ -925,10 +921,6 @@ li,p > a {
 
 .\[text-shadow\:_0\.1rem_0\.1rem_0\.2rem_var\(--tw-shadow-color\)\] {
   text-shadow: 0.1rem 0.1rem 0.2rem var(--tw-shadow-color);
-}
-
-.breadcrumb li:not(:last-child)::after {
-  content: "»";
 }
 
 .fancybox__container {
