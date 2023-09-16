@@ -727,16 +727,24 @@ p > a {
   word-break: break-all;
 }
 
-.ml-2 {
-  margin-left: 0.5rem;
+.fixed {
+  position: fixed;
 }
 
-.mr-2 {
-  margin-right: 0.5rem;
+.absolute {
+  position: absolute;
 }
 
-.mt-2 {
-  margin-top: 0.5rem;
+.relative {
+  position: relative;
+}
+
+.bottom-0 {
+  bottom: 0px;
+}
+
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .block {
@@ -776,6 +784,10 @@ p > a {
   max-height: 60%;
 }
 
+.min-h-7\/10-screen {
+  min-height: 70vh;
+}
+
 .min-h-\[5vh\] {
   min-height: 5vh;
 }
@@ -796,12 +808,20 @@ p > a {
   flex: none;
 }
 
+.flex-1 {
+  flex: 1 1 0%;
+}
+
 .shrink {
   flex-shrink: 1;
 }
 
 .grow {
   flex-grow: 1;
+}
+
+.flex-col {
+  flex-direction: column;
 }
 
 .flex-wrap {
@@ -818,11 +838,6 @@ p > a {
 
 .rounded-2xl {
   border-radius: 1rem;
-}
-
-.rounded-t-2xl {
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
 }
 
 .bg-gray-100\/50 {

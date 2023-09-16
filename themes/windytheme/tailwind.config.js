@@ -16,6 +16,7 @@ module.exports = {
       },
       minHeight: {
         '1/2-screen': '50vh',
+        '7/10-screen': '70vh',
       },
       maxHeight: {
         '1/2-screen': '50vh',

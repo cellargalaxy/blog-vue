@@ -2,6 +2,6 @@
 
 {{ $fence := resources.Get "img/fence.svg" }}
 <div class="h-7/10-screen fence" style="background-image: url('{{ $fence.Permalink }}')"></div>
-{{- partial "fence-board.html" . -}}
+{{- partial "header.html" . -}}
 
 {{ end }}

@@ -1,32 +1,11 @@
 {{ define "main" }}
 
-{{- partial "fence-board.html" . -}}
+{{- partial "header.html" . -}}
 
-<div class="scrub">
-    <!--        <div class="w-full flex">-->
-    <!--            <div class="grow"></div>-->
-    <!--            <div class="shrink max-w-main w-full">-->
-    <!--                <div class="p-2 bg-gray-100/50 shadow-2xl rounded-t-2xl">-->
-    <!--                    -->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <div class="grow"></div>-->
-    <!--        </div>-->
-
-    <!--    <div class="w-full flex">-->
-    <!--        <div class="grow"></div>-->
-    <!--        <div class="shrink max-w-main w-full">-->
-    <!--            <div class="p-2 bg-gray-100/50">-->
-    <!--                {{ .TableOfContents }}-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        <div class="grow"></div>-->
-    <!--    </div>-->
-
-
-    <div class="w-full flex">
+<div class="scrub min-h-7/10-screen flex flex-col">
+    <div class="w-full flex-1 flex">
         <div class="grow">
-            <div class="p-2 bg-gray-100/50 shadow-2xl rounded-2xl mr-2">
+            <div class="bg-gray-100/50 shadow-2xl rounded-2xl">
                 左边
             </div>
         </div>
@@ -71,15 +50,13 @@
             </div>
         </div>
         <div class="grow">
-            <div class="p-4 bg-gray-100/50 shadow-2xl rounded-2xl ml-2">
+            <div class="bg-gray-100/50 shadow-2xl rounded-2xl">
                 右边
             </div>
         </div>
     </div>
 
-
-    <div class="min-h-[5vh] p-2 bg-gray-100/50 shadow-2xl rounded-2xl mt-2">
-    </div>
+    {{- partial "footer.html" . -}}
 </div>
 
 
