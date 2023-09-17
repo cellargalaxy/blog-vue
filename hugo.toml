@@ -4,6 +4,8 @@ enableGitInfo = true
 markup.highlight.lineNos = true
 markup.goldmark.renderer.unsafe = true
 
+title = "blog-vue"
+
 [params.giscus]
 src = "https://giscus.app/client.js"
 data-repo = "cellargalaxy/blog-vue"

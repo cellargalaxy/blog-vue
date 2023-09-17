@@ -1,0 +1,37 @@
+<div class="fixed top-0 z-10 w-full hover:bg-gray-100/50 transition duration-500 group flex">
+    <div class="grow"></div>
+    <div class="shrink max-w-main w-full">
+        <nav class="flex justify-between py-2">
+            <a href="{{ .Site.BaseURL }}"
+               class="bg-gray-100/50 group-hover:bg-transparent duration-500 rounded-2xl p-2 text-xl font-semibold">
+                {{ $base := trim .Site.BaseURL "/" }}
+                {{ $bases := split $base "/" }}
+                {{ $base = index $bases 0 }}
+                {{ if ne .Site.Title "" }}
+                {{ $base = .Site.Title }}
+                {{ end }}
+                {{ $base }}
+            </a>
+
+            <!--                                                                                         x轴对齐    小-隐藏 大-展示 鼠标-展示         小-列排列 大-行排列  -->
+            <ul class="bg-gray-100/50 group-hover:bg-transparent duration-500 rounded-2xl p-2 list-none item-center hidden md:flex group-hover:flex flex-col md:flex-row">
+                {{ range os.ReadDir "content" }}
+                {{ if .IsDir }}
+                <li class="mx-2">
+                    <a href="/{{ .Name }}">{{ .Name }}</a>
+                </li>
+                {{ end }}
+                {{ end }}
+            </ul>
+
+            <div class="bg-gray-100/50 group-hover:bg-transparent duration-500 rounded-2xl p-2 md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                     class="h-6 w-6" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                </svg>
+            </div>
+        </nav>
+    </div>
+    <div class="grow"></div>
+</div>

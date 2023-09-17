@@ -54,7 +54,9 @@
                     </div>
                 </div>
 
-                {{ if ne .TableOfContents `<nav id="TableOfContents"></nav>` }}
+                {{ if ne .TableOfContents `
+                <nav id="TableOfContents"></nav>
+                ` }}
                 <hr class="border-2"/>
                 <div id="toc" class="p-4">
                     {{ .TableOfContents }}
