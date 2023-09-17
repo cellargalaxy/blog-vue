@@ -89,7 +89,6 @@ sw.*
 # Vim swap files
 *.swp
 
-blog-vue
 hugo
 resources
 .hugo_build.lock
