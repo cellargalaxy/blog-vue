@@ -9,4 +9,3 @@ homepage = "http://example.com/"
 tags = []
 features = []
 min_version = "0.117.0"
-test = ""
