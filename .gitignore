@@ -90,5 +90,7 @@ sw.*
 *.swp
 
 blog-vue
-.hugo_build.lock
 hugo
+resources
+.hugo_build.lock
+node_modules
