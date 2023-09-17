@@ -18,7 +18,7 @@
                 {{ range os.ReadDir "content" }}
                 {{ if .IsDir }}
                 <li class="mx-2">
-                    <a href="{{ .Site.BaseURL }}{{ .Name }}/">{{ .Name }}</a>
+                    <a href="{{ $.Site.BaseURL }}{{ .Name }}/">{{ .Name }}</a>
                 </li>
                 {{ end }}
                 {{ end }}
