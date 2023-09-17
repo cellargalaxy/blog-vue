@@ -1,0 +1,24 @@
+theme = "blog-vue"
+
+enableGitInfo = true
+markup.highlight.lineNos = true
+markup.goldmark.renderer.unsafe = true
+
+title = "blog-vue"
+
+[params.giscus]
+src = "https://giscus.app/client.js"
+data-repo = "cellargalaxy/blog-vue"
+data-repo-id = "MDEwOlJlcG9zaXRvcnkxNTA3MzE2NzU="
+data-category = "Announcements"
+data-category-id = "DIC_kwDOCPv7m84CPANS"
+data-mapping = "pathname"
+data-strict = "0"
+data-reactions-enabled = "1"
+data-emit-metadata = "0"
+data-input-position = "bottom"
+data-theme = "preferred_color_scheme"
+data-lang = "zh-CN"
+data-loading = "lazy"
+crossorigin = "anonymous"
+async = ""
