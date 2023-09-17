@@ -1,3 +1,65 @@
 {{ define "main" }}
 
+{{- partial "header.html" . -}}
+
+<div class="scrub min-h-7/10-screen flex flex-col">
+    <div class="w-full flex-1 flex">
+        <div class="grow">
+            <div class="bg-gray-100/50 shadow-2xl rounded-2xl"></div>
+        </div>
+        <div class="shrink max-w-main w-full">
+            <div class="bg-gray-100/50 shadow-2xl rounded-2xl">
+                <div class="p-4 text-center">
+                    <div class="flex flex-wrap">
+                        <p class="grow">
+                            {{ $base := trim .Site.BaseURL "/" }}
+                            {{ $bases := split $base "/" }}
+                            {{ $base = index $bases 0 }}
+
+                            {{ range .Ancestors.Reverse }}
+                            {{ $path := trim .RelPermalink "/" }}
+                            {{ $paths := split $path "/" }}
+                            {{ $path_len := $paths | len }}
+                            {{ $path_len = sub $path_len 1 }}
+                            {{ $path = index $paths $path_len }}
+                            {{ if eq $path "" }}
+                            {{ $path = $base }}
+                            {{ end }}
+                            <a href="{{ .RelPermalink }}">{{ $path }}</a>
+                            /
+                            {{ end }}
+                            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {{ range .Pages }}
+            <div class="bg-gray-100/50 shadow-2xl rounded-2xl mt-4">
+                <div class="p-4 text-center">
+                    <h1>
+                        <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    </h1>
+                    <div class="flex flex-wrap">
+                        <p class="grow">🗓️ {{ .Date.Format "2006-01-02" }}</p>
+                        <p class="grow">♻️ {{ .Lastmod.Format "2006-01-02" }}</p>
+                        <p class="grow">🕒 {{ .ReadingTime }} mins</p>
+                        <p class="grow">📖 {{ .WordCount }} words</p>
+                    </div>
+                </div>
+                <hr class="border-2"/>
+                <div class="p-4">
+                    {{ .Summary }}
+                </div>
+            </div>
+            {{ end }}
+        </div>
+        <div class="grow">
+            <div class="bg-gray-100/50 shadow-2xl rounded-2xl"></div>
+        </div>
+    </div>
+
+    {{- partial "footer.html" . -}}
+</div>
+
 {{ end }}
