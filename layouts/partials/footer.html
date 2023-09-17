@@ -2,34 +2,37 @@
     <div class="grow"></div>
     <div class="shrink max-w-main w-full">
         <div class="p-4">
-            <div id="footer"></div>
+            <div id="footer-div"></div>
         </div>
         <script>
             $(document).ready(function () {
                 let list = []
 
-                let htmls = $("#board-display").html().split("\n")
                 let start = false
-                for (let i = 0; i < htmls.length; i++) {
-                    if (htmls[i].includes("<!--more-->")) {
+                $("#board-display").children().each(function () {
+                    let html = $(this).prop("outerHTML")
+                    if (html.includes("<h1") && html.includes("footer")) {
                         start = true
-                        continue
+                        return
+                    }
+                    if (start && html.includes("<h1")) {
+                        start = false
+                        return
                     }
                     if (!start) {
-                        continue
+                        return
                     }
-                    if (htmls[i].includes("$build_date")) {
+                    if (html.includes("$build_date")) {
                         let build_date = $("meta[name='build_date']")
                         if (build_date !== undefined && build_date !== null) {
                             build_date = build_date.attr('content')
                         }
-                        console.log(build_date)
-                        htmls[i] = htmls[i].replace("$build_date", build_date)
+                        html = html.replace("$build_date", build_date)
                     }
-                    list.push(htmls[i])
-                }
+                    list.push(html)
+                })
 
-                $("#footer").html(list.join(""))
+                $("#footer-div").html(list.join(""))
             })
         </script>
     </div>
